@@ -1,0 +1,15 @@
+{
+  "name": "html-graphics-definition",
+  "version": "0.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "watch": "tsc --watch",
+    "generate-types": "node scripts/generate-types.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "json-schema-to-typescript": "^15.0.3"
+  }
+}

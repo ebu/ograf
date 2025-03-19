@@ -26,7 +26,7 @@ An OGraf graphic that follows the OGraf specification can be used in any OGraf c
 
 _This section is yet to be written.._
 
-[Link to the Specification](./v1/specification/docs/Specification.md)
+[Link to the Specification](./v1-draft-0/specification/docs/Specification.md)
 
 - _TODO: Examples of OGraf graphics_
 - _TODO: Links to development tools._

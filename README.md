@@ -8,7 +8,7 @@ _**The OGraf definition is currently a draft**, breaking changes may be introduc
 
 Time plan:
 
-- March 2025:
+- April 2025:
   - First public draft to be presented, industry feedback.<br />
     _This draft includes definitions for **Graphics**._
 - September 2025:

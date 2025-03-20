@@ -1,0 +1,32 @@
+{
+    "$schema": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json",
+    "name": "Lower 3rd - Name",
+    "description": "Name lower third",
+    "id": "l3rd-name",
+    "version": "0",
+    "customActions": [
+        {
+            "id": "highlight",
+            "name": "Highlight",
+            "description": "Highlight the name",
+            "schema": null
+        }
+    ],
+    "supportsRealTime": true,
+    "supportsNonRealTime": true,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string",
+                "title": "Name",
+                "default": "John Doe"
+            }
+        }
+    },
+    "v_notes": [
+        "get the schema:",
+        "manifest.actions.play.schema",
+        "manifest.standardGraphic.schema"
+    ]
+}

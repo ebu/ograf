@@ -447,13 +447,13 @@ export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjec
       [k: string]: unknown;
     };
 
-export interface HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1GraphicsManifestSchemaJson {
+export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSchemaJson {
   /**
    * Reference to the JSON-schema for this manifest
    */
-  $schema: "https://superflytv.github.io/tmp-GraphicsDefinition/definition/definition/json-schema/v1/graphics-manifest/schema.json";
+  $schema: "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json";
   /**
-   * The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.superflytv.my-lowerthird.
+   * The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.my-company.my-lowerthird.
    */
   id: string;
   /**
@@ -512,27 +512,31 @@ export interface HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitio
   stepCount?: number;
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1;
   /**
-   * This interface was referenced by `HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1GraphicsManifestSchemaJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;
 }
 export interface HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1LibActionJson {
   /**
+   * The identity of the action.
+   */
+  id: string;
+  /**
    * The name of the action. This is displayed to the user.
    */
-  label: string;
+  name: string;
   /**
    * A longer description of the action. This is displayed to the user.
    */
   description?: string;
   /**
-   * The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action.
+   * The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action. If the action does not require any parameters, set this to null.
    */
-  schema: null | HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson;
+  schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
   /**
    * This interface was referenced by `HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1LibActionJson`'s JSON-Schema definition
-   * via the `patternProperty` "^_.*".
+   * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;
 }

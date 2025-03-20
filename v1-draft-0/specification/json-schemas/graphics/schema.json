@@ -1,16 +1,16 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://superflytv.github.io/tmp-GraphicsDefinition/definition/definition/json-schema/v1/graphics-manifest/schema.json",
+    "$id": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json",
     "type": "object",
     "properties": {
         "$schema": {
             "type": "string",
-            "const": "https://superflytv.github.io/tmp-GraphicsDefinition/definition/definition/json-schema/v1/graphics-manifest/schema.json",
+            "const": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json",
             "description": "Reference to the JSON-schema for this manifest"
         },
         "id": {
             "type": "string",
-            "description": "The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.superflytv.my-lowerthird."
+            "description": "The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.my-company.my-lowerthird."
         },
         "version": {
             "type": "string",
@@ -57,7 +57,7 @@
             "type": "array",
             "description": "Custom Actions that can be invoked on the Graphic.",
             "items": {
-                "$ref": "https://superflytv.github.io/tmp-GraphicsDefinition/definition/definition/json-schema/v1/lib/action.json"
+                "$ref": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/lib/action.json"
             }
         },
         "supportsRealTime": {

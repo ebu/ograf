@@ -1,5 +1,7 @@
 # OGraf
 
+<img src="docs/logo/ograf-logo-colour.svg" width="300"/>
+
 **Ograf** is an upcoming Open standard for HTML based Graphics, used in live television and post production workflows.
 
 ## Project status

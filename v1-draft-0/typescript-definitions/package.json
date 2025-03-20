@@ -1,12 +1,24 @@
 {
-  "name": "html-graphics-definition",
-  "version": "0.0.0",
+  "name": "ograf",
+  "version": "0.0.1",
   "main": "dist/main.js",
+  "typings": "dist/index.d.ts",
   "license": "MIT",
+  "description": "TypeScript definitions for Ograf graphics",
+  "homepage": "https://github.com/ebu/ograf",
+  "keywords": [
+    "ograf",
+    "types",
+    "typescript",
+    "ebu",
+    "broadcast",
+    "graphics"
+  ],
   "scripts": {
     "build": "tsc --build",
     "watch": "tsc --watch",
-    "generate-types": "node scripts/generate-types.js"
+    "generate-types": "node scripts/generate-types.js",
+    "do:publish": "npm run generate-types && npm run build && npm publish --access public"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

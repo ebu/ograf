@@ -15,9 +15,11 @@ import {
  */
 
 /**
- * Methods called on a GraphicInstance by the Renderer
+ * This interface defines the methods that the Renderer can call on the Graphic.
+ * @example class MyOGrafGraphic extends HTMLElement implements GraphicsAPI.Graphic {}
+ *
  */
-export interface GraphicsApi {
+export interface Graphic {
   /**
    * Called by the Renderer when the Graphic has been loaded into the DOM
    * @returns a Promise that resolves when the Graphic has finished loading it's resources.
@@ -90,19 +92,19 @@ export interface GraphicsApi {
         action:
           | ({
               type: "updateAction";
-              params: Parameters<GraphicsApi["updateAction"]>[0];
+              params: Parameters<Graphic["updateAction"]>[0];
             } & VendorExtend)
           | ({
               type: "playAction";
-              params: Parameters<GraphicsApi["playAction"]>[0];
+              params: Parameters<Graphic["playAction"]>[0];
             } & VendorExtend)
           | ({
               type: "stopAction";
-              params: Parameters<GraphicsApi["stopAction"]>[0];
+              params: Parameters<Graphic["stopAction"]>[0];
             } & VendorExtend)
           | ({
               type: "customAction";
-              params: Parameters<GraphicsApi["customAction"]>[0];
+              params: Parameters<Graphic["customAction"]>[0];
             } & VendorExtend);
       }[];
     } & VendorExtend

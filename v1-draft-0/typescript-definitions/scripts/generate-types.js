@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 
 async function main() {
+
+
   const outputPath = path.resolve("./src/generated");
   const schemaPath = path.resolve("../specification/json-schemas/graphics");
   const options = {

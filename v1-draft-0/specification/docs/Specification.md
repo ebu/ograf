@@ -111,7 +111,7 @@ supports the following fields:
 
 | Field       | Type   | Required | Default | Description                                               |
 |-------------|--------|:--------:|:-------:|-----------------------------------------------------------|
-| id          | string |    X     |         | The identity of the action.                               |
+| id          | string |    X     |         | The identity of the action. The id must be unique within the graphic.                               |
 | name        | string |    X     |         | The name of the action (for use in GUIs).                 |
 | description | string |          |         | A longer description of the action.                       |
 | schema      | object |          |         | The JSON schema definition for the payload of the action. |

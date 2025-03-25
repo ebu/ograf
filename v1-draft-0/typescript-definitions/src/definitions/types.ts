@@ -22,7 +22,13 @@ export type ReturnPayload = {
 export type EmptyPayload = VendorExtend;
 
 /**
- * All parameters, payloads and return values can be extended with vendor-specific properties
+ * This indicates that the Parameters object is empty
+ * (but a vendor may choose to add their own vendor-specific properties)
+ */
+export type EmptyParams = VendorExtend;
+
+/**
+ * All parameters and return values can be extended with vendor-specific properties
  */
 export interface VendorExtend {
   [vendorSpecific: VendorSpecific]: unknown;
@@ -30,9 +36,9 @@ export interface VendorExtend {
 
 /** Payload when invoking an action of a GraphicInstance or a Renderer */
 export type ActionInvokeParams = {
-  /** Graphic method, as defined by the Graphic manifest*/
-  method: string;
-  /** Payload to send into the method */
+  /** Graphic id, as defined by the Graphic manifest*/
+  id: string;
+  /** Params to send into the method */
   payload: unknown;
 } & VendorExtend;
 

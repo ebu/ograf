@@ -5,7 +5,7 @@
     "properties": {
         "id": {
             "type": "string",
-            "description": "The identity of the action."
+            "description": "The identity of the action. The id must be unique within the graphic."
         },
         "name": {
             "type": "string",

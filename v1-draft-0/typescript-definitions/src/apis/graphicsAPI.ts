@@ -3,6 +3,7 @@ import {
   ActionInvokeParams,
   ReturnPayload,
   EmptyPayload,
+  EmptyParams,
   VendorExtend,
 } from "../definitions/types";
 
@@ -35,7 +36,7 @@ export interface Graphic {
    * Called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources.
    * This is called after the Renderer has unloaded the Graphic from the DOM.
    */
-  dispose: (params: EmptyPayload) => Promise<ReturnPayload>;
+  dispose: (params: EmptyParams) => Promise<ReturnPayload>;
 
   /** This is called whenever user send a new data payload. */
   updateAction: (

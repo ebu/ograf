@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/lib/action.json",
+    "$id": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/action.json",
     "type": "object",
     "properties": {
         "id": {

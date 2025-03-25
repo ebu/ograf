@@ -201,7 +201,7 @@ The following manifest describes a simple Lower Third Graphic. It does not conta
 
 ```json
 {
-  "$schema": "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json",
+  "$schema": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json",
   "id": "l3rd-name",
   "version": "1.0.0",
   "name": "Lower 3rd - Name",

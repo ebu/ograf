@@ -447,11 +447,11 @@ export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjec
       [k: string]: unknown;
     };
 
-export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSchemaJson {
+export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson {
   /**
    * Reference to the JSON-schema for this manifest
    */
-  $schema: "https://ebu.github.io/ograf/v1-draft-0/specification/json-schemas/graphics/schema.json";
+  $schema: "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json";
   /**
    * The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.my-company.my-lowerthird.
    */
@@ -497,7 +497,7 @@ export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSc
   /**
    * Custom Actions that can be invoked on the Graphic.
    */
-  customActions?: HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1LibActionJson[];
+  customActions?: HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson[];
   /**
    * Indicates if the Graphic supports real-time rendering
    */
@@ -512,12 +512,12 @@ export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSc
   stepCount?: number;
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1;
   /**
-   * This interface was referenced by `HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;
 }
-export interface HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1LibActionJson {
+export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson {
   /**
    * The identity of the action.
    */
@@ -535,7 +535,7 @@ export interface HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitio
    */
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
   /**
-   * This interface was referenced by `HttpsSuperflytvGithubIoTmpGraphicsDefinitionDefinitionDefinitionJsonSchemaV1LibActionJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;

@@ -21,6 +21,11 @@
                 "type": "string",
                 "title": "Name",
                 "default": "John Doe"
+            },
+            "title": {
+                "type": "string",
+                "title": "Title",
+                "default": "Ograf expert"
             }
         }
     },

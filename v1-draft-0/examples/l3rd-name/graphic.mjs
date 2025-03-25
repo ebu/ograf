@@ -11,6 +11,7 @@ class MyGraphic extends HTMLElement {
   constructor() {
     super();
     this.nonRealTimeState = {};
+    this.displayState = {}
   }
   connectedCallback() {
     // Called when the element is added to the DOM
@@ -39,21 +40,50 @@ class MyGraphic extends HTMLElement {
 
     container.style.position = "absolute";
     container.style.left = "10%";
-    container.style.bottom = "10%";
-    container.style.padding = "10px 20px";
+    container.style.bottom = "calc(10% + 30px)";
+    container.style.height = "50px";
+
+    container.style.padding = "6px 20px";
     container.style.backgroundColor = "#f00";
     container.style.color = "#fff";
     container.style.fontFamily = "Roboto, sans-serif";
-    container.style.fontSize = "24px";
+    container.style.fontSize = "28px";
     container.style.fontWeight = "bold";
+    container.style.zIndex = "2";
+    container.style.borderBottomRightRadius = "20px";
+    container.style.borderTopRightRadius = "20px";
+    container.style.borderTopLeftRadius = "20px";
 
     const nameText = document.createElement("div");
     nameText.innerText = "";
     container.appendChild(nameText);
 
+    const container2 = document.createElement("div");
+    this.appendChild(container2);
+
+    container2.style.position = "absolute";
+    container2.style.left = "10%";
+    container2.style.bottom = "10%";
+    container2.style.height = "30px";
+    container2.style.padding = "0px 20px";
+    container2.style.backgroundColor = "#b00";
+    container2.style.color = "#fff";
+    container2.style.fontFamily = "Roboto, sans-serif";
+    container2.style.fontSize = "18px";
+    container2.style.fontWeight = "bold";
+    container2.style.zIndex = "1";
+    container2.style.borderBottomRightRadius = "10px";
+    container2.style.borderBottomLeftRadius = "10px";
+
+    const nameText2 = document.createElement("div");
+    nameText2.innerText = "";
+    container2.appendChild(nameText2);
+
     this.elements = {
       container,
       nameText,
+      container2,
+      nameText2,
     };
 
     // Initialize the GSAP timeline --------------------------------------------
@@ -69,42 +99,42 @@ class MyGraphic extends HTMLElement {
     // When everything is loaded we can return:
     return;
   }
-  async dispose(_payload) {
+  async dispose(_params) {
     this.innerHTML = "";
     this.g = null;
   }
-  async getStatus(_payload) {
+  async getStatus(_params) {
     return {};
   }
   async updateAction(params) {
     // params.data
     // console.log("params", params);
 
-    await this._doAction("update", params);
+    await this._doAction("updateAction", params);
   }
   async playAction(params) {
     // params.delta
     // params.goto
     // params.skipAnimation
 
-    await this._doAction("play");
+    await this._doAction("playAction");
   }
   async stopAction(params) {
     // params.skipAnimation
 
-    await this._doAction("stop");
+    await this._doAction("stopAction");
   }
   async customAction(params) {
-    // params.method
+    // params.id
     // params.payload
 
-    await this._doAction(params.method, params.payload);
+    await this._doAction('customAction', params.id, params.payload);
   }
-  async _doAction(method, payload) {
+  async _doAction(type, payload) {
     const timeline = this.g.gsap.timeline();
 
     // Retrieve the tweens for the action:
-    const tweens = this._getActionAnimation(method, payload);
+    const tweens = this._getActionAnimation(type, payload);
 
     // Add the tweens to the timeline, so that they'll animate:
     for (const tween of tweens) {
@@ -128,35 +158,44 @@ class MyGraphic extends HTMLElement {
 
     // Initial state:
 
-    for (const action of this.nonRealTimeState.schedule) {
+    for (const event of (this.nonRealTimeState.schedule || [])) {
       const tweens = this._getActionAnimation(
-        action.invokeAction.method,
-        action.invokeAction.payload
+        event.action.type,
+        event.action.params
       );
 
       for (const tween of tweens) {
-        this.timeline.add(tween, action.timestamp / 1000);
+        this.timeline.add(tween, event.timestamp / 1000);
       }
     }
 
     this.timeline.seek(this.nonRealTimeState.timestamp / 1000);
   }
-  _getActionAnimation(method, payload) {
-    switch (method) {
-      case "update":
-        return this._getUpdateAnimation(payload);
-      case "play":
-        return this._getPlayAnimation(payload);
-      case "stop":
-        return this._getStopAnimation(payload);
-      case "highlight":
-        return this._getHighlightAnimation(payload);
+  _getActionAnimation(type, params) {
+    switch (type) {
+      case "updateAction":
+        return this._getUpdateAnimation(params);
+      case "playAction":
+        return this._getPlayAnimation(params);
+      case "stopAction":
+        return this._getStopAnimation(params);
+      case "customAction":
+        {
+          switch (params.id) {
+            case "highlight":
+              return this._getHighlightAnimation(params.payload);
+            default:
+              throw new Error(`Unknown customAction id "${params.id}"`);
+          }
+        }
       default:
-        throw new Error(`Unknown method "${method}"`);
+        throw new Error(`Unknown action type "${type}"`);
     }
   }
   _resetTimeline() {
     const gsap = this.g.gsap;
+
+    this.displayState = {}
 
     // Clear the timeline:
     this.timeline.clear();
@@ -165,9 +204,18 @@ class MyGraphic extends HTMLElement {
     const tweens = [
       gsap.set(this.elements.container, {
         x: -30,
+        backgroundColor: "#f00",
+        color: "#000",
         opacity: 0,
       }),
       gsap.set(this.elements.nameText, {
+        text: "",
+      }),
+      gsap.set(this.elements.container2, {
+        y: -20,
+        opacity: 0,
+      }),
+      gsap.set(this.elements.nameText2, {
         text: "",
       }),
     ];
@@ -179,24 +227,56 @@ class MyGraphic extends HTMLElement {
   }
 
   // -------------------- Actions --------------------
-  _getUpdateAnimation(payload) {
+  _getUpdateAnimation(params) {
     const gsap = this.g.gsap;
+
+    this.displayState.data = params.data
+
+    const showTitle = this.displayState.data.title
+    const isPlaying = this.displayState.isPlaying
 
     return [
       gsap.to(this.elements.nameText, {
         duration: 0.4,
-        text: payload.data.name,
+        text: params.data.name,
       }),
+      gsap.to(this.elements.nameText2, {
+        duration: 0.4,
+        text: params.data.title,
+      }),
+      (
+        isPlaying &&
+          gsap.to(this.elements.container2, {
+            duration: 0.3,
+            y: 0,
+            opacity: showTitle ? 1 : 0,
+            ease: "power2.out",
+          })
+      ),
+      (
+        isPlaying &&
+        gsap.to(this.elements.container, {
+          duration: 0.3,
+          borderBottomLeftRadius: showTitle ? "0" : "20px",
+          ease: "power2.out",
+        })
+      )
     ];
   }
-  _getPlayAnimation(payload) {
+  _getPlayAnimation(params) {
     const gsap = this.g.gsap;
+
+    this.displayState.isPlaying = true
+
+    const showTitle = Boolean(this.displayState.data.title)
+
 
     return [
       gsap.to(this.elements.container, {
         duration: 0.8,
         x: 0,
         opacity: 1,
+        borderBottomLeftRadius: showTitle ? "0" : "20px",
         ease: "power2.out",
       }),
 
@@ -204,21 +284,42 @@ class MyGraphic extends HTMLElement {
         duration: 0.4,
         // text: this._currentData.name,
       }),
+      gsap.to(this.elements.container2, {
+        delay: 0.3,
+        duration: 0.8,
+        y: 0,
+        opacity: showTitle ? 1 : 0,
+        ease: "power2.out",
+      }),
+      gsap.to(this.elements.nameText2, {
+        delay: 0.7,
+        duration: 0.8,
+        // text: this._currentData.name,
+      }),
     ];
   }
-  _getStopAnimation(payload) {
+  _getStopAnimation(params) {
     const gsap = this.g.gsap;
+
+    this.displayState.isPlaying = false
 
     return [
       gsap.to(this.elements.container, {
+        delay: 0.3,
         duration: 0.8,
         x: -30,
         opacity: 0,
         ease: "power2.in",
       }),
+      gsap.to(this.elements.container2, {
+        duration: 0.5,
+        y: -20,
+        opacity: 0,
+        ease: "power2.in",
+      }),
     ];
   }
-  _getHighlightAnimation(payload) {
+  _getHighlightAnimation(params) {
     const gsap = this.g.gsap;
 
     return [
@@ -231,13 +332,14 @@ class MyGraphic extends HTMLElement {
       }),
       gsap
         .to(this.elements.container, {
+          delay: 2,
           duration: 0.8,
           backgroundColor: "#f00",
           color: "#fff",
 
           ease: "power2.in",
         })
-        .delay(2),
+
     ];
   }
 }

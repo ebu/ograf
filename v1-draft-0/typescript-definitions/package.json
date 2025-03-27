@@ -1,8 +1,8 @@
 {
   "name": "ograf",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/main.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/main.d.ts",
   "license": "MIT",
   "description": "TypeScript definitions for Ograf graphics",
   "homepage": "https://ograf.ebu.io",

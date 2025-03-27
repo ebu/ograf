@@ -30,10 +30,12 @@ An OGraf graphic that follows the OGraf specification can be used in any OGraf c
 
 ## Getting Started
 
-_This section is yet to be written.._
+Useful resources:
+* [Examples of OGraf Graphics](https://github.com/ebu/ograf/tree/main/v1-draft-0/examples).
+* [OGraf Specification](./v1-draft-0/specification/docs/Specification.md).
 
-[Link to the Specification](./v1-draft-0/specification/docs/Specification.md)
 
-- _TODO: Examples of OGraf graphics_
-- _TODO: Links to development tools._
-- _TODO: Links to temporary rendering system._
+### Tools
+
+* The **[OGraf Devtool](https://github.com/SuperFlyTV/ograf-devtool)** is a useful too for developing OGraf graphics.
+* The **[Simple Rendering system](https://github.com/SuperFlyTV/ograf-server)** can be used to play OGraf Graphics in a browser (for use in existing system capable of rendering HTML graphics).

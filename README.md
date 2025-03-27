@@ -4,6 +4,10 @@
 
 **Ograf** is an upcoming Open standard for HTML based Graphics, used in live television and post production workflows.
 
+[Link to Project Web Page](https://ograf.ebu.io)
+
+[Link to Project Github repository ](https://github.com/ebu/ograf)
+
 ## Project status
 
 _**The OGraf definition is currently a draft**, breaking changes may be introduced before version 1 is finalized._

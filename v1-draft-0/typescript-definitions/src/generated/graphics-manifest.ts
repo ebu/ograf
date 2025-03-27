@@ -497,7 +497,7 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
   /**
    * Custom Actions that can be invoked on the Graphic.
    */
-  customActions?: HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson[];
+  customActions?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson[];
   /**
    * Indicates if the Graphic supports real-time rendering
    */
@@ -517,9 +517,9 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
    */
   [k: string]: unknown;
 }
-export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson {
+export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson {
   /**
-   * The identity of the action.
+   * The identity of the action. The id must be unique within the graphic.
    */
   id: string;
   /**
@@ -535,7 +535,7 @@ export interface HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJ
    */
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
   /**
-   * This interface was referenced by `HttpsEbuGithubIoOgrafV1Draft0SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;

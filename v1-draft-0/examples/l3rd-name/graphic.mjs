@@ -39,9 +39,9 @@ class MyGraphic extends HTMLElement {
     this.appendChild(container);
 
     container.style.position = "absolute";
-    container.style.left = "10%";
+    container.style.left = "calc(10% + 60px)";
     container.style.bottom = "calc(10% + 30px)";
-    container.style.height = "50px";
+    container.style.height = "32px";
 
     container.style.padding = "6px 20px";
     container.style.backgroundColor = "#f00";
@@ -62,10 +62,10 @@ class MyGraphic extends HTMLElement {
     this.appendChild(container2);
 
     container2.style.position = "absolute";
-    container2.style.left = "10%";
+    container2.style.left = "calc(10% + 60px)";
     container2.style.bottom = "10%";
-    container2.style.height = "30px";
-    container2.style.padding = "0px 20px";
+    container2.style.height = "23px";
+    container2.style.padding = "5px 20px 2px 20px";
     container2.style.backgroundColor = "#b00";
     container2.style.color = "#fff";
     container2.style.fontFamily = "Roboto, sans-serif";
@@ -79,11 +79,24 @@ class MyGraphic extends HTMLElement {
     nameText2.innerText = "";
     container2.appendChild(nameText2);
 
+    const logo = document.createElement("img");
+    logo.src = await this._loadImage(import.meta.resolve("./lib/ograf-logo-app.svg"))
+    logo.style.position = "absolute";
+    logo.style.left = `calc(10%)`
+    logo.style.bottom = `calc(10% + 10px)`
+    logo.style.width = "50px";
+    logo.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+    logo.style.borderRadius = "5px";
+    this.appendChild(logo);
+
+
+
     this.elements = {
       container,
       nameText,
       container2,
       nameText2,
+      logo
     };
 
     // Initialize the GSAP timeline --------------------------------------------
@@ -128,13 +141,13 @@ class MyGraphic extends HTMLElement {
     // params.id
     // params.payload
 
-    await this._doAction('customAction', params.id, params.payload);
+    await this._doAction('customAction', params);
   }
-  async _doAction(type, payload) {
+  async _doAction(type, params) {
     const timeline = this.g.gsap.timeline();
 
     // Retrieve the tweens for the action:
-    const tweens = this._getActionAnimation(type, payload);
+    const tweens = this._getActionAnimation(type, params);
 
     // Add the tweens to the timeline, so that they'll animate:
     for (const tween of tweens) {
@@ -205,7 +218,7 @@ class MyGraphic extends HTMLElement {
       gsap.set(this.elements.container, {
         x: -30,
         backgroundColor: "#f00",
-        color: "#000",
+        color: "#fff",
         opacity: 0,
       }),
       gsap.set(this.elements.nameText, {
@@ -217,6 +230,10 @@ class MyGraphic extends HTMLElement {
       }),
       gsap.set(this.elements.nameText2, {
         text: "",
+      }),
+      gsap.set(this.elements.logo, {
+        scale: 0.5,
+        opacity: 0
       }),
     ];
 
@@ -296,6 +313,16 @@ class MyGraphic extends HTMLElement {
         duration: 0.8,
         // text: this._currentData.name,
       }),
+      gsap.to(this.elements.logo, {
+        duration: 0.5,
+        opacity: 1,
+      }),
+      gsap.to(this.elements.logo, {
+        duration: 1.5,
+        rotation: 360,
+        scale: 1
+        // text: this._currentData.name,
+      }),
     ];
   }
   _getStopAnimation(params) {
@@ -316,6 +343,12 @@ class MyGraphic extends HTMLElement {
         y: -20,
         opacity: 0,
         ease: "power2.in",
+      }),
+      gsap.to(this.elements.logo, {
+        duration: 0.8,
+        rotation: 180,
+        scale: 0.8,
+        opacity: 0
       }),
     ];
   }
@@ -338,9 +371,29 @@ class MyGraphic extends HTMLElement {
           color: "#fff",
 
           ease: "power2.in",
-        })
+        }),
+        gsap.to(this.elements.logo, {
+          duration: 1,
+          scale: 1.5,
+          ease: "bounce.out",
+        }),
+        gsap.to(this.elements.logo, {
+          delay: 1,
+          duration: 1,
+          scale: 1,
+        }),
 
     ];
+  }
+  _loadImage(url) {
+    return new Promise((resolve, reject) => {
+      const newImg = new Image;
+      newImg.onload = function() {
+        resolve(this.src)
+      }
+      newImg.onerror = reject;
+      newImg.src = url
+    })
   }
 }
 

@@ -285,7 +285,7 @@ class MyGraphic extends HTMLElement {
 
     this.displayState.isPlaying = true
 
-    const showTitle = Boolean(this.displayState.data.title)
+    const showTitle = Boolean(this.displayState.data?.title)
 
 
     return [

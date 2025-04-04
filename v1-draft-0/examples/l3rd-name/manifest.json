@@ -4,6 +4,9 @@
     "description": "Name lower third",
     "id": "l3rd-name",
     "version": "0",
+    "author": {
+        "name": "Johan Nyman, SuperFly.tv"
+    },
     "customActions": [
         {
             "id": "highlight",
@@ -29,9 +32,6 @@
             }
         }
     },
-    "v_notes": [
-        "get the schema:",
-        "manifest.actions.play.schema",
-        "manifest.standardGraphic.schema"
-    ]
+    "asd": 123,
+    "v_myLittleNote": "Vendor-specific properties can be added using the 'v_' prefix, like this!"
 }

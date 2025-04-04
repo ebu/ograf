@@ -45,12 +45,6 @@ class Graphic extends HTMLElement {
   async customAction(params) {
     // No actions are implemented in this minimal example
   }
-  async goToTime(_payload) {
-    throw new Error("Non-realtime not supported!");
-  }
-  async setActionsSchedule(_payload) {
-    throw new Error("Non-realtime not supported!");
-  }
 }
 
 export default Graphic;

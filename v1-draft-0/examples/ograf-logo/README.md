@@ -1,6 +1,7 @@
 # Reference: Minimal Graphic
 
-This is a minimal implementation of a Graphic.
+This is a version of minimal implementation of a Graphic.
+It fades IN and OUT a image-file.
 It contains the minimum required properties and methods to be a valid Graphic.
 
 _Note: This is intended to be used when developing and validating renderer systems._

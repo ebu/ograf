@@ -1,0 +1,11 @@
+{
+    "$schema": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json",
+    "name": "Minimal Test Graphics",
+    "description": "This Graphic shows an OGraf logo",
+    "id": "minimal-logo",
+    "supportsRealTime": true,
+    "supportsNonRealTime": false,
+    "author": {
+        "name": "Markus Nygård, YLE"
+    }
+}

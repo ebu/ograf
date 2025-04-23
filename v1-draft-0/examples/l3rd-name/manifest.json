@@ -4,6 +4,7 @@
     "description": "Name lower third",
     "id": "l3rd-name",
     "version": "0",
+    "main": "graphic.mjs",
     "author": {
         "name": "Johan Nyman, SuperFly.tv"
     },
@@ -32,6 +33,5 @@
             }
         }
     },
-    "asd": 123,
     "v_myLittleNote": "Vendor-specific properties can be added using the 'v_' prefix, like this!"
 }

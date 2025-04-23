@@ -3,6 +3,7 @@
     "name": "Minimal Test Graphic",
     "description": "This Graphic includes the bare minimum required to be a valid OGraf Graphic. It displays a 'Hello World!' message.",
     "id": "minimal-example",
+    "main": "graphic.mjs",
     "supportsRealTime": true,
     "supportsNonRealTime": false
 }

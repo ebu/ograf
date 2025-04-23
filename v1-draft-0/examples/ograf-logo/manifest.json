@@ -3,6 +3,7 @@
     "name": "Minimal Test Graphics",
     "description": "This Graphic shows an OGraf logo",
     "id": "minimal-logo",
+    "main": "graphic.mjs",
     "supportsRealTime": true,
     "supportsNonRealTime": false,
     "author": {

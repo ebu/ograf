@@ -15,7 +15,7 @@ async function main() {
 * and run 'npm run generate-types' to regenerate this file.
 */`,
     customName: (schema, name) => {
-      console.log("name", name, schema);
+      // console.log("name", name, schema);
       return undefined;
     },
   };
@@ -41,6 +41,11 @@ async function main() {
 async function saveFile(savePath, contents) {
   // Ensure the folder exists:
   await fs.promises.mkdir(path.dirname(savePath), { recursive: true });
+
+  // Replace contents in case of using localhost during testing:
+
+  contents = contents.replaceAll('HttpLocalhost8080', 'HttpsOgrafEbuIo')
+
   await fs.promises.writeFile(savePath, contents);
 }
 

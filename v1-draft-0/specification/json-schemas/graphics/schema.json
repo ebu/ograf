@@ -77,13 +77,94 @@
             "description": "The schema is used by a Graphic to define the data parameters of the 'update' method.",
             "type": "object",
             "$ref": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+        },
+        "renderRequirements": {
+            "description": "A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "resolution": {
+                        "description": "If set, specifies requirements for the resolution of the Renderer.",
+                        "type": "object",
+                        "properties": {
+                            "width": {
+                                "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/number.json"
+                            },
+                            "height": {
+                                "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/number.json"
+                            }
+                        }
+                    },
+                    "frameRate": {
+                        "description": "If set, specifies requirements for frame rate of the Renderer. Example: 60 fps",
+                        "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/number.json"
+                    },
+                    "colorSpace": {
+                        "description": "If set, specifies requirements for the colorSpace of the Renderer.",
+                        "allOf": [
+                            {
+
+                                "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/string.json"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "exact": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "sRGB"
+                                                ]
+                                            },
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "sRGB"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "ideal": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string",
+                                                "enum": [
+                                                    "sRGB"
+                                                ]
+                                            },
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "sRGB"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+
+                },
+                "patternProperties": {
+                    "^v_.*": {}
+                },
+                "additionalProperties": false
+            }
         }
     },
     "required": [
         "$schema",
         "id",
         "name",
-        "main",
         "supportsRealTime",
         "supportsNonRealTime"
     ],

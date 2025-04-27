@@ -512,6 +512,33 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
   stepCount?: number;
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1;
   /**
+   * A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.
+   */
+  renderRequirements?: {
+    /**
+     * If set, specifies requirements for the resolution of the Renderer.
+     */
+    resolution?: {
+      width?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson;
+      height?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson;
+      [k: string]: unknown;
+    };
+    frameRate?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1;
+    /**
+     * If set, specifies requirements for the colorSpace of the Renderer.
+     */
+    colorSpace?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson & {
+      exact?: "sRGB" | "sRGB"[];
+      ideal?: "sRGB" | "sRGB"[];
+      [k: string]: unknown;
+    };
+    /**
+     * This interface was referenced by `undefined`'s JSON-Schema definition
+     * via the `patternProperty` "^v_.*".
+     */
+    [k: string]: unknown;
+  }[];
+  /**
    * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
@@ -536,6 +563,82 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson {
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
   /**
    * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   */
+  [k: string]: unknown;
+}
+/**
+ * The number constraint is used to specify a constraint for a numerical property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
+ */
+export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson {
+  /**
+   *  A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
+   */
+  max?: number;
+  /**
+   *  A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
+   */
+  min?: number;
+  /**
+   *  A number specifying a specific, required, value the property must have to be considered acceptable.
+   */
+  exact?: number;
+  /**
+   *  A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+   */
+  ideal?: number;
+  /**
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   *
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   */
+  [k: string]: unknown;
+}
+/**
+ * The number constraint is used to specify a constraint for a numerical property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
+ */
+export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1 {
+  /**
+   *  A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
+   */
+  max?: number;
+  /**
+   *  A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
+   */
+  min?: number;
+  /**
+   *  A number specifying a specific, required, value the property must have to be considered acceptable.
+   */
+  exact?: number;
+  /**
+   *  A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+   */
+  ideal?: number;
+  /**
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   *
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   */
+  [k: string]: unknown;
+}
+/**
+ * The string constraint is used to specify a constraint for a string property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindomstring)
+ */
+export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson {
+  /**
+   * A string or an array of strings, one of which must be the value of the property. If the property can't be set to one of the listed values, matching will fail.
+   */
+  exact?: string | string[];
+  /**
+   * A string or an array of strings, specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.
+   */
+  ideal?: string | string[];
+  /**
+   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;

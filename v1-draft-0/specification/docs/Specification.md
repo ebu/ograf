@@ -68,6 +68,7 @@ The manifest file is a JSON file containing metadata about the Graphic. It consi
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
 | schema              | object             |          |         | The JSON schema definition for the parameter of the `updateAction()` function. This schema can be seen as the (public) state model of the Graphic.                   |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of.                                                                                                                         |
+| renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
 
 #### Real-time vs. non-real-time
 
@@ -115,6 +116,47 @@ supports the following fields:
 | name        | string |    X     |         | The name of the action (for use in GUIs).                 |
 | description | string |          |         | A longer description of the action.                       |
 | schema      | object |          |         | The JSON schema definition for the payload of the action. |
+
+#### RenderRequirements
+
+A RenderRequirement in the manifest file is an object that describes which requirements a Graphic has for the rendering environment.
+The `renderRequirements` is a list of RenderRequirements, where at least one requirement must be fulfilled by the renderer for a
+Graphic to be expected to work.
+
+The RenderRequirement object contains the following fields:
+
+
+| Field             | Type             | Required | Default | Description                                               |
+|-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
+| resolution        | object           |          |         | Object that describes resolution requirements. |
+| resolution.width  | NumberConstraint |          |         | Specifies renderer width resolution requirement. |
+| resolution.height | NumberConstraint |          |         | Specifies renderer height resolution requirement. |
+| frameRate         | NumberConstraint |          |         | Specifies renderer frameRate requirement. |
+| colorSpace        | StringConstraint |          |         | Specifies renderer color-space requirement. Allowed values are "sRGB" |
+
+##### NumberConstraint
+
+A NumberConstraint is an object that describes a constraints for a numerical value.
+(This is inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
+It contains the following fields:
+
+| Field             | Type             | Required | Default | Description                                               |
+|-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
+| max               | number           |          |         | A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail. |
+| min               | number           |          |         | A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail. |
+| exact             | number           |          |         | A number specifying a specific, required, value the property must have to be considered acceptable. |
+| ideal             | number           |          |         | A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match. |
+
+##### StringConstraint
+
+A StringConstraint is an object that describes a constraints for a textual value.
+(This is inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
+It contains the following fields:
+
+| Field             | Type             | Required | Default | Description                                               |
+|-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
+| exact             | string           |          |         | A string specifying a specific, required, value the property must have to be considered acceptable. |
+| ideal             | string, string[] |          |         | A string (or an array of strings), specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match. |
 
 #### Vendor-specific fields
 

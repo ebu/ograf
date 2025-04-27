@@ -15,6 +15,8 @@ EBU members as well as the general industry is invited to join the [HTML Graphic
 
 Feedback can also be submitted using [GitHub Issues](https://github.com/ebu/ograf/issues).
 
+Graphics and Render system developers are encouraged to follow changes in the [Changelog](./CHANGELOG.md).
+
 ### Time plan
 
 - April 2025:

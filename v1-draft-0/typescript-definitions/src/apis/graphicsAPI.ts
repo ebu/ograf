@@ -30,7 +30,7 @@ export interface Graphic {
       /** Whether the rendering is done in realtime or non-realtime */
       renderType: "realtime" | "non-realtime";
     } & VendorExtend
-  ) => Promise<ReturnPayload>;
+  ) => Promise<ReturnPayload | undefined>;
 
   /**
    * Called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources.
@@ -44,7 +44,7 @@ export interface Graphic {
       /** The data send here is defined in the manifest "schema". */
       data: unknown;
     } & VendorExtend
-  ) => Promise<ReturnPayload>;
+  ) => Promise<ReturnPayload | undefined>;
 
   /** This is called when user calls the "play" action. */
   playAction: (
@@ -61,13 +61,15 @@ export interface Graphic {
   /** This is called when user calls the "stop" action. */
   stopAction: (
     params: { skipAnimation: boolean } & VendorExtend
-  ) => Promise<ReturnPayload>;
+  ) => Promise<ReturnPayload | undefined>;
 
   /**
    * Called by the Renderer to invoke an Action on the Graphic
    * @returns The return value of the invoked method (vendor-specific)
    */
-  customAction: (params: ActionInvokeParams) => Promise<ReturnPayload>;
+  customAction: (
+    params: ActionInvokeParams
+  ) => Promise<ReturnPayload | undefined>;
 
   /**
    * If the Graphic supports non-realtime rendering, this is called to make the graphic jump to a certain point in time.
@@ -75,7 +77,7 @@ export interface Graphic {
    */
   goToTime: (
     params: { timestamp: number } & VendorExtend
-  ) => Promise<ReturnPayload>;
+  ) => Promise<ReturnPayload | undefined>;
 
   /**
    * If the Graphic supports non-realtime rendering, this is called to schedule actions to be invoked at a certain point in time.
@@ -109,6 +111,5 @@ export interface Graphic {
             } & VendorExtend);
       }[];
     } & VendorExtend
-  ) => Promise<EmptyPayload>;
+  ) => Promise<EmptyPayload | undefined>;
 }
-

@@ -187,7 +187,7 @@ When a Graphic is removed from the Renderer, the following steps are executed by
 
 ## JSON Schema for Manifest file
 
-The normative JSON Schema for the Manifest file can be found [here](json-schema/v1/graphics-manifest/schema.json).
+The normative JSON Schema for the Manifest file can be found [here](../json-schemas/graphics/schema.json).
 
 ## Typescript interface for Graphic
 

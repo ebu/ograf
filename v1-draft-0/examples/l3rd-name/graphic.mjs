@@ -34,6 +34,11 @@ class MyGraphic extends HTMLElement {
     this.g.gsap.registerPlugin((await importsPromises.CSSPlugin).CSSPlugin);
     this.g.gsap.registerPlugin((await importsPromises.TextPlugin).TextPlugin);
 
+
+    const myFontFace = new FontFace("Monsieur La Doulaise", "url(https://fonts.gstatic.com/s/monsieurladoulaise/v18/_Xmz-GY4rjmCbQfc-aPRaa4pqV340p7EZm5ZyEA.woff2)");
+    document.fonts.add(myFontFace);
+    await myFontFace.load()
+
     // Setup our DOM -----------------------------------------------------------
     const container = document.createElement("div");
     this.appendChild(container);
@@ -46,9 +51,11 @@ class MyGraphic extends HTMLElement {
     container.style.padding = "6px 20px";
     container.style.backgroundColor = "#f00";
     container.style.color = "#fff";
-    container.style.fontFamily = "Roboto, sans-serif";
-    container.style.fontSize = "28px";
-    container.style.fontWeight = "bold";
+
+    container.style.fontFamily = myFontFace.family;
+    // container.style.fontFamily = "Roboto, sans-serif";
+    container.style.fontSize = "36px";
+    // container.style.fontWeight = "bold";
     container.style.zIndex = "2";
     container.style.borderBottomRightRadius = "20px";
     container.style.borderTopRightRadius = "20px";

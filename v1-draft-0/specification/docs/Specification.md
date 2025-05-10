@@ -66,7 +66,7 @@ The manifest file is a JSON file containing metadata about the Graphic. It consi
 | customActions       | Action[]           |          |         | An array of `Action` objects. They correspond to the custom actions that can be invoked on the Graphic. See below for details about the fields inside an `Action`.    |
 | supportsRealTime    | boolean            |    X     |         | Indicates whether the Graphic supports real-time rendering.                                                                                                        |
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
-| schema              | object             |          |         | The JSON schema definition for the parameter of the `updateAction()` function. This schema can be seen as the (public) state model of the Graphic.                   |
+| schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of.                                                                                                                         |
 
 #### Real-time vs. non-real-time
@@ -144,7 +144,9 @@ In [Typescript interface](#typescript-interface-for-graphic), the full interface
 
 
 Every Graphic MUST implement the following functions:
-* `load: ({}) => Promise<ReturnPayload>`: Called by the Renderer when the Graphic has been loaded into the DOM.
+* `load: ({ data:any }) => Promise<ReturnPayload>`: Called by the Renderer when the Graphic has been loaded into the DOM.
+  The `data`-payload MUST contain the initial internal state of the Graphic.
+  The schema of the `data`-payload of this function is described in the Manifest using the `schema` field.
   A Promise is returned that resolves when everything is loaded by the Graphic.
 * `dispose: ({}) => Promise<ReturnPayload>`: Called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources. A Promise
   is returned that resolves when the Graphic completed the necessary cleanup.
@@ -157,7 +159,7 @@ Every Graphic MUST implement the following functions:
 * `stopAction: ({skipAnimation: boolean}) => Promise<ReturnPayload>`: Called by the Renderer to stop the Graphic from being displayed.
   This can be with or without animation, depending on the value of the `skipAnimation` field. The returned Promise resolves to an `ReturnPayload` object.
 * `updateAction: ({ data: any }) => Promise<ReturnPayload>`: Called by the Renderer to update one or more fields of the internal state of the Graphic. The schema of the
-  payload of this function is described in the Manifest using the `schema` field. The returned Promise resolves to an `ReturnPayload` object.
+  `data`-payload of this function is described in the Manifest using the `schema` field. The returned Promise resolves to an `ReturnPayload` object.
 * `customAction: ({ id: string, payload: any}) => Promise<ReturnPayload>`: Called by the Renderer to invoke a custom action on the Graphic.
   The `id` field MUST correspond to an `id` of an Action that is defined in the Manifest file, inside the `actions` field.
   The schema for the `payload` field is the described in the corresponding Action inside the Manifest file. A Promise
@@ -230,7 +232,7 @@ The above manifest refers to the Javascript file `lower-third.mjs`, which is the
 
 ```typescript
 class Graphic extends HTMLElement {
-  async load(loadParams) {
+  async load({ data: { name: string } } ) {
     // Load resources and initialize
   }
   async dispose() {

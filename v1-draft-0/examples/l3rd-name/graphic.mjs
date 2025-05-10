@@ -23,6 +23,7 @@ class MyGraphic extends HTMLElement {
     // 2. Setup the DOM
     // 3. Initialize the GSAP timeline
 
+
     // Load the GSAP scripts ---------------------------------------------------
     const importsPromises = {
       gsap: import(import.meta.resolve("./lib/gsap-core.js")),
@@ -109,6 +110,13 @@ class MyGraphic extends HTMLElement {
       this.timeline.pause();
     } else throw new Error("Unsupported renderType: " + loadParams.renderType);
 
+    // Load initial data:
+    this.initialData = loadParams.data
+    await this._doAction("updateAction", {
+      data: this.initialData || {},
+      skipAnimation: true
+    });
+
     // When everything is loaded we can return:
     return;
   }
@@ -170,6 +178,12 @@ class MyGraphic extends HTMLElement {
     this._resetTimeline();
 
     // Initial state:
+
+    // Load initial data:
+    await this._doAction("updateAction", {
+      data: this.initialData || {},
+      skipAnimation: true
+    });
 
     for (const event of (this.nonRealTimeState.schedule || [])) {
       const tweens = this._getActionAnimation(
@@ -247,24 +261,26 @@ class MyGraphic extends HTMLElement {
   _getUpdateAnimation(params) {
     const gsap = this.g.gsap;
 
-    this.displayState.data = params.data
+    this.displayState.data = params.data || {}
+
+    const speed = params.skipAnimation ? 0 : 1
 
     const showTitle = this.displayState.data.title
     const isPlaying = this.displayState.isPlaying
 
     return [
       gsap.to(this.elements.nameText, {
-        duration: 0.4,
-        text: params.data.name,
+        duration: speed * 0.4,
+        text: this.displayState.data.name,
       }),
       gsap.to(this.elements.nameText2, {
-        duration: 0.4,
-        text: params.data.title,
+        duration: speed * 0.4,
+        text: this.displayState.data.title,
       }),
       (
         isPlaying &&
           gsap.to(this.elements.container2, {
-            duration: 0.3,
+            duration: speed * 0.3,
             y: 0,
             opacity: showTitle ? 1 : 0,
             ease: "power2.out",
@@ -273,7 +289,7 @@ class MyGraphic extends HTMLElement {
       (
         isPlaying &&
         gsap.to(this.elements.container, {
-          duration: 0.3,
+          duration: speed * 0.3,
           borderBottomLeftRadius: showTitle ? "0" : "20px",
           ease: "power2.out",
         })
@@ -285,7 +301,7 @@ class MyGraphic extends HTMLElement {
 
     this.displayState.isPlaying = true
 
-    const showTitle = Boolean(this.displayState.data?.title)
+    const showTitle = Boolean(this.displayState.data.title)
 
 
     return [
@@ -297,10 +313,6 @@ class MyGraphic extends HTMLElement {
         ease: "power2.out",
       }),
 
-      gsap.to(this.elements.nameText, {
-        duration: 0.4,
-        // text: this._currentData.name,
-      }),
       gsap.to(this.elements.container2, {
         delay: 0.3,
         duration: 0.8,
@@ -311,7 +323,6 @@ class MyGraphic extends HTMLElement {
       gsap.to(this.elements.nameText2, {
         delay: 0.7,
         duration: 0.8,
-        // text: this._currentData.name,
       }),
       gsap.to(this.elements.logo, {
         duration: 0.5,
@@ -321,7 +332,6 @@ class MyGraphic extends HTMLElement {
         duration: 1.5,
         rotation: 360,
         scale: 1
-        // text: this._currentData.name,
       }),
     ];
   }

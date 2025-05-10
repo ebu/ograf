@@ -1,0 +1,30 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/string.json",
+    "type": "object",
+    "description": "The string constraint is used to specify a constraint for a string property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindomstring)",
+    "properties": {
+        "exact": {
+            "description": "A string or an array of strings, one of which must be the value of the property. If the property can't be set to one of the listed values, matching will fail.",
+            "type": "string"
+        },
+        "ideal": {
+            "description": "A string (or an array of strings), specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        }
+    },
+    "patternProperties": {
+        "^v_.*": {}
+    },
+    "additionalProperties": false
+}

@@ -1,5 +1,6 @@
 export * as GraphicsAPI from "./apis/graphicsAPI";
 
+export * from "./definitions/render";
 export * from "./definitions/types";
 export * from "./definitions/vendor";
 import * as GeneratedGraphicsManifest from "./generated/graphics-manifest";

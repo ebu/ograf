@@ -3,10 +3,17 @@
     "name": "Minimal Test Graphics",
     "description": "This Graphic shows an OGraf logo",
     "id": "minimal-logo",
-    "main": "graphic.mjs",
     "supportsRealTime": true,
     "supportsNonRealTime": false,
     "author": {
         "name": "Markus Nygård, YLE"
-    }
+    },
+    "renderRequirements": [
+        {
+            "resolution": {
+                "width": { "min": 600, "max": 4000, "ideal": 1920 }
+            },
+            "frameRate": { "min": 1, "max": 240, "ideal": 60 }
+        }
+    ]
 }

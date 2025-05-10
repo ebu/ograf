@@ -1,3 +1,4 @@
+import { RenderCharacteristics } from "../definitions/render";
 import {
   PlayActionReturnPayload,
   ActionInvokeParams,
@@ -29,6 +30,9 @@ export interface Graphic {
     params: {
       /** Whether the rendering is done in realtime or non-realtime */
       renderType: "realtime" | "non-realtime";
+
+      /** A set of characteristics / capabilities of the Renderer, that affects how the Graphic will be rendered. */
+      renderCharacteristics: RenderCharacteristics;
     } & VendorExtend
   ) => Promise<ReturnPayload>;
 

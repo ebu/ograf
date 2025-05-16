@@ -28,6 +28,9 @@ export interface Graphic {
    */
   load: (
     params: {
+      /** The data send here is defined in the manifest "schema". Note: This data MUST HAVE the same type as the `data` argument in updateAction method. */
+      data: unknown;
+
       /** Whether the rendering is done in realtime or non-realtime */
       renderType: "realtime" | "non-realtime";
 
@@ -45,7 +48,7 @@ export interface Graphic {
   /** This is called whenever user send a new data payload. */
   updateAction: (
     params: {
-      /** The data send here is defined in the manifest "schema". */
+      /** The data send here is defined in the manifest "schema". Note: This data MUST HAVE the same type as the `data` argument in the load method.  */
       data: unknown;
     } & VendorExtend
   ) => Promise<ReturnPayload>;

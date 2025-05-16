@@ -132,7 +132,6 @@ The RenderRequirement object contains the following fields:
 | resolution.width  | NumberConstraint |          |         | Specifies renderer width resolution requirement. |
 | resolution.height | NumberConstraint |          |         | Specifies renderer height resolution requirement. |
 | frameRate         | NumberConstraint |          |         | Specifies renderer frameRate requirement. |
-| colorSpace        | StringConstraint |          |         | Specifies renderer color-space requirement. Allowed values are "sRGB" |
 
 ##### NumberConstraint
 

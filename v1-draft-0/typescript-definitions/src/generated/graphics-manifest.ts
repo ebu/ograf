@@ -525,14 +525,6 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
     };
     frameRate?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1;
     /**
-     * If set, specifies requirements for the colorSpace of the Renderer.
-     */
-    colorSpace?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson & {
-      exact?: "sRGB" | "sRGB"[];
-      ideal?: "sRGB" | "sRGB"[];
-      [k: string]: unknown;
-    };
-    /**
      * This interface was referenced by `undefined`'s JSON-Schema definition
      * via the `patternProperty` "^v_.*".
      */

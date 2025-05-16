@@ -11,8 +11,6 @@ export type RenderCharacteristics = {
   } & VendorExtend;
   /** Which frameRate the renderer will be rendering in. Examples: 50, 60, 29.97 */
   frameRate?: number;
-  /** Color space. If not set, assumed to be "sRGB" */
-  colorSpace?: "sRGB"; // TODO: Add others here
 
   // Ideas for future:
   // webcamInputs

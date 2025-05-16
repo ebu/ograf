@@ -99,58 +99,6 @@
                     "frameRate": {
                         "description": "If set, specifies requirements for frame rate of the Renderer. Example: 60 fps",
                         "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/number.json"
-                    },
-                    "colorSpace": {
-                        "description": "If set, specifies requirements for the colorSpace of the Renderer.",
-                        "allOf": [
-                            {
-
-                                "$ref": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/string.json"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "exact": {
-                                        "oneOf": [
-                                            {
-                                                "type": "string",
-                                                "enum": [
-                                                    "sRGB"
-                                                ]
-                                            },
-                                            {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "sRGB"
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    "ideal": {
-                                        "oneOf": [
-                                            {
-                                                "type": "string",
-                                                "enum": [
-                                                    "sRGB"
-                                                ]
-                                            },
-                                            {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "sRGB"
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        ]
                     }
 
                 },

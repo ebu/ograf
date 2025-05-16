@@ -19,3 +19,5 @@ The log below details the changes during development of this version:
   Before, the `data`-payload was only sent using the `updateData()` method. Now it must be sent on `load()` as well.
 * 2025-05-16: Change return values of Graphic methods to optionally be `undefined`.
   (An `undefined` value should be treated as `{ code: 200 }`)
+* 2025-xx-xx: Add optional `skipAnimation` argument to `updateAction` and `customAction`.
+  Before, it was only included in `playAction` and `stopAction`.

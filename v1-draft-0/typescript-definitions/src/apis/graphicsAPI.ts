@@ -50,6 +50,8 @@ export interface Graphic {
     params: {
       /** The data send here is defined in the manifest "schema". Note: This data MUST HAVE the same type as the `data` argument in the load method.  */
       data: unknown;
+      /** If true, skips animation (defaults to false) */
+      skipAnimation?: boolean;
     } & VendorExtend
   ) => Promise<ReturnPayload | undefined>;
 
@@ -61,13 +63,16 @@ export interface Graphic {
       /** Jump to a specific step/segment (defaults to undefined) */
       goto: number;
       /** If true, skips animation (defaults to false) */
-      skipAnimation: boolean;
+      skipAnimation?: boolean;
     } & VendorExtend
   ) => Promise<PlayActionReturnPayload>;
 
   /** This is called when user calls the "stop" action. */
   stopAction: (
-    params: { skipAnimation: boolean } & VendorExtend
+    params: {
+      /** If true, skips animation (defaults to false) */
+      skipAnimation?: boolean
+    } & VendorExtend
   ) => Promise<ReturnPayload | undefined>;
 
   /**

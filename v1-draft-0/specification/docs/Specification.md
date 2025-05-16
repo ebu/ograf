@@ -175,10 +175,11 @@ Depending on the rendering capabilities (defined in the Manifest file), a Graphi
 To describe the functions in this document, the Typescript interface notation is used. For simplicity, we omit the indication
 that vendor-specific fields can be included in both request and response payloads.
 For the 'action' methods (`playAction()`, `stopAction()`, `updateAction()` and `customAction()`), a Promise MUST be returned that
-resolves to an `ReturnPayload` object containing the following fields:
+resolves to `undefined` or to an `ReturnPayload` object containing the following fields:
 * `code`: a number that corresponds to an HTTP status code (2xx indicates a successful result, 4xx and 5xx indicate an error).
 * `message`: an optional human-readable message that corresponds to the `code`.
 * `result`: an optional Graphics-specific response object.
+If the returned Promise resolves to `undefined`, it should be treated as a `{ code: 200 }`.
 
 Similarly, for simplicity reasons, we omit these three fields in the description of the functions below.
 In [Typescript interface](#typescript-interface-for-graphic), the full interface is provided.

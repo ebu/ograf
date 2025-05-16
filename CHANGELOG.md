@@ -17,3 +17,5 @@ The log below details the changes during development of this version:
 * 2025-05-16: Add `renderRequirements` property to Graphics manifest
 * 2025-05-16: Add `data` argument to the `load` method.
   Before, the `data`-payload was only sent using the `updateData()` method. Now it must be sent on `load()` as well.
+* 2025-05-16: Change return values of Graphic methods to optionally be `undefined`.
+  (An `undefined` value should be treated as `{ code: 200 }`)

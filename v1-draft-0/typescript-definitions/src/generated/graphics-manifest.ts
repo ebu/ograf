@@ -564,19 +564,19 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson {
  */
 export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson {
   /**
-   *  A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
+   * A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
    */
   max?: number;
   /**
-   *  A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
+   * A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
    */
   min?: number;
   /**
-   *  A number specifying a specific, required, value the property must have to be considered acceptable.
+   * A number specifying a specific, required, value the property must have to be considered acceptable.
    */
   exact?: number;
   /**
-   *  A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+   * A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
    */
   ideal?: number;
   /**
@@ -593,19 +593,19 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNu
  */
 export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1 {
   /**
-   *  A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
+   * A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
    */
   max?: number;
   /**
-   *  A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
+   * A number specifying the smallest permissible value of the property it describes. If the value cannot remain equal to or greater than this value, matching will fail.
    */
   min?: number;
   /**
-   *  A number specifying a specific, required, value the property must have to be considered acceptable.
+   * A number specifying a specific, required, value the property must have to be considered acceptable.
    */
   exact?: number;
   /**
-   *  A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+   * A number specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
    */
   ideal?: number;
   /**
@@ -613,24 +613,6 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNu
    * via the `patternProperty` "^v_.*".
    *
    * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
-   * via the `patternProperty` "^v_.*".
-   */
-  [k: string]: unknown;
-}
-/**
- * The string constraint is used to specify a constraint for a string property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindomstring)
- */
-export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson {
-  /**
-   * A string or an array of strings, one of which must be the value of the property. If the property can't be set to one of the listed values, matching will fail.
-   */
-  exact?: string | string[];
-  /**
-   * A string or an array of strings, specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match.
-   */
-  ideal?: string | string[];
-  /**
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsStringJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: string]: unknown;

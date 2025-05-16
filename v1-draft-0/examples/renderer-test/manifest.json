@@ -1,0 +1,39 @@
+{
+    "$schema": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json",
+    "name": "Renderer Test Graphic",
+    "description": "This Graphic is used to validate a Renderer",
+    "id": "renderer-test",
+    "supportsRealTime": true,
+    "supportsNonRealTime": false,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "message": {
+                "type": "string",
+                "title": "Message",
+                "default": "Hello"
+            }
+        }
+    },
+    "customActions": [
+        {
+            "id": "highlight",
+            "name": "Highlight",
+            "schema": null
+        },
+        {
+            "id": "setColor",
+            "name": "Set Color",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "color": {
+                        "type": "string",
+                        "title": "Color",
+                        "default": "red"
+                    }
+                }
+            }
+        }
+    ]
+}

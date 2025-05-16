@@ -138,12 +138,12 @@ class MyGraphic extends HTMLElement {
     // params.goto
     // params.skipAnimation
 
-    await this._doAction("playAction");
+    await this._doAction("playAction", params);
   }
   async stopAction(params) {
     // params.skipAnimation
 
-    await this._doAction("stopAction");
+    await this._doAction("stopAction", params);
   }
   async customAction(params) {
     // params.id
@@ -154,13 +154,12 @@ class MyGraphic extends HTMLElement {
   async _doAction(type, params) {
     const timeline = this.g.gsap.timeline();
 
-    // Retrieve the tweens for the action:
-    const tweens = this._getActionAnimation(type, params);
-
+    // Retrieve the timeline for the action:
     // Add the tweens to the timeline, so that they'll animate:
-    for (const tween of tweens) {
-      timeline.add(tween, 0);
-    }
+    const actionTimeline = this._getActionAnimation(type, params);
+
+    timeline.add(actionTimeline, 0);
+
     // Wait for timeline to finish animating:
     await timeline.then();
   }
@@ -186,37 +185,43 @@ class MyGraphic extends HTMLElement {
     });
 
     for (const event of (this.nonRealTimeState.schedule || [])) {
-      const tweens = this._getActionAnimation(
+      const eventTimeline = this._getActionAnimation(
         event.action.type,
         event.action.params
-      );
+      )
 
-      for (const tween of tweens) {
-        this.timeline.add(tween, event.timestamp / 1000);
-      }
+      this.timeline.add(eventTimeline, event.timestamp / 1000);
     }
 
     this.timeline.seek(this.nonRealTimeState.timestamp / 1000);
   }
   _getActionAnimation(type, params) {
-    switch (type) {
-      case "updateAction":
-        return this._getUpdateAnimation(params);
-      case "playAction":
-        return this._getPlayAnimation(params);
-      case "stopAction":
-        return this._getStopAnimation(params);
-      case "customAction":
-        {
-          switch (params.id) {
-            case "highlight":
-              return this._getHighlightAnimation(params.payload);
-            default:
-              throw new Error(`Unknown customAction id "${params.id}"`);
-          }
-        }
-      default:
-        throw new Error(`Unknown action type "${type}"`);
+    let tweens = []
+
+     if (type === "updateAction") {
+        tweens = this._getUpdateAnimation(params);
+     } else if (type === "playAction") {
+        tweens = this._getPlayAnimation(params);
+     } else if (type === "stopAction") {
+        tweens = this._getStopAnimation(params);
+     } else if (type === "customAction") {
+      if (params.id === 'highlight') {
+        tweens = this._getHighlightAnimation(params.payload);
+      } else {
+        throw new Error(`Unknown customAction id "${params.id}"`);
+      }
+    } else {
+      throw new Error(`Unknown action type "${type}"`);
+    }
+
+    const actionTimeline = this.g.gsap.timeline();
+
+    for (const tween of tweens) {
+      actionTimeline.add(tween, 0);
+    }
+
+    if (params.skipAnimation) {
+      actionTimeline.timeScale(999999)
     }
   }
   _resetTimeline() {
@@ -261,26 +266,27 @@ class MyGraphic extends HTMLElement {
   _getUpdateAnimation(params) {
     const gsap = this.g.gsap;
 
+
     this.displayState.data = params.data || {}
 
-    const speed = params.skipAnimation ? 0 : 1
+
 
     const showTitle = this.displayState.data.title
     const isPlaying = this.displayState.isPlaying
 
     return [
       gsap.to(this.elements.nameText, {
-        duration: speed * 0.4,
+        duration: 0.4,
         text: this.displayState.data.name,
       }),
       gsap.to(this.elements.nameText2, {
-        duration: speed * 0.4,
+        duration: 0.4,
         text: this.displayState.data.title,
       }),
       (
         isPlaying &&
           gsap.to(this.elements.container2, {
-            duration: speed * 0.3,
+            duration: 0.3,
             y: 0,
             opacity: showTitle ? 1 : 0,
             ease: "power2.out",
@@ -289,7 +295,7 @@ class MyGraphic extends HTMLElement {
       (
         isPlaying &&
         gsap.to(this.elements.container, {
-          duration: speed * 0.3,
+          duration: 0.3,
           borderBottomLeftRadius: showTitle ? "0" : "20px",
           ease: "power2.out",
         })

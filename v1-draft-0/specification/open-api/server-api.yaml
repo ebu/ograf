@@ -143,17 +143,12 @@ paths:
           schema:
             $ref: "#/components/schemas/GraphicVersion"
           required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                force:
-                  type: boolean
-                  description: "Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected."
-                  default: false
+        - in: query
+          name: force
+          description: "Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected."
+          schema:
+            type: boolean
+            default: false
       responses:
         200:
           description: Graphic deleted

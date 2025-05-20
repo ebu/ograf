@@ -1,0 +1,27 @@
+{
+  "name": "ograf-dev-server-api",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --open"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "css-loader": "^7.1.2",
+    "json-loader": "^0.5.7",
+    "style-loader": "^4.0.0",
+    "swagger-ui": "^5.21.0",
+    "yaml-loader": "^0.8.1"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  }
+}

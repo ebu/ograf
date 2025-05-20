@@ -1,0 +1,1210 @@
+openapi: "3.0.3"
+info:
+  title: "OGraf Server API"
+  description: "The OGraf Server API is used to control an OGraf-compatible server"
+  version: "1.0.0"
+  license:
+    name: "MIT License"
+    url: "http://opensource.org/licenses/MIT"
+  x-logo:
+    url: "https://github.com/ebu/ograf/blob/main/docs/logo/ograf-logo-colour.svg"
+    backgroundColor: "#FFFFFF"
+    altText: "OGraf"
+
+servers:
+  - url: http://localhost:3000/ograf/v1
+  - url: http://localhost:8080/ograf/v1
+  - url: http://localhost/ograf/v1
+paths:
+  /:
+    get:
+      summary: Server information
+      responses:
+        200:
+          description: Returns a string with the version number
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: "My Ograf Server"
+                    description: "A name of the server"
+                required:
+                  - name
+# ------------------ Graphics -------------------------------------------------------------------------------
+  /graphics:
+    get:
+      summary: List graphics
+      responses:
+        200:
+          description: Returns a list of available OGraf Graphics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphics:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GraphicInfo"
+                required:
+                  - graphics
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /graphics/{graphicId}:
+    get:
+      summary: Retrieve list of versions of a graphic
+      parameters:
+        - in: path
+          name: graphicId
+          description: ID of the graphic to retrieve
+          schema:
+            $ref: "#/components/schemas/GraphicId"
+          required: true
+      responses:
+        200:
+          description: Returns a list of versions of an Ograf Graphic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphics:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GraphicInfo"
+                required:
+                  - graphics
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /graphics/{graphicId}/{graphicVersion}:
+    get:
+      summary: Retrieve info about a graphic
+      parameters:
+        - in: path
+          name: graphicId
+          description: ID of the graphic to retrieve
+          schema:
+            $ref: "#/components/schemas/GraphicId"
+          required: true
+        - in: path
+          name: graphicVersion
+          description: Version of the graphic to retrieve.
+          schema:
+            $ref: "#/components/schemas/GraphicVersion"
+          required: true
+      responses:
+        200:
+          description: Returns info of an OGraf Graphic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphic:
+                    $ref: "#/components/schemas/GraphicInfo"
+                required:
+                  - graphic
+        404:
+          description: No Graphic found with the given ID and version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraphicNotFoundResponse"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      summary: Delete a graphic
+      parameters:
+        - in: path
+          name: graphicId
+          description: ID of the graphic to delete
+          schema:
+            $ref: "#/components/schemas/GraphicId"
+          required: true
+        - in: path
+          name: graphicVersion
+          description: Version of the graphic to delete.
+          schema:
+            $ref: "#/components/schemas/GraphicVersion"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  description: "Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected."
+                  default: false
+      responses:
+        200:
+          description: Graphic deleted
+          content:
+            application/json:
+              schema:
+                type: object
+        404:
+          description: No Graphic found with the given ID and version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraphicNotFoundResponse"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /graphics/{graphicId}/{graphicVersion}/manifest:
+    get:
+      summary: Retrieve the manifest of a graphic
+      parameters:
+        - in: path
+          name: graphicId
+          description: ID of the graphic
+          schema:
+            $ref: "#/components/schemas/GraphicId"
+          required: true
+        - in: path
+          name: graphicVersion
+          description: Version of the graphic.
+          schema:
+            $ref: "#/components/schemas/GraphicVersion"
+          required: true
+      responses:
+        200:
+          description: Returns info of an OGraf Graphic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  manifest:
+                    $ref: "#/components/schemas/Manifest"
+                required:
+                  - manifest
+        404:
+          description: No Graphic found with the given ID and version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GraphicNotFoundResponse"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /graphics/{graphicId}/{graphicVersion}/{localPath}: # TODO: check that deep sub-paths works
+    get:
+      summary: Retrieve a resource (file) in a graphic
+      parameters:
+        - in: path
+          name: graphicId
+          description: ID of the graphic
+          schema:
+            $ref: "#/components/schemas/GraphicId"
+          required: true
+        - in: path
+          name: graphicVersion
+          description: Version of the graphic.
+          schema:
+            $ref: "#/components/schemas/GraphicVersion"
+          required: true
+        - in: path
+          name: localPath
+          description: The local path to a resource in the graphic
+          schema:
+            type: string
+            example: "graphic.mjs"
+          required: true
+      responses:
+        200:
+          description: Returns the content of the resource / file
+          content:
+           application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        404:
+          description: No resource / find on the given localPath
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Resource not found"
+                required:
+                  - error
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+# ------------------ Renderers ------------------------------------------------------------------------------
+  /renderers:
+    get:
+      summary: List Renderers
+      responses:
+        200:
+          description: Returns a list of available Renderers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  renderers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          $ref: "#/components/schemas/RendererId"
+                        name:
+                          description: "Short name of the renderer"
+                          type: string
+                          example: "My Renderer"
+                        description:
+                          description: "Description of the renderer"
+                          type: string
+                          example: "A simple, layer-based renderer"
+                      required:
+                        - id
+                        - name
+                required:
+                  - renderers
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}:
+    get:
+      summary: Retrieve info about a renderer
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+      responses:
+        200:
+          description: Returns info of a Renderer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  renderer:
+                    $ref: "#/components/schemas/RendererInfo"
+                required:
+                  - renderer
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/customActions/{customActionId}:
+    post:
+      summary: Invoke a CustomAction on a Renderer
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: customActionId
+          schema:
+            type: string
+          required: true
+          description: ID of the CustomAction to be invoked
+          example: "shake-it"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  description: "Payload to send into the CustomAction"
+                  example: { "foo": "bar" }
+              required:
+                - payload
+      responses:
+        200:
+          description: CustomAction successfully executed, returning result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    example: "Yes, I did it!"
+
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+# ------------------ Graphic handling -----------------------------------------------------------------------
+  /renderers/{rendererId}/graphic/clear:
+    post:
+      summary: Clear (remove) Graphic(s) from one (or more) RenderTargets
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  $ref: "#/components/schemas/GraphicFilter"
+              required:
+                - filters
+      responses:
+        200:
+          description: Graphic successfully loaded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClearGraphicsResponse"
+        404:
+          description: No Renderer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/load:
+    post:
+      summary: Load a Graphic onto a RenderTarget
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  description: "The graphic to load"
+                  type: object
+                  properties:
+                    id:
+                      $ref: "#/components/schemas/GraphicId"
+                    version:
+                      $ref: "#/components/schemas/GraphicVersion"
+                  required:
+                    - id
+                payload:
+                  description: "Payload to send to the load() method of the graphic"
+                  type: object
+                  properties:
+                    data:
+                      description: "Data to send to the load() method of the graphic"
+                      example: "{ \"foo\": \"bar\" }"
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: Graphic successfully loaded, returns GraphicInstanceId of the loaded graphic
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the instance of the graphic that was just loaded"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the load() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the load() method"
+                    type: string
+                    example: "Loaded OK"
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or load() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/updateAction:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the updateAction() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  $ref: "#/components/schemas/UpdateActionPayload"
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: updateAction() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the updateAction() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the updateAction() method"
+                    type: string
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or updateAction() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/playAction:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the playAction() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  $ref: "#/components/schemas/PlayActionPayload"
+              required:
+                - graphic
+                - payload
+
+      responses:
+        200:
+          description: playAction() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the playAction() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the playAction() method"
+                    type: string
+                    example: "Playing!"
+                  currentStep:
+                    description: The resulting step from a PlayAction
+                    type: number
+                    example: 1
+                required:
+                  - graphicInstanceId
+                  - statusCode
+                  - currentStep
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or playAction() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/stopAction:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the stopAction() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  $ref: "#/components/schemas/StopActionPayload"
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: stopAction() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the stopAction() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the stopAction() method"
+                    type: string
+                    example: "Stopped safely"
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or stopAction() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/customAction:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the customAction() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  $ref: "#/components/schemas/CustomActionPayload"
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: customAction() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the customAction() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the customAction() method"
+                    type: string
+                    example: "Highlighting"
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or customAction() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/goToTime:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the goToTime() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  description: "Payload to send to the goToTime() method of the graphic"
+                  type: object
+                  properties:
+                    timestamp:
+                      description: "The timestamp to go to"
+                      type: number
+                      example: "1234"
+                  required:
+                    - timestamp
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: goToTime() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the goToTime() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the goToTime() method"
+                    type: string
+                    example: "Jumped to 1234"
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or goToTime() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/targets/{renderTargetId}/setActionsSchedule:
+    post:
+      summary: "For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method"
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+        - in: path
+          name: renderTargetId
+          description: ID of the Renderer Target
+          schema:
+            $ref: "#/components/schemas/RendererTargetId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                graphic:
+                  $ref: "#/components/schemas/GraphicTarget"
+                payload:
+                  description: "Payload to send to the setActionsSchedule() method of the graphic"
+                  type: object
+                  properties:
+                    schedule:
+                      description: "A list of the scheduled actions to call at certain points in time"
+                      type: array
+                      example: "[ { \"timestamp\": 1234, \"action\": { \"type\": \"updateAction\", \"params\": { \"foo\": \"bar\" } } } ]"
+                      items:
+                        type: object
+                        properties:
+                          timestamp:
+                            description: "The timestamp to go to"
+                            type: number
+                            example: "1234"
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    pattern: "updateAction"
+                                  params:
+                                    $ref: "#/components/schemas/UpdateActionPayload"
+                                required:
+                                  - type
+                                  - params
+                              - type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    pattern: "playAction"
+                                  params:
+                                    $ref: "#/components/schemas/PlayActionPayload"
+                                required:
+                                  - type
+                                  - params
+                              - type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    pattern: "stopAction"
+                                  params:
+                                    $ref: "#/components/schemas/StopActionPayload"
+                                required:
+                                  - type
+                                  - params
+                              - type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    pattern: "customAction"
+                                  params:
+                                    $ref: "#/components/schemas/CustomActionPayload"
+                                required:
+                                  - type
+                                  - params
+                        required:
+                          - timestamp
+                          - action
+                  required:
+                    - schedule
+              required:
+                - graphic
+                - payload
+      responses:
+        200:
+          description: setActionsSchedule() successfully executed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  graphicInstanceId:
+                    description: "Unique ID of the affected GraphicInstance"
+                    $ref: "#/components/schemas/GraphicInstanceId"
+                  statusCode:
+                    description: "Returned by the setActionsSchedule() method"
+                    type: number
+                    example: 200
+                  statusMessage:
+                    description: "Returned by the setActionsSchedule() method"
+                    type: string
+                    example: "Schedule set"
+                required:
+                  - graphicInstanceId
+                  - statusCode
+        404:
+          description: No Graphic or RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error or setActionsSchedule() threw an error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Internal Server Error"
+        stack:
+          type: string
+          example: "Error at /path/to/file.js:123:45"
+      required:
+        - error
+    NotFoundResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Not found"
+      required:
+        - error
+    GraphicNotFoundResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Graphic not found"
+      required:
+        - error
+    RendererId:
+      description: "Version of the Renderer"
+      type: string
+      example: "renderer-0"
+    RendererTargetId:
+      description: "Version of the RendererTarget"
+      type: string
+      example: "layer-0"
+    GraphicId:
+      description: "ID of the Ograf Graphic"
+      type: string
+      example: "simple-l3rd"
+    GraphicVersion:
+      description: "Version of the Ograf Graphic"
+      type: string
+      example: "1.0" # TODO: how to handle empty string / no version
+    GraphicInstanceId:
+      description: "ID of the GraphicInstance"
+      type: string
+      example: "graphic-instance-0"
+    GraphicInfo:
+      type: object
+      title: GraphicInfo
+      properties:
+        id:
+          $ref: "#/components/schemas/GraphicId"
+        version:
+          $ref: "#/components/schemas/GraphicVersion"
+        name:
+          description: "Short name of the graphic"
+          type: string
+          example: "Simple LowerThird"
+        description:
+          description: "Description of the graphic"
+          type: string
+          example: "A simple lower third for the Main news show"
+        modified:
+          description: "Unix timestamp of last modified"
+          type: number
+          example: 1735689600000
+        author:
+          description: "Information about the author of the graphic"
+          type: object
+          properties:
+            name:
+              type: string
+              example: "John Doe"
+            email:
+              type: string
+              example: "john.doe@ograf.io"
+            url:
+              type: string
+              example: https://ograf.ebu.io/
+          required:
+            - name
+      required:
+        - id
+        - name
+        - modified
+    Manifest:
+      type: object
+      description: OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json
+      $ref: "../json-schemas/graphics/schema.json"
+    RendererInfo:
+      type: object
+      title: RendererInfo
+      properties:
+        id:
+          $ref: "#/components/schemas/RendererId"
+        name:
+          description: "Short name of the renderer"
+          type: string
+          example: "My Renderer"
+        description:
+          description: "Description of the renderer"
+          type: string
+          example: "A simple, layer-based renderer"
+        targets:
+          description: "List of available RenderTargets on the renderer"
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: "#/components/schemas/RendererTargetId"
+              name:
+                type: string
+              description:
+                type: string
+        customActions:
+          type: array
+          description: "Custom Actions that can be invoked on the Renderer."
+          items:
+            $ref: "../json-schemas/lib/action.json"
+        renderCharacteristics:
+          $ref: "#/components/schemas/RenderCharacteristics"
+          type: object
+
+      required:
+        - id
+        - name
+        - targets
+    RenderCharacteristics:
+      type: object
+      properties:
+        resolution:
+          type: object
+          properties:
+            width:
+              type: number
+              example: 1920
+            height:
+              type: number
+              example: 1080
+          required:
+            - width
+            - height
+        frameRate:
+          type: number
+          description: "Which frameRate the renderer will be rendering in. Examples: 50, 60, 29.97"
+          example: 50
+    GraphicFilter:
+      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+      type: object
+      properties:
+        renderTargetId:
+          description: "(Optional) If set, will only affect GraphicInstances from a certain RenderTarget"
+          type: string
+        graphic:
+          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
+          type: object
+          properties:
+            id:
+              $ref: "#/components/schemas/GraphicId"
+            version:
+              $ref: "#/components/schemas/GraphicVersion"
+          required:
+            - id
+        graphicInstanceId:
+          description: "(Optional) If set, will only affect a specific GraphicInstance"
+          type: string
+    GraphicTarget:
+      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+      type: object
+      properties:
+        graphic:
+          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
+          type: object
+          properties:
+            id:
+              $ref: "#/components/schemas/GraphicId"
+            version:
+              $ref: "#/components/schemas/GraphicVersion"
+        graphicInstanceId:
+          description: "(Optional) If set, will only affect a specific GraphicInstance"
+          $ref: "#/components/schemas/GraphicInstanceId"
+    ClearGraphicsResponse:
+      type: object
+      properties:
+        graphicInstances:
+          description: "A list of the GraphicInstances that were cleared"
+          type: array
+          items:
+            type: object
+            properties:
+              renderTargetId:
+                description: "ID of the RenderTarget that the graphic was cleared from"
+                $ref: "#/components/schemas/RendererTargetId"
+              graphicInstanceId:
+                description: "Unique ID of the instance of the graphic that was just cleared"
+                $ref: "#/components/schemas/GraphicInstanceId"
+              graphic:
+                description: "The graphic that was cleared"
+                type: object
+                properties:
+                  id:
+                    description: "ID of the graphic that was cleared"
+                    $ref: "#/components/schemas/GraphicId"
+                  version:
+                    description: "Version of the graphic that was cleared"
+                    $ref: "#/components/schemas/GraphicVersion"
+                required:
+                  - id
+            required:
+              - renderTargetId
+              - graphicInstanceId
+              - graphic
+      required:
+        - graphicInstances
+    UpdateActionPayload:
+      description: "Payload to send to the updateAction() method of the graphic"
+      type: object
+      properties:
+        data:
+          description: "Data to send to the updateAction() method of the graphic"
+          example: "{ \"foo\": \"bar\" }"
+    PlayActionPayload:
+      description: "Payload to send to the playAction() method of the graphic"
+      type: object
+      properties:
+        delta:
+          description: How far to advance. 1 = next step/segment. (defaults to 1)
+          type: number
+        goto:
+          description: Jump to a specific step/segment (defaults to undefined)
+          type: number
+        skipAnimation:
+          description: If true, skips animation (defaults to false)
+          type: boolean
+    StopActionPayload:
+      description: "Payload to send to the stopAction() method of the graphic"
+      type: object
+      properties:
+        skipAnimation:
+          description: If true, skips animation (defaults to false)
+          type: boolean
+    CustomActionPayload:
+      description: "Payload to send to the customAction() method of the graphic"
+      type: object
+      properties:
+        id:
+          description: "Action id, as defined by the Graphic manifest"
+          type: string
+          example: "highlight"
+        payload:
+          description: Payload to send into the method
+          example: { "foo": "bar" }
+      required:
+        - id

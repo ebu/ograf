@@ -368,7 +368,7 @@ class MyGraphic extends HTMLElement {
       }),
     ];
   }
-  _getHighlightAnimation(params) {
+  _getHighlightAnimation(payload) {
     const gsap = this.g.gsap;
 
     return [

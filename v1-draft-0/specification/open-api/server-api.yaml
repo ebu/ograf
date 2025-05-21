@@ -12,8 +12,8 @@ info:
     altText: "OGraf"
 
 servers:
-  - url: http://localhost:3000/ograf/v1
   - url: http://localhost:8080/ograf/v1
+  - url: http://localhost:3000/ograf/v1
   - url: http://localhost/ograf/v1
 paths:
   /:
@@ -33,6 +33,12 @@ paths:
                     description: "A name of the server"
                 required:
                   - name
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 # ------------------ Graphics -------------------------------------------------------------------------------
   /graphics:
     get:
@@ -193,7 +199,7 @@ paths:
                 type: object
                 properties:
                   manifest:
-                    $ref: "#/components/schemas/Manifest"
+                    $ref: "#/components/schemas/GraphicManifest"
                 required:
                   - manifest
         404:
@@ -317,6 +323,12 @@ paths:
                     $ref: "#/components/schemas/RendererInfo"
                 required:
                   - renderer
+        404:
+          description: No Renderer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
         500:
           description: Internal Server Error
           content:
@@ -362,7 +374,12 @@ paths:
                 properties:
                   result:
                     example: "Yes, I did it!"
-
+        404:
+          description: No Renderer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
         500:
           description: Internal Server Error
           content:
@@ -443,16 +460,18 @@ paths:
                       $ref: "#/components/schemas/GraphicVersion"
                   required:
                     - id
-                payload:
-                  description: "Payload to send to the load() method of the graphic"
+                params:
+                  description: "Params to send to the load() method of the graphic"
                   type: object
                   properties:
                     data:
                       description: "Data to send to the load() method of the graphic"
-                      example: "{ \"foo\": \"bar\" }"
+                      example: "{ \"name\": \"John Doe\" }"
+                  required:
+                    - data
               required:
                 - graphic
-                - payload
+                - params
       responses:
         200:
           description: Graphic successfully loaded, returns GraphicInstanceId of the loaded graphic
@@ -510,13 +529,13 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  $ref: "#/components/schemas/UpdateActionPayload"
+                params:
+                  $ref: "#/components/schemas/UpdateActionParams"
               required:
-                - graphic
-                - payload
+                - target
+                - params
       responses:
         200:
           description: updateAction() successfully executed
@@ -573,13 +592,13 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  $ref: "#/components/schemas/PlayActionPayload"
+                params:
+                  $ref: "#/components/schemas/PlayActionParams"
               required:
-                - graphic
-                - payload
+                - target
+                - params
 
       responses:
         200:
@@ -643,13 +662,13 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  $ref: "#/components/schemas/StopActionPayload"
+                params:
+                  $ref: "#/components/schemas/StopActionParams"
               required:
-                - graphic
-                - payload
+                - target
+                - params
       responses:
         200:
           description: stopAction() successfully executed
@@ -707,13 +726,13 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  $ref: "#/components/schemas/CustomActionPayload"
+                params:
+                  $ref: "#/components/schemas/CustomActionParams"
               required:
-                - graphic
-                - payload
+                - target
+                - params
       responses:
         200:
           description: customAction() successfully executed
@@ -771,10 +790,10 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  description: "Payload to send to the goToTime() method of the graphic"
+                params:
+                  description: "Params to send to the goToTime() method of the graphic"
                   type: object
                   properties:
                     timestamp:
@@ -784,8 +803,8 @@ paths:
                   required:
                     - timestamp
               required:
-                - graphic
-                - payload
+                - target
+                - params
       responses:
         200:
           description: goToTime() successfully executed
@@ -843,10 +862,10 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                target:
                   $ref: "#/components/schemas/GraphicTarget"
-                payload:
-                  description: "Payload to send to the setActionsSchedule() method of the graphic"
+                params:
+                  description: "Params to send to the setActionsSchedule() method of the graphic"
                   type: object
                   properties:
                     schedule:
@@ -868,7 +887,7 @@ paths:
                                     type: string
                                     pattern: "updateAction"
                                   params:
-                                    $ref: "#/components/schemas/UpdateActionPayload"
+                                    $ref: "#/components/schemas/UpdateActionParams"
                                 required:
                                   - type
                                   - params
@@ -878,7 +897,7 @@ paths:
                                     type: string
                                     pattern: "playAction"
                                   params:
-                                    $ref: "#/components/schemas/PlayActionPayload"
+                                    $ref: "#/components/schemas/PlayActionParams"
                                 required:
                                   - type
                                   - params
@@ -888,7 +907,7 @@ paths:
                                     type: string
                                     pattern: "stopAction"
                                   params:
-                                    $ref: "#/components/schemas/StopActionPayload"
+                                    $ref: "#/components/schemas/StopActionParams"
                                 required:
                                   - type
                                   - params
@@ -898,7 +917,7 @@ paths:
                                     type: string
                                     pattern: "customAction"
                                   params:
-                                    $ref: "#/components/schemas/CustomActionPayload"
+                                    $ref: "#/components/schemas/CustomActionParams"
                                 required:
                                   - type
                                   - params
@@ -908,8 +927,8 @@ paths:
                   required:
                     - schedule
               required:
-                - graphic
-                - payload
+                - target
+                - params
       responses:
         200:
           description: setActionsSchedule() successfully executed
@@ -1033,7 +1052,7 @@ components:
         - id
         - name
         - modified
-    Manifest:
+    GraphicManifest:
       type: object
       description: OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json
       $ref: "../json-schemas/graphics/schema.json"
@@ -1163,15 +1182,17 @@ components:
               - graphic
       required:
         - graphicInstances
-    UpdateActionPayload:
-      description: "Payload to send to the updateAction() method of the graphic"
+    UpdateActionParams:
+      description: "Params to send to the updateAction() method of the graphic"
       type: object
       properties:
         data:
           description: "Data to send to the updateAction() method of the graphic"
-          example: "{ \"foo\": \"bar\" }"
-    PlayActionPayload:
-      description: "Payload to send to the playAction() method of the graphic"
+          example: "{ \"name\": \"John Doe\" }"
+      required:
+        - data
+    PlayActionParams:
+      description: "Params to send to the playAction() method of the graphic"
       type: object
       properties:
         delta:
@@ -1183,15 +1204,15 @@ components:
         skipAnimation:
           description: If true, skips animation (defaults to false)
           type: boolean
-    StopActionPayload:
-      description: "Payload to send to the stopAction() method of the graphic"
+    StopActionParams:
+      description: "Params to send to the stopAction() method of the graphic"
       type: object
       properties:
         skipAnimation:
           description: If true, skips animation (defaults to false)
           type: boolean
-    CustomActionPayload:
-      description: "Payload to send to the customAction() method of the graphic"
+    CustomActionParams:
+      description: "Params to send to the customAction() method of the graphic"
       type: object
       properties:
         id:
@@ -1199,7 +1220,8 @@ components:
           type: string
           example: "highlight"
         payload:
-          description: Payload to send into the method
+          description: payload to send into the method
           example: { "foo": "bar" }
       required:
         - id
+        - payload

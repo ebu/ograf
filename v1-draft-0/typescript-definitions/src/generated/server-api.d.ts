@@ -38,6 +38,15 @@ export interface paths {
                         };
                     };
                 };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
             };
         };
         put?: never;
@@ -209,7 +218,10 @@ export interface paths {
         /** Delete a graphic */
         delete: {
             parameters: {
-                query?: never;
+                query?: {
+                    /** @description Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected. */
+                    force?: boolean;
+                };
                 header?: never;
                 path: {
                     /** @description ID of the graphic to delete */
@@ -219,19 +231,7 @@ export interface paths {
                 };
                 cookie?: never;
             };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /**
-                         * @description Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected.
-                         * @default false
-                         */
-                        force?: boolean;
-                    } & {
-                        [key: string]: unknown;
-                    };
-                };
-            };
+            requestBody?: never;
             responses: {
                 /** @description Graphic deleted */
                 200: {
@@ -492,6 +492,15 @@ export interface paths {
                         };
                     };
                 };
+                /** @description No Renderer found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["NotFoundResponse"];
+                    };
+                };
                 /** @description Internal Server Error */
                 500: {
                     headers: {
@@ -564,6 +573,15 @@ export interface paths {
                         } & {
                             [key: string]: unknown;
                         };
+                    };
+                };
+                /** @description No Renderer found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["NotFoundResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -680,13 +698,13 @@ export interface paths {
                         } & {
                             [key: string]: unknown;
                         };
-                        /** @description Payload to send to the load() method of the graphic */
-                        payload: {
+                        /** @description Params to send to the load() method of the graphic */
+                        params: {
                             /**
                              * @description Data to send to the load() method of the graphic
-                             * @example { "foo": "bar" }
+                             * @example { "name": "John Doe" }
                              */
-                            data?: unknown;
+                            data: unknown;
                         } & {
                             [key: string]: unknown;
                         };
@@ -771,8 +789,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        payload: components["schemas"]["UpdateActionPayload"];
+                        target: components["schemas"]["GraphicTarget"];
+                        params: components["schemas"]["UpdateActionParams"];
                     } & {
                         [key: string]: unknown;
                     };
@@ -851,8 +869,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        payload: components["schemas"]["PlayActionPayload"];
+                        target: components["schemas"]["GraphicTarget"];
+                        params: components["schemas"]["PlayActionParams"];
                     } & {
                         [key: string]: unknown;
                     };
@@ -939,8 +957,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        payload: components["schemas"]["StopActionPayload"];
+                        target: components["schemas"]["GraphicTarget"];
+                        params: components["schemas"]["StopActionParams"];
                     } & {
                         [key: string]: unknown;
                     };
@@ -1022,8 +1040,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        payload: components["schemas"]["CustomActionPayload"];
+                        target: components["schemas"]["GraphicTarget"];
+                        params: components["schemas"]["CustomActionParams"];
                     } & {
                         [key: string]: unknown;
                     };
@@ -1105,9 +1123,9 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        /** @description Payload to send to the goToTime() method of the graphic */
-                        payload: {
+                        target: components["schemas"]["GraphicTarget"];
+                        /** @description Params to send to the goToTime() method of the graphic */
+                        params: {
                             /**
                              * @description The timestamp to go to
                              * @example 1234
@@ -1197,9 +1215,9 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        graphic: components["schemas"]["GraphicTarget"];
-                        /** @description Payload to send to the setActionsSchedule() method of the graphic */
-                        payload: {
+                        target: components["schemas"]["GraphicTarget"];
+                        /** @description Params to send to the setActionsSchedule() method of the graphic */
+                        params: {
                             /**
                              * @description A list of the scheduled actions to call at certain points in time
                              * @example [ { "timestamp": 1234, "action": { "type": "updateAction", "params": { "foo": "bar" } } } ]
@@ -1212,22 +1230,22 @@ export interface paths {
                                 timestamp: number;
                                 action: ({
                                     type: string;
-                                    params: components["schemas"]["UpdateActionPayload"];
+                                    params: components["schemas"]["UpdateActionParams"];
                                 } & {
                                     [key: string]: unknown;
                                 }) | ({
                                     type: string;
-                                    params: components["schemas"]["PlayActionPayload"];
+                                    params: components["schemas"]["PlayActionParams"];
                                 } & {
                                     [key: string]: unknown;
                                 }) | ({
                                     type: string;
-                                    params: components["schemas"]["StopActionPayload"];
+                                    params: components["schemas"]["StopActionParams"];
                                 } & {
                                     [key: string]: unknown;
                                 }) | ({
                                     type: string;
-                                    params: components["schemas"]["CustomActionPayload"];
+                                    params: components["schemas"]["CustomActionParams"];
                                 } & {
                                     [key: string]: unknown;
                                 });
@@ -1376,7 +1394,7 @@ export interface components {
             [key: string]: unknown;
         };
         /** @description OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json */
-        Manifest: components["schemas"]["schema-2"];
+        GraphicManifest: components["schemas"]["schema-2"];
         /** RendererInfo */
         RendererInfo: {
             id: components["schemas"]["RendererId"];
@@ -1473,18 +1491,18 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description Payload to send to the updateAction() method of the graphic */
-        UpdateActionPayload: {
+        /** @description Params to send to the updateAction() method of the graphic */
+        UpdateActionParams: {
             /**
              * @description Data to send to the updateAction() method of the graphic
-             * @example { "foo": "bar" }
+             * @example { "name": "John Doe" }
              */
-            data?: unknown;
+            data: unknown;
         } & {
             [key: string]: unknown;
         };
-        /** @description Payload to send to the playAction() method of the graphic */
-        PlayActionPayload: {
+        /** @description Params to send to the playAction() method of the graphic */
+        PlayActionParams: {
             /** @description How far to advance. 1 = next step/segment. (defaults to 1) */
             delta?: number;
             /** @description Jump to a specific step/segment (defaults to undefined) */
@@ -1494,27 +1512,27 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description Payload to send to the stopAction() method of the graphic */
-        StopActionPayload: {
+        /** @description Params to send to the stopAction() method of the graphic */
+        StopActionParams: {
             /** @description If true, skips animation (defaults to false) */
             skipAnimation?: boolean;
         } & {
             [key: string]: unknown;
         };
-        /** @description Payload to send to the customAction() method of the graphic */
-        CustomActionPayload: {
+        /** @description Params to send to the customAction() method of the graphic */
+        CustomActionParams: {
             /**
              * @description Action id, as defined by the Graphic manifest
              * @example highlight
              */
             id: string;
             /**
-             * @description Payload to send into the method
+             * @description payload to send into the method
              * @example {
              *       "foo": "bar"
              *     }
              */
-            payload?: unknown;
+            payload: unknown;
         } & {
             [key: string]: unknown;
         };

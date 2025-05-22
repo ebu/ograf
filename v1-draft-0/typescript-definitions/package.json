@@ -1,6 +1,6 @@
 {
   "name": "ograf",
-  "version": "0.0.5",
+  "version": "0.1.0-server-api.0",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "generate-types": "node scripts/generate-types.js",
     "generate-server-types": "openapi-typescript ../specification/open-api/server-api.yaml -o ./src/generated/server-api.d.ts --additional-properties=true && node scripts/post-generate-server-types.js",
     "build-all": "npm run generate-types && npm run generate-server-types && npm run build",
-    "do:publish": "npm run build-all && npm publish --access public"
+    "do:publish": "npm run build-all && npm publish --access public --tag next"
   },
   "devDependencies": {
     "json-schema-to-typescript": "^15.0.4",

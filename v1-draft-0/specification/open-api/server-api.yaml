@@ -21,7 +21,7 @@ paths:
       summary: Server information
       responses:
         200:
-          description: Returns a string with the version number
+          description: Returns information about the server
           content:
             application/json:
               schema:
@@ -29,8 +29,23 @@ paths:
                 properties:
                   name:
                     type: string
+                    description: "Name of the server"
                     example: "My Ograf Server"
-                    description: "A name of the server"
+                  description:
+                    type: string
+                    description: "Longer description of the server"
+                    example: "This server handles graphics for the main news shows"
+                  author:
+                    description: "Information about the author/manufacturer of the Server"
+                    $ref: "#/components/schemas/Author"
+                  version:
+                    type: string
+                    description: Version of the Server
+                    example: '1.0'
+                  uptime:
+                    type: number
+                    description: Server uptime (in milliseconds)
+                    example: 3600000
                 required:
                   - name
         500:
@@ -63,38 +78,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-
   /graphics/{graphicId}:
-    get:
-      summary: Retrieve list of versions of a graphic
-      parameters:
-        - in: path
-          name: graphicId
-          description: ID of the graphic to retrieve
-          schema:
-            $ref: "#/components/schemas/GraphicId"
-          required: true
-      responses:
-        200:
-          description: Returns a list of versions of an Ograf Graphic
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  graphics:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/GraphicInfo"
-                required:
-                  - graphics
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-  /graphics/{graphicId}/{graphicVersion}:
     get:
       summary: Retrieve info about a graphic
       parameters:
@@ -103,12 +87,6 @@ paths:
           description: ID of the graphic to retrieve
           schema:
             $ref: "#/components/schemas/GraphicId"
-          required: true
-        - in: path
-          name: graphicVersion
-          description: Version of the graphic to retrieve.
-          schema:
-            $ref: "#/components/schemas/GraphicVersion"
           required: true
       responses:
         200:
@@ -120,8 +98,11 @@ paths:
                 properties:
                   graphic:
                     $ref: "#/components/schemas/GraphicInfo"
+                  manifest:
+                    $ref: "#/components/schemas/GraphicManifest"
                 required:
                   - graphic
+                  - manifest
         404:
           description: No Graphic found with the given ID and version
           content:
@@ -142,12 +123,6 @@ paths:
           description: ID of the graphic to delete
           schema:
             $ref: "#/components/schemas/GraphicId"
-          required: true
-        - in: path
-          name: graphicVersion
-          description: Version of the graphic to delete.
-          schema:
-            $ref: "#/components/schemas/GraphicVersion"
           required: true
         - in: query
           name: force
@@ -174,95 +149,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /graphics/{graphicId}/{graphicVersion}/manifest:
-    get:
-      summary: Retrieve the manifest of a graphic
-      parameters:
-        - in: path
-          name: graphicId
-          description: ID of the graphic
-          schema:
-            $ref: "#/components/schemas/GraphicId"
-          required: true
-        - in: path
-          name: graphicVersion
-          description: Version of the graphic.
-          schema:
-            $ref: "#/components/schemas/GraphicVersion"
-          required: true
-      responses:
-        200:
-          description: Returns info of an OGraf Graphic
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  manifest:
-                    $ref: "#/components/schemas/GraphicManifest"
-                required:
-                  - manifest
-        404:
-          description: No Graphic found with the given ID and version
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GraphicNotFoundResponse"
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-  /graphics/{graphicId}/{graphicVersion}/{localPath}: # TODO: check that deep sub-paths works
-    get:
-      summary: Retrieve a resource (file) in a graphic
-      parameters:
-        - in: path
-          name: graphicId
-          description: ID of the graphic
-          schema:
-            $ref: "#/components/schemas/GraphicId"
-          required: true
-        - in: path
-          name: graphicVersion
-          description: Version of the graphic.
-          schema:
-            $ref: "#/components/schemas/GraphicVersion"
-          required: true
-        - in: path
-          name: localPath
-          description: The local path to a resource in the graphic
-          schema:
-            type: string
-            example: "graphic.mjs"
-          required: true
-      responses:
-        200:
-          description: Returns the content of the resource / file
-          content:
-           application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        404:
-          description: No resource / find on the given localPath
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Resource not found"
-                required:
-                  - error
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
 # ------------------ Renderers ------------------------------------------------------------------------------
   /renderers:
     get:
@@ -283,13 +169,9 @@ paths:
                         id:
                           $ref: "#/components/schemas/RendererId"
                         name:
-                          description: "Short name of the renderer"
-                          type: string
-                          example: "My Renderer"
+                          $ref: "#/components/schemas/RendererInfo/properties/name"
                         description:
-                          description: "Description of the renderer"
-                          type: string
-                          example: "A simple, layer-based renderer"
+                          $ref: "#/components/schemas/RendererInfo/properties/description"
                       required:
                         - id
                         - name
@@ -387,7 +269,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 # ------------------ Graphic handling -----------------------------------------------------------------------
-  /renderers/{rendererId}/graphic/clear:
+  /renderers/{rendererId}/target/graphic/clear:
     post:
       summary: Clear (remove) Graphic(s) from one (or more) RenderTargets
       parameters:
@@ -427,7 +309,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/load:
+  /renderers/{rendererId}/target/graphic/load:
     post:
       summary: Load a Graphic onto a RenderTarget
       parameters:
@@ -437,12 +319,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -450,16 +326,12 @@ paths:
             schema:
               type: object
               properties:
-                graphic:
+                renderTarget:
+                  description: "The RenderTarget to load the graphic onto"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicId:
                   description: "The graphic to load"
-                  type: object
-                  properties:
-                    id:
-                      $ref: "#/components/schemas/GraphicId"
-                    version:
-                      $ref: "#/components/schemas/GraphicVersion"
-                  required:
-                    - id
+                  $ref: "#/components/schemas/GraphicId"
                 params:
                   description: "Params to send to the load() method of the graphic"
                   type: object
@@ -470,7 +342,8 @@ paths:
                   required:
                     - data
               required:
-                - graphic
+                - renderTarget
+                - graphicId
                 - params
       responses:
         200:
@@ -506,7 +379,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/updateAction:
+  /renderers/{rendererId}/target/graphic/updateAction:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the updateAction() method"
       parameters:
@@ -516,12 +389,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -529,12 +396,17 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/UpdateActionParams"
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
       responses:
         200:
@@ -569,7 +441,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/playAction:
+  /renderers/{rendererId}/target/graphic/playAction:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the playAction() method"
       parameters:
@@ -579,12 +451,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -592,12 +458,17 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/PlayActionParams"
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
 
       responses:
@@ -639,7 +510,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/stopAction:
+  /renderers/{rendererId}/target/graphic/stopAction:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the stopAction() method"
       parameters:
@@ -649,12 +520,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -662,12 +527,17 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/StopActionParams"
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
       responses:
         200:
@@ -703,7 +573,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/customAction:
+  /renderers/{rendererId}/target/graphic/customAction:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the customAction() method"
       parameters:
@@ -713,12 +583,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -726,12 +590,17 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/CustomActionParams"
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
       responses:
         200:
@@ -767,7 +636,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/goToTime:
+  /renderers/{rendererId}/target/graphic/goToTime:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the goToTime() method"
       parameters:
@@ -777,12 +646,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -790,7 +653,11 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   description: "Params to send to the goToTime() method of the graphic"
@@ -803,7 +670,8 @@ paths:
                   required:
                     - timestamp
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
       responses:
         200:
@@ -839,7 +707,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/targets/{renderTargetId}/setActionsSchedule:
+  /renderers/{rendererId}/target/graphic/setActionsSchedule:
     post:
       summary: "For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method"
       parameters:
@@ -849,12 +717,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: path
-          name: renderTargetId
-          description: ID of the Renderer Target
-          schema:
-            $ref: "#/components/schemas/RendererTargetId"
-          required: true
       requestBody:
         required: true
         content:
@@ -862,7 +724,11 @@ paths:
             schema:
               type: object
               properties:
-                target:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                graphicTarget:
+                  description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
                 params:
                   description: "Params to send to the setActionsSchedule() method of the graphic"
@@ -927,7 +793,8 @@ paths:
                   required:
                     - schedule
               required:
-                - target
+                - renderTarget
+                - graphicTarget
                 - params
       responses:
         200:
@@ -994,21 +861,16 @@ components:
       required:
         - error
     RendererId:
-      description: "Version of the Renderer"
+      description: "ID of the Renderer"
       type: string
       example: "renderer-0"
-    RendererTargetId:
-      description: "Version of the RendererTarget"
-      type: string
-      example: "layer-0"
+    RendererTargetIdentifier:
+      description: "Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer."
+      example: '"layer-0" or { "bank": 1, "layer": 14 }'
     GraphicId:
       description: "ID of the Ograf Graphic"
       type: string
       example: "simple-l3rd"
-    GraphicVersion:
-      description: "Version of the Ograf Graphic"
-      type: string
-      example: "1.0" # TODO: how to handle empty string / no version
     GraphicInstanceId:
       description: "ID of the GraphicInstance"
       type: string
@@ -1020,7 +882,8 @@ components:
         id:
           $ref: "#/components/schemas/GraphicId"
         version:
-          $ref: "#/components/schemas/GraphicVersion"
+          description: "Version of the Graphic"
+          type: string
         name:
           description: "Short name of the graphic"
           type: string
@@ -1029,29 +892,34 @@ components:
           description: "Description of the graphic"
           type: string
           example: "A simple lower third for the Main news show"
-        modified:
-          description: "Unix timestamp of last modified"
-          type: number
-          example: 1735689600000
         author:
           description: "Information about the author of the graphic"
-          type: object
-          properties:
-            name:
-              type: string
-              example: "John Doe"
-            email:
-              type: string
-              example: "john.doe@ograf.io"
-            url:
-              type: string
-              example: https://ograf.ebu.io/
-          required:
-            - name
+          $ref: "#/components/schemas/Author"
+        created:
+          description: "Unix timestamp of when the Graphic was created"
+          type: number
+          example: 1735689600000
+        modified:
+          description: "Unix timestamp of when the Graphic was last modified"
+          type: number
+          example: 1735689600000
       required:
         - id
         - name
-        - modified
+    Author:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          example: "john.doe@ograf.io"
+        url:
+          type: string
+          example: https://ograf.ebu.io/
+      required:
+        - name
     GraphicManifest:
       type: object
       description: OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json
@@ -1070,18 +938,6 @@ components:
           description: "Description of the renderer"
           type: string
           example: "A simple, layer-based renderer"
-        targets:
-          description: "List of available RenderTargets on the renderer"
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: "#/components/schemas/RendererTargetId"
-              name:
-                type: string
-              description:
-                type: string
         customActions:
           type: array
           description: "Custom Actions that can be invoked on the Renderer."
@@ -1090,6 +946,53 @@ components:
         renderCharacteristics:
           $ref: "#/components/schemas/RenderCharacteristics"
           type: object
+        renderTargetSchema:
+          description: "Schema of the RenderTarget. This is a GDD/JSON-object schema that describes the structure of the RenderTarget identifier. See https://superflytv.github.io/GraphicsDataDefinition"
+          type: object
+          x-$ref: "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+          externalDocs:
+            url: https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json
+          example: '{ "type": "string" } or { "type": "object", "properties": { "bank": { "type": "integer" }, "layer": { "type": "integer" } }, "required": [ "bank", "layer" ] }'
+
+
+        status:
+          description: "Status of the renderer"
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+                - OK
+                - WARNING
+                - ERROR
+              example: "OK"
+            message:
+              type: string
+              example: "Renderer is running"
+            renderTargets:
+              description: "List of active RenderTargets and their contents"
+              type: array
+              items:
+                type: object
+                properties:
+                  renderTarget:
+                    description: "Identifier of the RenderTarget"
+                    $ref: "#/components/schemas/RendererTargetIdentifier"
+                  name:
+                    description: "Name of the RenderTarget"
+                    type: string
+                    example: "Layer 0"
+                  status:
+                    type: string
+                    enum:
+                      - OK
+                      - WARNING
+                      - ERROR
+                    example: "OK"
+                  message:
+                    type: string
+                    example: "RenderTarget is running"
+
 
       required:
         - id
@@ -1118,19 +1021,12 @@ components:
       description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
       type: object
       properties:
-        renderTargetId:
+        renderTarget:
           description: "(Optional) If set, will only affect GraphicInstances from a certain RenderTarget"
-          type: string
-        graphic:
-          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
-          type: object
-          properties:
-            id:
-              $ref: "#/components/schemas/GraphicId"
-            version:
-              $ref: "#/components/schemas/GraphicVersion"
-          required:
-            - id
+          $ref: "#/components/schemas/RendererTargetIdentifier"
+        graphicId:
+          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id"
+          $ref: "#/components/schemas/GraphicId"
         graphicInstanceId:
           description: "(Optional) If set, will only affect a specific GraphicInstance"
           type: string
@@ -1138,14 +1034,9 @@ components:
       description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
       type: object
       properties:
-        graphic:
+        graphicId:
           description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
-          type: object
-          properties:
-            id:
-              $ref: "#/components/schemas/GraphicId"
-            version:
-              $ref: "#/components/schemas/GraphicVersion"
+          $ref: "#/components/schemas/GraphicId"
         graphicInstanceId:
           description: "(Optional) If set, will only affect a specific GraphicInstance"
           $ref: "#/components/schemas/GraphicInstanceId"
@@ -1158,9 +1049,9 @@ components:
           items:
             type: object
             properties:
-              renderTargetId:
+              renderTarget:
                 description: "ID of the RenderTarget that the graphic was cleared from"
-                $ref: "#/components/schemas/RendererTargetId"
+                $ref: "#/components/schemas/RendererTargetIdentifier"
               graphicInstanceId:
                 description: "Unique ID of the instance of the graphic that was just cleared"
                 $ref: "#/components/schemas/GraphicInstanceId"
@@ -1171,13 +1062,10 @@ components:
                   id:
                     description: "ID of the graphic that was cleared"
                     $ref: "#/components/schemas/GraphicId"
-                  version:
-                    description: "Version of the graphic that was cleared"
-                    $ref: "#/components/schemas/GraphicVersion"
                 required:
                   - id
             required:
-              - renderTargetId
+              - renderTarget
               - graphicInstanceId
               - graphic
       required:

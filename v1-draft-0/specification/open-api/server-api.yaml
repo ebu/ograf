@@ -218,7 +218,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/target:
-    get:
+    post:
       summary: Retrieve info about a RenderTarget
       parameters:
         - in: path

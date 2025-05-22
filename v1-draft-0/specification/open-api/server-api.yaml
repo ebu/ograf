@@ -217,6 +217,50 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target:
+    get:
+      summary: Retrieve info about a RenderTarget
+      parameters:
+        - in: path
+          name: rendererId
+          description: ID of the Renderer
+          schema:
+            $ref: "#/components/schemas/RendererId"
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                renderTarget:
+                  description: "The RenderTarget to retrieve info about"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+      responses:
+        200:
+          description: Returns info of a Renderer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  renderTarget:
+                    $ref: "#/components/schemas/RenderTargetInfo"
+                required:
+                  - renderTarget
+        404:
+          description: No RenderTarget found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundResponse"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/customActions/{customActionId}:
     post:
       summary: Invoke a CustomAction on a Renderer
@@ -328,7 +372,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to load the graphic onto"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicId:
                   description: "The graphic to load"
                   $ref: "#/components/schemas/GraphicId"
@@ -398,7 +442,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -460,7 +504,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -529,7 +573,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -592,7 +636,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -655,7 +699,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -726,7 +770,7 @@ paths:
               properties:
                 renderTarget:
                   description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RendererTargetIdentifier"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicTarget:
                   description: "The Graphic to target with the command"
                   $ref: "#/components/schemas/GraphicTarget"
@@ -833,6 +877,7 @@ paths:
 
 components:
   schemas:
+    # Responses
     ErrorResponse:
       type: object
       properties:
@@ -860,11 +905,66 @@ components:
           example: "Graphic not found"
       required:
         - error
+    ClearGraphicsResponse:
+      type: object
+      properties:
+        graphicInstances:
+          description: "A list of the GraphicInstances that were cleared"
+          type: array
+          items:
+            type: object
+            properties:
+              renderTarget:
+                description: "ID of the RenderTarget that the graphic was cleared from"
+                $ref: "#/components/schemas/RenderTargetIdentifier"
+              graphicInstanceId:
+                description: "Unique ID of the instance of the graphic that was just cleared"
+                $ref: "#/components/schemas/GraphicInstanceId"
+              graphic:
+                description: "The graphic that was cleared"
+                type: object
+                properties:
+                  id:
+                    description: "ID of the graphic that was cleared"
+                    $ref: "#/components/schemas/GraphicId"
+                required:
+                  - id
+            required:
+              - renderTarget
+              - graphicInstanceId
+              - graphic
+      required:
+        - graphicInstances
+    # Targets / Filters
+    GraphicFilter:
+      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+      type: object
+      properties:
+        renderTarget:
+          description: "(Optional) If set, will only affect GraphicInstances from a certain RenderTarget"
+          $ref: "#/components/schemas/RenderTargetIdentifier"
+        graphicId:
+          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id"
+          $ref: "#/components/schemas/GraphicId"
+        graphicInstanceId:
+          description: "(Optional) If set, will only affect a specific GraphicInstance"
+          type: string
+    GraphicTarget:
+      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+      type: object
+      properties:
+        graphicId:
+          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
+          $ref: "#/components/schemas/GraphicId"
+        graphicInstanceId:
+          description: "(Optional) If set, will only affect a specific GraphicInstance"
+          $ref: "#/components/schemas/GraphicInstanceId"
+     # Ids
     RendererId:
       description: "ID of the Renderer"
       type: string
       example: "renderer-0"
-    RendererTargetIdentifier:
+    RenderTargetIdentifier:
       description: "Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer."
       example: '"layer-0" or { "bank": 1, "layer": 14 }'
     GraphicId:
@@ -875,6 +975,7 @@ components:
       description: "ID of the GraphicInstance"
       type: string
       example: "graphic-instance-0"
+    # Objects
     GraphicInfo:
       type: object
       title: GraphicInfo
@@ -905,20 +1006,6 @@ components:
           example: 1735689600000
       required:
         - id
-        - name
-    Author:
-      type: object
-      properties:
-        name:
-          type: string
-          example: "John Doe"
-        email:
-          type: string
-          example: "john.doe@ograf.io"
-        url:
-          type: string
-          example: https://ograf.ebu.io/
-      required:
         - name
     GraphicManifest:
       type: object
@@ -973,31 +1060,50 @@ components:
               description: "List of active RenderTargets and their contents"
               type: array
               items:
-                type: object
-                properties:
-                  renderTarget:
-                    description: "Identifier of the RenderTarget"
-                    $ref: "#/components/schemas/RendererTargetIdentifier"
-                  name:
-                    description: "Name of the RenderTarget"
-                    type: string
-                    example: "Layer 0"
-                  status:
-                    type: string
-                    enum:
-                      - OK
-                      - WARNING
-                      - ERROR
-                    example: "OK"
-                  message:
-                    type: string
-                    example: "RenderTarget is running"
-
-
+                $ref: "#/components/schemas/RenderTargetInfo"
+          required:
+            - status
+            - renderTargets
       required:
         - id
         - name
-        - targets
+        - status
+    RenderTargetInfo:
+      type: object
+      properties:
+        renderTarget:
+          description: "Identifier of the RenderTarget"
+          $ref: "#/components/schemas/RenderTargetIdentifier"
+        name:
+          description: "Name of the RenderTarget"
+          type: string
+          example: "Layer 0"
+        description:
+          description: "Longer description of the RenderTarget"
+          type: string
+        status:
+          type: string
+          enum:
+            - OK
+            - WARNING
+            - ERROR
+          example: "OK"
+        statusMessage:
+          type: string
+          example: "RenderTarget is running"
+        graphicInstances:
+          type: array
+          items:
+            type: object
+            properties:
+              graphicInstanceId:
+                $ref: "#/components/schemas/GraphicInstanceId"
+              graphic:
+                $ref: "#/components/schemas/GraphicInfo"
+      required:
+        - renderTarget
+        - name
+        - status
     RenderCharacteristics:
       type: object
       properties:
@@ -1017,59 +1123,21 @@ components:
           type: number
           description: "Which frameRate the renderer will be rendering in. Examples: 50, 60, 29.97"
           example: 50
-    GraphicFilter:
-      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+    Author:
       type: object
       properties:
-        renderTarget:
-          description: "(Optional) If set, will only affect GraphicInstances from a certain RenderTarget"
-          $ref: "#/components/schemas/RendererTargetIdentifier"
-        graphicId:
-          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id"
-          $ref: "#/components/schemas/GraphicId"
-        graphicInstanceId:
-          description: "(Optional) If set, will only affect a specific GraphicInstance"
+        name:
           type: string
-    GraphicTarget:
-      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
-      type: object
-      properties:
-        graphicId:
-          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
-          $ref: "#/components/schemas/GraphicId"
-        graphicInstanceId:
-          description: "(Optional) If set, will only affect a specific GraphicInstance"
-          $ref: "#/components/schemas/GraphicInstanceId"
-    ClearGraphicsResponse:
-      type: object
-      properties:
-        graphicInstances:
-          description: "A list of the GraphicInstances that were cleared"
-          type: array
-          items:
-            type: object
-            properties:
-              renderTarget:
-                description: "ID of the RenderTarget that the graphic was cleared from"
-                $ref: "#/components/schemas/RendererTargetIdentifier"
-              graphicInstanceId:
-                description: "Unique ID of the instance of the graphic that was just cleared"
-                $ref: "#/components/schemas/GraphicInstanceId"
-              graphic:
-                description: "The graphic that was cleared"
-                type: object
-                properties:
-                  id:
-                    description: "ID of the graphic that was cleared"
-                    $ref: "#/components/schemas/GraphicId"
-                required:
-                  - id
-            required:
-              - renderTarget
-              - graphicInstanceId
-              - graphic
+          example: "John Doe"
+        email:
+          type: string
+          example: "john.doe@ograf.io"
+        url:
+          type: string
+          example: https://ograf.ebu.io/
       required:
-        - graphicInstances
+        - name
+    # Action Parameters
     UpdateActionParams:
       description: "Params to send to the updateAction() method of the graphic"
       type: object

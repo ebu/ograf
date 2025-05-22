@@ -345,6 +345,76 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/renderers/{rendererId}/target": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Retrieve info about a RenderTarget */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    /** @description ID of the Renderer */
+                    rendererId: components["schemas"]["RendererId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /** @description The RenderTarget to retrieve info about */
+                        renderTarget?: components["schemas"]["RenderTargetIdentifier"];
+                    } & {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            responses: {
+                /** @description Returns info of a Renderer */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            renderTarget: components["schemas"]["RenderTargetInfo"];
+                        } & {
+                            [key: string]: unknown;
+                        };
+                    };
+                };
+                /** @description No RenderTarget found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["NotFoundResponse"];
+                    };
+                };
+                /** @description Internal Server Error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/renderers/{rendererId}/customActions/{customActionId}": {
         parameters: {
             query?: never;
@@ -515,7 +585,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to load the graphic onto */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The graphic to load */
                         graphicId: components["schemas"]["GraphicId"];
                         /** @description Params to send to the load() method of the graphic */
@@ -608,7 +678,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["UpdateActionParams"];
@@ -689,7 +759,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["PlayActionParams"];
@@ -778,7 +848,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["StopActionParams"];
@@ -862,7 +932,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["CustomActionParams"];
@@ -946,7 +1016,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         /** @description Params to send to the goToTime() method of the graphic */
@@ -1039,7 +1109,7 @@ export interface paths {
                 content: {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RendererTargetIdentifier"];
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The Graphic to target with the command */
                         graphicTarget: components["schemas"]["GraphicTarget"];
                         /** @description Params to send to the setActionsSchedule() method of the graphic */
@@ -1161,6 +1231,46 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
+        ClearGraphicsResponse: {
+            /** @description A list of the GraphicInstances that were cleared */
+            graphicInstances: ({
+                /** @description ID of the RenderTarget that the graphic was cleared from */
+                renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                /** @description Unique ID of the instance of the graphic that was just cleared */
+                graphicInstanceId: components["schemas"]["GraphicInstanceId"];
+                /** @description The graphic that was cleared */
+                graphic: {
+                    /** @description ID of the graphic that was cleared */
+                    id: components["schemas"]["GraphicId"];
+                } & {
+                    [key: string]: unknown;
+                };
+            } & {
+                [key: string]: unknown;
+            })[];
+        } & {
+            [key: string]: unknown;
+        };
+        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
+        GraphicFilter: {
+            /** @description (Optional) If set, will only affect GraphicInstances from a certain RenderTarget */
+            renderTarget?: components["schemas"]["RenderTargetIdentifier"];
+            /** @description (Optional) If set, will only affect GraphicInstances of a certain Graphic id */
+            graphicId?: components["schemas"]["GraphicId"];
+            /** @description (Optional) If set, will only affect a specific GraphicInstance */
+            graphicInstanceId?: string;
+        } & {
+            [key: string]: unknown;
+        };
+        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
+        GraphicTarget: {
+            /** @description (Optional) If set, will only affect GraphicInstances of a certain Graphic id and version */
+            graphicId?: components["schemas"]["GraphicId"];
+            /** @description (Optional) If set, will only affect a specific GraphicInstance */
+            graphicInstanceId?: components["schemas"]["GraphicInstanceId"];
+        } & {
+            [key: string]: unknown;
+        };
         /**
          * @description ID of the Renderer
          * @example renderer-0
@@ -1170,7 +1280,7 @@ export interface components {
          * @description Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer.
          * @example "layer-0" or { "bank": 1, "layer": 14 }
          */
-        RendererTargetIdentifier: unknown;
+        RenderTargetIdentifier: unknown;
         /**
          * @description ID of the Ograf Graphic
          * @example simple-l3rd
@@ -1211,16 +1321,6 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        Author: {
-            /** @example John Doe */
-            name: string;
-            /** @example john.doe@ograf.io */
-            email?: string;
-            /** @example https://ograf.ebu.io/ */
-            url?: string;
-        } & {
-            [key: string]: unknown;
-        };
         /** @description OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json */
         GraphicManifest: components["schemas"]["schema-2"];
         /** RendererInfo */
@@ -1245,36 +1345,45 @@ export interface components {
              */
             renderTargetSchema?: Record<string, never>;
             /** @description Status of the renderer */
-            status?: {
+            status: {
                 /**
                  * @example OK
                  * @enum {string}
                  */
-                status?: "OK" | "WARNING" | "ERROR";
+                status: "OK" | "WARNING" | "ERROR";
                 /** @example Renderer is running */
                 message?: string;
                 /** @description List of active RenderTargets and their contents */
-                renderTargets?: ({
-                    /** @description Identifier of the RenderTarget */
-                    renderTarget?: components["schemas"]["RendererTargetIdentifier"];
-                    /**
-                     * @description Name of the RenderTarget
-                     * @example Layer 0
-                     */
-                    name?: string;
-                    /**
-                     * @example OK
-                     * @enum {string}
-                     */
-                    status?: "OK" | "WARNING" | "ERROR";
-                    /** @example RenderTarget is running */
-                    message?: string;
-                } & {
-                    [key: string]: unknown;
-                })[];
+                renderTargets: components["schemas"]["RenderTargetInfo"][];
             } & {
                 [key: string]: unknown;
             };
+        } & {
+            [key: string]: unknown;
+        };
+        RenderTargetInfo: {
+            /** @description Identifier of the RenderTarget */
+            renderTarget: components["schemas"]["RenderTargetIdentifier"];
+            /**
+             * @description Name of the RenderTarget
+             * @example Layer 0
+             */
+            name: string;
+            /** @description Longer description of the RenderTarget */
+            description?: string;
+            /**
+             * @example OK
+             * @enum {string}
+             */
+            status: "OK" | "WARNING" | "ERROR";
+            /** @example RenderTarget is running */
+            statusMessage?: string;
+            graphicInstances?: ({
+                graphicInstanceId?: components["schemas"]["GraphicInstanceId"];
+                graphic?: components["schemas"]["GraphicInfo"];
+            } & {
+                [key: string]: unknown;
+            })[];
         } & {
             [key: string]: unknown;
         };
@@ -1295,43 +1404,13 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
-        GraphicFilter: {
-            /** @description (Optional) If set, will only affect GraphicInstances from a certain RenderTarget */
-            renderTarget?: components["schemas"]["RendererTargetIdentifier"];
-            /** @description (Optional) If set, will only affect GraphicInstances of a certain Graphic id */
-            graphicId?: components["schemas"]["GraphicId"];
-            /** @description (Optional) If set, will only affect a specific GraphicInstance */
-            graphicInstanceId?: string;
-        } & {
-            [key: string]: unknown;
-        };
-        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
-        GraphicTarget: {
-            /** @description (Optional) If set, will only affect GraphicInstances of a certain Graphic id and version */
-            graphicId?: components["schemas"]["GraphicId"];
-            /** @description (Optional) If set, will only affect a specific GraphicInstance */
-            graphicInstanceId?: components["schemas"]["GraphicInstanceId"];
-        } & {
-            [key: string]: unknown;
-        };
-        ClearGraphicsResponse: {
-            /** @description A list of the GraphicInstances that were cleared */
-            graphicInstances: ({
-                /** @description ID of the RenderTarget that the graphic was cleared from */
-                renderTarget: components["schemas"]["RendererTargetIdentifier"];
-                /** @description Unique ID of the instance of the graphic that was just cleared */
-                graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                /** @description The graphic that was cleared */
-                graphic: {
-                    /** @description ID of the graphic that was cleared */
-                    id: components["schemas"]["GraphicId"];
-                } & {
-                    [key: string]: unknown;
-                };
-            } & {
-                [key: string]: unknown;
-            })[];
+        Author: {
+            /** @example John Doe */
+            name: string;
+            /** @example john.doe@ograf.io */
+            email?: string;
+            /** @example https://ograf.ebu.io/ */
+            url?: string;
         } & {
             [key: string]: unknown;
         };

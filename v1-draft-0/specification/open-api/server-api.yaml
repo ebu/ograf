@@ -314,7 +314,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
 # ------------------ Graphic handling -----------------------------------------------------------------------
   /renderers/{rendererId}/target/graphic/clear:
-    post:
+    put:
       summary: Clear (remove) Graphic(s) from one (or more) RenderTargets
       parameters:
         - in: path
@@ -354,7 +354,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/target/graphic/load:
-    post:
+    put:
       summary: Load a Graphic onto a RenderTarget
       parameters:
         - in: path
@@ -681,7 +681,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/target/graphic/goToTime:
-    post:
+    put:
       summary: "For Graphic(s) at a RenderTarget: Call the goToTime() method"
       parameters:
         - in: path
@@ -752,7 +752,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/target/graphic/setActionsSchedule:
-    post:
+    put:
       summary: "For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method"
       parameters:
         - in: path

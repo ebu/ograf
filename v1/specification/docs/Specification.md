@@ -52,7 +52,9 @@ directly or indirectly referenced from the Manifest file and can be seen as depe
 
 ### Manifest Model
 
-The manifest file is a JSON file containing metadata about the Graphic. It consists of the following fields:
+The manifest file is a JSON file containing metadata about the Graphic.
+The file name of the manifest file MUST end with `manifest.json`.
+It consists of the following fields:
 
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |
 |---------------------|--------------------|:--------:|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|

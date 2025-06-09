@@ -1,5 +1,5 @@
 {
-    "$schema": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json",
+    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
     "name": "Minimal Test Graphic",
     "description": "This Graphic includes the bare minimum required to be a valid OGraf Graphic. It displays a 'Hello World!' message.",
     "id": "minimal-example",

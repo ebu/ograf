@@ -56,7 +56,7 @@ The manifest file is a JSON file containing metadata about the Graphic. It consi
 
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |
 |---------------------|--------------------|:--------:|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $schema             | string             |    X     |         | MUST be the string "https://ograf.ebu.io/v1/speficiation/json-schemas/schema.json". <br /> This doubles as a reference to the JSON Schema of the manifest file as well as a OGraf version. |
+| $schema             | string             |    X     |         | MUST be the string "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json". <br /> This doubles as a reference to the JSON Schema of the manifest file as well as a OGraf version. |
 | id                  | string             |    X     |         | A unique identifier for the Graphic.                                                                                                                               |
 | version             | string             |          |         | A version descriptor of the Graphic. The versioning scheme is beyond the scope of this specification.                                                              |
 | name                | string             |    X     |         | The name of the Graphic.                                                                                                                                           |
@@ -245,7 +245,7 @@ The following manifest describes a simple Lower Third Graphic. It does not conta
 
 ```json
 {
-  "$schema": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json",
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
   "id": "l3rd-name",
   "version": "1.0.0",
   "name": "Lower 3rd - Name",

@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/lib/constraints/string.json",
+    "$id": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/string.json",
     "type": "object",
     "description": "The string constraint is used to specify a constraint for a string property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindomstring)",
     "properties": {

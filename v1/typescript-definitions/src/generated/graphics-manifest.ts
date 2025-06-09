@@ -451,7 +451,7 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
   /**
    * Reference to the JSON-schema for this manifest
    */
-  $schema: "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json";
+  $schema: "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json";
   /**
    * The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.my-company.my-lowerthird.
    */

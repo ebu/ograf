@@ -352,12 +352,13 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
         /** Retrieve info about a RenderTarget */
-        post: {
+        get: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to retrieve info about */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -365,16 +366,7 @@ export interface paths {
                 };
                 cookie?: never;
             };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The RenderTarget to retrieve info about */
-                        renderTarget?: components["schemas"]["RenderTargetIdentifier"];
-                    } & {
-                        [key: string]: unknown;
-                    };
-                };
-            };
+            requestBody?: never;
             responses: {
                 /** @description Returns info of a Renderer */
                 200: {
@@ -409,6 +401,8 @@ export interface paths {
                 };
             };
         };
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -504,9 +498,8 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
         /** Clear (remove) Graphic(s) from one (or more) RenderTargets */
-        post: {
+        put: {
             parameters: {
                 query?: never;
                 header?: never;
@@ -555,6 +548,7 @@ export interface paths {
                 };
             };
         };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -569,11 +563,13 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
         /** Load a Graphic onto a RenderTarget */
-        post: {
+        put: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to load the graphic onto */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -584,8 +580,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to load the graphic onto */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The graphic to load */
                         graphicId: components["schemas"]["GraphicId"];
                         /** @description Params to send to the load() method of the graphic */
@@ -648,6 +642,7 @@ export interface paths {
                 };
             };
         };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -666,7 +661,12 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the updateAction() method */
         post: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command. */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -677,10 +677,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["UpdateActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -747,7 +743,12 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the playAction() method */
         post: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -758,10 +759,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["PlayActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -836,7 +833,12 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the stopAction() method */
         post: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -847,10 +849,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["StopActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -920,7 +918,12 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the customAction() method */
         post: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -931,10 +934,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         params: components["schemas"]["CustomActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -1000,11 +999,15 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
         /** For Graphic(s) at a RenderTarget: Call the goToTime() method */
-        post: {
+        put: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -1015,10 +1018,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         /** @description Params to send to the goToTime() method of the graphic */
                         params: {
                             /**
@@ -1079,6 +1078,7 @@ export interface paths {
                 };
             };
         };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1093,11 +1093,15 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
         /** For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method */
-        post: {
+        put: {
             parameters: {
-                query?: never;
+                query: {
+                    /** @description The RenderTarget to target with the command */
+                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                    /** @description The Graphic to target with the command */
+                    graphicTarget: components["schemas"]["GraphicTarget"];
+                };
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -1108,10 +1112,6 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description The Graphic to target with the command */
-                        graphicTarget: components["schemas"]["GraphicTarget"];
                         /** @description Params to send to the setActionsSchedule() method of the graphic */
                         params: {
                             /**
@@ -1201,6 +1201,7 @@ export interface paths {
                 };
             };
         };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1277,8 +1278,8 @@ export interface components {
          */
         RendererId: string;
         /**
-         * @description Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer.
-         * @example "layer-0" or { "bank": 1, "layer": 14 }
+         * @description Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer. (Must be a shallow object)
+         * @example { "bank": 1, "layer": 14 }
          */
         RenderTargetIdentifier: unknown;
         /**
@@ -1339,11 +1340,7 @@ export interface components {
             /** @description Custom Actions that can be invoked on the Renderer. */
             customActions?: components["schemas"]["action"][];
             renderCharacteristics?: components["schemas"]["RenderCharacteristics"];
-            /**
-             * @description Schema of the RenderTarget. This is a GDD/JSON-object schema that describes the structure of the RenderTarget identifier. See https://superflytv.github.io/GraphicsDataDefinition
-             * @example { "type": "string" } or { "type": "object", "properties": { "bank": { "type": "integer" }, "layer": { "type": "integer" } }, "required": [ "bank", "layer" ] }
-             */
-            renderTargetSchema?: Record<string, never>;
+            renderTargetSchema?: components["schemas"]["RenderTargetSchema"];
             /** @description Status of the renderer */
             status: {
                 /**
@@ -1387,6 +1384,23 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
+        ShallowGDDObjectSchema: components["schemas"]["object"] & ({
+            /** @enum {string} */
+            type: "boolean" | "integer" | "number" | "string";
+        } & {
+            [key: string]: unknown;
+        });
+        /**
+         * @description Schema of the RenderTarget. This is a GDD/JSON-object schema that describes the structure of the RenderTarget identifier. See https://superflytv.github.io/GraphicsDataDefinition
+         * @example { "type": "object", "properties": { "bank": { "type": "integer" }, "layer": { "type": "integer" } }, "required": [ "bank", "layer" ] }
+         */
+        RenderTargetSchema: components["schemas"]["ShallowGDDObjectSchema"] | ({
+            allOf?: components["schemas"]["ShallowGDDObjectSchema"][];
+            anyOf?: components["schemas"]["ShallowGDDObjectSchema"][];
+            oneOf?: components["schemas"]["ShallowGDDObjectSchema"][];
+        } & {
+            [key: string]: unknown;
+        });
         RenderCharacteristics: {
             resolution?: {
                 /** @example 1920 */

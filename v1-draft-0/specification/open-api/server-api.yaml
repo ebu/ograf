@@ -218,7 +218,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
   /renderers/{rendererId}/target:
-    post:
+    get:
       summary: Retrieve info about a RenderTarget
       parameters:
         - in: path
@@ -227,16 +227,12 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                renderTarget:
-                  description: "The RenderTarget to retrieve info about"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to retrieve info about"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
       responses:
         200:
           description: Returns info of a Renderer
@@ -363,6 +359,12 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to load the graphic onto"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
       requestBody:
         required: true
         content:
@@ -370,9 +372,6 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to load the graphic onto"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicId:
                   description: "The graphic to load"
                   $ref: "#/components/schemas/GraphicId"
@@ -386,7 +385,6 @@ paths:
                   required:
                     - data
               required:
-                - renderTarget
                 - graphicId
                 - params
       responses:
@@ -433,6 +431,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command."
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -440,17 +450,9 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/UpdateActionParams"
               required:
-                - renderTarget
-                - graphicTarget
                 - params
       responses:
         200:
@@ -495,6 +497,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -502,17 +516,9 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/PlayActionParams"
               required:
-                - renderTarget
-                - graphicTarget
                 - params
 
       responses:
@@ -564,6 +570,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -571,17 +589,9 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/StopActionParams"
               required:
-                - renderTarget
-                - graphicTarget
                 - params
       responses:
         200:
@@ -627,6 +637,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -634,17 +656,9 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   $ref: "#/components/schemas/CustomActionParams"
               required:
-                - renderTarget
-                - graphicTarget
                 - params
       responses:
         200:
@@ -690,6 +704,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -697,12 +723,6 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   description: "Params to send to the goToTime() method of the graphic"
                   type: object
@@ -714,8 +734,6 @@ paths:
                   required:
                     - timestamp
               required:
-                - renderTarget
-                - graphicTarget
                 - params
       responses:
         200:
@@ -761,6 +779,18 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: query
+          name: renderTarget
+          description: "The RenderTarget to target with the command"
+          schema:
+            $ref: "#/components/schemas/RenderTargetIdentifier"
+          required: true
+        - in: query
+          name: graphicTarget
+          description: "The Graphic to target with the command"
+          schema:
+            $ref: "#/components/schemas/GraphicTarget"
+          required: true
       requestBody:
         required: true
         content:
@@ -768,12 +798,6 @@ paths:
             schema:
               type: object
               properties:
-                renderTarget:
-                  description: "The RenderTarget to target with the command"
-                  $ref: "#/components/schemas/RenderTargetIdentifier"
-                graphicTarget:
-                  description: "The Graphic to target with the command"
-                  $ref: "#/components/schemas/GraphicTarget"
                 params:
                   description: "Params to send to the setActionsSchedule() method of the graphic"
                   type: object
@@ -837,8 +861,6 @@ paths:
                   required:
                     - schedule
               required:
-                - renderTarget
-                - graphicTarget
                 - params
       responses:
         200:
@@ -965,8 +987,8 @@ components:
       type: string
       example: "renderer-0"
     RenderTargetIdentifier:
-      description: "Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer."
-      example: '"layer-0" or { "bank": 1, "layer": 14 }'
+      description: "Identifier of a RenderTarget. The type of this is defined by the renderTarget schema of a Renderer. (Must be a shallow object)"
+      example: '{ "bank": 1, "layer": 14 }'
     GraphicId:
       description: "ID of the Ograf Graphic"
       type: string
@@ -1034,14 +1056,7 @@ components:
           $ref: "#/components/schemas/RenderCharacteristics"
           type: object
         renderTargetSchema:
-          description: "Schema of the RenderTarget. This is a GDD/JSON-object schema that describes the structure of the RenderTarget identifier. See https://superflytv.github.io/GraphicsDataDefinition"
-          type: object
-          x-$ref: "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
-          externalDocs:
-            url: https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json
-          example: '{ "type": "string" } or { "type": "object", "properties": { "bank": { "type": "integer" }, "layer": { "type": "integer" } }, "required": [ "bank", "layer" ] }'
-
-
+          $ref: "#/components/schemas/RenderTargetSchema"
         status:
           description: "Status of the renderer"
           type: object
@@ -1104,6 +1119,46 @@ components:
         - renderTarget
         - name
         - status
+    ShallowGDDObjectSchema:
+      allOf:
+        - $ref: https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - boolean
+                - integer
+                - number
+                - string
+                # not "object" or "array"! Only a shallow object is permitted!
+          additionalProperties: true
+          required:
+            - type
+
+    RenderTargetSchema:
+      description: "Schema of the RenderTarget. This is a GDD/JSON-object schema that describes the structure of the RenderTarget identifier. See https://superflytv.github.io/GraphicsDataDefinition"
+      type: object
+      x-$ref: "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+      externalDocs:
+        url: https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json
+      example: '{ "type": "object", "properties": { "bank": { "type": "integer" }, "layer": { "type": "integer" } }, "required": [ "bank", "layer" ] }'
+      oneOf:
+        - $ref: "#/components/schemas/ShallowGDDObjectSchema"
+        - type: object
+          properties:
+            allOf:
+              type: array
+              items:
+                $ref: "#/components/schemas/ShallowGDDObjectSchema"
+            anyOf:
+              type: array
+              items:
+                $ref: "#/components/schemas/ShallowGDDObjectSchema"
+            oneOf:
+              type: array
+              items:
+                $ref: "#/components/schemas/ShallowGDDObjectSchema"
     RenderCharacteristics:
       type: object
       properties:

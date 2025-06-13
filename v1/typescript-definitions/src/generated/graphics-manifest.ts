@@ -447,7 +447,7 @@ export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjec
       [k: string]: unknown;
     };
 
-export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson {
+export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
   /**
    * Reference to the JSON-schema for this manifest
    */
@@ -492,12 +492,12 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
      * This interface was referenced by `undefined`'s JSON-Schema definition
      * via the `patternProperty` "^v_.*".
      */
-    [k: string]: unknown;
+    [k: `v_${string}`]: unknown;
   };
   /**
    * Custom Actions that can be invoked on the Graphic.
    */
-  customActions?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson[];
+  customActions?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson[];
   /**
    * Indicates if the Graphic supports real-time rendering
    */
@@ -519,24 +519,24 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJs
      * If set, specifies requirements for the resolution of the Renderer.
      */
     resolution?: {
-      width?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson;
-      height?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson;
+      width?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson;
+      height?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson;
       [k: string]: unknown;
     };
-    frameRate?: HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1;
+    frameRate?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1;
     /**
      * This interface was referenced by `undefined`'s JSON-Schema definition
      * via the `patternProperty` "^v_.*".
      */
-    [k: string]: unknown;
+    [k: `v_${string}`]: unknown;
   }[];
   /**
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
-  [k: string]: unknown;
+  [k: `v_${string}`]: unknown;
 }
-export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson {
+export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson {
   /**
    * The identity of the action. The id must be unique within the graphic.
    */
@@ -554,15 +554,15 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson {
    */
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
   /**
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
-  [k: string]: unknown;
+  [k: `v_${string}`]: unknown;
 }
 /**
  * The number constraint is used to specify a constraint for a numerical property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
  */
-export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson {
+export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson {
   /**
    * A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
    */
@@ -580,18 +580,18 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNu
    */
   ideal?: number;
   /**
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    *
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
-  [k: string]: unknown;
+  [k: `v_${string}`]: unknown;
 }
 /**
  * The number constraint is used to specify a constraint for a numerical property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constraindouble)
  */
-export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1 {
+export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1 {
   /**
    * A number specifying the largest permissible value of the property it describes. If the value cannot remain equal to or less than this value, matching will fail.
    */
@@ -609,11 +609,11 @@ export interface HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNu
    */
   ideal?: number;
   /**
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    *
-   * This interface was referenced by `HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
-  [k: string]: unknown;
+  [k: `v_${string}`]: unknown;
 }

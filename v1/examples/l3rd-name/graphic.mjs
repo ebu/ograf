@@ -124,9 +124,6 @@ class MyGraphic extends HTMLElement {
     this.innerHTML = "";
     this.g = null;
   }
-  async getStatus(_params) {
-    return {};
-  }
   async updateAction(params) {
     // params.data
     // console.log("params", params);

@@ -53,7 +53,7 @@ directly or indirectly referenced from the Manifest file and can be seen as depe
 ### Manifest Model
 
 The manifest file is a JSON file containing metadata about the Graphic.
-The file name of the manifest file MUST end with `manifest.json`.
+The file name of the manifest file MUST end with `.ograf` (e.g. `my-graphic.ograf`).
 It consists of the following fields:
 
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |
@@ -71,6 +71,9 @@ It consists of the following fields:
 | schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of.                                                                                                                         |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
+
+There MAY be multiple manifest files in a folder. In the case of multiple manifest files, will be interpreted as multiple, independent Graphics.
+(This can be useful for example when having a package of multiple OGraf graphics, which then might share resources such as images, fonts, etc.)
 
 #### Real-time vs. non-real-time
 

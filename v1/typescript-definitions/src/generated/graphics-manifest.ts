@@ -524,6 +524,7 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
       [k: string]: unknown;
     };
     frameRate?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1;
+    accessToPublicInternet?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsBooleanJson;
     /**
      * This interface was referenced by `undefined`'s JSON-Schema definition
      * via the `patternProperty` "^v_.*".
@@ -613,6 +614,24 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJs
    * via the `patternProperty` "^v_.*".
    *
    * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1`'s JSON-Schema definition
+   * via the `patternProperty` "^v_.*".
+   */
+  [k: `v_${string}`]: unknown;
+}
+/**
+ * If set, specifies requirement on whether the renderer has access to the public internet or not.
+ */
+export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsBooleanJson {
+  /**
+   * A boolean specifying a specific, required, value the property must have to be considered acceptable.
+   */
+  exact?: boolean;
+  /**
+   * A boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.
+   */
+  ideal?: boolean;
+  /**
+   * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsBooleanJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */
   [k: `v_${string}`]: unknown;

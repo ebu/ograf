@@ -42,9 +42,13 @@ async function saveFile(savePath, contents) {
   // Ensure the folder exists:
   await fs.promises.mkdir(path.dirname(savePath), { recursive: true });
 
-  // Replace contents in case of using localhost during testing:
+  // The ^v_.* are generated as [k: string]: unknown, fix that:
+  contents = contents.replaceAll(/(v_.+\n.*\n[ \t]+)(\[k: string\]: unknown)/g, '$1[k: `v_${string}`]: unknown')
 
+
+  // Replace contents in case of using localhost during testing:
   contents = contents.replaceAll('HttpLocalhost8080', 'HttpsOgrafEbuIo')
+  contents = contents.replaceAll('Http1270018081V1', 'HttpsOgrafEbuIoV1')
 
   await fs.promises.writeFile(savePath, contents);
 }

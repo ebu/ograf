@@ -181,10 +181,10 @@ To describe the functions in this document, the Typescript interface notation is
 that vendor-specific fields can be included in both request and response payloads.
 For the 'action' methods (`playAction()`, `stopAction()`, `updateAction()` and `customAction()`), a Promise MUST be returned that
 resolves to `undefined` or to an `ReturnPayload` object containing the following fields:
-* `code`: a number that corresponds to an HTTP status code (2xx indicates a successful result, 4xx and 5xx indicate an error).
-* `message`: an optional human-readable message that corresponds to the `code`.
+* `statusCode`: a number that corresponds to an HTTP status code (2xx indicates a successful result, 4xx and 5xx indicate an error).
+* `statusMessage`: an optional human-readable message that corresponds to the `statusCode`.
 * `result`: an optional Graphics-specific response object.
-If the returned Promise resolves to `undefined`, it should be treated as a `{ code: 200 }`.
+If the returned Promise resolves to `undefined`, it should be treated as a `{ statusCode: 200 }`.
 
 Similarly, for simplicity reasons, we omit these three fields in the description of the functions below.
 In [Typescript interface](#typescript-interface-for-graphic), the full interface is provided.
@@ -287,18 +287,18 @@ class Graphic extends HTMLElement {
   }
   async playAction({ delta: number, goto: number, skipAnimation: boolean }) {
     // Play the Graphic according to the incoming params
-    return {code: 200, message: 'OK', currentStep}
+    return {statusCode: 200, statusMessage: 'OK', currentStep}
   }
   async stopAction({ skipAnimation: boolean }) {
     // Stop the Graphic, with or without animation
-    return {code: 200, message: 'OK'}
+    return {statusCode: 200, statusMessage: 'OK'}
   }
   async updateAction({ data: { name: string } }) {
     // Update the state of the Graphic
-    return {code: 200, message: 'OK'}
+    return {statusCode: 200, statusMessage: 'OK'}
   }
   async customAction({ id: string, payload: any}) {
-    return {code: 400, message: 'No custom actions supported'}
+    return {statusCode: 400, statusMessage: 'No custom actions supported'}
   }
 }
 

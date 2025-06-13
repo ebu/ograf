@@ -216,6 +216,16 @@ Additionally, every non-real-time Graphic MUST implement the following functions
 * `goToTime: ({timestamp: number}) => Promise<ReturnPayload>`: Called to make the Graphic jump to a certain `timestamp`, expressed in milliseconds. A Promise is returned with an `ReturnPayload` that resolves when the frame is rendered at the requested position.
 * `setActionsSchedule: (payload: {schedule: {timestamp: number, action: {type, params}}}) => Promise<ReturnPayload>`: Called to schedule actions to be invoked at a certain point in time. When this is called, the Graphic is expected to store the scheduled actions and invoke them when the time comes. A call to this replaces any previous scheduled actions. For every `timestamp`, expressed in milliseconds, an action type is provided together with corresponding parameters. The action type is either `playAction`, `stopAction`, `updateAction` or the id of a custom action.
 
+The point in time when the Promise returned by the 'action' methods is resolved SHOULD indicate that the graphic is ready to execute another action.
+For example, it could be when a graphic has finished animating in (or reached next step / transitioned between states).
+If the graphic has a long/infinite animation (like a text-scroller), the Promise SHOULD NOT wait for that long animation to finish, but instead
+resolve instantly (or after an in-animation).
+
+The graphic MUST be able to handle calls to the 'action' methods at any point in time, regardless of if the Promise returned by the previous method call has not yet resolved.
+The graphic MAY handle multiple subsequent method calls in any way it sees fit. Queueing commands to be executed in order, aborting a previous animation or "skipping ahead" are all reasonable strategies.
+The graphic SHOULD NOT ignore a subsequent method call if the previous one has not yet resolved.
+
+
 The default export MUST be used to export the `class` representing the Graphic.
 This type of export allows you to import the Graphic using any name.
 
@@ -232,6 +242,8 @@ When a Graphic is added into a Renderer, the following steps are executed by the
 When a Graphic is removed from the Renderer, the following steps are executed by the Renderer:
 * MUST call the `dispose()` function of the Graphic.
 * SHOULD wait for the promise to resolve.
+
+The Renderer calls the 'action' methods
 
 
 ## JSON Schema for Manifest file

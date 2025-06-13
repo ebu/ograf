@@ -99,6 +99,10 @@
                     "frameRate": {
                         "description": "If set, specifies requirements for frame rate of the Renderer. Example: 60 fps",
                         "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/number.json"
+                    },
+                    "accessToPublicInternet": {
+                        "description": "If set, specifies requirement on whether the renderer has access to the public internet or not.",
+                        "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/boolean.json"
                     }
 
                 },

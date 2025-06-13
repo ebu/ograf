@@ -12,9 +12,11 @@ export type RenderCharacteristics = {
   /** Which frameRate the renderer will be rendering in. Examples: 50, 60, 29.97 */
   frameRate?: number;
 
+  /** Whether the renderer has access to the public internet (so the graphic can fetch resources) */
+  accessToPublicInternet?: boolean
+
   // Ideas for future:
   // webcamInputs
-  // accessToPublicInternet?: boolean // Whether the renderer has access to the public internet (so the graphic can fetch resources)
   // keyer?: boolean; //
 
 } & VendorExtend;

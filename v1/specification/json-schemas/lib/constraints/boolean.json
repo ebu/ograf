@@ -1,0 +1,20 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/boolean.json",
+    "type": "object",
+    "description": "The boolean constraint is used to specify a constraint for a boolean property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constrainboolean)",
+    "properties": {
+        "exact": {
+            "description": "A boolean specifying a specific, required, value the property must have to be considered acceptable.",
+            "type": "boolean"
+        },
+        "ideal": {
+            "description": "A boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match.",
+            "type": "boolean"
+        }
+    },
+    "patternProperties": {
+        "^v_.*": {}
+    },
+    "additionalProperties": false
+}

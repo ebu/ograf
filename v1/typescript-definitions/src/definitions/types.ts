@@ -36,9 +36,9 @@ export interface VendorExtend {
 
 /** Payload when invoking an action of a GraphicInstance or a Renderer */
 export type ActionInvokeParams = {
-  /** Graphic id, as defined by the Graphic manifest*/
+  /** Action id, as defined by the Graphic manifest */
   id: string;
-  /** Params to send into the method */
+  /** Payload to send into the method */
   payload: unknown;
 
   /** If true, skips animation (defaults to false) */

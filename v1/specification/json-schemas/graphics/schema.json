@@ -68,10 +68,16 @@
             "type": "boolean",
             "description": "Indicates if the Graphic supports non-real-time rendering. Note: If true, the Graphic must implement the 'goToTime()' and the 'setActionsSchedule()' methods."
         },
+        "hasSteps": {
+            "type": "boolean",
+            "description": "If true, implies that the Graphic can be played in steps and can be controlled by the playAction({delta: number}) or playAction({goto: number}) methods.",
+            "default": false,
+        },
         "stepCount": {
             "type": "number",
-            "description": "The number of steps in the Graphic. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (defaults to 1).",
-            "default": 1
+            "description": "The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1. If the Graphic has a dynamic number of steps, this property should be 0.",
+            "default": 1,
+            "minimum": 0
         },
         "schema": {
             "description": "The schema is used by a Graphic to define the data parameters of the 'update' method.",

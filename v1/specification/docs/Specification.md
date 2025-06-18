@@ -137,6 +137,7 @@ The RenderRequirement object contains the following fields:
 | resolution.width  | NumberConstraint |          |         | Specifies renderer width resolution requirement. |
 | resolution.height | NumberConstraint |          |         | Specifies renderer height resolution requirement. |
 | frameRate         | NumberConstraint |          |         | Specifies renderer frameRate requirement. |
+| accessToPublicInternet | BooleanConstraint |          |    | Specifies requirement on whether the renderer has access to the public internet or not. |
 
 ##### NumberConstraint
 
@@ -161,6 +162,18 @@ It contains the following fields:
 |-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
 | exact             | string           |          |         | A string specifying a specific, required, value the property must have to be considered acceptable. |
 | ideal             | string, string[] |          |         | A string (or an array of strings), specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match. |
+
+
+##### BooleanConstraint
+
+A BooleanConstraint is an object that describes a constraints for a boolean value.
+(This is inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constrainboolean)
+It contains the following fields:
+
+| Field             | Type             | Required | Default | Description                                               |
+|-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
+| exact             | boolean           |          |         | A boolean specifying a specific, required, value the property must have to be considered acceptable. |
+| ideal             | boolean           |          |         | A boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match. |
 
 #### Vendor-specific fields
 

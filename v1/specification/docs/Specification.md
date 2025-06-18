@@ -69,7 +69,7 @@ It consists of the following fields:
 | supportsRealTime    | boolean            |    X     |         | Indicates whether the Graphic supports real-time rendering.                                                                                                        |
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
 | schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
-| hasSteps            | boolean            |          |  false  | If true, implies that the Graphic can be played in steps and can be controlled by the playAction({delta: number}) or playAction({goto: number}) methods.           |
+| hasSteps            | boolean            |          |  true   | If true, implies that the Graphic can be played in steps and can be controlled by the playAction({delta: number}) or playAction({goto: number}) methods.           |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1. If the Graphic has a dynamic number of steps, this property should be 0. |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
 

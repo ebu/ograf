@@ -3,6 +3,7 @@
     "name": "Renderer Test Graphic",
     "description": "This Graphic is used to validate a Renderer",
     "id": "renderer-test",
+    "main": "graphic.mjs",
     "supportsRealTime": true,
     "supportsNonRealTime": false,
     "schema": {

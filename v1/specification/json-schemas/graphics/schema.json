@@ -117,6 +117,7 @@
         "$schema",
         "id",
         "name",
+        "main",
         "supportsRealTime",
         "supportsNonRealTime"
     ],

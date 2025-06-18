@@ -10,7 +10,7 @@ export type ReturnPayload = {
    */
   statusCode: number;
   /**
-   * (Optional) A human-readable message to help understand the status code.
+   * (Optional) A human-readable message to help understand the statusCode.
    */
   statusMessage?: string;
 } & VendorExtend;

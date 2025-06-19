@@ -96,17 +96,21 @@ also typically nothing visible in the rendered output at that moment. The arrows
 The first model represents a Graphic containing zero steps. When `playAction()` is called on this Graphic, it will
 animate the Graphic in and after some predefined time the Graphic will animate out automatically.
 
+<img src="images/step-model1.svg" alt="Step model" style="width:500px; height:auto;">
+
 The second model represents a Graphic containing one step. When `playAction()` is called on this Graphic, it will
 animate the Graphic in and will pause at step 1. Pausing here doesn't mean that the Graphic is not moving, it refers to
 the fact that there is an interaction necessary with the Graphic to move to the next step (in this case the end).
 The `stopAction()` function SHOULD be used to go to the end of the Graphic.
+
+<img src="images/step-model2.svg" alt="Step model" style="width:500px; height:auto;">
 
 The third model represents a multi-step Graphic containing two steps. It is similar to the one-step model,
 but now the `playAction()` function MUST be used again to transition between different steps, except for the end node, where the `stopAction()`
 function SHOULD be used. The normal flow is to go to step 1, then to step 2 and finally to the end node. However, it is
 possible that you transition to any step or directly to the end node (indicated by the dotted lines in the figure).
 
-<img src="images/step-model.svg" alt="Step model" style="width:500px; height:auto;">
+<img src="images/step-model3.svg" alt="Step model" style="width:500px; height:auto;">
 
 #### Custom actions
 

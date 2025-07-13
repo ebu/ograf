@@ -25,3 +25,6 @@ The log below details the changes during development of this version:
   Before, there where no requirements on the manifest file name.
 * 2025-06-13: Add optional `skipAnimation` argument to `updateAction` and `customAction`.
   Before, it was only included in `playAction` and `stopAction`.
+* 2025-07-02: Change requirement on manifest file name.
+  The manifest file must now have the suffix `".ograf.json"`.
+  Before, it was `".ograf"`.

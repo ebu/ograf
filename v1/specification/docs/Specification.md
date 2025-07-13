@@ -53,7 +53,7 @@ directly or indirectly referenced from the Manifest file and can be seen as depe
 ### Manifest Model
 
 The manifest file is a JSON file containing metadata about the Graphic.
-The file name of the manifest file MUST end with `.ograf` (e.g. `my-graphic.ograf`).
+The file name of the manifest file MUST end with `.ograf.json` (e.g. `my-graphic.ograf.json`).
 It consists of the following fields:
 
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |

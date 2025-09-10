@@ -11,6 +11,6 @@ import * as ServerApi from "./generated/server-api";
 export { ServerApi }
 
 // Also export the GraphicsManifest types using simplified names
-export type GraphicsManifest = GeneratedGraphicsManifest.HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasGraphicsSchemaJson
-export type GraphicsManifestCustomAction = GeneratedGraphicsManifest.HttpsOgrafEbuIoV1Draft0SpecificationJsonSchemasLibActionJson
+export type GraphicsManifest = GeneratedGraphicsManifest.HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson
+export type GraphicsManifestCustomAction = GeneratedGraphicsManifest.HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson
 

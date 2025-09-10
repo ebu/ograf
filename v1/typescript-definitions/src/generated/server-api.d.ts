@@ -1671,18 +1671,27 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
+        /** @description The boolean constraint is used to specify a constraint for a boolean property. (Inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constrainboolean) */
+        boolean: {
+            /** @description A boolean specifying a specific, required, value the property must have to be considered acceptable. */
+            exact?: boolean;
+            /** @description A boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match. */
+            ideal?: boolean;
+        } & {
+            [key: string]: unknown;
+        };
         "schema-2": {
             /**
              * @description Reference to the JSON-schema for this manifest
              * @constant
              */
-            $schema: "https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json";
+            $schema: "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json";
             /** @description The id of the Graphic uniquely identifies it. It is recommended to use a reverse domain name notation. For example: com.my-company.my-lowerthird. */
             id: string;
             /** @description The version of the Graphic. The version SHOULD be alphabetically sortable. Examples: ['0', '1', '2'], ['1.0', '1.1', '1.2'], ['2024-07-01_final', '2024-07-01_final_final2'] */
             version?: string;
             /** @description The main entry point, ie the path to the main javascript file of the Graphic. */
-            main?: string;
+            main: string;
             /** @description Name of the Graphic */
             name: string;
             /** @description (optional) A longer description of the Graphic */
@@ -1722,6 +1731,8 @@ export interface components {
                 };
                 /** @description If set, specifies requirements for frame rate of the Renderer. Example: 60 fps */
                 frameRate?: components["schemas"]["number"];
+                /** @description If set, specifies requirement on whether the renderer has access to the public internet or not. */
+                accessToPublicInternet?: components["schemas"]["boolean"];
             } & {
                 [key: string]: unknown;
             })[];

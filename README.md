@@ -37,7 +37,7 @@ An OGraf graphic that follows the OGraf specification can be used in any OGraf c
 
 Useful resources:
 * [Examples of OGraf Graphics](https://github.com/ebu/ograf/tree/main/v1/examples).
-* [OGraf Specification](./specification/docs/Specification.md).
+* [OGraf Specification](./v1/specification/docs/Specification).
 
 
 ### Tools

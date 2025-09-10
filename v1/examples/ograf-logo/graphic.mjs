@@ -34,14 +34,6 @@ class Graphic extends HTMLElement {
   async dispose(_params) {
     this.innerHTML = "";
   }
-  async getStatus(_params) {
-    return {
-      statusCode: 200,
-      status: {
-        // nothing
-      },
-    };
-  }
   async updateAction(_params) {
     // No updateActions are implemented in this example
   }

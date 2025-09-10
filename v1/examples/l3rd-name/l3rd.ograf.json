@@ -3,6 +3,7 @@
     "name": "Lower 3rd - Name",
     "description": "Name lower third",
     "id": "l3rd-name",
+    "main": "graphic.mjs",
     "version": "0",
     "author": {
         "name": "Johan Nyman, SuperFly.tv"

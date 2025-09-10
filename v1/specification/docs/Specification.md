@@ -53,7 +53,7 @@ directly or indirectly referenced from the Manifest file and can be seen as depe
 ### Manifest Model
 
 The manifest file is a JSON file containing metadata about the Graphic.
-The file name of the manifest file MUST end with `.ograf` (e.g. `my-graphic.ograf`).
+The file name of the manifest file MUST end with `.ograf.json` (e.g. `my-graphic.ograf.json`).
 It consists of the following fields:
 
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |
@@ -137,6 +137,7 @@ The RenderRequirement object contains the following fields:
 | resolution.width  | NumberConstraint |          |         | Specifies renderer width resolution requirement. |
 | resolution.height | NumberConstraint |          |         | Specifies renderer height resolution requirement. |
 | frameRate         | NumberConstraint |          |         | Specifies renderer frameRate requirement. |
+| accessToPublicInternet | BooleanConstraint |          |    | Specifies requirement on whether the renderer has access to the public internet or not. |
 
 ##### NumberConstraint
 
@@ -162,6 +163,18 @@ It contains the following fields:
 | exact             | string           |          |         | A string specifying a specific, required, value the property must have to be considered acceptable. |
 | ideal             | string, string[] |          |         | A string (or an array of strings), specifying ideal values for the property. If possible, one of the listed values will be used, but if it's not possible, the user agent will use the closest possible match. |
 
+
+##### BooleanConstraint
+
+A BooleanConstraint is an object that describes a constraints for a boolean value.
+(This is inspired by https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#constrainboolean)
+It contains the following fields:
+
+| Field             | Type             | Required | Default | Description                                               |
+|-------------------|------------------|:--------:|:-------:|-----------------------------------------------------------|
+| exact             | boolean           |          |         | A boolean specifying a specific, required, value the property must have to be considered acceptable. |
+| ideal             | boolean           |          |         | A boolean specifying an ideal value for the property. If possible, this value will be used, but if it's not possible, the user agent will use the closest possible match. |
+
 #### Vendor-specific fields
 
 Vendor-specific fields are additional fields that are not part of this specification, but used for vendor-specific means.
@@ -181,10 +194,10 @@ To describe the functions in this document, the Typescript interface notation is
 that vendor-specific fields can be included in both request and response payloads.
 For the 'action' methods (`playAction()`, `stopAction()`, `updateAction()` and `customAction()`), a Promise MUST be returned that
 resolves to `undefined` or to an `ReturnPayload` object containing the following fields:
-* `code`: a number that corresponds to an HTTP status code (2xx indicates a successful result, 4xx and 5xx indicate an error).
-* `message`: an optional human-readable message that corresponds to the `code`.
+* `statusCode`: a number that corresponds to an HTTP status code (2xx indicates a successful result, 4xx and 5xx indicate an error).
+* `statusMessage`: an optional human-readable message that corresponds to the `statusCode`.
 * `result`: an optional Graphics-specific response object.
-If the returned Promise resolves to `undefined`, it should be treated as a `{ code: 200 }`.
+If the returned Promise resolves to `undefined`, it should be treated as a `{ statusCode: 200 }`.
 
 Similarly, for simplicity reasons, we omit these three fields in the description of the functions below.
 In [Typescript interface](#typescript-interface-for-graphic), the full interface is provided.
@@ -287,18 +300,18 @@ class Graphic extends HTMLElement {
   }
   async playAction({ delta: number, goto: number, skipAnimation: boolean }) {
     // Play the Graphic according to the incoming params
-    return {code: 200, message: 'OK', currentStep}
+    return {statusCode: 200, statusMessage: 'OK', currentStep}
   }
   async stopAction({ skipAnimation: boolean }) {
     // Stop the Graphic, with or without animation
-    return {code: 200, message: 'OK'}
+    return {statusCode: 200, statusMessage: 'OK'}
   }
   async updateAction({ data: { name: string } }) {
     // Update the state of the Graphic
-    return {code: 200, message: 'OK'}
+    return {statusCode: 200, statusMessage: 'OK'}
   }
   async customAction({ id: string, payload: any}) {
-    return {code: 400, message: 'No custom actions supported'}
+    return {statusCode: 400, statusMessage: 'No custom actions supported'}
   }
 }
 

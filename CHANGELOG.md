@@ -5,9 +5,7 @@ This log lists changes between versions.
 
 
 
-## Version 1 - Draft 0
-
-This is a draft for Version 1. During its development, it may contain breaking changes.
+## Version 1
 
 The log below details the changes during development of this version:
 

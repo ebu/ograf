@@ -2,14 +2,15 @@
 
 <img src="docs/logo/ograf-logo-colour.svg" width="300"/>
 
-**OGraf** is an upcoming Open specification for HTML based Graphics, used in live television and post production workflows.
+**OGraf** is an Open specification for HTML based Graphics, used in live television and post production workflows.
 
 * [Link to Project Web Page](https://ograf.ebu.io)
 * [Link to Project Github repository ](https://github.com/ebu/ograf)
 
 ## Project status
 
-_**The OGraf specification is currently a draft**, breaking changes may be introduced before version 1 is finalized._
+* **The OGraf Graphics specification** (version 1) is production ready and considered stable. Additional features and non-breaking changes will be added continously.
+* **The OGraf Control API specification** is under development.
 
 EBU members as well as the general industry is invited to join the [HTML Graphics Working Group](https://tech.ebu.ch/groups/html_graphics) to participate in discussions and development of the OGraf specification.
 
@@ -19,19 +20,17 @@ Graphics and Render system developers are encouraged to follow changes in the [C
 
 ### Time plan
 
-- April 2025:
-  - First public draft to be presented, industry feedback.<br />
-    _This draft includes definitions for **Graphics**._
-- September 2025:
-  - Version 1 to be finalized.<br />
-    This version includes definitions for **Graphics**.
+- **Done:**
+  - Version 1 of **Graphics definition**
+- Autumn 2025:
   - First draft of **Server API** to be presented.
-- Late 2025(?):
+- Late 2025 / Q1 2026:
   - Version 1 to be extended with **Server API** definitions.
 
 ## Introduction
 
-An OGraf graphic that follows the OGraf specification can be used in any OGraf compatible Rendering system and controlled by any OGraf compatible Control system.
+The OGraf specification defines a way to create HTML based graphics as well as an (upcoming) Control API.
+It allows for vendor interoperability between Graphics, Rendering systems and Control systems.
 
 ## Getting Started
 

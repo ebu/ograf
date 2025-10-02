@@ -69,8 +69,7 @@ It consists of the following fields:
 | supportsRealTime    | boolean            |    X     |         | Indicates whether the Graphic supports real-time rendering.                                                                                                        |
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
 | schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
-| hasSteps            | boolean            |          |  true   | If true, implies that the Graphic can be played in steps and can be controlled by the playAction({delta: number}) or playAction({goto: number}) methods.           |
-| stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1. If the Graphic has a dynamic number of steps, this property should be 0. |
+| stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic as a dynamic/unknown number of steps. |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
 
 There MAY be multiple manifest files in a folder. In the case of multiple manifest files, will be interpreted as multiple, independent Graphics.
@@ -109,15 +108,14 @@ possible that you transition to any step or directly to the end node (indicated 
 
 <img src="images/step-model.svg" alt="Step model" style="width:500px; height:auto;">
 
-In the Graphic Manifest, there are two fields `hasSteps` and `stepCount` that are used to describe the step model of a Graphic:
+In the Graphic Manifest, the `stepCount` property is used to describe the step model of a Graphic:
 
-| hasSteps | stepCount | Description                                                                 | Controller SHOULD display step controls*                                                     |
-|----------|-----------|-----------------------------------------------------------------------------| ----------------------------------------------------------------------------------|
-| false    |  undefined or 0 | The Graphic has no steps, it is a simple Graphic that can be played once. (This is the **first model** as described above) | No |
-| false    |  >=1            | N/A | No |
-| true     |  0              | The Graphic has an unknown number of steps, it is a simple Graphic that can be played once. | yes |
-| true     |  1              | The Graphic has a single step (This is the **second model** above) | No |
-| true     |  >=1            | The Graphic has a known number of steps (This is the **third model** above) | Yes |
+| stepCount | Description                                                                 | Controller SHOULD display step controls*                                                     |
+|-----------|-----------------------------------------------------------------------------| ----------------------------------------------------------------------------------|
+|  `-1`              | The Graphic has a dynamic/unknown number of steps. | Yes |
+|  `0` | The Graphic has no steps, it is a simple Graphic that can be played once. (This is the **first model** as described above) | No |
+|  `undefined`<br/>or `1`              | The Graphic has a single step (This is the **second model** above) | No |
+|  `>1`            | The Graphic has (a known number of) multiple steps (This is the **third model** above) | Yes |
 
 *Note: "step controls" are controls that allow a user to navigate between steps, such as "next step", "previous step", "go to step X", etc.
 

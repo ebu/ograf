@@ -43,7 +43,7 @@ export interface Graphic {
    * Called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources.
    * This is called after the Renderer has unloaded the Graphic from the DOM.
    */
-  dispose: (params: EmptyParams) => Promise<ReturnPayload>;
+  dispose: (params: EmptyParams) => Promise<ReturnPayload | undefined>;
 
   /** This is called whenever user send a new data payload. */
   updateAction: (

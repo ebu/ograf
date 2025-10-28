@@ -444,6 +444,8 @@ export interface paths {
                          *     }
                          */
                         payload: unknown;
+                        /** @description If true, skips animation (defaults to false) */
+                        skipAnimation?: boolean;
                     } & {
                         [key: string]: unknown;
                     };
@@ -1435,6 +1437,8 @@ export interface components {
              * @example { "name": "John Doe" }
              */
             data: unknown;
+            /** @description If true, skips animation (defaults to false) */
+            skipAnimation?: boolean;
         } & {
             [key: string]: unknown;
         };
@@ -1464,12 +1468,14 @@ export interface components {
              */
             id: string;
             /**
-             * @description payload to send into the method
+             * @description Payload to send into the Custom Action
              * @example {
              *       "foo": "bar"
              *     }
              */
             payload: unknown;
+            /** @description If true, skips animation (defaults to false) */
+            skipAnimation?: boolean;
         } & {
             [key: string]: unknown;
         };

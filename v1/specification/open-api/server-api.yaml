@@ -284,6 +284,9 @@ paths:
                 payload:
                   description: "Payload to send into the CustomAction"
                   example: { "foo": "bar" }
+                skipAnimation:
+                  description: If true, skips animation (defaults to false)
+                  type: boolean
               required:
                 - payload
       responses:
@@ -1200,6 +1203,9 @@ components:
         data:
           description: "Data to send to the updateAction() method of the graphic"
           example: "{ \"name\": \"John Doe\" }"
+        skipAnimation:
+          description: If true, skips animation (defaults to false)
+          type: boolean
       required:
         - data
     PlayActionParams:
@@ -1231,8 +1237,11 @@ components:
           type: string
           example: "highlight"
         payload:
-          description: payload to send into the method
+          description: "Payload to send into the Custom Action"
           example: { "foo": "bar" }
+        skipAnimation:
+          description: If true, skips animation (defaults to false)
+          type: boolean
       required:
         - id
         - payload

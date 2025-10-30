@@ -1,4 +1,4 @@
-name: Publish to NPM
+name: Publish nightly to NPM
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -34,6 +34,11 @@ jobs:
         env:
           CI: true
 
+      - name: Bump version to prerelease
+        run: |
+          PRERELEASE_TAG=nightly-$(echo "${{ github.ref_name }}" | sed -r 's/[^a-z0-9]+/-/gi')
+          npm version prerelease --preid $PRERELEASE_TAG-$COMMIT_DATE-$GIT_HASH
+
       - name: Generate types
         run: npm run generate-types
         env:
@@ -45,6 +50,6 @@ jobs:
           CI: true
 
       - name: Publish to NPM
-        run: npm publish --tag latest
+        run: npm publish --tag nightly
         env:
           CI: true

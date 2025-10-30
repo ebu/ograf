@@ -5,6 +5,9 @@
   "types": "dist/main.d.ts",
   "license": "MIT",
   "description": "TypeScript definitions for Ograf graphics",
+  "repository": {
+    "url": "https://github.com/ebu/ograf"
+  },
   "homepage": "https://ograf.ebu.io",
   "keywords": [
     "ograf",
@@ -17,8 +20,7 @@
   "scripts": {
     "build": "tsc --build",
     "watch": "tsc --watch",
-    "generate-types": "node scripts/generate-types.js",
-    "do:publish": "npm run generate-types && npm run build && npm publish --access public"
+    "generate-types": "node scripts/generate-types.js"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

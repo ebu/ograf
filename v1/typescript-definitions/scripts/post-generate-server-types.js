@@ -6,7 +6,7 @@ async function main() {
 
 
   const folderPath = path.resolve("./src/generated");
-  const filePath = path.join(folderPath, 'server-api.d.ts')
+  const filePath = path.join(folderPath, 'server-api.ts')
   console.log(`Fixing ${filePath}...`)
 
   const orgContent = await fs.promises.readFile(filePath, "utf-8");

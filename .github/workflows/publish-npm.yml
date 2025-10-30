@@ -34,15 +34,9 @@ jobs:
         env:
           CI: true
 
-      - name: Get the Prerelease tag
-        id: prerelease-tag
-        uses: yuya-takeyama/docker-tag-from-github-ref-action@2b0614b1338c8f19dd9d3ea433ca9bc0cc7057ba
-        with:
-          remove-version-tag-prefix: false
-
       - name: Bump version to prerelease
         run: |
-          PRERELEASE_TAG=nightly-$(echo "${{ steps.prerelease-tag.outputs.tag }}" | sed -r 's/[^a-z0-9]+/-/gi')
+          PRERELEASE_TAG=nightly-$(echo "${{ github.ref_name }}" | sed -r 's/[^a-z0-9]+/-/gi')
           npm version prerelease --preid $PRERELEASE_TAG-$COMMIT_DATE-$GIT_HASH
 
       - name: Generate types

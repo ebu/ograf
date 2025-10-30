@@ -36,7 +36,7 @@ It allows for vendor interoperability between Graphics, Rendering systems and Co
 
 Useful resources:
 * [Examples of OGraf Graphics](https://github.com/ebu/ograf/tree/main/v1/examples).
-* [OGraf Specification](./v1/specification/docs/Specification).
+* [OGraf Specification](./v1/specification/docs/Specification.md).
 
 
 ### Tools

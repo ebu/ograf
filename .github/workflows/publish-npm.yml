@@ -1,0 +1,50 @@
+name: Publish to NPM
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  Publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ./v1/typescript-definitions
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          package-manager-cache: false
+          registry-url: "https://registry.npmjs.org"
+
+      # Ensure npm 11.5.1 or later is installed:
+      # - name: Update npm
+      #   run: npm install -g npm@latest
+
+      - name: Prepare Environment
+        # Install from package-lock.json:
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Generate types
+        run: npm run generate-types
+        env:
+          CI: true
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Publish to NPM
+        run: npm publish --tag latest
+        env:
+          CI: true

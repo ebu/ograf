@@ -5,6 +5,9 @@
   "types": "dist/main.d.ts",
   "license": "MIT",
   "description": "TypeScript definitions for Ograf graphics",
+  "repository": {
+    "url": "https://github.com/ebu/ograf"
+  },
   "homepage": "https://ograf.ebu.io",
   "keywords": [
     "ograf",

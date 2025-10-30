@@ -463,7 +463,7 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
   /**
    * The main entry point, ie the path to the main javascript file of the Graphic.
    */
-  main?: string;
+  main: string;
   /**
    * Name of the Graphic
    */

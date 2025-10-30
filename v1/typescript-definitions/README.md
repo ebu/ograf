@@ -71,3 +71,15 @@ npm run build
 npm run watch
 
 ```
+
+### Publish to NPM
+
+To publish a new version to NPM:
+
+1. Bump the version `npm version major|minor|patch`
+2. Commit and push to GitHub
+3. Go to the Actions tab and trigger the "Publish to NPM" workflow
+
+To publish a nightly build to NPM:
+
+1. Go to the Actions tab and trigger the "Publish nightly to NPM" workflow

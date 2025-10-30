@@ -45,7 +45,7 @@ export type ActionInvokeParams = {
   skipAnimation?: boolean;
 } & VendorExtend;
 
-export type PlayActionReturnPayload = (ReturnPayload | {}) & {
+export type PlayActionReturnPayload = ReturnPayload & {
   /** The resulting step from a PlayAction */
   currentStep: number;
 };

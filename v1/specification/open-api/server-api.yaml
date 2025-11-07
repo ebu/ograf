@@ -1034,7 +1034,7 @@ components:
         - name
     GraphicManifest:
       type: object
-      description: OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json
+      description: OGraf manifest, see https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json
       $ref: "../json-schemas/graphics/schema.json"
     RendererInfo:
       type: object
@@ -1122,6 +1122,7 @@ components:
         - renderTarget
         - name
         - status
+        - graphicInstances
     ShallowGDDObjectSchema:
       allOf:
         - $ref: https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json

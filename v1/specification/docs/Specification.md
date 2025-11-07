@@ -69,7 +69,7 @@ It consists of the following fields:
 | supportsRealTime    | boolean            |    X     |         | Indicates whether the Graphic supports real-time rendering.                                                                                                        |
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
 | schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
-| stepCount           | integer            |          |    1    | The number of steps a Graphic consists of.                                                                                                                         |
+| stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic as a dynamic/unknown number of steps. |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
 
 There MAY be multiple manifest files in a folder. In the case of multiple manifest files, they will be interpreted as multiple, independent Graphics.
@@ -93,24 +93,35 @@ step models. Every model has a start and an end node. The start node represents 
 typically nothing is visible in the rendered output. Similarly, the end node represents the end of the Graphic rendering,
 also typically nothing visible in the rendered output at that moment. The arrows between the nodes represent the transitions.
 
-The first model represents a Graphic containing zero steps. When `playAction()` is called on this Graphic, it will
+The **first model** represents a Graphic containing zero steps. When `playAction()` is called on this Graphic, it will
 animate the Graphic in and after some predefined time the Graphic will animate out automatically.
 
 <img src="images/step-model1.svg" alt="Step model" style="width:500px; height:auto;">
 
-The second model represents a Graphic containing one step. When `playAction()` is called on this Graphic, it will
+The **second model** represents a Graphic containing one step. When `playAction()` is called on this Graphic, it will
 animate the Graphic in and will pause at step 1. Pausing here doesn't mean that the Graphic is not moving, it refers to
 the fact that there is an interaction necessary with the Graphic to move to the next step (in this case the end).
 The `stopAction()` function SHOULD be used to go to the end of the Graphic.
 
 <img src="images/step-model2.svg" alt="Step model" style="width:500px; height:auto;">
 
-The third model represents a multi-step Graphic containing two steps. It is similar to the one-step model,
+The **third model** represents a multi-step Graphic containing two steps. It is similar to the one-step model,
 but now the `playAction()` function MUST be used again to transition between different steps, except for the end node, where the `stopAction()`
 function SHOULD be used. The normal flow is to go to step 1, then to step 2 and finally to the end node. However, it is
 possible that you transition to any step or directly to the end node (indicated by the dotted lines in the figure).
 
 <img src="images/step-model3.svg" alt="Step model" style="width:500px; height:auto;">
+
+In the Graphic Manifest, the `stepCount` property is used to describe the step model of a Graphic:
+
+| stepCount | Description                                                                 | Controller SHOULD display step controls*                                                     |
+|-----------|-----------------------------------------------------------------------------| ----------------------------------------------------------------------------------|
+|  `-1`              | The Graphic has a dynamic/unknown number of steps. | Yes |
+|  `0` | The Graphic has no steps, it is a simple Graphic that can be played once. (This is the **first model** as described above) | No |
+|  `undefined`<br/>or `1`              | The Graphic has a single step (This is the **second model** above) | No |
+|  `>1`            | The Graphic has (a known number of) multiple steps (This is the **third model** above) | Yes |
+
+*Note: "step controls" are controls that allow a user to navigate between steps, such as "next step", "previous step", "go to step X", etc.
 
 #### Custom actions
 
@@ -219,16 +230,16 @@ load: (
   } & VendorExtend
 ) => Promise<ReturnPayload | undefined>;
 ```
-The `load()` function is called by the Renderer when the Graphic has been loaded into the DOM. The `data` field 
-contains the initial internal state of the Graphic and follows the model described in the Manifest using the 
+The `load()` function is called by the Renderer when the Graphic has been loaded into the DOM. The `data` field
+contains the initial internal state of the Graphic and follows the model described in the Manifest using the
 `schema` field. The Graphic MUST update its internal state with the `data` received in the `load()` function.
 
 The `renderType` field gives the Graphic an indication whether the rendering is done in realtime or non-realtime.
-The `renderCharacteristics` field provides the Graphic a set of characteristics / capabilities of the Renderer, that 
+The `renderCharacteristics` field provides the Graphic a set of characteristics / capabilities of the Renderer, that
 could affect how the Graphic will be rendered.
 
-A Promise is returned that MUST resolve when the Graphic is ready to receive 'action' methods (`playAction()`, 
-`stopAction()`, `updateAction()`, `customAction()`). This way, Renderers are able to implement 'load-and-play' 
+A Promise is returned that MUST resolve when the Graphic is ready to receive 'action' methods (`playAction()`,
+`stopAction()`, `updateAction()`, `customAction()`). This way, Renderers are able to implement 'load-and-play'
 scenarios using `load({data}).then(() => playAction())`.
 
 
@@ -236,7 +247,7 @@ scenarios using `load({data}).then(() => playAction())`.
 ```
 dispose: (params: EmptyParams) => Promise<ReturnPayload>;
 ```
-The `dispose()` function is called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources. 
+The `dispose()` function is called by the Renderer to force the Graphic to terminate/dispose/clear any loaded resources.
 A Promise is returned that MUST resolve when the Graphic completed the necessary cleanup.
 
 
@@ -250,17 +261,17 @@ playAction: (
   } & VendorExtend
 ) => Promise<PlayActionReturnPayload>;
 ```
-The `playAction()` function is called by the Renderer to play a given step. 
-The `skipAnimation` field indicates whether the Graphic should transition with or without animation. 
-When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when 
+The `playAction()` function is called by the Renderer to play a given step.
+The `skipAnimation` field indicates whether the Graphic should transition with or without animation.
+When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when
 `skipAnimation` is set to `true`.
 
-The `delta` and `goto` fields indicate the target step. Steps are zero-based indexed. `delta` is used for relative steps, 
+The `delta` and `goto` fields indicate the target step. Steps are zero-based indexed. `delta` is used for relative steps,
 `goto` for an absolute step number. The target step MUST be determined as follows by the Graphic:
 * when `goto` is not equal to `undefined`, the target step is equal to the value provided in the `goto` field;
 * when `goto` is `undefined`, the target step is calculated as the sum of the current step and the value provided in the
 `delta` field (which defaults to `1` when not provided). When the current step is undefined (i.e. when the Graphic is
-in the 'start' state), the target step must be calculated as `-1 + delta`. 
+in the 'start' state), the target step must be calculated as `-1 + delta`.
 
 When the target step is higher or equal to the `stepCount` defined in the Manifest, the Graphic MUST transition to the
 end.
@@ -281,13 +292,13 @@ incoming `goto` and `delta` fields. Target step equal to `undefined` means the G
 |      0       |     1     | undefined |     1     |  undefined  |
 
 The returned Promise MUST resolve to a `ReturnPayload` object with an additional `currentStep` field indicating
-the current step after the execution of this function. 
-In case `stepCount` is equal to zero or the `playAction()` function is used to transition to the end, the `currentStep` 
+the current step after the execution of this function.
+In case `stepCount` is equal to zero or the `playAction()` function is used to transition to the end, the `currentStep`
 field in the response MUST be `undefined`.
 
-The point in time when the Promise returned by the `playAction()` function is resolved SHOULD indicate that the graphic 
-is ready to execute another action. For example, it could be when a graphic has finished animating in (or reached next 
-step / transitioned between states). If the graphic has a long or infinite animation (like a text-scroller), 
+The point in time when the Promise returned by the `playAction()` function is resolved SHOULD indicate that the graphic
+is ready to execute another action. For example, it could be when a graphic has finished animating in (or reached next
+step / transitioned between states). If the graphic has a long or infinite animation (like a text-scroller),
 the Promise SHOULD NOT wait for that long animation to finish, but instead resolve instantly (or after an in-animation).
 
 
@@ -304,8 +315,8 @@ The `skipAnimation` field indicates whether the Graphic should disappear with or
 When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when
 `skipAnimation` is set to `true`.
 
-The returned Promise MUST resolve when the Graphic is stopped from being displayed. The point in time when the Promise 
-returned by the `stopAction()` function is resolved SHOULD indicate that the graphic is ready to execute another action. 
+The returned Promise MUST resolve when the Graphic is stopped from being displayed. The point in time when the Promise
+returned by the `stopAction()` function is resolved SHOULD indicate that the graphic is ready to execute another action.
 Typically for the `stopAction()`, it could be when a graphic has finished animating out.
 
 
@@ -318,8 +329,8 @@ updateAction: (
   } & VendorExtend
 ) => Promise<ReturnPayload | undefined>;
 ```
-The `updateAction()` function is called by the Renderer to update one or more fields of the internal state of the 
-Graphic. The `data` field contains a (potentially partial) update of the internal state of the Graphic and follows the 
+The `updateAction()` function is called by the Renderer to update one or more fields of the internal state of the
+Graphic. The `data` field contains a (potentially partial) update of the internal state of the Graphic and follows the
 model described in the Manifest using the `schema` field.
 
 The returned Promise MUST resolve after the execution of the update.
@@ -334,9 +345,9 @@ customAction: (
   } & VendorExtend
 ) => Promise<ReturnPayload | undefined>;
 ```
-The `customAction()` function is called by the Renderer to invoke a custom action on the Graphic. The `id` field MUST 
-correspond to an `id` of an Action that is defined in the Manifest file, inside the `actions` field. The schema for the 
-`payload` field is the described in the corresponding Action inside the Manifest file. The returned Promise MUST 
+The `customAction()` function is called by the Renderer to invoke a custom action on the Graphic. The `id` field MUST
+correspond to an `id` of an Action that is defined in the Manifest file, inside the `actions` field. The schema for the
+`payload` field is the described in the corresponding Action inside the Manifest file. The returned Promise MUST
 resolve when the action is executed.
 
 <br>
@@ -348,7 +359,7 @@ goToTime: (
   params: { timestamp: number } & VendorExtend
 ) => Promise<ReturnPayload | undefined>;
 ```
-The `goToTime()` function is called to make the Graphic jump to a certain `timestamp`, expressed in milliseconds. 
+The `goToTime()` function is called to make the Graphic jump to a certain `timestamp`, expressed in milliseconds.
 A Promise is returned that MUST resolve when the frame is rendered at the requested position.
 
 #### setActionsSchedule()
@@ -378,19 +389,19 @@ setActionsSchedule: (
   } & VendorExtend
 ) => Promise<EmptyPayload | undefined>;
 ```
-The `setActionsSchedule()` function is called to schedule actions to be invoked at a certain point in time. When this 
-is called, the Graphic is expected to store the scheduled actions and invoke them when the time comes. A call to this 
-replaces any previous scheduled actions. For every `timestamp`, expressed in milliseconds, an action type is provided 
-together with corresponding parameters. The action type is either `playAction`, `stopAction`, `updateAction` or 
+The `setActionsSchedule()` function is called to schedule actions to be invoked at a certain point in time. When this
+is called, the Graphic is expected to store the scheduled actions and invoke them when the time comes. A call to this
+replaces any previous scheduled actions. For every `timestamp`, expressed in milliseconds, an action type is provided
+together with corresponding parameters. The action type is either `playAction`, `stopAction`, `updateAction` or
 `customAction`.
 
-A Promise is returned that MUST resolve when the Graphic received the schedule. The Graphics SHOULD NOT wait to 
+A Promise is returned that MUST resolve when the Graphic received the schedule. The Graphics SHOULD NOT wait to
 resolve the Promise until the schedule is executed.
 
 <br>
-The graphic MUST be able to handle calls to the 'action' methods at any point in time, regardless of if the Promise 
+The graphic MUST be able to handle calls to the 'action' methods at any point in time, regardless of if the Promise
 returned by the previous method call has not yet resolved.
-The graphic MAY handle multiple subsequent method calls in any way it sees fit. Queueing commands to be executed in 
+The graphic MAY handle multiple subsequent method calls in any way it sees fit. Queueing commands to be executed in
 order, aborting a previous animation or "skipping ahead" are all reasonable strategies.
 The graphic SHOULD NOT ignore a subsequent method call if the previous one has not yet resolved.
 
@@ -400,7 +411,7 @@ This type of export allows you to import the Graphic using any name.
 
 ## Requirements for a Renderer
 
-The way a Graphic is added into and removed from a Renderer is non-normative. But there are a few normative steps to 
+The way a Graphic is added into and removed from a Renderer is non-normative. But there are a few normative steps to
 take by the Renderer when doing so.
 
 When a Graphic is added into a Renderer, the following steps are executed by the Renderer:

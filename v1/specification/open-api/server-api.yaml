@@ -442,9 +442,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -508,9 +508,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -581,9 +581,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -648,9 +648,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -715,9 +715,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -790,9 +790,9 @@ paths:
           required: true
         - in: query
           name: graphicTarget
-          description: "The Graphic to target with the command"
+          description: "The Graphic to target with the command (graphicInstanceId)"
           schema:
-            $ref: "#/components/schemas/GraphicTarget"
+            $ref: "#/components/schemas/GraphicInstanceId"
           required: true
       requestBody:
         required: true
@@ -974,16 +974,6 @@ components:
         graphicInstanceId:
           description: "(Optional) If set, will only affect a specific GraphicInstance"
           type: string
-    GraphicTarget:
-      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
-      type: object
-      properties:
-        graphicId:
-          description: "(Optional) If set, will only affect GraphicInstances of a certain Graphic id and version"
-          $ref: "#/components/schemas/GraphicId"
-        graphicInstanceId:
-          description: "(Optional) If set, will only affect a specific GraphicInstance"
-          $ref: "#/components/schemas/GraphicInstanceId"
      # Ids
     RendererId:
       description: "ID of the Renderer"
@@ -997,7 +987,7 @@ components:
       type: string
       example: "simple-l3rd"
     GraphicInstanceId:
-      description: "ID of the GraphicInstance"
+      description: "ID of an GraphicInstance. A GraphicInstance is a specific instance of a Graphic that is loaded onto a RenderTarget."
       type: string
       example: "graphic-instance-0"
     # Objects

@@ -40,9 +40,6 @@ export type ActionInvokeParams = {
   id: string;
   /** Params to send into the method */
   payload: unknown;
-
-  /** If true, skips animation (defaults to false) */
-  skipAnimation?: boolean;
 } & VendorExtend;
 
 export type PlayActionReturnPayload = ReturnPayload & {

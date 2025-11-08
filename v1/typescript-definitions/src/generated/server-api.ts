@@ -666,8 +666,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command. */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -748,8 +748,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -838,8 +838,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -923,8 +923,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -1007,8 +1007,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -1101,8 +1101,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command */
-                    graphicTarget: components["schemas"]["GraphicTarget"];
+                    /** @description The Graphic to target with the command (graphicInstanceId) */
+                    graphicTarget: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -1265,15 +1265,6 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
-        GraphicTarget: {
-            /** @description (Optional) If set, will only affect GraphicInstances of a certain Graphic id and version */
-            graphicId?: components["schemas"]["GraphicId"];
-            /** @description (Optional) If set, will only affect a specific GraphicInstance */
-            graphicInstanceId?: components["schemas"]["GraphicInstanceId"];
-        } & {
-            [key: string]: unknown;
-        };
         /**
          * @description ID of the Renderer
          * @example renderer-0
@@ -1290,7 +1281,7 @@ export interface components {
          */
         GraphicId: string;
         /**
-         * @description ID of the GraphicInstance
+         * @description ID of an GraphicInstance. A GraphicInstance is a specific instance of a Graphic that is loaded onto a RenderTarget.
          * @example graphic-instance-0
          */
         GraphicInstanceId: string;
@@ -1324,7 +1315,7 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description OGraf manifest, see https://ograf.ebu.io/v1-draft-0/specification/json-schemas/graphics/schema.json */
+        /** @description OGraf manifest, see https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json */
         GraphicManifest: components["schemas"]["schema-2"];
         /** RendererInfo */
         RendererInfo: {
@@ -1377,9 +1368,9 @@ export interface components {
             status: "OK" | "WARNING" | "ERROR";
             /** @example RenderTarget is running */
             statusMessage?: string;
-            graphicInstances?: ({
-                graphicInstanceId?: components["schemas"]["GraphicInstanceId"];
-                graphic?: components["schemas"]["GraphicInfo"];
+            graphicInstances: ({
+                graphicInstanceId: components["schemas"]["GraphicInstanceId"];
+                graphic: components["schemas"]["GraphicInfo"];
             } & {
                 [key: string]: unknown;
             })[];

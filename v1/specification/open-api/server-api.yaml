@@ -235,12 +235,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  renderTarget:
-                    $ref: "#/components/schemas/RenderTargetInfo"
-                required:
-                  - renderTarget
+                $ref: "#/components/schemas/RenderTargetInfo"
         404:
           description: No RenderTarget found
           content:

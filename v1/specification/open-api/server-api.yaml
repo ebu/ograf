@@ -42,10 +42,6 @@ paths:
                     type: string
                     description: Version of the Server
                     example: '1.0'
-                  uptime:
-                    type: number
-                    description: Server uptime (in milliseconds)
-                    example: 3600000
                 required:
                   - name
         500:

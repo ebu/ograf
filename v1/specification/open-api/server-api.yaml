@@ -1060,18 +1060,18 @@ components:
             message:
               type: string
               example: "Renderer is running"
-            renderTargets:
-              description: "List of active RenderTargets and their contents"
-              type: array
-              items:
-                $ref: "#/components/schemas/RenderTargetInfo"
           required:
             - status
-            - renderTargets
+        renderTargets:
+          description: "List of active RenderTargets and their contents"
+          type: array
+          items:
+            $ref: "#/components/schemas/RenderTargetInfo"
       required:
         - id
         - name
         - status
+        - renderTargets
     RenderTargetInfo:
       type: object
       properties:

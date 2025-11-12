@@ -89,7 +89,7 @@ export interface Graphic {
    */
   goToTime: (
     params: {
-      /** The timestamp to go to */
+      /** The timestamp to go to (in milliseconds) */
       timestamp: number
     } & VendorExtend
   ) => Promise<ReturnPayload | undefined>;

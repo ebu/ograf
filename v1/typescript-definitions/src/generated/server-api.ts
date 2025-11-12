@@ -1023,7 +1023,7 @@ export interface paths {
                         /** @description Params to send to the goToTime() method of the graphic */
                         params: {
                             /**
-                             * @description The timestamp to go to
+                             * @description The timestamp to go to (in milliseconds)
                              * @example 1234
                              */
                             timestamp: number;
@@ -1122,7 +1122,7 @@ export interface paths {
                              */
                             schedule: ({
                                 /**
-                                 * @description The timestamp to go to
+                                 * @description The timestamp to apply action (in milliseconds)
                                  * @example 1234
                                  */
                                 timestamp: number;

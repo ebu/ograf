@@ -731,7 +731,7 @@ paths:
                   type: object
                   properties:
                     timestamp:
-                      description: "The timestamp to go to"
+                      description: "The timestamp to go to (in milliseconds)"
                       type: number
                       example: "1234"
                   required:
@@ -813,7 +813,7 @@ paths:
                         type: object
                         properties:
                           timestamp:
-                            description: "The timestamp to go to"
+                            description: "The timestamp to apply action (in milliseconds)"
                             type: number
                             example: "1234"
                           action:
@@ -1005,17 +1005,20 @@ components:
           description: "Description of the graphic"
           type: string
           example: "A simple lower third for the Main news show"
-        author:
-          description: "Information about the author of the graphic"
+        createdAt:
+          description: "DateTime of when the Graphic was created ( ISO8601 string )"
+          type: string
+          example: "2025-11-12T15:48:34Z"
+        createdBy:
+          description: "Information about who created the graphic"
           $ref: "#/components/schemas/Author"
-        created:
-          description: "Unix timestamp of when the Graphic was created"
-          type: number
-          example: 1735689600000
-        modified:
-          description: "Unix timestamp of when the Graphic was last modified"
-          type: number
-          example: 1735689600000
+        updatedAt:
+          description: "DateTime of when the Graphic was last updated ( ISO8601 string )"
+          type: string
+          example: "2025-11-12T15:48:34Z"
+        updatedBy:
+          description: "Information about who last updated the graphic"
+          $ref: "#/components/schemas/Author"
       required:
         - id
         - name

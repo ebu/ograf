@@ -45,11 +45,6 @@ export interface paths {
                              * @example 1.0
                              */
                             version?: string;
-                            /**
-                             * @description Server uptime (in milliseconds)
-                             * @example 3600000
-                             */
-                            uptime?: number;
                         } & {
                             [key: string]: unknown;
                         };
@@ -163,7 +158,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["GraphicNotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -210,7 +205,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["GraphicNotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -323,7 +318,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -374,11 +369,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": {
-                            renderTarget: components["schemas"]["RenderTargetInfo"];
-                        } & {
-                            [key: string]: unknown;
-                        };
+                        "application/json": components["schemas"]["RenderTargetInfo"];
                     };
                 };
                 /** @description No RenderTarget found */
@@ -387,7 +378,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -472,7 +463,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -536,7 +527,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error */
@@ -607,7 +598,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            /** @description Unique ID of the instance of the graphic that was just loaded */
+                            /** @description Unique ID of the instance of the graphic that was just loaded. Use this id to target the graphic instance for further actions. */
                             graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                             /**
                              * @description Returned by the load() method
@@ -630,7 +621,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or load() threw an error */
@@ -666,8 +657,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command. */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -713,7 +704,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or updateAction() threw an error */
@@ -748,8 +739,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -803,7 +794,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or playAction() threw an error */
@@ -838,8 +829,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -888,7 +879,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or stopAction() threw an error */
@@ -923,8 +914,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -973,7 +964,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or customAction() threw an error */
@@ -1007,8 +998,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -1066,7 +1057,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or goToTime() threw an error */
@@ -1101,8 +1092,8 @@ export interface paths {
                 query: {
                     /** @description The RenderTarget to target with the command */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description The Graphic to target with the command (graphicInstanceId) */
-                    graphicTarget: components["schemas"]["GraphicInstanceId"];
+                    /** @description Id of the Graphic instance to target with the command */
+                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 };
                 header?: never;
                 path: {
@@ -1189,7 +1180,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NotFoundResponse"];
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description Internal Server Error or setActionsSchedule() threw an error */
@@ -1214,23 +1205,33 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @description A response object containing problem details, see https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details. */
         ErrorResponse: {
-            /** @example Internal Server Error */
-            error: string;
-            /** @example Error at /path/to/file.js:123:45 */
-            stack?: string;
-        } & {
-            [key: string]: unknown;
-        };
-        NotFoundResponse: {
-            /** @example Not found */
-            error: string;
-        } & {
-            [key: string]: unknown;
-        };
-        GraphicNotFoundResponse: {
-            /** @example Graphic not found */
-            error: string;
+            /**
+             * @description A URI reference that identifies the problem type. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+             * @example https://example.com/probs/out-of-credit
+             */
+            type?: string;
+            /**
+             * @description A short, human-readable summary of the problem type. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+             * @example Internal Server Error
+             */
+            title?: string;
+            /**
+             * @description The HTTP status code generated by the origin server for this occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+             * @example 500
+             */
+            status?: number;
+            /**
+             * @description A human-readable explanation specific to this occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+             * @example Internal Server Error
+             */
+            detail?: string;
+            /**
+             * @description A URI reference that identifies the specific occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+             * @example /renderers/renderer-0/target/graphic/
+             */
+            instance?: string;
         } & {
             [key: string]: unknown;
         };
@@ -1241,13 +1242,6 @@ export interface components {
                 renderTarget: components["schemas"]["RenderTargetIdentifier"];
                 /** @description Unique ID of the instance of the graphic that was just cleared */
                 graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                /** @description The graphic that was cleared */
-                graphic: {
-                    /** @description ID of the graphic that was cleared */
-                    id: components["schemas"]["GraphicId"];
-                } & {
-                    [key: string]: unknown;
-                };
             } & {
                 [key: string]: unknown;
             })[];
@@ -1300,18 +1294,20 @@ export interface components {
              * @example A simple lower third for the Main news show
              */
             description?: string;
-            /** @description Information about the author of the graphic */
-            author?: components["schemas"]["Author"];
             /**
-             * @description Unix timestamp of when the Graphic was created
-             * @example 1735689600000
+             * @description DateTime of when the Graphic was created ( ISO8601 string )
+             * @example 2025-11-12T15:48:34Z
              */
-            created?: number;
+            createdAt?: string;
+            /** @description Information about who created the graphic */
+            createdBy?: components["schemas"]["Author"];
             /**
-             * @description Unix timestamp of when the Graphic was last modified
-             * @example 1735689600000
+             * @description DateTime of when the Graphic was last updated ( ISO8601 string )
+             * @example 2025-11-12T15:48:34Z
              */
-            modified?: number;
+            updatedAt?: string;
+            /** @description Information about who last updated the graphic */
+            updatedBy?: components["schemas"]["Author"];
         } & {
             [key: string]: unknown;
         };
@@ -1343,11 +1339,11 @@ export interface components {
                 status: "OK" | "WARNING" | "ERROR";
                 /** @example Renderer is running */
                 message?: string;
-                /** @description List of active RenderTargets and their contents */
-                renderTargets: components["schemas"]["RenderTargetInfo"][];
             } & {
                 [key: string]: unknown;
             };
+            /** @description List of active RenderTargets and their contents */
+            renderTargets: components["schemas"]["RenderTargetInfo"][];
         } & {
             [key: string]: unknown;
         };
@@ -1361,13 +1357,6 @@ export interface components {
             name: string;
             /** @description Longer description of the RenderTarget */
             description?: string;
-            /**
-             * @example OK
-             * @enum {string}
-             */
-            status: "OK" | "WARNING" | "ERROR";
-            /** @example RenderTarget is running */
-            statusMessage?: string;
             graphicInstances: ({
                 graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                 graphic: components["schemas"]["GraphicInfo"];

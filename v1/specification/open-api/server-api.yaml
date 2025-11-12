@@ -933,15 +933,6 @@ components:
               graphicInstanceId:
                 description: "Unique ID of the instance of the graphic that was just cleared"
                 $ref: "#/components/schemas/GraphicInstanceId"
-              graphic:
-                description: "The graphic that was cleared"
-                type: object
-                properties:
-                  id:
-                    description: "ID of the graphic that was cleared"
-                    $ref: "#/components/schemas/GraphicId"
-                required:
-                  - id
             required:
               - renderTarget
               - graphicInstanceId

@@ -390,7 +390,7 @@ paths:
                 type: object
                 properties:
                   graphicInstanceId:
-                    description: "Unique ID of the instance of the graphic that was just loaded"
+                    description: "Unique ID of the instance of the graphic that was just loaded. Use this id to target the graphic instance for further actions."
                     $ref: "#/components/schemas/GraphicInstanceId"
                   statusCode:
                     description: "Returned by the load() method"
@@ -432,8 +432,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true
@@ -498,8 +498,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true
@@ -571,8 +571,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true
@@ -638,8 +638,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true
@@ -705,8 +705,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true
@@ -780,8 +780,8 @@ paths:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
         - in: query
-          name: graphicTarget
-          description: "The Graphic to target with the command (graphicInstanceId)"
+          name: graphicInstanceId
+          description: "Id of the Graphic instance to target with the command"
           schema:
             $ref: "#/components/schemas/GraphicInstanceId"
           required: true

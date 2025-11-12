@@ -108,7 +108,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GraphicNotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -142,7 +142,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GraphicNotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -210,7 +210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -250,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -304,7 +304,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -345,7 +345,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error
           content:
@@ -417,7 +417,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or load() threw an error
           content:
@@ -483,7 +483,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or updateAction() threw an error
           content:
@@ -556,7 +556,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or playAction() threw an error
           content:
@@ -623,7 +623,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or stopAction() threw an error
           content:
@@ -690,7 +690,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or customAction() threw an error
           content:
@@ -765,7 +765,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or goToTime() threw an error
           content:
@@ -892,7 +892,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotFoundResponse"
+                $ref: "#/components/schemas/ErrorResponse"
         500:
           description: Internal Server Error or setActionsSchedule() threw an error
           content:
@@ -905,31 +905,28 @@ components:
     # Responses
     ErrorResponse:
       type: object
+      description: A response object containing problem details, see https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
       properties:
-        error:
+        type:
+          type: string
+          example: "https://example.com/probs/out-of-credit"
+          description: A URI reference that identifies the problem type. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+        title:
           type: string
           example: "Internal Server Error"
-        stack:
+          description: A short, human-readable summary of the problem type. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+        status:
+          type: integer
+          example: 500
+          description: The HTTP status code generated by the origin server for this occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+        detail:
           type: string
-          example: "Error at /path/to/file.js:123:45"
-      required:
-        - error
-    NotFoundResponse:
-      type: object
-      properties:
-        error:
+          example: "Internal Server Error"
+          description: A human-readable explanation specific to this occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
+        instance:
           type: string
-          example: "Not found"
-      required:
-        - error
-    GraphicNotFoundResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: "Graphic not found"
-      required:
-        - error
+          example: '/renderers/renderer-0/target/graphic/'
+          description: A URI reference that identifies the specific occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
     ClearGraphicsResponse:
       type: object
       properties:

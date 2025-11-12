@@ -1080,16 +1080,6 @@ components:
         description:
           description: "Longer description of the RenderTarget"
           type: string
-        status:
-          type: string
-          enum:
-            - OK
-            - WARNING
-            - ERROR
-          example: "OK"
-        statusMessage:
-          type: string
-          example: "RenderTarget is running"
         graphicInstances:
           type: array
           items:
@@ -1105,7 +1095,6 @@ components:
       required:
         - renderTarget
         - name
-        - status
         - graphicInstances
     ShallowGDDObjectSchema:
       allOf:

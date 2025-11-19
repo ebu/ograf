@@ -321,7 +321,10 @@ paths:
               type: object
               properties:
                 filters:
-                  $ref: "#/components/schemas/GraphicFilter"
+                  type: array
+                  description: "List of filters for what Graphics to clear. If no filters are defined, All graphics are cleared. If multiple filters are defined, any GraphicInstances matching at least one of the filters will be cleared."
+                  items:
+                    $ref: "#/components/schemas/GraphicFilter"
               required:
                 - filters
       responses:
@@ -941,7 +944,7 @@ components:
         - graphicInstances
     # Targets / Filters
     GraphicFilter:
-      description: "If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected."
+      description: "If set, apply filters to which GraphicInstances to affect. If no properties in this object are defined, any GraphicInstance will match. If multiple properties are defined, only GraphicsInstances that match all properties will match."
       type: object
       properties:
         renderTarget:

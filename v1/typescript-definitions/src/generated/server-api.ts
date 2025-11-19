@@ -93,7 +93,7 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            graphics: components["schemas"]["GraphicInfo"][];
+                            graphics: components["schemas"]["GraphicListInfo"][];
                         } & {
                             [key: string]: unknown;
                         };
@@ -145,8 +145,8 @@ export interface paths {
                     };
                     content: {
                         "application/json": {
-                            graphic: components["schemas"]["GraphicInfo"];
-                            manifest: components["schemas"]["schema-2"];
+                            graphic: components["schemas"]["schema-2"];
+                            metadata?: components["schemas"]["GraphicMetadata"];
                         } & {
                             [key: string]: unknown;
                         };
@@ -178,7 +178,7 @@ export interface paths {
         delete: {
             parameters: {
                 query?: {
-                    /** @description Whether to force deletion. If force is false, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected. */
+                    /** @description Whether to force deletion. If force not true, it is recommended that the server keeps the Graphic contents for a while, but unlist it. This is to ensure that any currently-on-air Graphics are not affected. */
                     force?: boolean;
                 };
                 header?: never;
@@ -351,7 +351,7 @@ export interface paths {
         get: {
             parameters: {
                 query: {
-                    /** @description The RenderTarget to retrieve info about */
+                    /** @description The RenderTarget to retrieve info about. Note that this is a JSON-stringified RenderTargetIdentifier! */
                     renderTarget: components["schemas"]["RenderTargetIdentifier"];
                 };
                 header?: never;
@@ -505,7 +505,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
-                        filters: components["schemas"]["GraphicFilter"];
+                        /** @description List of filters for what Graphics to clear. If no filters are defined, All graphics are cleared. If multiple filters are defined, any GraphicInstances matching at least one of the filters will be cleared. */
+                        filters: components["schemas"]["GraphicFilter"][];
                     } & {
                         [key: string]: unknown;
                     };
@@ -559,10 +560,7 @@ export interface paths {
         /** Load a Graphic onto a RenderTarget */
         put: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to load the graphic onto */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -573,6 +571,8 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to load the graphic onto */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The graphic to load */
                         graphicId: components["schemas"]["GraphicId"];
                         /** @description Params to send to the load() method of the graphic */
@@ -654,12 +654,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the updateAction() method */
         post: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command. */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -670,6 +665,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command. */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["UpdateActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -736,12 +735,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the playAction() method */
         post: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -752,6 +746,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command. */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["PlayActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -826,12 +824,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the stopAction() method */
         post: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -842,6 +835,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["StopActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -911,12 +908,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the customAction() method */
         post: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -927,6 +919,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["CustomActionParams"];
                     } & {
                         [key: string]: unknown;
@@ -995,12 +991,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the goToTime() method */
         put: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -1011,6 +1002,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         /** @description Params to send to the goToTime() method of the graphic */
                         params: {
                             /**
@@ -1089,12 +1084,7 @@ export interface paths {
         /** For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method */
         put: {
             parameters: {
-                query: {
-                    /** @description The RenderTarget to target with the command */
-                    renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                    /** @description Id of the Graphic instance to target with the command */
-                    graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                };
+                query?: never;
                 header?: never;
                 path: {
                     /** @description ID of the Renderer */
@@ -1105,6 +1095,10 @@ export interface paths {
             requestBody: {
                 content: {
                     "application/json": {
+                        /** @description The RenderTarget to target with the command */
+                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
+                        /** @description Id of the Graphic instance to target with the command */
+                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         /** @description Params to send to the setActionsSchedule() method of the graphic */
                         params: {
                             /**
@@ -1248,7 +1242,7 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description If set, apply filters to which GraphicInstances to affect. If no filters are defined, ALL graphics will be cleared. If multiple filters are defined, only instances that match all filters will be affected. */
+        /** @description If set, apply filters to which GraphicInstances to affect. If no properties in this object are defined, any GraphicInstance will match. If multiple properties are defined, only GraphicsInstances that match all properties will match. */
         GraphicFilter: {
             /** @description (Optional) If set, will only affect GraphicInstances from a certain RenderTarget */
             renderTarget?: components["schemas"]["RenderTargetIdentifier"];
@@ -1279,11 +1273,12 @@ export interface components {
          * @example graphic-instance-0
          */
         GraphicInstanceId: string;
-        /** GraphicInfo */
-        GraphicInfo: {
+        /**
+         * GraphicListInfo
+         * @description Minimal information about an OGraf Graphic
+         */
+        GraphicListInfo: {
             id: components["schemas"]["GraphicId"];
-            /** @description Version of the Graphic */
-            version?: string;
             /**
              * @description Short name of the graphic
              * @example Simple LowerThird
@@ -1294,11 +1289,19 @@ export interface components {
              * @example A simple lower third for the Main news show
              */
             description?: string;
+        } & {
+            [key: string]: unknown;
+        };
+        /**
+         * GraphicMetadata
+         * @description Metadata information about an OGraf Graphic, generated by the server
+         */
+        GraphicMetadata: {
             /**
              * @description DateTime of when the Graphic was created ( ISO8601 string )
              * @example 2025-11-12T15:48:34Z
              */
-            createdAt?: string;
+            createdAt: string;
             /** @description Information about who created the graphic */
             createdBy?: components["schemas"]["Author"];
             /**
@@ -1359,7 +1362,7 @@ export interface components {
             description?: string;
             graphicInstances: ({
                 graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                graphic: components["schemas"]["GraphicInfo"];
+                graphic: components["schemas"]["GraphicListInfo"];
             } & {
                 [key: string]: unknown;
             })[];
@@ -1700,7 +1703,7 @@ export interface components {
             /** @description Indicates if the Graphic supports non-real-time rendering. Note: If true, the Graphic must implement the 'goToTime()' and the 'setActionsSchedule()' methods. */
             supportsNonRealTime: boolean;
             /**
-             * @description The number of steps in the Graphic. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (defaults to 1).
+             * @description The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic as a dynamic/unknown number of steps.
              * @default 1
              */
             stepCount: number;

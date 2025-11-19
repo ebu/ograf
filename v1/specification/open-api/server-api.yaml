@@ -225,7 +225,7 @@ paths:
           required: true
         - in: query
           name: renderTarget
-          description: "The RenderTarget to retrieve info about"
+          description: "The RenderTarget to retrieve info about. Note that this is a JSON-stringified RenderTargetIdentifier!"
           schema:
             $ref: "#/components/schemas/RenderTargetIdentifier"
           required: true
@@ -356,12 +356,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to load the graphic onto"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
       requestBody:
         required: true
         content:
@@ -369,6 +363,9 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to load the graphic onto"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicId:
                   description: "The graphic to load"
                   $ref: "#/components/schemas/GraphicId"
@@ -382,6 +379,7 @@ paths:
                   required:
                     - data
               required:
+                - renderTarget
                 - graphicId
                 - params
       responses:
@@ -428,18 +426,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command."
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -447,9 +433,17 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command."
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/UpdateActionParams"
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
       responses:
         200:
@@ -494,18 +488,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -513,9 +495,17 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command."
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/PlayActionParams"
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
 
       responses:
@@ -567,18 +557,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -586,9 +564,17 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/StopActionParams"
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
       responses:
         200:
@@ -634,18 +620,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -653,9 +627,17 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/CustomActionParams"
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
       responses:
         200:
@@ -701,18 +683,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -720,6 +690,12 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   description: "Params to send to the goToTime() method of the graphic"
                   type: object
@@ -731,6 +707,8 @@ paths:
                   required:
                     - timestamp
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
       responses:
         200:
@@ -776,18 +754,6 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
-        - in: query
-          name: renderTarget
-          description: "The RenderTarget to target with the command"
-          schema:
-            $ref: "#/components/schemas/RenderTargetIdentifier"
-          required: true
-        - in: query
-          name: graphicInstanceId
-          description: "Id of the Graphic instance to target with the command"
-          schema:
-            $ref: "#/components/schemas/GraphicInstanceId"
-          required: true
       requestBody:
         required: true
         content:
@@ -795,6 +761,12 @@ paths:
             schema:
               type: object
               properties:
+                renderTarget:
+                  description: "The RenderTarget to target with the command"
+                  $ref: "#/components/schemas/RenderTargetIdentifier"
+                graphicInstanceId:
+                  description: "Id of the Graphic instance to target with the command"
+                  $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   description: "Params to send to the setActionsSchedule() method of the graphic"
                   type: object
@@ -858,6 +830,8 @@ paths:
                   required:
                     - schedule
               required:
+                - renderTarget
+                - graphicInstanceId
                 - params
       responses:
         200:

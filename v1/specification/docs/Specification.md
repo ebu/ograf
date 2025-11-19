@@ -334,6 +334,8 @@ Graphic. The `data` field contains a (potentially partial) update of the interna
 model described in the Manifest using the `schema` field.
 
 The returned Promise MUST resolve after the execution of the update.
+The point in time when the Promise is resolved SHOULD indicate that the graphic is ready to execute another action.
+Typically, it could be when a graphic has finished an animation of the update.
 
 
 #### customAction()
@@ -350,7 +352,12 @@ correspond to an `id` of an Action that is defined in the Manifest file, inside 
 `payload` field is the described in the corresponding Action inside the Manifest file. The returned Promise MUST
 resolve when the action is executed.
 
-<br>
+The returned Promise MUST resolve after the execution of the update.
+The point in time when the Promise is resolved SHOULD indicate that the graphic is ready to execute another action.
+Typically, it could be when a graphic has finished an animation of the action.
+
+---
+
 Additionally, every non-real-time Graphic MUST implement the following functions.
 
 #### goToTime()

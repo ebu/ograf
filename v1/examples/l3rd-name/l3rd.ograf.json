@@ -1,5 +1,5 @@
 {
-    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "$schema": "http://localhost:8080/v1/specification/json-schemas/graphics/schema.json",
     "name": "Lower 3rd - Name",
     "description": "Name lower third",
     "id": "l3rd-name",

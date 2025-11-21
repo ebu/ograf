@@ -1,11 +1,11 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "$id": "http://localhost:8080/v1/specification/json-schemas/graphics/schema.json",
     "type": "object",
     "properties": {
         "$schema": {
             "type": "string",
-            "const": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+            "const": "http://localhost:8080/v1/specification/json-schemas/graphics/schema.json",
             "description": "Reference to the JSON-schema for this manifest"
         },
         "id": {
@@ -57,7 +57,7 @@
             "type": "array",
             "description": "Custom Actions that can be invoked on the Graphic.",
             "items": {
-                "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/action.json"
+                "$ref": "http://localhost:8080/v1/specification/json-schemas/lib/action.json"
             }
         },
         "supportsRealTime": {
@@ -77,7 +77,7 @@
         "schema": {
             "description": "The schema is used by a Graphic to define the data parameters of the 'update' method.",
             "type": "object",
-            "$ref": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+            "$ref": "http://localhost:8080/v1/specification/json-schemas/gdd/object.json"
         },
         "renderRequirements": {
             "description": "A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.",
@@ -90,20 +90,20 @@
                         "type": "object",
                         "properties": {
                             "width": {
-                                "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/number.json"
+                                "$ref": "http://localhost:8080/v1/specification/json-schemas/lib/constraints/number.json"
                             },
                             "height": {
-                                "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/number.json"
+                                "$ref": "http://localhost:8080/v1/specification/json-schemas/lib/constraints/number.json"
                             }
                         }
                     },
                     "frameRate": {
                         "description": "If set, specifies requirements for frame rate of the Renderer. Example: 60 fps",
-                        "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/number.json"
+                        "$ref": "http://localhost:8080/v1/specification/json-schemas/lib/constraints/number.json"
                     },
                     "accessToPublicInternet": {
                         "description": "If set, specifies requirement on whether the renderer has access to the public internet or not.",
-                        "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/boolean.json"
+                        "$ref": "http://localhost:8080/v1/specification/json-schemas/lib/constraints/boolean.json"
                     }
 
                 },

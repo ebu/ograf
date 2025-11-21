@@ -1,5 +1,5 @@
 {
-    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "$schema": "http://localhost:8080/v1/specification/json-schemas/graphics/schema.json",
     "name": "Minimal Test Graphics",
     "description": "This Graphic shows an OGraf logo",
     "id": "minimal-logo",

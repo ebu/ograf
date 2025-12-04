@@ -20,10 +20,13 @@
   "scripts": {
     "build": "tsc --build",
     "watch": "tsc --watch",
-    "generate-types": "node scripts/generate-types.js"
+    "generate-types": "node scripts/generate-types.js",
+    "generate-server-types": "openapi-typescript ../specification/open-api/server-api.yaml -o ./src/generated/server-api.ts --additional-properties=true && node scripts/post-generate-server-types.js",
+    "build-all": "npm run generate-types && npm run generate-server-types && npm run build"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "json-schema-to-typescript": "^15.0.3"
+    "json-schema-to-typescript": "^15.0.4",
+    "openapi-typescript": "^7.8.0",
+    "typescript": "^5.6.3"
   }
 }

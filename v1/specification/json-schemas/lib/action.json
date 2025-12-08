@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ograf.ebu.io/v1/specification/json-schemas/lib/action.json",
+    "$id": "http://localhost:8080/v1/specification/json-schemas/lib/action.json",
     "type": "object",
     "properties": {
         "id": {
@@ -20,7 +20,7 @@
             "oneOf": [
                 {
                     "type": "object",
-                    "$ref": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+                    "$ref": "http://localhost:8080/v1/specification/json-schemas/gdd/object.json"
                 },
                 {
                     "type": "null"

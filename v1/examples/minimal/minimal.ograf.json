@@ -1,9 +1,21 @@
 {
-    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "$schema": "http://localhost:8080/v1/specification/json-schemas/graphics/schema.json",
     "name": "Minimal Test Graphic",
     "description": "This Graphic includes the bare minimum required to be a valid OGraf Graphic. It displays a 'Hello World!' message.",
     "id": "minimal-example",
     "main": "graphic.mjs",
     "supportsRealTime": true,
-    "supportsNonRealTime": false
+    "supportsNonRealTime": false,
+    "schema": {
+        "type":"object",
+
+        "properties": {
+            "message": {
+                "type": "string",
+                "default": "Hello World!",
+                "gddType": "color-rrggbb",
+                "pattern": "^#[0-9a-f]{6}$"
+            }
+        }
+    }
 }

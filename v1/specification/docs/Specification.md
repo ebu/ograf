@@ -333,6 +333,10 @@ The `updateAction()` function is called by the Renderer to update one or more fi
 Graphic. The `data` field contains a (potentially partial) update of the internal state of the Graphic and follows the
 model described in the Manifest using the `schema` field.
 
+The `skipAnimation` field indicates whether the Graphic should update with or without animation.
+When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when
+`skipAnimation` is set to `true`.
+
 The returned Promise MUST resolve after the execution of the update.
 The point in time when the Promise is resolved SHOULD indicate that the graphic is ready to execute another action.
 Typically, it could be when a graphic has finished an animation of the update.
@@ -344,6 +348,7 @@ customAction: (
   params: {
     id: string;
     payload: unknown;
+    skipAnimation?: boolean;
   } & VendorExtend
 ) => Promise<ReturnPayload | undefined>;
 ```
@@ -351,6 +356,10 @@ The `customAction()` function is called by the Renderer to invoke a custom actio
 correspond to an `id` of an Action that is defined in the Manifest file, inside the `actions` field. The schema for the
 `payload` field is the described in the corresponding Action inside the Manifest file. The returned Promise MUST
 resolve when the action is executed.
+
+The `skipAnimation` field indicates whether the Graphic should disappear with or without animation.
+When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when
+`skipAnimation` is set to `true`.
 
 The returned Promise MUST resolve after the execution of the update.
 The point in time when the Promise is resolved SHOULD indicate that the graphic is ready to execute another action.

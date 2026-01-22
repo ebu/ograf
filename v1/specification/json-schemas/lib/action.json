@@ -20,7 +20,7 @@
             "oneOf": [
                 {
                     "type": "object",
-                    "$ref": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/lib/object.json"
+                    "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/object.json"
                 },
                 {
                     "type": "null"

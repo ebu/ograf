@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/gdd-types.json",
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "gddType": { "const": "single-line" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "multi-line" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "file-path" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "file-path/image-path" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "select" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "enum": ["string", "number", "integer"]
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {},
+            "required": ["labels"]
+          }
+        },
+        "required": ["gddOptions", "enum"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "gddType": { "const": "select" },
+          "type": { "const": "string" }
+        },
+        "required": ["gddType", "type"]
+      },
+      "then": {
+        "properties": {
+          "enum": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "required": ["gddOptions", "enum"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "gddType": { "const": "select" },
+          "type": { "const": "integer" }
+        },
+        "required": ["gddType", "type"]
+      },
+      "then": {
+        "properties": {
+          "enum": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "labels": {
+                "type": "object",
+                "propertyNames": {
+                  "pattern": "^[0-9]+$"
+                },
+                "patternProperties": {
+                  ".": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "required": ["gddOptions", "enum"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "gddType": { "const": "select" },
+          "type": { "const": "number" }
+        },
+        "required": ["gddType", "type"]
+      },
+      "then": {
+        "properties": {
+          "enum": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "labels": {
+                "type": "object",
+                "propertyNames": {
+                  "pattern": "^[0-9,.]+$"
+                },
+                "patternProperties": {
+                  ".": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["gddOptions", "enum"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "color-rrggbb" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          },
+          "pattern": {
+            "type": "string",
+            "const": "^#[0-9a-f]{6}$"
+          }
+        },
+        "required": ["pattern"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "color-rrggbbaa" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          },
+          "pattern": {
+            "type": "string",
+            "const": "^#[0-9a-f]{8}$"
+          }
+        },
+        "required": ["pattern"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "percentage" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "number"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "duration-ms" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

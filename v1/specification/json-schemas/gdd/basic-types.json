@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/basic-types.json",
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "boolean" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "default": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "string" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "default": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "number" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "default": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "integer" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "default": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "array" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "items": {
+            "type": "object",
+            "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/object.json"
+          },
+          "default": {
+            "type": "array"
+          }
+        },
+        "required": ["items"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "object" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "properties": {
+            "type": "object",
+            "patternProperties": {
+              ".": {
+                "type": "object",
+                "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/object.json"
+              }
+            },
+            "additionalProperties": false
+
+          },
+          "default": {
+            "type": "object"
+          }
+        },
+        "required": ["properties"]
+      }
+    }
+  ]
+}

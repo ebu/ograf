@@ -507,10 +507,7 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
    */
   supportsNonRealTime: boolean;
   /**
-   * The number of steps a Graphic consists of.
-   * If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1
-   * (which is the default behavior if left undefined).
-   * A value of -1 indicates that a Graphic as a dynamic/unknown number of steps.
+   * The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic as a dynamic/unknown number of steps.
    */
   stepCount?: number;
   schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1;

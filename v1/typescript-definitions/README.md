@@ -66,7 +66,10 @@ The instructions below are for developers who want to work on the Typescript def
 ```bash
 
 npm install
-npm run generate-types # If any of the specification has changed
+npm run generate-types # Run this if the Graphics API has changed
+npm run generate-server-types # Run this if the server API has changed
+
+
 npm run build
 # or
 npm run watch

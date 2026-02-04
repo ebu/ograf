@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/playout-options.json",
+  "type": "object",
+  "properties": {
+    "client": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": ["integer", "null"],
+          "description": "The suggested duration of the template (in milliseconds). null means that it is manually taken out, undefined should be treated as null (this is ignored if steps=0). Defaults to null."
+        },
+        "steps": {
+          "type": "integer",
+          "description": "Number of steps in the template. 1 means that there are no steps (ie there's only \"the default step\"). 2 or more means that it can be \"stepped\" (ie 2 means it can be stepped once). -1 means \"infinite\" number of steps. 0 means that the template is \"volatile\" / \"fire and forget\" (template really has no duration, like a bumper). Defaults to 1"
+        },
+        "dataformat": {
+          "type": "string",
+          "enum": ["json", "casparcg-xml"],
+          "description": "How the data should be formatted. This is mostly used for the older CasparCG flash-based xml data format. Defaults to \"json\""
+        }
+      }
+    },
+    "render": {
+      "type": "object",
+      "properties": {
+        "resolutions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              "width|height|framerate": {
+                "type": ["number", "object"],
+                "allOf": [
+                  {
+                    "if": {
+                      "type": "object"
+                    },
+                    "then": {
+                      "properties": {
+                        "min": {
+                          "type": "number"
+                        },
+                        "max": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "playout": {
+      "type": "object"
+    }
+  }
+}

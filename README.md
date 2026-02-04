@@ -22,9 +22,9 @@ Graphics and Render system developers are encouraged to follow changes in the [C
 
 - **Done:**
   - Version 1 of **Graphics definition**
-- Autumn 2025:
+- Early 2026:
   - First draft of **Server API** to be presented.
-- Late 2025 / Q1 2026:
+- Mid 2026:
   - Version 1 to be extended with **Server API** definitions.
 
 ## Introduction

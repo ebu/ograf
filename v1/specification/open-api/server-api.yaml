@@ -1159,6 +1159,7 @@ components:
                 $ref: "#/components/schemas/ShallowGDDObjectSchema"
     RenderCharacteristics:
       type: object
+      description: "Renderer Characteristics. This corresponds to the 'renderRequirements' field in the Graphic manifest."
       properties:
         resolution:
           type: object
@@ -1176,6 +1177,10 @@ components:
           type: number
           description: "Which frameRate the renderer will be rendering in. Examples: 50, 60, 29.97"
           example: 50
+        accessToPublicInternet:
+          type: boolean
+          description: "Whether the renderer has access to the public internet or not"
+          example: true
     Author:
       type: object
       properties:

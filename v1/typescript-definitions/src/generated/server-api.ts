@@ -483,7 +483,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/clear": {
+    "/renderers/{rendererId}/target/graphicInstance/clear": {
         parameters: {
             query?: never;
             header?: never;
@@ -491,7 +491,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** Clear (remove) Graphic(s) from one (or more) RenderTargets */
+        /** Clear (remove) GraphicInstance(s) from one (or more) RenderTargets */
         put: {
             parameters: {
                 query?: never;
@@ -513,7 +513,7 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description Graphic successfully loaded */
+                /** @description GraphicInstance(s) successfully cleared */
                 200: {
                     headers: {
                         [name: string]: unknown;
@@ -549,7 +549,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/load": {
+    "/renderers/{rendererId}/target/graphicInstance/load": {
         parameters: {
             query?: never;
             header?: never;
@@ -557,8 +557,9 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** Load a Graphic onto a RenderTarget */
-        put: {
+        put?: never;
+        /** Load a Graphic onto a RenderTarget (ie create a GraphicInstance at a RenderTarget) */
+        post: {
             parameters: {
                 query?: never;
                 header?: never;
@@ -575,10 +576,10 @@ export interface paths {
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
                         /** @description The graphic to load */
                         graphicId: components["schemas"]["GraphicId"];
-                        /** @description Params to send to the load() method of the graphic */
+                        /** @description Params to send to the load() method of the GraphicInstance */
                         params: {
                             /**
-                             * @description Data to send to the load() method of the graphic
+                             * @description Data to send to the load() method of the GraphicInstance
                              * @example { "name": "John Doe" }
                              */
                             data: unknown;
@@ -591,14 +592,14 @@ export interface paths {
                 };
             };
             responses: {
-                /** @description Graphic successfully loaded, returns GraphicInstanceId of the loaded graphic */
+                /** @description Graphic successfully loaded, returns GraphicInstanceId of the new GraphicInstance */
                 200: {
                     headers: {
                         [name: string]: unknown;
                     };
                     content: {
                         "application/json": {
-                            /** @description Unique ID of the instance of the graphic that was just loaded. Use this id to target the graphic instance for further actions. */
+                            /** @description Unique ID of the newly created GraphicInstance. Use this id to target the GraphicInstance for further actions. */
                             graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                             /**
                              * @description Returned by the load() method
@@ -624,8 +625,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or load() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description load() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -635,14 +645,13 @@ export interface paths {
                 };
             };
         };
-        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/updateAction": {
+    "/renderers/{rendererId}/target/graphicInstance/updateAction": {
         parameters: {
             query?: never;
             header?: never;
@@ -651,7 +660,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** For Graphic(s) at a RenderTarget: Call the updateAction() method */
+        /** For GraphicInstance at a RenderTarget: Call the updateAction() method */
         post: {
             parameters: {
                 query?: never;
@@ -667,7 +676,7 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command. */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["UpdateActionParams"];
                     } & {
@@ -697,7 +706,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -706,8 +715,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or updateAction() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description updateAction() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -723,7 +741,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/playAction": {
+    "/renderers/{rendererId}/target/graphicInstance/playAction": {
         parameters: {
             query?: never;
             header?: never;
@@ -732,7 +750,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** For Graphic(s) at a RenderTarget: Call the playAction() method */
+        /** For GraphicInstance at a RenderTarget: Call the playAction() method */
         post: {
             parameters: {
                 query?: never;
@@ -748,7 +766,7 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command. */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["PlayActionParams"];
                     } & {
@@ -786,7 +804,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -795,8 +813,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or playAction() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description playAction() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -812,7 +839,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/stopAction": {
+    "/renderers/{rendererId}/target/graphicInstance/stopAction": {
         parameters: {
             query?: never;
             header?: never;
@@ -821,7 +848,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** For Graphic(s) at a RenderTarget: Call the stopAction() method */
+        /** For GraphicInstance at a RenderTarget: Call the stopAction() method */
         post: {
             parameters: {
                 query?: never;
@@ -837,7 +864,7 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["StopActionParams"];
                     } & {
@@ -870,7 +897,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -879,8 +906,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or stopAction() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description stopAction() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -896,7 +932,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/customAction": {
+    "/renderers/{rendererId}/target/graphicInstance/customActions/{customActionId}": {
         parameters: {
             query?: never;
             header?: never;
@@ -905,7 +941,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** For Graphic(s) at a RenderTarget: Call the customAction() method */
+        /** For GraphicInstance at a RenderTarget: Call the customAction() method */
         post: {
             parameters: {
                 query?: never;
@@ -913,6 +949,11 @@ export interface paths {
                 path: {
                     /** @description ID of the Renderer */
                     rendererId: components["schemas"]["RendererId"];
+                    /**
+                     * @description ID of the CustomAction to be invoked, as defined by the Graphic manifest
+                     * @example highlight
+                     */
+                    customActionId: string;
                 };
                 cookie?: never;
             };
@@ -921,7 +962,7 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
                         params: components["schemas"]["CustomActionParams"];
                     } & {
@@ -954,7 +995,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -963,8 +1004,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or customAction() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description customAction() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -980,7 +1030,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/goToTime": {
+    "/renderers/{rendererId}/target/graphicInstance/goToTime": {
         parameters: {
             query?: never;
             header?: never;
@@ -988,7 +1038,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** For Graphic(s) at a RenderTarget: Call the goToTime() method */
+        /** For GraphicInstance at a RenderTarget: Call the goToTime() method */
         put: {
             parameters: {
                 query?: never;
@@ -1004,9 +1054,9 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                        /** @description Params to send to the goToTime() method of the graphic */
+                        /** @description Params to send to the goToTime() method of the GraphicInstance */
                         params: {
                             /**
                              * @description The timestamp to go to (in milliseconds)
@@ -1046,7 +1096,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -1055,8 +1105,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or goToTime() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description gotoTime() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -1073,7 +1132,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphic/setActionsSchedule": {
+    "/renderers/{rendererId}/target/graphicInstance/setActionsSchedule": {
         parameters: {
             query?: never;
             header?: never;
@@ -1081,7 +1140,7 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method */
+        /** For GraphicInstance at a RenderTarget: Call the setActionsSchedule() method */
         put: {
             parameters: {
                 query?: never;
@@ -1097,9 +1156,9 @@ export interface paths {
                     "application/json": {
                         /** @description The RenderTarget to target with the command */
                         renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the Graphic instance to target with the command */
+                        /** @description Id of the GraphicInstance to target with the command */
                         graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                        /** @description Params to send to the setActionsSchedule() method of the graphic */
+                        /** @description Params to send to the setActionsSchedule() method of the GraphicInstance */
                         params: {
                             /**
                              * @description A list of the scheduled actions to call at certain points in time
@@ -1128,7 +1187,7 @@ export interface paths {
                                     [key: string]: unknown;
                                 }) | ({
                                     type: string;
-                                    params: components["schemas"]["CustomActionParams"];
+                                    params: components["schemas"]["CustomActionParamsWithId"];
                                 } & {
                                     [key: string]: unknown;
                                 });
@@ -1168,7 +1227,7 @@ export interface paths {
                         };
                     };
                 };
-                /** @description No Graphic or RenderTarget found */
+                /** @description No GraphicInstance or RenderTarget found */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -1177,8 +1236,17 @@ export interface paths {
                         "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
-                /** @description Internal Server Error or setActionsSchedule() threw an error */
+                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
                 500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description setActionsSchedule() threw an error (ie the error comes from within GraphicInstance) */
+                550: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -1223,7 +1291,7 @@ export interface components {
             detail?: string;
             /**
              * @description A URI reference that identifies the specific occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
-             * @example /renderers/renderer-0/target/graphic/
+             * @example /renderers/renderer-0/target/graphicInstance/
              */
             instance?: string;
         } & {
@@ -1232,9 +1300,9 @@ export interface components {
         ClearGraphicsResponse: {
             /** @description A list of the GraphicInstances that were cleared */
             graphicInstances: ({
-                /** @description ID of the RenderTarget that the graphic was cleared from */
+                /** @description ID of the RenderTarget that the graphicInstance was cleared from */
                 renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                /** @description Unique ID of the instance of the graphic that was just cleared */
+                /** @description Unique ID of the GraphicInstance that was just cleared */
                 graphicInstanceId: components["schemas"]["GraphicInstanceId"];
             } & {
                 [key: string]: unknown;
@@ -1369,7 +1437,7 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        ShallowGDDObjectSchema: components["schemas"]["object"] & ({
+        ShallowGDDObjectSchema: components["schemas"]["object-2"] & ({
             /** @enum {string} */
             type: "boolean" | "integer" | "number" | "string";
         } & {
@@ -1413,10 +1481,10 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description Params to send to the updateAction() method of the graphic */
+        /** @description Params to send to the updateAction() method of the GraphicInstance */
         UpdateActionParams: {
             /**
-             * @description Data to send to the updateAction() method of the graphic
+             * @description Data to send to the updateAction() method of the GraphicInstance
              * @example { "name": "John Doe" }
              */
             data: unknown;
@@ -1425,7 +1493,7 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description Params to send to the playAction() method of the graphic */
+        /** @description Params to send to the playAction() method of the GraphicInstance */
         PlayActionParams: {
             /** @description How far to advance. 1 = next step/segment. (defaults to 1) */
             delta?: number;
@@ -1436,15 +1504,29 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
-        /** @description Params to send to the stopAction() method of the graphic */
+        /** @description Params to send to the stopAction() method of the GraphicInstance */
         StopActionParams: {
             /** @description If true, skips animation (defaults to false) */
             skipAnimation?: boolean;
         } & {
             [key: string]: unknown;
         };
-        /** @description Params to send to the customAction() method of the graphic */
+        /** @description Params to send to the customAction() method of the GraphicInstance */
         CustomActionParams: {
+            /**
+             * @description Payload to send into the Custom Action
+             * @example {
+             *       "foo": "bar"
+             *     }
+             */
+            payload: unknown;
+            /** @description If true, skips animation (defaults to false) */
+            skipAnimation?: boolean;
+        } & {
+            [key: string]: unknown;
+        };
+        /** @description Params to send to the customAction() method of the GraphicInstance, including the action id */
+        CustomActionParamsWithId: {
             /**
              * @description Action id, as defined by the Graphic manifest
              * @example highlight
@@ -1728,6 +1810,16 @@ export interface components {
         } & {
             [key: string]: unknown;
         };
+        "gdd-types-2": unknown & unknown & unknown & unknown & unknown & unknown & unknown & unknown & unknown & unknown & unknown & unknown;
+        "basic-types-2": unknown & unknown & unknown & unknown & unknown & unknown;
+        "object-2": ({
+            /** @enum {string} */
+            type: "boolean" | "string" | "number" | "integer" | "array" | "object";
+            gddType?: string;
+            gddOptions?: Record<string, never>;
+        } & {
+            [key: string]: unknown;
+        }) & (components["schemas"]["schema"] & components["schemas"]["gdd-types-2"] & components["schemas"]["basic-types-2"]);
     };
     responses: never;
     parameters: never;

@@ -303,9 +303,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 # ------------------ Graphic handling -----------------------------------------------------------------------
-  /renderers/{rendererId}/target/graphic/clear:
+  /renderers/{rendererId}/target/graphicInstance/clear:
     put:
-      summary: Clear (remove) Graphic(s) from one (or more) RenderTargets
+      summary: Clear (remove) GraphicInstance(s) from one (or more) RenderTargets
       parameters:
         - in: path
           name: rendererId
@@ -329,7 +329,7 @@ paths:
                 - filters
       responses:
         200:
-          description: Graphic successfully loaded
+          description: GraphicInstance(s) successfully cleared
           content:
             application/json:
               schema:
@@ -346,9 +346,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/load:
-    put:
-      summary: Load a Graphic onto a RenderTarget
+  /renderers/{rendererId}/target/graphicInstance/load:
+    post:
+      summary: Load a Graphic onto a RenderTarget (ie create a GraphicInstance at a RenderTarget)
       parameters:
         - in: path
           name: rendererId
@@ -370,11 +370,11 @@ paths:
                   description: "The graphic to load"
                   $ref: "#/components/schemas/GraphicId"
                 params:
-                  description: "Params to send to the load() method of the graphic"
+                  description: "Params to send to the load() method of the GraphicInstance"
                   type: object
                   properties:
                     data:
-                      description: "Data to send to the load() method of the graphic"
+                      description: "Data to send to the load() method of the GraphicInstance"
                       example: "{ \"name\": \"John Doe\" }"
                   required:
                     - data
@@ -384,14 +384,14 @@ paths:
                 - params
       responses:
         200:
-          description: Graphic successfully loaded, returns GraphicInstanceId of the loaded graphic
+          description: Graphic successfully loaded, returns GraphicInstanceId of the new GraphicInstance
           content:
             application/json:
               schema:
                 type: object
                 properties:
                   graphicInstanceId:
-                    description: "Unique ID of the instance of the graphic that was just loaded. Use this id to target the graphic instance for further actions."
+                    description: "Unique ID of the newly created GraphicInstance. Use this id to target the GraphicInstance for further actions."
                     $ref: "#/components/schemas/GraphicInstanceId"
                   statusCode:
                     description: "Returned by the load() method"
@@ -411,14 +411,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or load() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/updateAction:
+        550:
+          description: load() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/updateAction:
     post:
-      summary: "For Graphic(s) at a RenderTarget: Call the updateAction() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the updateAction() method"
       parameters:
         - in: path
           name: rendererId
@@ -437,7 +443,7 @@ paths:
                   description: "The RenderTarget to target with the command."
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/UpdateActionParams"
@@ -467,20 +473,26 @@ paths:
                   - graphicInstanceId
                   - statusCode
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or updateAction() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/playAction:
+        550:
+          description: updateAction() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/playAction:
     post:
-      summary: "For Graphic(s) at a RenderTarget: Call the playAction() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the playAction() method"
       parameters:
         - in: path
           name: rendererId
@@ -499,7 +511,7 @@ paths:
                   description: "The RenderTarget to target with the command."
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/PlayActionParams"
@@ -536,20 +548,26 @@ paths:
                   - statusCode
                   - currentStep
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or playAction() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/stopAction:
+        550:
+          description: playAction() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/stopAction:
     post:
-      summary: "For Graphic(s) at a RenderTarget: Call the stopAction() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the stopAction() method"
       parameters:
         - in: path
           name: rendererId
@@ -568,7 +586,7 @@ paths:
                   description: "The RenderTarget to target with the command"
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/StopActionParams"
@@ -599,20 +617,26 @@ paths:
                   - graphicInstanceId
                   - statusCode
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or stopAction() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/customAction:
+        550:
+          description: stopAction() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/customActions/{customActionId}:
     post:
-      summary: "For Graphic(s) at a RenderTarget: Call the customAction() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the customAction() method"
       parameters:
         - in: path
           name: rendererId
@@ -620,6 +644,13 @@ paths:
           schema:
             $ref: "#/components/schemas/RendererId"
           required: true
+        - in: path
+          name: customActionId
+          schema:
+            type: string
+          required: true
+          description: ID of the CustomAction to be invoked, as defined by the Graphic manifest
+          example: "highlight"
       requestBody:
         required: true
         content:
@@ -631,7 +662,7 @@ paths:
                   description: "The RenderTarget to target with the command"
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
                   $ref: "#/components/schemas/CustomActionParams"
@@ -662,20 +693,26 @@ paths:
                   - graphicInstanceId
                   - statusCode
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or customAction() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/goToTime:
+        550:
+          description: customAction() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/goToTime:
     put:
-      summary: "For Graphic(s) at a RenderTarget: Call the goToTime() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the goToTime() method"
       parameters:
         - in: path
           name: rendererId
@@ -694,10 +731,10 @@ paths:
                   description: "The RenderTarget to target with the command"
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
-                  description: "Params to send to the goToTime() method of the graphic"
+                  description: "Params to send to the goToTime() method of the GraphicInstance"
                   type: object
                   properties:
                     timestamp:
@@ -733,20 +770,26 @@ paths:
                   - graphicInstanceId
                   - statusCode
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or goToTime() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  /renderers/{rendererId}/target/graphic/setActionsSchedule:
+        550:
+          description: gotoTime() threw an error (ie the error comes from within GraphicInstance)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /renderers/{rendererId}/target/graphicInstance/setActionsSchedule:
     put:
-      summary: "For Graphic(s) at a RenderTarget: Call the setActionsSchedule() method"
+      summary: "For GraphicInstance at a RenderTarget: Call the setActionsSchedule() method"
       parameters:
         - in: path
           name: rendererId
@@ -765,10 +808,10 @@ paths:
                   description: "The RenderTarget to target with the command"
                   $ref: "#/components/schemas/RenderTargetIdentifier"
                 graphicInstanceId:
-                  description: "Id of the Graphic instance to target with the command"
+                  description: "Id of the GraphicInstance to target with the command"
                   $ref: "#/components/schemas/GraphicInstanceId"
                 params:
-                  description: "Params to send to the setActionsSchedule() method of the graphic"
+                  description: "Params to send to the setActionsSchedule() method of the GraphicInstance"
                   type: object
                   properties:
                     schedule:
@@ -820,7 +863,7 @@ paths:
                                     type: string
                                     pattern: "customAction"
                                   params:
-                                    $ref: "#/components/schemas/CustomActionParams"
+                                    $ref: "#/components/schemas/CustomActionParamsWithId"
                                 required:
                                   - type
                                   - params
@@ -856,13 +899,19 @@ paths:
                   - graphicInstanceId
                   - statusCode
         404:
-          description: No Graphic or RenderTarget found
+          description: No GraphicInstance or RenderTarget found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         500:
-          description: Internal Server Error or setActionsSchedule() threw an error
+          description: Internal Server Error (ie the error comes from the Server or Renderer)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        550:
+          description: setActionsSchedule() threw an error (ie the error comes from within GraphicInstance)
           content:
             application/json:
               schema:
@@ -893,7 +942,7 @@ components:
           description: A human-readable explanation specific to this occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
         instance:
           type: string
-          example: '/renderers/renderer-0/target/graphic/'
+          example: '/renderers/renderer-0/target/graphicInstance/'
           description: A URI reference that identifies the specific occurrence of the problem. See https://www.rfc-editor.org/rfc/rfc7807.html#section-3.1 for details.
     ClearGraphicsResponse:
       type: object
@@ -905,10 +954,10 @@ components:
             type: object
             properties:
               renderTarget:
-                description: "ID of the RenderTarget that the graphic was cleared from"
+                description: "ID of the RenderTarget that the graphicInstance was cleared from"
                 $ref: "#/components/schemas/RenderTargetIdentifier"
               graphicInstanceId:
-                description: "Unique ID of the instance of the graphic that was just cleared"
+                description: "Unique ID of the GraphicInstance that was just cleared"
                 $ref: "#/components/schemas/GraphicInstanceId"
             required:
               - renderTarget
@@ -1143,11 +1192,11 @@ components:
         - name
     # Action Parameters
     UpdateActionParams:
-      description: "Params to send to the updateAction() method of the graphic"
+      description: "Params to send to the updateAction() method of the GraphicInstance"
       type: object
       properties:
         data:
-          description: "Data to send to the updateAction() method of the graphic"
+          description: "Data to send to the updateAction() method of the GraphicInstance"
           example: "{ \"name\": \"John Doe\" }"
         skipAnimation:
           description: If true, skips animation (defaults to false)
@@ -1155,7 +1204,7 @@ components:
       required:
         - data
     PlayActionParams:
-      description: "Params to send to the playAction() method of the graphic"
+      description: "Params to send to the playAction() method of the GraphicInstance"
       type: object
       properties:
         delta:
@@ -1168,14 +1217,27 @@ components:
           description: If true, skips animation (defaults to false)
           type: boolean
     StopActionParams:
-      description: "Params to send to the stopAction() method of the graphic"
+      description: "Params to send to the stopAction() method of the GraphicInstance"
       type: object
       properties:
         skipAnimation:
           description: If true, skips animation (defaults to false)
           type: boolean
     CustomActionParams:
-      description: "Params to send to the customAction() method of the graphic"
+      description: "Params to send to the customAction() method of the GraphicInstance"
+      type: object
+      properties:
+        payload:
+          description: "Payload to send into the Custom Action"
+          example: { "foo": "bar" }
+        skipAnimation:
+          description: If true, skips animation (defaults to false)
+          type: boolean
+      required:
+        - id
+        - payload
+    CustomActionParamsWithId:
+      description: "Params to send to the customAction() method of the GraphicInstance, including the action id"
       type: object
       properties:
         id:

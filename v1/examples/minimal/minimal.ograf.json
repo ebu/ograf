@@ -5,5 +5,17 @@
     "id": "minimal-example",
     "main": "graphic.mjs",
     "supportsRealTime": true,
-    "supportsNonRealTime": false
+    "supportsNonRealTime": false,
+    "schema": {
+        "type":"object",
+
+        "properties": {
+            "message": {
+                "type": "string",
+                "default": "Hello World!",
+                "gddType": "color-rrggbb",
+                "pattern": "^#[0-9a-f]{6}$"
+            }
+        }
+    }
 }

@@ -1234,7 +1234,6 @@ components:
           description: If true, skips animation (defaults to false)
           type: boolean
       required:
-        - id
         - payload
     CustomActionParamsWithId:
       description: "Params to send to the customAction() method of the GraphicInstance, including the action id"

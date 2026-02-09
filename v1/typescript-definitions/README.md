@@ -1,13 +1,13 @@
-# OGraf Typescript Definitions
+# EBU OGraf Typescript Definitions
 
-These are Typescript definitions for the OGraf API.
+[![NPM Version](https://img.shields.io/npm/v/ograf)](https://www.npmjs.com/package/ograf)
 
-https://github.com/ebu/ograf
+Typescript definitions for _OGraf Graphics_ and _OGraf Server API_, see the [OGraf website](https://ograf.ebu.io).
 
 ## Getting Started
 
+### OGraf Graphics
 ```typescript
-
 import { GraphicsAPI } from 'ograf';
 
 
@@ -56,10 +56,25 @@ class MyOGrafGraphic extends HTMLElement implements GraphicsAPI.Graphic {
 
 ```
 
+### OGraf Server API
+
+```typescript
+import { ServerApi } from 'ograf'
+
+// The ServerAPI is auto-generated from the OGraf Server API OpenAPI definition.
+// The types can be useful when you implement your OGraf Server:
+type Method = ServerApi.paths['/renderers/{rendererId}/target/graphicInstance/playAction']['post']
+const requestBody: Method['requestBody']
+const requestParameters: Method['parameters']
+const successResponse: Method['responses']['200']['content']['application/json']
+const error500Response: Method['responses']['500']['content']['application/json']
+```
 
 ## For Developers
 
 The instructions below are for developers who want to work on the Typescript definitions.
+
+Note: All types in this package are based on the [OGraf Specification](https://ograf.ebu.io). In case of any discrepancy between the two, this package is to be updated to match the OGraf Specification.
 
 ### Install & build
 

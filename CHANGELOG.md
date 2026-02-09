@@ -9,7 +9,8 @@ This log lists changes between versions.
 
 ### Non-breaking changes in version 1:
 
-
+* 2026-02-09: [PR 12](https://github.com/ebu/ograf/pull/12): Publish first draft of the **OGraf Server API**. Note: Breaking changes might be introduced to the Server API while it is a draft.
+* 2026-02-04: [PR 40](https://github.com/ebu/ograf/pull/40): Move over GDD Definitions to OGraf repo.
 * 2026-01-21: [PR 39](https://github.com/ebu/ograf/pull/39): Add optional `skipAnimation` property to `updateAction()` & `customAction()` in specification.md, to align with the other actions / typescript types.
 * 2026-01-21: [PR 38](https://github.com/ebu/ograf/pull/38): Add definitions of the returned Promise for `updateAction()` and `customAction()`, to align with the preexisting actions.
 * 2025-11-07: [PR 17](https://github.com/ebu/ograf/pull/17): Modify the `stepCount` property, to include the value -1 to signify that a Graphic does have steps, but the number of steps is not known on beforehand.

@@ -9,8 +9,12 @@
 
 ## Project status
 
-* **The OGraf Graphics specification** (version 1) is production ready and considered stable. Additional features and non-breaking changes will be added continously.
-* **The OGraf Control API specification** is under development.
+* **The OGraf Graphics specification** (version 1) is production ready and considered stable.
+
+  Additional features and non-breaking changes will be added continously.
+* **The OGraf Control API specification** is published as a draft, expected to be finalized Mid 2026.
+
+  Breaking changes may be introduced to the Server API during the draft period.
 
 EBU members as well as the general industry is invited to join the [HTML Graphics Working Group](https://tech.ebu.ch/groups/html_graphics) to participate in discussions and development of the OGraf specification.
 
@@ -21,11 +25,13 @@ Graphics and Render system developers are encouraged to follow changes in the [C
 ### Time plan
 
 - **Done:**
-  - Version 1 of **Graphics definition**
-- Early 2026:
-  - First draft of **Server API** to be presented.
+  - Version 1 of **Graphics definition** (2025-09-17).
+  - First draft of **Server API** published (2026-02-09).
+- Q1+Q2 2026:
+  - Feedback from the industry on the **Server API**
 - Mid 2026:
-  - Version 1 to be extended with **Server API** definitions.
+  - **Server API** definitions to be added to Version 1.
+  - Continued work on improving the **OGraf Graphics specification**
 
 ## Introduction
 
@@ -36,10 +42,10 @@ It allows for vendor interoperability between Graphics, Rendering systems and Co
 
 Useful resources:
 * [Examples of OGraf Graphics](https://github.com/ebu/ograf/tree/main/v1/examples).
-* [OGraf Specification](./v1/specification/docs/Specification.md).
+* [OGraf Specification](./v1/specification/docs/README.md).
 
 
 ### Tools
 
 * The **[OGraf Devtool](https://github.com/SuperFlyTV/ograf-devtool)** is a tool for developing OGraf graphics.
-* The **[Simple Rendering system](https://github.com/SuperFlyTV/ograf-server)** can be used to play OGraf Graphics in a browser (for use in any existing system capable of rendering HTML graphics).
+* The **[OGraf Simple Rendering System](https://github.com/SuperFlyTV/ograf-server)** can be used to play OGraf Graphics in a browser (for use in any existing system capable of rendering HTML graphics).

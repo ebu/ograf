@@ -1,9 +1,11 @@
-# EBU OGraf
+# EBU OGraf Graphics specification
 
 ## About
 
 EBU OGraf is a specification for Web-based Broadcast Graphics.
 It allows users to create a Graphic once and use it in multiple compatible Graphic renderers.
+
+_(For the OGraf Server API, see [Server API](Specification_Server_API.md).)_
 
 ## Introduction
 
@@ -446,7 +448,7 @@ The normative JSON Schema for the Manifest file can be found [here](../json-sche
 
 ## Typescript interface for Graphic
 
-The informative Typescript interface for the Graphic Web Component can be found [here](../../typescript-definitions/src/apis/graphicsAPI.ts).
+The informative Typescript interface for the Graphic Web Component can be found [here](https://github.com/ebu/ograf/blob/main/v1/typescript-definitions/src/apis/graphicsAPI.ts).
 
 ## Examples
 

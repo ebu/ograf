@@ -12,6 +12,7 @@ class MyGraphic extends HTMLElement {
     super();
     this.nonRealTimeState = {};
     this.displayState = {}
+    this.loadParams = {}
   }
   connectedCallback() {
     // Called when the element is added to the DOM
@@ -23,6 +24,7 @@ class MyGraphic extends HTMLElement {
     // 2. Setup the DOM
     // 3. Initialize the GSAP timeline
 
+    this.loadParams = loadParams
 
     // Load the GSAP scripts ---------------------------------------------------
     const importsPromises = {
@@ -104,12 +106,6 @@ class MyGraphic extends HTMLElement {
     this.timeline = this.g.gsap.timeline();
     this._resetTimeline();
 
-    if (loadParams.renderType === "realtime") {
-      this.timeline.play(); // not really needed, it's playing by default
-    } else if (loadParams.renderType === "non-realtime") {
-      this.timeline.pause();
-    } else throw new Error("Unsupported renderType: " + loadParams.renderType);
-
     // Load initial data:
     this.initialData = loadParams.data
     await this._doAction("updateAction", {
@@ -126,7 +122,6 @@ class MyGraphic extends HTMLElement {
   }
   async updateAction(params) {
     // params.data
-    // console.log("params", params);
 
     await this._doAction("updateAction", params);
   }
@@ -220,6 +215,7 @@ class MyGraphic extends HTMLElement {
     if (params.skipAnimation) {
       actionTimeline.timeScale(999999)
     }
+    return actionTimeline
   }
   _resetTimeline() {
     const gsap = this.g.gsap;
@@ -257,6 +253,12 @@ class MyGraphic extends HTMLElement {
     for (const tween of tweens) {
       this.timeline.add(tween, 0);
     }
+
+    if (this.loadParams.renderType === "realtime") {
+      this.timeline.play(); // not really needed, it's playing by default
+    } else if (this.loadParams.renderType === "non-realtime") {
+      this.timeline.pause();
+    } else throw new Error("Unsupported renderType: " + loadParams.renderType);
   }
 
   // -------------------- Actions --------------------

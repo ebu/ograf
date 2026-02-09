@@ -18,3 +18,10 @@ The OGraf Server API is defined as an [OpenAPI](https://www.openapis.org/) defin
 * [Human-readable docs can be found here](https://html-preview.github.io/?url=https://github.com/ebu/ograf/blob/main/v1/specification/open-api/docs/index.html)
 
 
+## Additional notes
+
+### Security (optional)
+
+* The current version of the Server API doesn't specify any security measures.
+* It is up to the vendor to ensure security/authentication.
+* Future versions of the Server API may include optional/recommended security/authentication methods.

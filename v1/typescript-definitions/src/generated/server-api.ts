@@ -1030,239 +1030,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/renderers/{rendererId}/target/graphicInstance/goToTime": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** For GraphicInstance at a RenderTarget: Call the goToTime() method */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description ID of the Renderer */
-                    rendererId: components["schemas"]["RendererId"];
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the GraphicInstance to target with the command */
-                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                        /** @description Params to send to the goToTime() method of the GraphicInstance */
-                        params: {
-                            /**
-                             * @description The timestamp to go to (in milliseconds)
-                             * @example 1234
-                             */
-                            timestamp: number;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    } & {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-            responses: {
-                /** @description goToTime() successfully executed */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @description Unique ID of the affected GraphicInstance */
-                            graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                            /**
-                             * @description Returned by the goToTime() method
-                             * @example 200
-                             */
-                            statusCode: number;
-                            /**
-                             * @description Returned by the goToTime() method
-                             * @example Jumped to 1234
-                             */
-                            statusMessage?: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-                /** @description No GraphicInstance or RenderTarget found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-                /** @description gotoTime() threw an error (ie the error comes from within GraphicInstance) */
-                550: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/renderers/{rendererId}/target/graphicInstance/setActionsSchedule": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** For GraphicInstance at a RenderTarget: Call the setActionsSchedule() method */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    /** @description ID of the Renderer */
-                    rendererId: components["schemas"]["RendererId"];
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description The RenderTarget to target with the command */
-                        renderTarget: components["schemas"]["RenderTargetIdentifier"];
-                        /** @description Id of the GraphicInstance to target with the command */
-                        graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                        /** @description Params to send to the setActionsSchedule() method of the GraphicInstance */
-                        params: {
-                            /**
-                             * @description A list of the scheduled actions to call at certain points in time
-                             * @example [ { "timestamp": 1234, "action": { "type": "updateAction", "params": { "foo": "bar" } } } ]
-                             */
-                            schedule: ({
-                                /**
-                                 * @description The timestamp to apply action (in milliseconds)
-                                 * @example 1234
-                                 */
-                                timestamp: number;
-                                action: ({
-                                    type: string;
-                                    params: components["schemas"]["UpdateActionParams"];
-                                } & {
-                                    [key: string]: unknown;
-                                }) | ({
-                                    type: string;
-                                    params: components["schemas"]["PlayActionParams"];
-                                } & {
-                                    [key: string]: unknown;
-                                }) | ({
-                                    type: string;
-                                    params: components["schemas"]["StopActionParams"];
-                                } & {
-                                    [key: string]: unknown;
-                                }) | ({
-                                    type: string;
-                                    params: components["schemas"]["CustomActionParamsWithId"];
-                                } & {
-                                    [key: string]: unknown;
-                                });
-                            } & {
-                                [key: string]: unknown;
-                            })[];
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    } & {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-            responses: {
-                /** @description setActionsSchedule() successfully executed */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @description Unique ID of the affected GraphicInstance */
-                            graphicInstanceId: components["schemas"]["GraphicInstanceId"];
-                            /**
-                             * @description Returned by the setActionsSchedule() method
-                             * @example 200
-                             */
-                            statusCode: number;
-                            /**
-                             * @description Returned by the setActionsSchedule() method
-                             * @example Schedule set
-                             */
-                            statusMessage?: string;
-                        } & {
-                            [key: string]: unknown;
-                        };
-                    };
-                };
-                /** @description No GraphicInstance or RenderTarget found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-                /** @description Internal Server Error (ie the error comes from the Server or Renderer) */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-                /** @description setActionsSchedule() threw an error (ie the error comes from within GraphicInstance) */
-                550: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorResponse"];
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1454,6 +1221,7 @@ export interface components {
         } & {
             [key: string]: unknown;
         });
+        /** @description Renderer Characteristics. This corresponds to the 'renderRequirements' field in the Graphic manifest. */
         RenderCharacteristics: {
             resolution?: {
                 /** @example 1920 */
@@ -1468,6 +1236,11 @@ export interface components {
              * @example 50
              */
             frameRate?: number;
+            /**
+             * @description Whether the renderer has access to the public internet or not
+             * @example true
+             */
+            accessToPublicInternet?: boolean;
         } & {
             [key: string]: unknown;
         };

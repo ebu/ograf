@@ -58,6 +58,11 @@ jobs:
         env:
           CI: true
 
+      - name: Generate server types
+        run: npm run generate-server-types
+        env:
+          CI: true
+
       - name: Build
         run: npm run build
         env:

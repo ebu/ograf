@@ -5,17 +5,16 @@
  * and run 'npm run generate-types' to regenerate this file.
  */
 
-export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson =
-  CoreAndValidationSpecificationsMetaSchema &
-    HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibGddTypesJson &
-    HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibBasicTypesJson & {
-      type: "boolean" | "string" | "number" | "integer" | "array" | "object";
-      gddType?: string;
-      gddOptions?: {
-        [k: string]: unknown;
-      };
+export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson = CoreAndValidationSpecificationsMetaSchema &
+  HttpsOgrafEbuIoV1SpecificationJsonSchemasGddGddTypesJson &
+  HttpsOgrafEbuIoV1SpecificationJsonSchemasGddBasicTypesJson & {
+    type: "boolean" | "string" | "number" | "integer" | "array" | "object";
+    gddType?: string;
+    gddOptions?: {
       [k: string]: unknown;
     };
+    [k: string]: unknown;
+  };
 export type CoreAndValidationSpecificationsMetaSchema = CoreVocabularyMetaSchema &
   ApplicatorVocabularyMetaSchema &
   UnevaluatedApplicatorVocabularyMetaSchema &
@@ -426,26 +425,25 @@ export type ContentVocabularyMetaSchema = {
     }
   | boolean
 );
-export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibGddTypesJson = {
+export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddGddTypesJson = {
   [k: string]: unknown;
 };
-export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibBasicTypesJson = {
+export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddBasicTypesJson = {
   [k: string]: unknown;
 };
 /**
  * The schema is used by a Graphic to define the data parameters of the 'update' method.
  */
-export type HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1 =
-  CoreAndValidationSpecificationsMetaSchema &
-    HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibGddTypesJson &
-    HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibBasicTypesJson & {
-      type: "boolean" | "string" | "number" | "integer" | "array" | "object";
-      gddType?: string;
-      gddOptions?: {
-        [k: string]: unknown;
-      };
+export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson1 = CoreAndValidationSpecificationsMetaSchema &
+  HttpsOgrafEbuIoV1SpecificationJsonSchemasGddGddTypesJson &
+  HttpsOgrafEbuIoV1SpecificationJsonSchemasGddBasicTypesJson & {
+    type: "boolean" | "string" | "number" | "integer" | "array" | "object";
+    gddType?: string;
+    gddOptions?: {
       [k: string]: unknown;
     };
+    [k: string]: unknown;
+  };
 
 export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
   /**
@@ -507,13 +505,10 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
    */
   supportsNonRealTime: boolean;
   /**
-   * The number of steps a Graphic consists of.
-   * If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1
-   * (which is the default behavior if left undefined).
-   * A value of -1 indicates that a Graphic as a dynamic/unknown number of steps.
+   * The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic as a dynamic/unknown number of steps.
    */
   stepCount?: number;
-  schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson1;
+  schema?: HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson1;
   /**
    * A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.
    */
@@ -556,7 +551,7 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson {
   /**
    * The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action. If the action does not require any parameters, set this to null.
    */
-  schema?: HttpsSuperflytvGithubIoGraphicsDataDefinitionGddMetaSchemaV1LibObjectJson | null;
+  schema?: HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson | null;
   /**
    * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasLibActionJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".

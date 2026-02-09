@@ -1,9 +1,11 @@
-# EBU OGraf
+# EBU OGraf Graphics specification
 
 ## About
 
 EBU OGraf is a specification for Web-based Broadcast Graphics.
 It allows users to create a Graphic once and use it in multiple compatible Graphic renderers.
+
+_(For the OGraf Server API, see [Server API](Specification_Server_API.md).)_
 
 ## Introduction
 
@@ -59,7 +61,7 @@ It consists of the following fields:
 | Field               | Type               | Required | Default | Description                                                                                                                                                        |
 |---------------------|--------------------|:--------:|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | $schema             | string             |    X     |         | MUST be the string "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json". <br /> This doubles as a reference to the JSON Schema of the manifest file as well as a OGraf version. |
-| id                  | string             |    X     |         | A unique identifier for the Graphic.                                                                                                                               |
+| id                  | string             |    X     |         | A unique identifier for the Graphic. Can consist of any unicode character, except "/" (forward slash). |
 | version             | string             |          |         | A version descriptor of the Graphic. The versioning scheme is beyond the scope of this specification.                                                              |
 | name                | string             |    X     |         | The name of the Graphic.                                                                                                                                           |
 | description         | string             |          |         | A longer description of the Graphic.                                                                                                                               |
@@ -446,7 +448,7 @@ The normative JSON Schema for the Manifest file can be found [here](../json-sche
 
 ## Typescript interface for Graphic
 
-The informative Typescript interface for the Graphic Web Component can be found [here](../../typescript-definitions/src/apis/graphicsAPI.ts).
+The informative Typescript interface for the Graphic Web Component can be found [here](https://github.com/ebu/ograf/blob/main/v1/typescript-definitions/src/apis/graphicsAPI.ts).
 
 ## Examples
 

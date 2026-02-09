@@ -29,7 +29,7 @@ export interface Graphic {
   load: (
     params: {
       /** The data send here is defined in the manifest "schema". Note: This data MUST HAVE the same type as the `data` argument in updateAction method. */
-      data: unknown;
+      data?: unknown;
 
       /** Whether the rendering is done in realtime or non-realtime */
       renderType: "realtime" | "non-realtime";
@@ -59,9 +59,9 @@ export interface Graphic {
   playAction: (
     params: {
       /** How far to advance. 1 = next step/segment. (defaults to 1) */
-      delta: number;
+      delta?: number;
       /** Jump to a specific step/segment (defaults to undefined) */
-      goto: number;
+      goto?: number;
       /** If true, skips animation (defaults to false) */
       skipAnimation?: boolean;
     } & VendorExtend
@@ -88,7 +88,10 @@ export interface Graphic {
    * @returns A Promise that resolves when the Graphic has finished rendering the requested frame.
    */
   goToTime: (
-    params: { timestamp: number } & VendorExtend
+    params: {
+      /** The timestamp to go to (in milliseconds) */
+      timestamp: number
+    } & VendorExtend
   ) => Promise<ReturnPayload | undefined>;
 
   /**

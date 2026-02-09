@@ -13,4 +13,8 @@ _(Looking for the OGraf Graphics specification instead? See [OGraf Graphics spec
 ## Definition
 
 The OGraf Server API is defined as an [OpenAPI](https://www.openapis.org/) definition.
-[The definition can be found here](https://github.com/ebu/ograf/blob/main/v1/specification/open-api/server-api.yaml).
+
+* [The .yaml definition can be found here](https://github.com/ebu/ograf/blob/main/v1/specification/open-api/server-api.yaml).
+* [Human-readable docs can be found here](https://html-preview.github.io/?url=https://github.com/ebu/ograf/blob/main/v1/specification/open-api/docs/index.html)
+
+

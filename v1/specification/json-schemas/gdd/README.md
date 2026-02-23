@@ -4,6 +4,8 @@ _Note: This was previously a [standalone repository](https://github.com/SuperFly
 
 ## What is GDD?
 
+GDD ist the way an ograf template defines the schema of the variable fields, that the template expect a GUI to present to the user. And is part of the bigger ograf manifest specification.
+
 GDD is a subset of the [JSON-schema definition](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-a-vocabulary-for-structural) (with a few exceptions, see further below).
 
 It supports all the basic JSON types (such as `strings` and `numbers`) but also extends them with **GDD Types**,
@@ -12,7 +14,6 @@ which can be used by _Graphics client GUIs_ to auto-generate input forms for the
 All **GDD Types** are designed to gracefully degrade in case the GUI can't handle that particular type.
 One example is the `["string", "RRGGBB"]` type which (when supported) can provide a color-picker in the GUI,
 but if not supported will gracefully degrade to a simple text input.
-
 
 
 **Table of contents**
@@ -25,100 +26,12 @@ but if not supported will gracefully degrade to a simple text input.
 
 ## Getting started
 
-* [Examples of GDD-templates](https://github.com/SuperFlyTV/GraphicsDataDefinition/tree/master/examples)
+* [Examples of JSON manifest containing GDD schemas ](https://github.com/ebu/ograf/tree/main/v1/examples)
 
 * [Live demo of a Reference GUI](https://superflytv.github.io/GraphicsDataDefinition/lib/reference-gui/dist/)
 
 * [CHANGELOG](/CHANGELOG.md)
 
-The GDD Schema can either be defined in a separate JSON-file, or inline in the HTML-template-file:
-
-**HTML Graphics file, "example.html":**
-
-The `<script name="graphics-data-definition">` tag refers to a JSON-file that contains the GDD Schema definitions.
-The `src=""` is a relative path to the Schema json file.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script
-      name="graphics-data-definition"
-      type="application/json+gdd"
-      src="example.json"
-    ></script>
-  </head>
-  <body>
-    *** HTML content ***
-  </body>
-</html>
-```
-
-**JSON file, "example.json"**
-
-```json
-{
-  "$schema": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/schema.json",
-  "title": "One-Line GFX Template",
-  "type": "object",
-  "properties": {
-    "text0": {
-      "description": "Text content",
-      "type": "string",
-      "maxLength": 50,
-      "gddType": "single-line",
-      "gddOptions": {}
-    }
-  }
-}
-```
-
-**HTML Graphics file, "example-inline.html":**
-
-The `<script name="graphics-data-definition">` tag can also contain the GDD Schema definitions inline:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script name="graphics-data-definition" type="application/json+gdd">
-      {
-        "$schema": "https://superflytv.github.io/GraphicsDataDefinition/gdd-meta-schema/v1/schema.json",
-        "title": "One-Line GFX Template",
-        "type": "object",
-        "properties": {
-          "text0": {
-            "description": "Text content",
-            "type": "string",
-            "maxLength": 50,
-            "gddType": "single-line",
-            "gddOptions": {
-
-            }
-          }
-        }
-      }
-    </script>
-    <script type="text/javascript">
-      // This is optional, but often helpful.
-      // Expose the gddSchema globally:
-      window.gddSchema = JSON.parse(
-        document.querySelector('head > script[name="graphics-data-definition"]')
-          .innerHTML
-      );
-    </script>
-  </head>
-  <body>
-    *** HTML content ***
-  </body>
-</html>
-```
-
-**Example data**
-
-```json
-{ "text0": "Hello world!" }
-```
 
 ## General Definition
 

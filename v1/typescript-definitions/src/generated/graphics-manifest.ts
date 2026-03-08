@@ -524,6 +524,26 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
     frameRate?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsNumberJson1;
     accessToPublicInternet?: HttpsOgrafEbuIoV1SpecificationJsonSchemasLibConstraintsBooleanJson;
     /**
+     * Minimum required version(s) of the rendering engine. At least one listed engine requirement should be satisfied by the renderer (e.g. type CEF with version.min 139).
+     */
+    engine?: {
+      /**
+       * Identifier of the rendering engine (e.g. CEF, Gecko). Vendor-specific types are allowed.
+       */
+      type: string;
+      /**
+       * Minimum engine version; CEF uses branch number (e.g. 139), other engines use their own scheme.
+       */
+      version: {
+        /**
+         * Minimum required version. Format is engine-specific (e.g. CEF branch number as string "139", or semver "120.0.5"). Comparison semantics are defined by the renderer for the given engine type.
+         */
+        min: string;
+        [k: string]: unknown;
+      };
+      [k: string]: unknown;
+    }[];
+    /**
      * This interface was referenced by `undefined`'s JSON-Schema definition
      * via the `patternProperty` "^v_.*".
      */

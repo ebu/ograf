@@ -530,6 +530,34 @@ export interface HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson {
     [k: `v_${string}`]: unknown;
   }[];
   /**
+   * Optional list of thumbnail images for the Graphic. Each entry references an image file (PNG, JPG, GIF, or webp) and may specify its resolution so UIs can choose or scale appropriately.
+   */
+  thumbnails?: {
+    /**
+     * Path to the image file, relative to the manifest or absolute. Allowed formats: PNG, JPG, GIF, webp.
+     */
+    file: string;
+    /**
+     * Resolution of the image in pixels. When present, the UI can derive aspect ratio (e.g. width/height) and choose or scale the thumbnail appropriately.
+     */
+    resolution?: {
+      /**
+       * Width in pixels.
+       */
+      width: number;
+      /**
+       * Height in pixels.
+       */
+      height: number;
+      [k: string]: unknown;
+    };
+    /**
+     * This interface was referenced by `undefined`'s JSON-Schema definition
+     * via the `patternProperty` "^v_.*".
+     */
+    [k: `v_${string}`]: unknown;
+  }[];
+  /**
    * This interface was referenced by `HttpsOgrafEbuIoV1SpecificationJsonSchemasGraphicsSchemaJson`'s JSON-Schema definition
    * via the `patternProperty` "^v_.*".
    */

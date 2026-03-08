@@ -73,6 +73,7 @@ It consists of the following fields:
 | schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic has a dynamic or unknown number of steps. |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
+| thumbnails          | Thumbnail[]        |          |         | Optional array of thumbnail entries. Each entry has `file` (path to image; PNG, JPG, GIF, or webp) and optionally `resolution` (object with `width` and `height` in pixels). |
 
 There MAY be multiple manifest files in a folder. In the case of multiple manifest files, they will be interpreted as multiple, independent Graphics.
 This can be useful for example when having a package of multiple OGraf graphics, which then might share resources such as images, fonts, etc.

@@ -19,6 +19,10 @@
     },
     "gddOptions": {
       "type": "object"
+    },
+    "order": {
+      "type": "number",
+      "description": "For UI ordering, lower values should be displayed first"
     }
   },
   "required": ["type"],

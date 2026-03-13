@@ -166,7 +166,8 @@ All properties share these definitions: ([JSON-schema definition](https://json-s
   "label": string, // [Optional] Short label to name the property
   "description": string, // [Optional] Longer description of the property
   "gddType": string, // [Optional unless required by GDD Type] A string containing the GDD Type name, see below
-  "gddOptions": object // [Optional unless required by GDD Type] An object containing options for a certain GDD Type, see below
+  "gddOptions": object, // [Optional unless required by GDD Type] An object containing options for a certain GDD Type, see below
+  "order": number // [Optional] Hint for UI ordering; lower means earlier
 }
 ```
 
@@ -449,6 +450,37 @@ Example:
   "gddType": "single-line/my-custom-formatted-text" // Will degrade to be "single-line" or simply a "string"
 }
 ```
+
+## Property order
+
+To provide a stable and author-controlled ordering in UIs, each property MAY define an `order` value:
+
+- Properties with a lower `order` value SHOULD be rendered before properties with a higher `order` value.
+- Properties with an `order` value SHOULD be rendered before properties without an `order` value.
+- Properties without an `order` value MAY be ordered in an implementation-defined way.
+
+Example:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "order": 1
+    },
+    "subtitle": {
+      "type": "string",
+      "order": 2
+    },
+    "internalNotes": {
+      "type": "string"
+    }
+  }
+}
+```
+
+In a GUI, `title` SHOULD be displayed before `subtitle`, while `internalNotes` (which has no `order`) can be placed after them in an implementation-defined position.
 
 ## For GUI Developers
 

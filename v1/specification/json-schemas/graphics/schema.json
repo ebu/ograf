@@ -104,8 +104,32 @@
                     "accessToPublicInternet": {
                         "description": "If set, specifies requirement on whether the renderer has access to the public internet or not.",
                         "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/lib/constraints/boolean.json"
+                    },
+                    "engine": {
+                        "description": "Minimum required version(s) of the rendering engine. At least one listed engine requirement should be satisfied by the renderer (e.g. type CEF with version.min 139).",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "description": "Identifier of the rendering engine (e.g. CEF, Gecko). Vendor-specific types are allowed."
+                                },
+                                "version": {
+                                    "type": "object",
+                                    "description": "Minimum engine version",
+                                    "properties": {
+                                        "min": {
+                                            "type": "string",
+                                            "description": "Minimum required version. Format is engine-specific (e.g. CEF branch number as string \"139\", or semver \"120.0.5\")."
+                                        }
+                                    },
+                                    "required": ["min"]
+                                }
+                            },
+                            "required": ["type", "version"]
+                        }
                     }
-
                 },
                 "patternProperties": {
                     "^v_.*": {}

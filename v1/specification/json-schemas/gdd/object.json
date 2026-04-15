@@ -20,6 +20,10 @@
     "gddOptions": {
       "type": "object"
     },
+    "hidden": {
+      "type": "boolean",
+      "description": "When true, the value of this property SHOULD NOT be included when labelling the graphic in a GUI (e.g. in playout or automation UIs). Default is false. Used to keep labels concise by excluding technical or less meaningful fields."
+    },
     "order": {
       "type": "number",
       "description": "For UI ordering, lower values should be displayed first"

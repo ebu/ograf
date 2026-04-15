@@ -166,10 +166,10 @@ All properties share these definitions: ([JSON-schema definition](https://json-s
   "label": string, // [Optional] Short label to name the property
   "description": string, // [Optional] Longer description of the property
   "gddType": string, // [Optional unless required by GDD Type] A string containing the GDD Type name, see below
-  "gddOptions": object // [Optional unless required by GDD Type] An object containing options for a certain GDD Type, see below
+  "gddOptions": object, // [Optional unless required by GDD Type] An object containing options for a certain GDD Type, see below
+  "hidden": boolean // [Optional] When true, exclude this property's value when building a label/display name for the graphic in a GUI. Default false.
 }
 ```
-
 #### The `type` property
 
 In the standard JSON-schema definition, the `type` property is allowed to be either a string or an array containing any combination of the basic types `"boolean"`, `"string"`, `"number"`, `"integer"`, `"array"`, `"object"` or `"null"`.

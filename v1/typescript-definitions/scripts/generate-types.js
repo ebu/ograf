@@ -45,6 +45,8 @@ async function saveFile(savePath, contents) {
   // The ^v_.* are generated as [k: string]: unknown, fix that:
   contents = contents.replaceAll(/(v_.+\n.*\n[ \t]+)(\[k: string\]: unknown)/g, '$1[k: `v_${string}`]: unknown')
 
+  // GDD object: generator does not emit optional props from $ref when allOf is used; add hidden so it appears like gddType/gddOptions
+  contents = contents.replace(/(gddOptions\?: \{\s*\[k: string\]: unknown;\s*\};)\n(    \[k: string\]: unknown;)/,"$1\n    hidden?: boolean;\n$2");
 
   // Replace contents in case of using localhost during testing:
   contents = contents.replaceAll('HttpLocalhost8080', 'HttpsOgrafEbuIo')

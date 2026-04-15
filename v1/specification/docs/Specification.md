@@ -70,13 +70,12 @@ It consists of the following fields:
 | customActions       | Action[]           |          |         | An array of `Action` objects. They correspond to the custom actions that can be invoked on the Graphic. See below for details about the fields inside an `Action`.    |
 | supportsRealTime    | boolean            |    X     |         | Indicates whether the Graphic supports real-time rendering.                                                                                                        |
 | supportsNonRealTime | boolean            |    X     |         | Indicates whether the Graphic supports non-real-time rendering. If true, the Graphic MUST implement the non-real-time functions `goToTime()` and `setActionsSchedule()`.                 |
-| schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic.                   |
+| schema              | object             |          |         | The JSON schema definition for the `data` argument to the `load()` and `updateAction()` methods. This schema can be seen as the (public) state model of the Graphic. Properties in this schema MAY include an optional `hidden` (boolean) attribute; when `hidden` is true, the property's value SHOULD NOT be included when building a display name or label for the Graphic in a GUI (e.g. in playout or automation UIs).                   |
 | stepCount           | integer            |          |    1    | The number of steps a Graphic consists of. If the Graphic is simply triggered by a play, then a stop, this is considered a stepCount of 1 (which is the default behavior if left undefined). A value of -1 indicates that a Graphic has a dynamic or unknown number of steps. |
 | renderRequirements  | RenderRequirement[]|          |         | A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work.   |
 
 There MAY be multiple manifest files in a folder. In the case of multiple manifest files, they will be interpreted as multiple, independent Graphics.
 This can be useful for example when having a package of multiple OGraf graphics, which then might share resources such as images, fonts, etc.
-
 #### Real-time vs. non-real-time
 
 Real-time rendering of a Graphic means that the Graphic is animated at real-time speed, typically in the context of live TV.

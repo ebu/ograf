@@ -13,6 +13,7 @@ export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson = CoreAndVali
     gddOptions?: {
       [k: string]: unknown;
     };
+    hidden?: boolean;
     [k: string]: unknown;
   };
 export type CoreAndValidationSpecificationsMetaSchema = CoreVocabularyMetaSchema &

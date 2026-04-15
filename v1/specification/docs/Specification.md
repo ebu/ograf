@@ -154,6 +154,7 @@ The RenderRequirement object contains the following fields:
 | resolution.height | NumberConstraint |          |         | Specifies renderer height resolution requirement. |
 | frameRate         | NumberConstraint |          |         | Specifies renderer frameRate requirement. |
 | accessToPublicInternet | BooleanConstraint |          |    | Specifies requirement on whether the renderer has access to the public internet or not. |
+| engine                 | EngineRequirement[] |        |    | Array of minimum version requirements for the rendering engine |
 
 ##### NumberConstraint
 

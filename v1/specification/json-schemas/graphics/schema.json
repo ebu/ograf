@@ -136,6 +136,41 @@
                 },
                 "additionalProperties": false
             }
+        },
+        "thumbnails": {
+            "description": "Optional list of thumbnail images for the Graphic. Each entry references an image file (PNG, JPG, GIF, or webp) and may specify its resolution so UIs can choose or scale appropriately.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "Path to the image file, relative to the manifest or absolute. Allowed formats: PNG, JPG, GIF, webp."
+                    },
+                    "resolution": {
+                        "type": "object",
+                        "description": "Resolution of the image in pixels. When present, the UI can derive aspect ratio (e.g. width/height) and choose or scale the thumbnail appropriately.",
+                        "properties": {
+                            "width": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "description": "Width in pixels."
+                            },
+                            "height": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "description": "Height in pixels."
+                            }
+                        },
+                        "required": ["width", "height"]
+                    }
+                },
+                "required": ["file"],
+                "patternProperties": {
+                    "^v_.*": {}
+                },
+                "additionalProperties": false
+            }
         }
     },
     "required": [

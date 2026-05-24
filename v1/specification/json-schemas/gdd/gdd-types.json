@@ -79,6 +79,73 @@
     },
     {
       "if": {
+        "properties": { "gddType": { "const": "file-list" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "string"
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "folder": {
+                "type": "string"
+              },
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["folder"]
+          }
+        },
+        "required": ["gddOptions"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "gddType": { "const": "file-list-multiple" } },
+        "required": ["gddType"]
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "const": "array"
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "string"
+              }
+            },
+            "required": ["type"]
+          },
+          "gddOptions": {
+            "type": "object",
+            "properties": {
+              "folder": {
+                "type": "string"
+              },
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["folder"]
+          }
+        },
+        "required": ["gddOptions", "items"]
+      }
+    },
+    {
+      "if": {
         "properties": { "gddType": { "const": "select" } },
         "required": ["gddType"]
       },

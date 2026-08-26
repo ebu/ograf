@@ -1699,7 +1699,7 @@ export interface components {
              * @default 1
              */
             stepCount: number;
-            /** @description The schema is used by a Graphic to define the data parameters of the 'update' method. */
+            /** @description The schema is used by a Graphic to define the data parameters of the 'load()' and 'updateAction()' methods. */
             schema?: components["schemas"]["object"];
             /** @description A list of requirements that this Graphic has for the rendering environment. At least one of the requirements must be met for the graphic to be expected to work. */
             renderRequirements?: ({

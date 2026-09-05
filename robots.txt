@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ograf.ebu.io/sitemap.xml

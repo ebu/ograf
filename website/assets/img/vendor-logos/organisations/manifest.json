@@ -1,0 +1,57 @@
+[
+  {
+    "file": "european-broadcasting-union.svg",
+    "name": "European Broadcasting Union",
+    "url": "https://www.ebu.ch/home"
+  },
+  {
+    "file": "bbc.svg",
+    "name": "BBC",
+    "url": "https://www.bbc.com/"
+  },
+  {
+    "file": "nrk.webp",
+    "name": "NRK",
+    "url": "https://www.nrk.no/"
+  },
+  {
+    "file": "tv-2-denmark.png",
+    "name": "TV2 Denmark",
+    "url": "https://tv2.dk/"
+  },
+  {
+    "file": "svt.png",
+    "name": "SVT",
+    "url": "https://www.svt.se/"
+  },
+  {
+    "file": "tv-2-norway.png",
+    "name": "TV 2",
+    "url": "https://www.tv2.no/"
+  },
+  {
+    "file": "deutsche-welle.png",
+    "name": "Deutsche Welle",
+    "url": "https://www.dw.com/"
+  },
+  {
+    "file": "itn.png",
+    "name": "ITN",
+    "url": "https://www.itn.co.uk/"
+  },
+  {
+    "file": "yle.svg",
+    "name": "YLE",
+    "url": "https://yle.fi/"
+  },
+  {
+    "file": "volant-media.webp",
+    "name": "Volant Media",
+    "url": "https://www.volantmedia.net/"
+  },
+  {
+    "file": "cbc.svg",
+    "name": "Canadian Broadcasting Corporation",
+    "url": "https://www.cbc.ca/"
+  }
+]

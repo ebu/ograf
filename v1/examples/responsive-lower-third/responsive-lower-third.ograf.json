@@ -1,0 +1,71 @@
+{
+    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "id": "responsive-lower-third",
+    "version": "1.0.0",
+    "name": "Responsive Lower Third",
+    "description": "A real-time lower third that adapts to the renderer's output dimensions.",
+    "author": {
+        "name": "European Broadcasting Union",
+        "url": "https://ebu.io/"
+    },
+    "main": "graphic.mjs",
+    "thumbnails": [
+        {
+            "file": "thumbnail.webp",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        }
+    ],
+    "supportsRealTime": true,
+    "supportsNonRealTime": false,
+    "stepCount": 1,
+    "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "name": {
+                "type": "string",
+                "label": "Name",
+                "description": "Name of the person shown in the lower third.",
+                "gddType": "single-line",
+                "order": 1,
+                "default": "Anders Berg",
+                "maxLength": 80
+            },
+            "title": {
+                "type": "string",
+                "label": "Title",
+                "description": "Role or title shown below the name.",
+                "gddType": "single-line",
+                "order": 2,
+                "default": "Senior Correspondent",
+                "maxLength": 120
+            },
+            "channel": {
+                "type": "string",
+                "label": "Channel",
+                "description": "Channel or programme label.",
+                "gddType": "single-line",
+                "order": 3,
+                "default": "OGraf News",
+                "maxLength": 40
+            }
+        }
+    },
+    "actionDurations": [
+        {
+            "type": "playAction",
+            "duration": 950
+        },
+        {
+            "type": "updateAction",
+            "duration": 400
+        },
+        {
+            "type": "stopAction",
+            "duration": 640
+        }
+    ]
+}

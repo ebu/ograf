@@ -1,0 +1,42 @@
+[
+  {
+    "file": "adobe.svg",
+    "name": "Adobe",
+    "url": "https://www.adobe.com/"
+  },
+  {
+    "file": "spx-graphics.png",
+    "name": "SPX Graphics",
+    "url": "https://spxgraphics.com/"
+  },
+  {
+    "file": "streamshapers.svg",
+    "name": "StreamShapers",
+    "url": "https://www.streamshapers.com/"
+  },
+  {
+    "file": "superfly-tv.svg",
+    "name": "SuperFly.tv",
+    "url": "https://superfly.tv/"
+  },
+  {
+    "file": "blackmagic-design.svg",
+    "name": "Blackmagic Design",
+    "url": "https://www.blackmagicdesign.com/"
+  },
+  {
+    "file": "everviz.svg",
+    "name": "Everviz",
+    "url": "https://everviz.com/"
+  },
+  {
+    "file": "loopic.svg",
+    "name": "Loopic",
+    "url": "https://www.loopic.io/"
+  },
+  {
+    "file": "neton-live.svg",
+    "name": "Neton Live",
+    "url": "https://www.neton.live/"
+  }
+]

@@ -13,8 +13,7 @@
             "message": {
                 "type": "string",
                 "default": "Hello World!",
-                "gddType": "color-rrggbb",
-                "pattern": "^#[0-9a-f]{6}$",
+        "gddType": "single-line",
                 "hidden": true
             }
         }

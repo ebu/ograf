@@ -1,0 +1,132 @@
+{
+    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "id": "scoreboard",
+    "version": "1.0.0",
+    "name": "Live Scoreboard",
+    "description": "A responsive real-time scoreboard demonstrating OGraf steps and custom actions.",
+    "author": {
+        "name": "European Broadcasting Union",
+        "url": "https://ebu.io/"
+    },
+    "main": "graphic.mjs",
+    "thumbnails": [
+        {
+            "file": "thumbnail.webp",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        }
+    ],
+    "supportsRealTime": true,
+    "supportsNonRealTime": false,
+    "stepCount": 5,
+    "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "homeShort": {
+                "type": "string",
+                "label": "Home team",
+                "description": "Short name of the home team.",
+                "gddType": "single-line",
+                "order": 1,
+                "default": "FCZ",
+                "maxLength": 4
+            },
+            "awayShort": {
+                "type": "string",
+                "label": "Away team",
+                "description": "Short name of the away team.",
+                "gddType": "single-line",
+                "order": 2,
+                "default": "AJX",
+                "maxLength": 4
+            },
+            "homeScore": {
+                "type": "integer",
+                "label": "Home score",
+                "order": 3,
+                "default": 0,
+                "minimum": 0
+            },
+            "awayScore": {
+                "type": "integer",
+                "label": "Away score",
+                "order": 4,
+                "default": 0,
+                "minimum": 0
+            },
+            "homeColor": {
+                "type": "string",
+                "label": "Home colour",
+                "gddType": "color-rrggbb",
+                "order": 5,
+                "default": "#005ca9",
+                "pattern": "^#[0-9a-f]{6}$"
+            },
+            "awayColor": {
+                "type": "string",
+                "label": "Away colour",
+                "gddType": "color-rrggbb",
+                "order": 6,
+                "default": "#d4192c",
+                "pattern": "^#[0-9a-f]{6}$"
+            },
+            "minute": {
+                "type": "integer",
+                "label": "Minute",
+                "order": 7,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 90
+            },
+            "seconds": {
+                "type": "integer",
+                "label": "Seconds",
+                "order": 8,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 59
+            }
+        }
+    },
+    "customActions": [
+        {
+            "id": "goal-home",
+            "name": "Goal (Home)",
+            "description": "Increment the home team score by one.",
+            "schema": null
+        },
+        {
+            "id": "goal-away",
+            "name": "Goal (Away)",
+            "description": "Increment the away team score by one.",
+            "schema": null
+        }
+    ],
+    "actionDurations": [
+        {
+            "type": "playAction",
+            "duration": -1
+        },
+        {
+            "type": "updateAction",
+            "duration": -1
+        },
+        {
+            "type": "stopAction",
+            "duration": 400
+        },
+        {
+            "type": "customAction",
+            "customActionId": "goal-home",
+            "duration": 600
+        },
+        {
+            "type": "customAction",
+            "customActionId": "goal-away",
+            "duration": 600
+        }
+    ]
+}

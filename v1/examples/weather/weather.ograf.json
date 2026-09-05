@@ -1,0 +1,127 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "Weather_Ver05",
+  "version": "5.0.1",
+  "name": "Weatherdisplay",
+  "main": "graphic.mjs",
+  "supportsRealTime": true,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "_darkText": {
+        "type": "integer",
+        "label": "Cityname Color",
+        "default": 0,
+        "gddType": "select",
+        "gddOptions": {
+          "labels": {
+            "0": "Light Text",
+            "1": "Dark Text"
+          }
+        },
+        "enum": [
+          0,
+          1
+        ],
+        "order": 0
+      },
+      "_sun-lightning-rain-snow": {
+        "type": "integer",
+        "label": "Weather Icon",
+        "default": 0,
+        "gddType": "select",
+        "gddOptions": {
+          "labels": {
+            "0": "Sun",
+            "1": "Storm",
+            "2": "Rain",
+            "3": "Snow"
+          }
+        },
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "order": 1
+      },
+      "_city": {
+        "type": "string",
+        "label": "City",
+        "default": "Hannover",
+        "gddType": "single-line",
+        "order": 2
+      },
+      "_temperature": {
+        "type": "string",
+        "label": "Temperature (°C)",
+        "default": "25",
+        "gddType": "single-line",
+        "order": 3
+      },
+      "_image": {
+        "type": "string",
+        "label": "image",
+        "default": "./lib/images/image_0.jpg",
+        "gddType": "file-path/image-path",
+        "gddOptions": {
+          "extensions": [
+            "jpg",
+            "png",
+            "jpeg",
+            "webp",
+            "gif",
+            "svg"
+          ]
+        }
+      }
+    }
+  },
+  "author": {
+    "name": "StreamShapers",
+    "email": "mail@streamshapers.com",
+    "url": "streamshapers.com"
+  },
+  "description": "A weatherdisplay with an image and name for the city. Temperature and an icon for the weather conditions.",
+  "stepCount": 1,
+  "actionDurations": [
+    {
+      "type": "playAction",
+      "duration": 2000
+    },
+    {
+      "type": "updateAction",
+      "duration": 0
+    },
+    {
+      "type": "stopAction",
+      "duration": 1320
+    }
+  ],
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": {
+          "exact": 1920
+        },
+        "height": {
+          "exact": 1080
+        }
+      },
+      "frameRate": {
+        "exact": 25
+      }
+    }
+  ],
+  "thumbnails": [
+    {
+      "file": "thumbnail.jpg",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      }
+    }
+  ]
+}

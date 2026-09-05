@@ -1,0 +1,72 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "96123dd7-6e6a-4a0e-8084-4c4b4a2db0c3",
+  "version": "1.0.0",
+  "name": "OGraf Headline",
+  "main": "graphic.mjs",
+  "supportsRealTime": true,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "_headlineTagText": {
+        "type": "string",
+        "label": "Headline Tag Text",
+        "default": "Breaking News\r",
+        "gddType": "single-line",
+        "order": 0
+      },
+      "_headlineText": {
+        "type": "string",
+        "label": "Headline Text",
+        "default": "Breaking News - OGraf",
+        "gddType": "single-line",
+        "order": 1
+      }
+    }
+  },
+  "author": {
+    "name": "Mike and Nico",
+    "url": "streamshapers.com"
+  },
+  "description": "A lower third headline with a tag text and the actual headline.\nDesigned by Mike and technically adapted by Nico.",
+  "stepCount": 1,
+  "actionDurations": [
+    {
+      "type": "playAction",
+      "duration": 2820
+    },
+    {
+      "type": "updateAction",
+      "duration": 0
+    },
+    {
+      "type": "stopAction",
+      "duration": 820
+    }
+  ],
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": {
+          "exact": 1920
+        },
+        "height": {
+          "exact": 1080
+        }
+      },
+      "frameRate": {
+        "exact": 50
+      }
+    }
+  ],
+  "thumbnails": [
+    {
+      "file": "thumbnail.jpg",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      }
+    }
+  ]
+}

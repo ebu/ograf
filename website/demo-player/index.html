@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>OGraf Example Player</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0e1a center / cover no-repeat;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: var(--demo-overlay, transparent);
+            pointer-events: none;
+        }
+
+        .demo-background {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            object-fit: cover;
+            object-position: calc(var(--focus-x, 0.5) * 100%) center;
+            pointer-events: none;
+        }
+
+        .graphic-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        .graphic-canvas--fixed {
+            right: auto;
+            bottom: auto;
+            transform-origin: top left;
+        }
+
+        #graphic {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="graphic-canvas" id="graphic-canvas"></div>
+    <script type="module" src="../js/demo-player.js?v=3"></script>
+</body>
+</html>

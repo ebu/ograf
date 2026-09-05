@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGraf - Open HTML Graphics for Broadcast</title>
+    <meta name="description"
+          content="OGraf is the EBU's open specification for HTML broadcast graphics. Build graphics once and run them across compatible broadcast, web, and mobile workflows.">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#87A0DE">
+
+    <link rel="canonical" href="https://ograf.ebu.io/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="OGraf - Open HTML Graphics for Broadcast">
+    <meta property="og:description"
+          content="The EBU's open specification for HTML broadcast graphics. Build once, run across compatible broadcast, web, and mobile workflows.">
+    <meta property="og:site_name" content="OGraf">
+    <meta property="og:url" content="https://ograf.ebu.io/">
+    <meta property="og:image"
+          content="https://ograf.ebu.io/website/assets/img/ograf-social-preview.png">
+    <meta property="og:image:secure_url"
+          content="https://ograf.ebu.io/website/assets/img/ograf-social-preview.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"
+          content="OGraf logo with the text &quot;The EBU's open specification to liberate broadcast graphics&quot; on a dark blue background.">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OGraf - Open HTML Graphics for Broadcast">
+    <meta name="twitter:description"
+          content="The EBU's open specification for HTML broadcast graphics. Build once, run across compatible broadcast, web, and mobile workflows.">
+    <meta name="twitter:image"
+          content="https://ograf.ebu.io/website/assets/img/ograf-social-preview.png">
+    <meta name="twitter:image:alt"
+          content="OGraf logo with the text &quot;The EBU's open specification to liberate broadcast graphics&quot; on a dark blue background.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "OGraf",
+      "url": "https://ograf.ebu.io/",
+      "description": "The EBU's open specification for HTML broadcast graphics.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "European Broadcasting Union"
+      }
+    }
+    </script>
+    <link rel="icon" href="website/assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="website/assets/icons/favicon-96x96.png"
+          type="image/png" sizes="96x96">
+    <link rel="apple-touch-icon" href="website/assets/icons/apple-touch-icon.png"
+          sizes="180x180">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="stylesheet" href="website/css/fonts.css">
+    <link rel="stylesheet" href="website/css/style.css?v=23">
+    <link rel="stylesheet" href="website/css/hero-ticker.css?v=2">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ---------------------------------------
+     NAV
+--------------------------------------- -->
+<header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+
+        <a href="./" class="site-header__logo" aria-label="OGraf - Home">
+            <img src="docs/logo/ograf-logo-colour.svg" alt="OGraf" width="120" height="40">
+        </a>
+
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+            <ul class="site-nav__list">
+                <li><a href="./" class="site-nav__link site-nav__link--active">Home</a></li>
+                <li><a href="#demos" class="site-nav__link">Demos</a></li>
+                <li><a href="https://ograf.ebu.io/v1/specification/docs/Specification.html" class="site-nav__link"
+                       target="_blank" rel="noopener">Specification</a></li>
+                <li><a href="https://github.com/ebu/ograf" class="site-nav__link site-nav__link--cta" target="_blank"
+                       rel="noopener">GitHub</a></li>
+            </ul>
+        </nav>
+
+        <button class="nav-toggle" id="nav-toggle" type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="site-nav">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+        </button>
+
+    </div>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+    <!-- ---------------------------------------
+         HERO BLOCK - hero + vendor ticker share one background
+    --------------------------------------- -->
+    <div class="hero-block">
+
+        <!-- ---------------------------------------
+             HERO
+        --------------------------------------- -->
+        <section class="section-hero">
+            <div class="hero__inner">
+
+                <div class="hero__content">
+                    <p class="eyebrow hero__eyebrow">European Broadcasting Union</p>
+
+                    <h1 class="hero__heading hero__heading--logo">
+                        <img src="docs/logo/ograf-logo-colour.svg" alt="OGraf" class="hero__logo">
+                        <span class="sr-only">OGraf – Open Graphics. Open Possibilities.</span>
+                    </h1>
+
+                    <p class="hero__sub">The EBU's open specification to liberate broadcast graphics</p>
+
+                    <div class="hero__actions">
+                        <a href="https://tech.ebu.ch/groups/html-graphics"
+                           class="btn btn--primary"
+                           target="_blank" rel="noopener">
+                            Join the Working Group
+                        </a>
+                        <a href="https://ograf.ebu.io/v1/specification/docs/Specification.html"
+                           class="btn btn--ghost"
+                           target="_blank" rel="noopener">
+                            Read the Spec
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero__badges">
+                    <a class="hero__badge hero__badge--production" href="#status"
+                       aria-label="OGraf Graphics Specification v1, stable, published 2025-09-17. Jump to project status.">
+                        <span class="hero__badge-dot" aria-hidden="true"></span>
+                        <span class="hero__badge-label">v1</span>
+                        <span class="hero__badge-text">Graphics Specification &middot; Stable</span>
+                    </a>
+                    <a class="hero__badge hero__badge--production" href="#status"
+                       aria-label="OGraf Server API v1, stable, published 2026-08-13. Jump to project status.">
+                        <span class="hero__badge-dot" aria-hidden="true"></span>
+                        <span class="hero__badge-label">v1</span>
+                        <span class="hero__badge-text">Server API &middot; Stable</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Discovery hint pointing at the diagonal ticker cards.
+                 Fades in after a short delay; hides permanently once the
+                 user has hovered a card (handled in js/hero-ticker.js). -->
+            <div class="hero-ticker-hint" id="hero-ticker-hint" aria-hidden="true">
+                <svg class="hero-ticker-hint__arrow" viewBox="0 0 80 80" fill="none">
+                    <!-- Hand-drawn arrow: tail starts at the right (where the
+                         text begins), runs along the bottom to the left, then
+                         sweeps tall up the left side to the tip near the top. -->
+                    <path d="M 76 70 C 35 70, 15 70, 15 6"
+                          stroke="currentColor" stroke-width="2.2"
+                          stroke-linecap="round" fill="none"/>
+                    <!-- Arrow head pointing straight up at the tip. -->
+                    <path d="M 7 14 L 15 6 L 23 14"
+                          stroke="currentColor" stroke-width="2.2"
+                          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <span class="hero-ticker-hint__text">Try these examples</span>
+            </div>
+
+        </section>
+
+        <!-- ---------------------------------------
+             VENDOR LOGO TICKER (shares hero background)
+        --------------------------------------- -->
+        <section class="vendor-ticker vendor-ticker--dark" aria-label="OGraf-compliant vendors">
+            <div class="vendor-ticker__viewport">
+                <div class="vendor-ticker__track" id="vendor-ticker-track" aria-hidden="true"></div>
+            </div>
+        </section>
+
+    </div><!-- /.hero-block -->
+
+    <!-- ---------------------------------------
+         INTRO
+    --------------------------------------- -->
+    <section class="section-intro">
+        <div class="container">
+            <div class="intro__statements">
+
+                <p class="intro__statement">
+                    OGraf is an open specification from EBU for HTML graphics in broadcast. Your graphics work across
+                    broadcast platforms, regardless of provider.
+                </p>
+
+                <p class="intro__statement">
+                    Combine the best tools. Swap components when better ones emerge.
+                    No rebuilding. No retraining.
+                </p>
+
+                <p class="intro__statement intro__statement--accent">
+                    Build on web standards. Extend with web technologies. Integrate freely.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         STAGE - multi-device live demo
+    --------------------------------------- -->
+    <section class="section-stage" aria-label="OGraf running on multiple devices">
+        <div class="container">
+
+            <div class="stage__header">
+                <p class="eyebrow">One template. Every screen.</p>
+                <h2 class="heading-section">One Template for any device.</h2>
+                <p class="stage__intro">A single OGraf graphic running live - broadcast, web, mobile. Same code, same
+                    data,
+                    every screen in sync. Try it.</p>
+            </div>
+
+            <div class="stage__bento" id="stage-devices">
+
+                <!-- ----------------------------------------------------------------------------------------------
+                     Each device is a frame + a "screen" containing:
+                       1. <video>      -> demo background (NOT part of OGraf,
+                                          purely to give the LT something
+                                          realistic to overlay)
+                       2. <div class="stage-device__bg-overlay">
+                                       -> dark scrim for LT contrast (also
+                                          a demo concern)
+                       3. <div class="stage-device__canvas">
+                                       -> logical renderer output matching the
+                                          device aspect ratio, scaled by JS.
+                                          Holds <ograf-lower-third>, which is
+                                          the actual OGraf graphic and the
+                                          only real-spec asset on the page.
+                     The LT selects its responsive layout from the actual
+                     logical output dimensions supplied by the renderer.
+                ---------------------------------------------------------------------------------------------- -->
+
+                <!-- TV - large landscape, hero tile -->
+                <div class="stage-device stage-device--tv stage-bento__tile stage-bento__tile--tv" aria-hidden="true">
+                    <div class="stage-device__frame">
+                        <div class="stage-device__screen" data-ratio="16/9" data-focus-x="0.5">
+                            <video class="stage-device__bg-video" muted loop playsinline preload="none"
+                                   poster="website/assets/img/bg-interview.webp">
+                                <source data-src="website/assets/video/Background-Interview-Video-720.webm"
+                                        type="video/webm">
+                                <source data-src="website/assets/video/Background-Interview-Video-720.mp4"
+                                        type="video/mp4">
+                            </video>
+                            <div class="stage-device__bg-overlay"></div>
+                            <div class="stage-device__canvas">
+                                <ograf-lower-third class="stage-device__graphic"></ograf-lower-third>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stage-device__stand">
+                        <div class="stage-device__stand-neck"></div>
+                        <div class="stage-device__stand-foot"></div>
+                    </div>
+                    <span class="stage-device__label mono">Broadcast &middot; 16:9</span>
+                </div>
+
+                <!-- Bottom row - three devices sized to the same height -->
+                <div class="stage-bento__row stage-bento__row--bottom">
+
+                    <!-- Tablet - iPad portrait -->
+                    <div class="stage-device stage-device--tablet" aria-hidden="true">
+                        <div class="stage-device__frame">
+                            <span class="stage-device__camera"></span>
+                            <div class="stage-device__screen" data-ratio="16/9" data-focus-x="0.55">
+                                <video class="stage-device__bg-video" muted loop playsinline preload="none"
+                                       poster="website/assets/img/bg-interview.webp">
+                                    <source data-src="website/assets/video/Background-Interview-Video-720.webm"
+                                            type="video/webm">
+                                    <source data-src="website/assets/video/Background-Interview-Video-720.mp4"
+                                            type="video/mp4">
+                                </video>
+                                <div class="stage-device__bg-overlay"></div>
+                                <div class="stage-device__canvas">
+                                    <ograf-lower-third class="stage-device__graphic"></ograf-lower-third>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="stage-device__label mono">Tablet &middot; 3:4</span>
+                    </div>
+
+                    <!-- Phone - iPhone 16 Pro silhouette -->
+                    <div class="stage-device stage-device--phone" aria-hidden="true">
+                        <div class="stage-device__frame">
+                            <span class="stage-device__side-button stage-device__side-button--left"></span>
+                            <span class="stage-device__side-button stage-device__side-button--right-top"></span>
+                            <span class="stage-device__side-button stage-device__side-button--right-bot"></span>
+                            <div class="stage-device__screen" data-ratio="16/9" data-focus-x="0.6">
+                                <video class="stage-device__bg-video" muted loop playsinline preload="none"
+                                       poster="website/assets/img/bg-interview.webp">
+                                    <source data-src="website/assets/video/Background-Interview-Video-720.webm"
+                                            type="video/webm">
+                                    <source data-src="website/assets/video/Background-Interview-Video-720.mp4"
+                                            type="video/mp4">
+                                </video>
+                                <div class="stage-device__bg-overlay"></div>
+                                <div class="stage-device__canvas">
+                                    <ograf-lower-third class="stage-device__graphic"></ograf-lower-third>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="stage-device__label mono">Mobile &middot; 9:16</span>
+                    </div>
+
+                </div>
+
+                <!-- Controls tile -->
+                <div class="stage__controls stage-bento__tile stage-bento__tile--controls">
+
+                    <div class="stage__buttons">
+                        <button class="stage-btn stage-btn--primary stage-btn--toggle" id="stage-toggle" type="button" disabled>
+                            <i data-lucide="play" class="stage-btn__icon stage-btn__icon--play"></i>
+                            <i data-lucide="square" class="stage-btn__icon stage-btn__icon--stop"></i>
+                            <span class="stage-btn__label">Play In</span>
+                        </button>
+                    </div>
+
+                    <div class="stage__fields">
+                        <label class="stage__field">
+                            <span class="stage__field-label">Name</span>
+                            <input class="stage__field-input" id="stage-name" type="text"
+                                   value="Anders Berg" autocomplete="off">
+                        </label>
+                        <label class="stage__field">
+                            <span class="stage__field-label">Title</span>
+                            <input class="stage__field-input" id="stage-title" type="text"
+                                   value="Senior Correspondent" autocomplete="off">
+                        </label>
+                        <label class="stage__field">
+                            <span class="stage__field-label">Channel</span>
+                            <input class="stage__field-input" id="stage-channel" type="text"
+                                   value="OGraf News" autocomplete="off">
+                        </label>
+                    </div>
+
+                    <div class="stage__sync" id="stage-sync" data-state="loading"
+                         role="status" aria-live="polite" aria-atomic="true">
+                        <span class="stage__sync-dot" aria-hidden="true"></span>
+                        <span class="stage__sync-copy">
+                            <span class="stage__sync-status">Loading</span>
+                            <span class="stage__sync-detail">Devices</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         THE PROBLEM
+    --------------------------------------- -->
+    <section class="section-problem">
+        <div class="container">
+
+            <div class="problem__layout">
+
+                <div class="problem__copy">
+                    <p class="eyebrow">The Problem</p>
+                    <h2 class="heading-section problem__heading">Proprietary systems<br>lock you in.</h2>
+
+                    <div class="problem__paragraphs">
+                        <p>
+                            Your workflow is locked to one provider. Your talent pool is limited to scarce specialists.
+                        </p>
+                        <p>
+                            Want to switch vendors? You'll have to rebuild everything. Want to hire talent? Good luck
+                            finding specialists. Want to integrate with other systems or extend functionality? You'll
+                            be wrestling with custom SDKs, vendor-specific APIs, or waiting on the vendor's roadmap.
+                        </p>
+                        <p class="problem__kicker">The cost isn't the license. It's the limitations.</p>
+                    </div>
+                </div>
+
+                <div class="problem__diagram" role="img" aria-label="Diagram: locked vendor pipeline">
+                    <div class="pipeline pipeline--locked">
+
+                        <div class="pipeline__steps">
+                            <div class="pipeline__step pipeline__step--locked">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i data-lucide="pencil"></i></span>
+                                Create
+                                <span class="pipeline__step-vendor">Vendor A</span>
+                            </div>
+                            <div class="pipeline__arrow" aria-hidden="true"></div>
+                            <div class="pipeline__step pipeline__step--locked">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i
+                                        data-lucide="database"></i></span>
+                                Store
+                                <span class="pipeline__step-vendor">Vendor A</span>
+                            </div>
+                            <div class="pipeline__arrow" aria-hidden="true"></div>
+                            <div class="pipeline__step pipeline__step--locked">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i
+                                        data-lucide="sliders-horizontal"></i></span>
+                                Control
+                                <span class="pipeline__step-vendor">Vendor A</span>
+                            </div>
+                            <div class="pipeline__arrow" aria-hidden="true"></div>
+                            <div class="pipeline__step pipeline__step--locked">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i data-lucide="tv"></i></span>
+                                Render
+                                <span class="pipeline__step-vendor">Vendor A</span>
+                            </div>
+                        </div>
+
+                        <p class="pipeline__caption">All stages are owned and controlled by one vendor</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         THE SOLUTION
+    --------------------------------------- -->
+    <section class="section-solution">
+        <div class="container">
+
+            <div class="solution__layout">
+
+                <div class="solution__diagram" role="img" aria-label="Diagram: OGraf modular open pipeline">
+                    <div class="pipeline pipeline--open">
+
+                        <div class="pipeline__vendor-label pipeline__vendor-label--open">
+                            OGraf Standard
+                        </div>
+
+                        <div class="pipeline__steps">
+                            <div class="pipeline__step-wrap">
+                                <div class="pipeline__step pipeline__step--blue">
+                                    <span class="pipeline__step-icon" aria-hidden="true"><i
+                                            data-lucide="pencil"></i></span>
+                                    Create
+                                    <span class="pipeline__step-vendor">Vendor A</span>
+                                </div>
+                                <div class="pipeline__swap" aria-hidden="true">
+                                    <span class="pipeline__swap-arrow"><i data-lucide="arrow-up-down"></i></span>
+                                    <div class="pipeline__step pipeline__step--blue pipeline__step--alt">
+                                        <span class="pipeline__step-icon"><i data-lucide="pencil"></i></span>
+                                        Create
+                                        <span class="pipeline__step-vendor">Vendor E</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pipeline__arrow pipeline__arrow--open" aria-hidden="true"></div>
+
+                            <div class="pipeline__step pipeline__step--green">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i
+                                        data-lucide="database"></i></span>
+                                Store
+                                <span class="pipeline__step-vendor">Vendor B</span>
+                            </div>
+
+                            <div class="pipeline__arrow pipeline__arrow--open" aria-hidden="true"></div>
+
+                            <div class="pipeline__step pipeline__step--amber">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i
+                                        data-lucide="sliders-horizontal"></i></span>
+                                Control
+                                <span class="pipeline__step-vendor">Vendor C</span>
+                            </div>
+
+                            <div class="pipeline__arrow pipeline__arrow--open" aria-hidden="true"></div>
+
+                            <div class="pipeline__step pipeline__step--violet">
+                                <span class="pipeline__step-icon" aria-hidden="true"><i data-lucide="tv"></i></span>
+                                Render
+                                <span class="pipeline__step-vendor">Vendor D</span>
+                            </div>
+                        </div>
+
+                        <p class="pipeline__caption pipeline__caption--open">Replace any component - the workflow keeps
+                            running</p>
+
+                    </div>
+                </div>
+
+                <div class="solution__copy">
+                    <p class="eyebrow">The Solution</p>
+                    <h2 class="heading-section solution__heading">A common standard based on web technologies. </h2>
+
+                    <div class="solution__paragraphs">
+                        <p>
+                            OGraf defines a common standard using HTML, CSS, and JavaScript. Your graphics work on any
+                            OGraf-compliant system, regardless of provider.
+                        </p>
+                        <p>
+                            Choose the best editor, the best renderer, the best control system. Mix and match based on
+                            what works for your needs. No lock-in to a single provider.
+                        </p>
+                        <p class="solution__kicker">
+                            Web standards mean web developers can create broadcast graphics. The talent pool just
+                            expanded dramatically.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         KEY BENEFITS
+    --------------------------------------- -->
+    <section class="section-benefits">
+        <div class="container">
+
+            <div class="benefits__header">
+                <p class="eyebrow">Key Benefits</p>
+                <h2 class="heading-section">Why OGraf changes everything.</h2>
+            </div>
+
+            <div class="benefits__grid">
+
+                <article class="benefit-card">
+                    <div class="benefit-card__icon" aria-hidden="true"><i data-lucide="globe"></i></div>
+                    <h3 class="benefit-card__title">Cross-Platform by Default</h3>
+                    <p>HTML works everywhere. On-air, online, mobile, social. One graphics package. Every
+                        destination.</p>
+                    <p>Create once. Deploy infinitely. That's the web advantage.</p>
+                </article>
+
+                <article class="benefit-card">
+                    <div class="benefit-card__icon" aria-hidden="true"><i data-lucide="users"></i></div>
+                    <h3 class="benefit-card__title">Bigger Talent Pool</h3>
+                    <p>Broadcast graphics specialists are rare. Web developers and visual designers are not. OGraf works
+                        with both.</p>
+                    <p>Developers use the tools they already know. Designers create visually without writing a line of
+                        code. Either way - broadcast-ready output.</p>
+                </article>
+
+                <article class="benefit-card">
+                    <div class="benefit-card__icon" aria-hidden="true"><i data-lucide="link-2-off"></i></div>
+                    <h3 class="benefit-card__title">Vendor Independence</h3>
+                    <p>Switch vendors without switching workflows. Negotiate from strength. Never get locked in
+                        again.</p>
+                    <p>One specification. Multiple vendors competing for your business. That's the real choice.</p>
+                </article>
+
+                <article class="benefit-card benefit-card--row2">
+                    <div class="benefit-card__icon" aria-hidden="true"><i data-lucide="banknote"></i></div>
+                    <h3 class="benefit-card__title">Lower Total Cost</h3>
+                    <p>No proprietary licenses for every seat. No vendor-specific training. No forced upgrade cycles. No
+                        integration tax every time systems talk to each other.</p>
+                    <p>Web tools are free. Web skills are abundant. Web standards are proven.</p>
+                </article>
+
+                <article class="benefit-card benefit-card--row2">
+                    <div class="benefit-card__icon" aria-hidden="true"><i data-lucide="rocket"></i></div>
+                    <h3 class="benefit-card__title">Future-Ready</h3>
+                    <p>Web standards evolve with the industry. New browser features become new graphics capabilities.
+                        Automatically.</p>
+                    <p>AI tools train on HTML. They already know the language. They can't learn proprietary formats.</p>
+                    <p>Future-proof isn't a promise. It's built into open standards.</p>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         COMPARISON TABLE
+    --------------------------------------- -->
+    <section class="section-compare">
+        <div class="container">
+
+            <div class="compare__header">
+                <p class="eyebrow">The Difference</p>
+                <h2 class="heading-section">OGraf vs. Proprietary.</h2>
+            </div>
+
+            <div class="compare__table-wrap" tabindex="0" role="region"
+                 aria-label="Comparison of OGraf and proprietary systems">
+                <table class="compare__table">
+                    <thead>
+                    <tr>
+                        <th class="compare__feature-col">Feature</th>
+                        <th class="compare__col compare__col--bad">Proprietary System</th>
+                        <th class="compare__col compare__col--good">OGraf</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Vendor portability</td>
+                        <td><i data-lucide="x" class="compare__icon compare__icon--no" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Full web technologies (HTML/CSS/JS)</td>
+                        <td><span class="compare__partial">Limited</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Open source &amp; free to use</td>
+                        <td><i data-lucide="x" class="compare__icon compare__icon--no" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>No specialist skills are required</td>
+                        <td><i data-lucide="x" class="compare__icon compare__icon--no" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Custom data integration</td>
+                        <td><span class="compare__partial">Vendor API only</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Free choice of a control system</td>
+                        <td><i data-lucide="x" class="compare__icon compare__icon--no" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>AI-friendly tooling</td>
+                        <td><i data-lucide="x" class="compare__icon compare__icon--no" aria-hidden="true"></i><span class="sr-only">No</span></td>
+                        <td><i data-lucide="check" class="compare__icon compare__icon--yes" aria-hidden="true"></i><span class="sr-only">Yes</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         DEMOS
+    --------------------------------------- -->
+    <section class="section-demos" id="demos">
+        <div class="container">
+
+            <div class="demos__header">
+                <p class="eyebrow">Live Demo</p>
+                <h2 class="heading-section">See OGraf in action.</h2>
+                <p class="demos__intro">A real OGraf graphic running in your browser – the same spec-compliant code that
+                    runs in broadcast.</p>
+            </div>
+
+        </div><!-- /.container -->
+
+        <!-- ---- Demo Carousel ---- -->
+        <div class="demo-carousel" role="region" aria-label="Interactive OGraf demos">
+
+            <div class="demo-carousel__viewport">
+                <div class="demo-carousel__track">
+
+                <!-- Slide 1: Live Scoreboard -->
+                <div class="demo-carousel__slide is-active" id="demo-slide-0" role="tabpanel"
+                     data-example-id="scoreboard"
+                     aria-labelledby="demo-tab-0" tabindex="0">
+                    <div class="demo-card demo-card--scoreboard">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Live Scoreboard</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Responsive</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/scoreboard"
+                                   data-example-download="scoreboard"
+                                   aria-label="Download the Live Scoreboard OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options" role="radiogroup"
+                                     aria-label="Live Scoreboard format">
+                                    <button class="demo-aspect-btn is-active" type="button" role="radio"
+                                            aria-checked="true" tabindex="0" data-ratio="16/9"
+                                            title="Landscape 16:9">
+                                        <svg width="20" height="14" viewBox="0 0 20 14">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="4/3"
+                                            title="Classic 4:3">
+                                        <svg width="16" height="14" viewBox="0 0 16 14">
+                                            <rect x="0.5" y="0.5" width="15" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>4:3</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="1/1"
+                                            title="Square 1:1">
+                                        <svg width="14" height="14" viewBox="0 0 14 14">
+                                            <rect x="0.5" y="0.5" width="13" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>1:1</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="9/16"
+                                            title="Portrait 9:16">
+                                        <svg width="10" height="16" viewBox="0 0 10 16">
+                                            <rect x="0.5" y="0.5" width="9" height="15" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>9:16</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player demo-player--sb" id="sb-player" data-ratio="16/9">
+                                    <iframe
+                                            id="sb-iframe"
+                                            class="demo-player__iframe"
+                                            data-src="website/demo-player/index.html?example=scoreboard"
+                                            title="OGraf Live Scoreboard Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"
+                                    ></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" id="sb-play" type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" id="sb-next" type="button" disabled>Next Step</button>
+                                    <button class="btn btn--ghost demo-btn" id="sb-goal-home" type="button" disabled>Goal Home
+                                    </button>
+                                    <button class="btn btn--ghost demo-btn" id="sb-goal-away" type="button" disabled>Goal Away
+                                    </button>
+                                    <button class="btn btn--ghost demo-btn" id="sb-update" type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" id="sb-stop" type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields">
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Home</span>
+                                        <input class="demo-field__input" id="sb-home" type="text" value="FCZ"
+                                               maxlength="4" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Away</span>
+                                        <input class="demo-field__input" id="sb-away" type="text" value="AJX"
+                                               maxlength="4" autocomplete="off">
+                                    </label>
+
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" id="sb-status" data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div><!-- /.demo-card__body -->
+                    </div><!-- /.demo-card -->
+                </div><!-- /.demo-carousel__slide -->
+
+                <!-- Slide 2: L3rd Name -->
+                <div class="demo-carousel__slide" id="demo-slide-1" role="tabpanel"
+                     data-example-id="l3rd-name"
+                     aria-labelledby="demo-tab-1" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="l3rd-name">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">L3rd Name</h3>
+                            <div class="demo-card__header-actions">
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/l3rd-name"
+                                   data-example-download="l3rd-name"
+                                   aria-label="Download the L3rd Name OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options">
+                                    <span class="demo-aspect-fixed">
+                                        <svg width="20" height="14" viewBox="0 0 20 14">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9 fixed</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player>
+                                    <iframe
+                                            class="demo-player__iframe"
+                                            data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=l3rd-name"
+                                            title="OGraf L3rd Name Example"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"
+                                    ></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play" type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update" type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-custom-action="highlight"
+                                            type="button" disabled>Highlight</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop" type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields">
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Name</span>
+                                        <input class="demo-field__input" data-demo-field="name" type="text"
+                                               value="John Doe" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Title</span>
+                                        <input class="demo-field__input" data-demo-field="title" type="text"
+                                               value="OGraf expert" autocomplete="off">
+                                    </label>
+
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div><!-- /.demo-card__body -->
+                    </div><!-- /.demo-card -->
+                </div><!-- /.demo-carousel__slide -->
+
+                <!-- Slide 3: Responsive Lower Third -->
+                <div class="demo-carousel__slide" id="demo-slide-2" role="tabpanel"
+                     data-example-id="responsive-lower-third"
+                     aria-labelledby="demo-tab-2" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="responsive-lower-third">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Responsive Lower Third</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Multi-device</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/responsive-lower-third"
+                                   data-example-download="responsive-lower-third"
+                                   aria-label="Download the Responsive Lower Third OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options" role="radiogroup"
+                                     aria-label="Responsive Lower Third format">
+                                    <button class="demo-aspect-btn is-active" type="button" role="radio"
+                                            aria-checked="true" tabindex="0" data-ratio="16/9"
+                                            title="Landscape 16:9">
+                                        <svg width="20" height="14" viewBox="0 0 20 14">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="4/3"
+                                            title="Classic 4:3">
+                                        <svg width="16" height="14" viewBox="0 0 16 14">
+                                            <rect x="0.5" y="0.5" width="15" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>4:3</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="1/1"
+                                            title="Square 1:1">
+                                        <svg width="14" height="14" viewBox="0 0 14 14">
+                                            <rect x="0.5" y="0.5" width="13" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>1:1</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="9/16"
+                                            title="Portrait 9:16">
+                                        <svg width="10" height="16" viewBox="0 0 10 16">
+                                            <rect x="0.5" y="0.5" width="9" height="15" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>9:16</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player data-ratio="16/9">
+                                    <iframe
+                                            class="demo-player__iframe"
+                                            data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=responsive-lower-third"
+                                            title="OGraf Responsive Lower Third Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"
+                                    ></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play" type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update" type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop" type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields">
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Name</span>
+                                        <input class="demo-field__input" data-demo-field="name" type="text"
+                                               value="Anders Berg" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Title</span>
+                                        <input class="demo-field__input" data-demo-field="title" type="text"
+                                               value="Senior Correspondent" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Channel</span>
+                                        <input class="demo-field__input" data-demo-field="channel" type="text"
+                                               value="OGraf News" autocomplete="off">
+                                    </label>
+
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div><!-- /.demo-card__body -->
+                    </div><!-- /.demo-card -->
+                </div><!-- /.demo-carousel__slide -->
+
+                <!-- Slide 4: Bar Chart -->
+                <div class="demo-carousel__slide" id="demo-slide-3" role="tabpanel"
+                     data-example-id="bar-chart"
+                     aria-labelledby="demo-tab-3" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="bar-chart">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Bar Chart</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Full screen</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/bar-chart"
+                                   data-example-download="bar-chart"
+                                   aria-label="Download the Bar Chart OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options">
+                                    <span class="demo-aspect-fixed">
+                                        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9 fixed</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player>
+                                    <iframe class="demo-player__iframe" data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=bar-chart"
+                                            title="OGraf Bar Chart Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play"
+                                            type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update"
+                                            type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop"
+                                            type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields demo-controls__fields--compact">
+                                    <label class="demo-field demo-field--wide">
+                                        <span class="demo-field__label">Title</span>
+                                        <input class="demo-field__input" data-demo-field="_Title" type="text"
+                                               value="Bar Chart Graphic" autocomplete="off">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 1</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 1"
+                                               data-demo-value-type="number" type="number" value="205">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 2</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 2"
+                                               data-demo-value-type="number" type="number" value="600">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 3</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 3"
+                                               data-demo-value-type="number" type="number" value="807">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 4</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 4"
+                                               data-demo-value-type="number" type="number" value="1200">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 5</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 5"
+                                               data-demo-value-type="number" type="number" value="290">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Value 6</span>
+                                        <input class="demo-field__input" data-demo-field="_Value 6"
+                                               data-demo-value-type="number" type="number" value="102">
+                                    </label>
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.demo-carousel__slide -->
+
+                <!-- Slide 5: Headline -->
+                <div class="demo-carousel__slide" id="demo-slide-4" role="tabpanel"
+                     data-example-id="headline"
+                     aria-labelledby="demo-tab-4" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="headline">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Headline</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Lower third</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/headline"
+                                   data-example-download="headline"
+                                   aria-label="Download the Headline OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options">
+                                    <span class="demo-aspect-fixed">
+                                        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9 fixed</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player>
+                                    <iframe class="demo-player__iframe" data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=headline"
+                                            title="OGraf Headline Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play"
+                                            type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update"
+                                            type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop"
+                                            type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields">
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Tag</span>
+                                        <input class="demo-field__input" data-demo-field="_headlineTagText"
+                                               type="text" value="Breaking News" autocomplete="off">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Headline</span>
+                                        <input class="demo-field__input" data-demo-field="_headlineText"
+                                               type="text" value="Breaking News - OGraf" autocomplete="off">
+                                    </label>
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.demo-carousel__slide -->
+
+                <!-- Slide 6: Weather -->
+                <div class="demo-carousel__slide" id="demo-slide-5" role="tabpanel"
+                     data-example-id="weather"
+                     aria-labelledby="demo-tab-5" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="weather">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Weather</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Full screen</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/weather"
+                                   data-example-download="weather"
+                                   aria-label="Download the Weather OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options">
+                                    <span class="demo-aspect-fixed">
+                                        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9 fixed</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player>
+                                    <iframe class="demo-player__iframe" data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=weather"
+                                            title="OGraf Weather Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play"
+                                            type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update"
+                                            type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop"
+                                            type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields demo-controls__fields--compact">
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">City</span>
+                                        <input class="demo-field__input" data-demo-field="_city" type="text"
+                                               value="Hannover" autocomplete="off">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Temperature</span>
+                                        <input class="demo-field__input" data-demo-field="_temperature"
+                                               type="text" value="25" autocomplete="off">
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Weather</span>
+                                        <select class="demo-field__input" data-demo-field="_sun-lightning-rain-snow"
+                                                data-demo-value-type="number">
+                                            <option value="0" selected>Sun</option>
+                                            <option value="1">Storm</option>
+                                            <option value="2">Rain</option>
+                                            <option value="3">Snow</option>
+                                        </select>
+                                    </label>
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">City color</span>
+                                        <select class="demo-field__input" data-demo-field="_darkText"
+                                                data-demo-value-type="number">
+                                            <option value="0" selected>Light</option>
+                                            <option value="1">Dark</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.demo-carousel__slide -->
+
+                </div><!-- /.demo-carousel__track -->
+            </div><!-- /.demo-carousel__viewport -->
+
+            <button class="demo-carousel__btn demo-carousel__btn--prev" type="button" aria-label="Previous demo" disabled>
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <button class="demo-carousel__btn demo-carousel__btn--next" type="button" aria-label="Next demo">
+                <i data-lucide="chevron-right"></i>
+            </button>
+
+            <div class="demo-carousel__dots" role="tablist" aria-label="Demo navigation">
+                <button class="demo-carousel__dot is-active" id="demo-tab-0" type="button" role="tab"
+                        aria-selected="true" aria-controls="demo-slide-0" tabindex="0" data-index="0"
+                        data-example-id="scoreboard"
+                        aria-label="Live Scoreboard"></button>
+                <button class="demo-carousel__dot" id="demo-tab-1" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-1" tabindex="-1" data-index="1"
+                        data-example-id="l3rd-name"
+                        aria-label="L3rd Name"></button>
+                <button class="demo-carousel__dot" id="demo-tab-2" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-2" tabindex="-1" data-index="2"
+                        data-example-id="responsive-lower-third"
+                        aria-label="Responsive Lower Third"></button>
+                <button class="demo-carousel__dot" id="demo-tab-3" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-3" tabindex="-1" data-index="3"
+                        data-example-id="bar-chart" aria-label="Bar Chart"></button>
+                <button class="demo-carousel__dot" id="demo-tab-4" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-4" tabindex="-1" data-index="4"
+                        data-example-id="headline" aria-label="Headline"></button>
+                <button class="demo-carousel__dot" id="demo-tab-5" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-5" tabindex="-1" data-index="5"
+                        data-example-id="weather" aria-label="Weather"></button>
+            </div>
+
+        </div><!-- /.demo-carousel -->
+
+    </section>
+
+    <!-- ---------------------------------------
+         WHAT IT IS / ISN'T
+    --------------------------------------- -->
+    <section class="section-whatis">
+        <div class="container">
+
+            <div class="whatis__header">
+                <p class="eyebrow">Clarity</p>
+                <h2 class="heading-section">What OGraf is – and isn't.</h2>
+            </div>
+
+            <div class="whatis__grid">
+
+                <div class="whatis__col whatis__col--is">
+                    <h3 class="whatis__col-heading">
+                        <span class="whatis__col-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                        It is
+                    </h3>
+                    <ul class="whatis__list">
+                        <li class="whatis__item whatis__item--is">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                            <span>A unified HTML-based standard for both rendered and live graphics</span>
+                        </li>
+                        <li class="whatis__item whatis__item--is">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                            <span>A flexible API framework – integrates OGraf-compliant controllers, servers, and renderers, commercial or open source</span>
+                        </li>
+                        <li class="whatis__item whatis__item--is">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                            <span>A modular workflow – replace or upgrade individual components without disrupting the system</span>
+                        </li>
+                        <li class="whatis__item whatis__item--is">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                            <span>A universal platform – works across broadcast, web, mobile, streaming, video editing, and interactive devices</span>
+                        </li>
+                        <li class="whatis__item whatis__item--is">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="check"></i></span>
+                            <span>An open standard – maintained by the community, not owned by a vendor</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="whatis__divider" aria-hidden="true"></div>
+
+                <div class="whatis__col whatis__col--isnot">
+                    <h3 class="whatis__col-heading">
+                        <span class="whatis__col-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                        It isn't
+                    </h3>
+                    <ul class="whatis__list">
+                        <li class="whatis__item whatis__item--isnot">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                            <span>A renderer or playback engine</span>
+                        </li>
+                        <li class="whatis__item whatis__item--isnot">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                            <span>A control system or CMS</span>
+                        </li>
+                        <li class="whatis__item whatis__item--isnot">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                            <span>A replacement for your existing tools – it works with them</span>
+                        </li>
+                        <li class="whatis__item whatis__item--isnot">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                            <span>Tied to any vendor, platform, or proprietary format</span>
+                        </li>
+                        <li class="whatis__item whatis__item--isnot">
+                            <span class="whatis__item-icon" aria-hidden="true"><i data-lucide="x"></i></span>
+                            <span>A requirement to rewrite existing graphics - it's a layer of interoperability</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         TWO CREATION PATHS
+    --------------------------------------- -->
+    <section class="section-paths">
+        <div class="container">
+
+            <div class="paths__header">
+                <p class="eyebrow">Two Ways to Build</p>
+                <h2 class="heading-section">For every creator.</h2>
+                <p class="paths__intro">OGraf graphics are HTML at heart, which means they can be created with code,
+                    with visual tools, or anything in between. The same standard. The same compatibility.</p>
+            </div>
+
+            <div class="paths__grid">
+
+                <div class="path-card path-card--dev">
+                    <div class="path-card__icon" aria-hidden="true"><i data-lucide="code-2"></i></div>
+                    <h3 class="path-card__title">For Developers</h3>
+                    <p class="path-card__sub">HTML &middot; CSS &middot; JavaScript</p>
+                    <p class="path-card__desc">Write OGraf graphics as standard web modules. Use any framework, any IDE,
+                        any AI coding assistant. If you can build for the web, you can build broadcast graphics.</p>
+                    <ul class="path-card__list">
+                        <li>Any web developer can contribute</li>
+                        <li>Full access to the web platform</li>
+                        <li>AI-generated code works out of the box</li>
+                        <li>Fits your existing development workflow</li>
+                    </ul>
+                </div>
+
+                <div class="path-card path-card--designer">
+                    <div class="path-card__icon" aria-hidden="true"><i data-lucide="pen-tool"></i></div>
+                    <h3 class="path-card__title">For Designers</h3>
+                    <p class="path-card__sub">Visual tools &middot; No coding required</p>
+                    <p class="path-card__desc">Create professional broadcast graphics entirely through visual design
+                        tools, no programming knowledge needed. Export OGraf-compliant graphics directly.</p>
+                    <ul class="path-card__list">
+                        <li>Design and animate visually</li>
+                        <li>Export OGraf-ready graphics in one step</li>
+                        <li>No code, no complexity</li>
+                        <li>The same standard. The same compatibility.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         VIDEO
+    --------------------------------------- -->
+    <section class="section-video">
+        <div class="container">
+            <div class="section-video__header">
+                <p class="eyebrow">In Action</p>
+                <h2 class="heading-lg">From design to air<br>in minutes.</h2>
+                <p class="section-video__sub">Watch how an OGraf graphic is created with a visual design tool and played
+                    out, no coding required.</p>
+            </div>
+            <div class="section-video__embed" data-video-id="u4wruk2QTs0">
+                <button class="section-video__consent" type="button">
+                    <span class="section-video__play" aria-hidden="true"><i data-lucide="play"></i></span>
+                    <span class="section-video__consent-copy">
+                        <strong>Load video</strong>
+                        <span>Connect to YouTube only after you choose to play it.</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         CODE EXAMPLE
+    --------------------------------------- -->
+    <section class="section-code">
+        <div class="container">
+
+            <div class="code-section__layout">
+
+                <div class="code-section__copy">
+                    <p class="eyebrow">Under the Hood</p>
+                    <h2 class="heading-section">Simple by design.</h2>
+                    <p>
+                        At its core, an OGraf graphic needs only a JSON manifest that declares the data schema and a Web
+                        Component with standard control functions.
+                    </p>
+                    <p>
+                        Everything else is standard HTML, CSS, and JavaScript.
+                    </p>
+                    <p class="code__kicker">
+                        No runtime dependencies. No proprietary APIs. Pure web standards.
+                    </p>
+                </div>
+
+                <div class="code-section__block">
+                    <div class="code-block">
+                        <div class="code-block__header">
+                            <span class="code-block__traffic-lights" aria-hidden="true">
+                                <span class="code-block__dot code-block__dot--red"></span>
+                                <span class="code-block__dot code-block__dot--yellow"></span>
+                                <span class="code-block__dot code-block__dot--green"></span>
+                            </span>
+                            <div class="code-block__tabs" role="tablist" aria-label="OGraf code examples">
+                                <button class="code-block__tab is-active" id="code-tab-manifest" type="button"
+                                        role="tab" aria-selected="true" aria-controls="code-panel-manifest"
+                                        tabindex="0" data-tab="manifest">graphic.ograf.json
+                                </button>
+                                <button class="code-block__tab" id="code-tab-module" type="button"
+                                        role="tab" aria-selected="false" aria-controls="code-panel-module"
+                                        tabindex="-1" data-tab="module">graphic.mjs</button>
+                            </div>
+                        </div>
+
+                        <!-- Panel: manifest -->
+                        <pre class="code-block__pre code-block__panel is-active" id="code-panel-manifest"
+                             role="tabpanel" aria-labelledby="code-tab-manifest" tabindex="0"
+                             aria-label="graphic.ograf.json example" data-panel="manifest"><code
+                                class="code-block__code">{
+  <span class="tok-key">"$schema"</span>: <span class="tok-string">"https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json"</span>,
+  <span class="tok-key">"id"</span>:      <span class="tok-string">"my-lower-third"</span>,
+  <span class="tok-key">"name"</span>:    <span class="tok-string">"Lower Third"</span>,
+  <span class="tok-key">"main"</span>:    <span class="tok-string">"graphic.mjs"</span>,
+  <span class="tok-key">"supportsRealTime"</span>:    <span class="tok-var">true</span>,
+  <span class="tok-key">"supportsNonRealTime"</span>: <span class="tok-var">false</span>,
+  <span class="tok-key">"stepCount"</span>: <span class="tok-number">1</span>,
+  <span class="tok-key">"schema"</span>: {
+    <span class="tok-key">"type"</span>: <span class="tok-string">"object"</span>,
+    <span class="tok-key">"properties"</span>: {
+      <span class="tok-key">"name"</span>:  { <span class="tok-key">"type"</span>: <span
+                                    class="tok-string">"string"</span>, <span class="tok-key">"default"</span>: <span
+                                    class="tok-string">"Jane Smith"</span> },
+      <span class="tok-key">"title"</span>: { <span class="tok-key">"type"</span>: <span
+                                    class="tok-string">"string"</span>, <span class="tok-key">"default"</span>: <span
+                                    class="tok-string">"Correspondent"</span> }
+    }
+  }
+}</code></pre>
+
+                        <!-- Panel: module -->
+                        <pre class="code-block__pre code-block__panel" id="code-panel-module"
+                             role="tabpanel" aria-labelledby="code-tab-module" tabindex="0" hidden
+                             aria-label="graphic.mjs example" data-panel="module"><code
+                                class="code-block__code"><span class="tok-keyword">export default class</span> <span
+                                class="tok-fn">LowerThird</span> <span class="tok-keyword">extends</span> <span
+                                class="tok-var">HTMLElement</span> {
+
+  <span class="tok-keyword">async</span> <span class="tok-fn">load</span>(data) {
+    <span class="tok-var">this</span>._data = data;
+    <span class="tok-var">this</span>.attachShadow({ mode: <span class="tok-string">'open'</span> });
+    <span class="tok-var">this</span>.shadowRoot.innerHTML =
+      <span class="tok-string">`&lt;div class="graphic"&gt;&lt;span id="name"&gt;&lt;/span&gt; &lt;span id="title"&gt;&lt;/span&gt;&lt;/div&gt;`</span>;
+    <span class="tok-keyword">return</span> { status: <span class="tok-number">0</span> };
+  }
+
+  <span class="tok-keyword">async</span> <span class="tok-fn">playAction</span>() {
+    <span class="tok-var">this</span>.shadowRoot.<span class="tok-fn">querySelector</span>(<span class="tok-string">'.graphic'</span>).<span
+                                    class="tok-fn">animate</span>(
+      [{ transform: <span class="tok-string">'translateY(100%)'</span> }, { transform: <span class="tok-string">'translateY(0)'</span> }],
+      { duration: <span class="tok-number">400</span>, fill: <span class="tok-string">'forwards'</span> }
+    );
+    <span class="tok-keyword">return</span> { status: <span class="tok-number">0</span> };
+  }
+
+  <span class="tok-keyword">async</span> <span class="tok-fn">stopAction</span>() {
+    <span class="tok-keyword">await</span> <span class="tok-var">this</span>.shadowRoot.<span class="tok-fn">querySelector</span>(<span
+                                    class="tok-string">'.graphic'</span>)
+      .<span class="tok-fn">animate</span>([{ transform: <span class="tok-string">'translateY(100%)'</span> }], { duration: <span
+                                    class="tok-number">300</span>, fill: <span class="tok-string">'forwards'</span> })
+      .finished;
+    <span class="tok-keyword">return</span> { status: <span class="tok-number">0</span> };
+  }
+
+  <span class="tok-keyword">async</span> <span class="tok-fn">updateAction</span>(data) {
+    Object.<span class="tok-fn">assign</span>(<span class="tok-var">this</span>._data, data);
+    <span class="tok-var">this</span>.shadowRoot.<span class="tok-fn">querySelector</span>(<span class="tok-string">'#name'</span>).textContent  = <span
+                                    class="tok-var">this</span>._data.name;
+    <span class="tok-var">this</span>.shadowRoot.<span class="tok-fn">querySelector</span>(<span class="tok-string">'#title'</span>).textContent = <span
+                                    class="tok-var">this</span>._data.title;
+    <span class="tok-keyword">return</span> { status: <span class="tok-number">0</span> };
+  }
+}</code></pre>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         TESTIMONIALS
+    --------------------------------------- -->
+    <!-- Testimonials are temporarily omitted until the final quotes are available.
+    <section class="section-testimonials">
+        <div class="container">
+
+            <div class="testimonials__header">
+                <p class="eyebrow">Testimonials</p>
+                <h2 class="heading-section">Trusted by broadcasters.</h2>
+            </div>
+
+            <div class="testimonials__grid">
+
+                <blockquote class="testimonial-card">
+                    <p class="testimonial-card__quote">"OGraf has fundamentally changed how we approach graphics
+                        procurement. For the first time we can evaluate vendors purely on merit, not on lock-in."</p>
+                    <footer class="testimonial-card__footer">
+                        <div class="testimonial-card__avatar" aria-hidden="true">JD</div>
+                        <div>
+                            <p class="testimonial-card__name">[Head of Broadcast Technology]</p>
+                            <p class="testimonial-card__org">[Major European Broadcaster] - placeholder</p>
+                        </div>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card">
+                    <p class="testimonial-card__quote">"Our developers were building broadcast graphics in their first
+                        week. No specialist training required, just the web skills they already had."</p>
+                    <footer class="testimonial-card__footer">
+                        <div class="testimonial-card__avatar" aria-hidden="true">MK</div>
+                        <div>
+                            <p class="testimonial-card__name">[Lead Graphics Developer]</p>
+                            <p class="testimonial-card__org">[Graphics Vendor] - placeholder</p>
+                        </div>
+                    </footer>
+                </blockquote>
+
+                <blockquote class="testimonial-card">
+                    <p class="testimonial-card__quote">"We went from a 6-month integration project to a 2-week
+                        implementation. OGraf gave us the standard we didn't know we needed."</p>
+                    <footer class="testimonial-card__footer">
+                        <div class="testimonial-card__avatar" aria-hidden="true">AR</div>
+                        <div>
+                            <p class="testimonial-card__name">[CTO]</p>
+                            <p class="testimonial-card__org">[Broadcast Solutions Provider] - placeholder</p>
+                        </div>
+                    </footer>
+                </blockquote>
+
+            </div>
+
+        </div>
+    </section>
+    -->
+
+    <!-- ---------------------------------------
+         PROJECT STATUS
+    --------------------------------------- -->
+    <section class="section-status" id="status">
+        <div class="container">
+
+            <div class="status__header">
+                <p class="eyebrow status__eyebrow">Project Status</p>
+                <h2 class="heading-section status__heading">OGraf v1 is stable.</h2>
+                <p class="status__intro">Version 1 includes the Graphics Specification and the Server API. Both are
+                    published, stable, and maintained with backwards-compatible or optional changes.</p>
+            </div>
+
+            <div class="status-grid">
+                <article class="status-card">
+                    <div class="status-card__meta">
+                        <span class="status-card__badge"><i data-lucide="circle-check" aria-hidden="true"></i>
+                            Stable</span>
+                        <span class="status-card__date mono">Published 2025-09-17</span>
+                    </div>
+                    <h3 class="status-card__title">OGraf Graphics Specification</h3>
+                    <p class="status-card__desc">The stable Version 1 specification for HTML-based graphics.</p>
+                    <div class="status-card__links">
+                        <a href="https://ograf.ebu.io/v1/specification/docs/Specification.html"
+                           target="_blank" rel="noopener">Read the specification</a>
+                    </div>
+                </article>
+
+                <article class="status-card">
+                    <div class="status-card__meta">
+                        <span class="status-card__badge"><i data-lucide="circle-check" aria-hidden="true"></i>
+                            Stable</span>
+                        <span class="status-card__date mono">Published 2026-08-13</span>
+                    </div>
+                    <h3 class="status-card__title">OGraf Server API</h3>
+                    <p class="status-card__desc">The stable Version 1 REST API between OGraf controllers and
+                        renderers.</p>
+                    <div class="status-card__links">
+                        <a href="https://ograf.ebu.io/v1/specification/docs/Specification_Server_API.html"
+                           target="_blank" rel="noopener">Read the Server API specification</a>
+                        <a href="https://ograf.ebu.io/v1/specification/open-api/docs/"
+                           target="_blank" rel="noopener">Explore OpenAPI</a>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         VENDORS & ADOPTERS
+    --------------------------------------- -->
+    <section class="section-vendors">
+        <div class="container">
+
+            <div class="vendors__header">
+                <p class="eyebrow">Ecosystem</p>
+                <h2 class="heading-section">Vendors &amp; adopters.</h2>
+                <p class="vendors__intro">These companies build OGraf-compatible tools and broadcast organizations that
+                    have adopted the standard.</p>
+            </div>
+
+            <div class="vendors__group">
+                <h3 class="vendors__group-label">Vendors</h3>
+                <!-- Autopopulated by js/logo-grid.js from the manifest below.
+                     Workflow: drop the new logo into website/assets/img/vendor-logos/vendors/,
+                     run npm --prefix website/_tooling run update-manifests, then edit the manifest
+                     to fill in the proper name + url for the new entry. -->
+                <ul class="logo-grid"
+                    data-manifest="website/assets/img/vendor-logos/vendors/manifest.json"
+                    data-base="website/assets/img/vendor-logos/vendors/"></ul>
+            </div>
+
+            <div class="vendors__group">
+                <h3 class="vendors__group-label">Broadcast Organizations</h3>
+                <!-- Autopopulated by js/logo-grid.js from the manifest below.
+                     Workflow: drop the new logo into website/assets/img/vendor-logos/organisations/,
+                     run npm --prefix website/_tooling run update-manifests, then edit the manifest
+                     to fill in the proper name + url for the new entry. -->
+                <ul class="logo-grid"
+                    data-manifest="website/assets/img/vendor-logos/organisations/manifest.json"
+                    data-base="website/assets/img/vendor-logos/organisations/"></ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ---------------------------------------
+         GITHUB / OPEN SOURCE
+    --------------------------------------- -->
+    <section class="section-github">
+        <div class="container">
+
+            <div class="github__layout">
+
+                <div class="github__copy">
+                    <p class="eyebrow github__eyebrow">Open Source</p>
+                    <h2 class="heading-section github__heading">Built in the open.<br>Owned by no one.</h2>
+                    <p class="github__desc">OGraf is maintained on GitHub. The specification, tooling, and sample
+                        packages are all public. Read it, fork it, contribute to it.</p>
+
+                    <div class="github__links">
+                        <a href="https://github.com/ebu/ograf"
+                           class="btn btn--light"
+                           target="_blank" rel="noopener">
+                            <i data-lucide="star" aria-hidden="true"></i> GitHub Repository
+                        </a>
+                        <a href="https://github.com/ebu/ograf/issues"
+                           class="github__text-link"
+                           target="_blank" rel="noopener">Issues</a>
+                        <a href="https://github.com/ebu/ograf/blob/main/CHANGELOG.md"
+                           class="github__text-link"
+                           target="_blank" rel="noopener">Changelog</a>
+                    </div>
+                </div>
+
+                <section class="github__contents" aria-label="Repository contents">
+                    <p class="github__contents-label">The repo contains</p>
+                    <ul class="github__list">
+                        <li class="github__list-item">
+                            <span class="github__list-icon" aria-hidden="true"><i data-lucide="file-text"></i></span>
+                            Comprehensive workflow descriptions
+                        </li>
+                        <li class="github__list-item">
+                            <span class="github__list-icon" aria-hidden="true"><i data-lucide="book-open"></i></span>
+                            Detailed documentation and specifications
+                        </li>
+                        <li class="github__list-item">
+                            <span class="github__list-icon" aria-hidden="true"><i data-lucide="test-tube-2"></i></span>
+                            Sample graphics packages for testing
+                        </li>
+                        <li class="github__list-item">
+                            <span class="github__list-icon" aria-hidden="true"><i data-lucide="wrench"></i></span>
+                            Developer toolkits and testing frameworks
+                        </li>
+                        <li class="github__list-item">
+                            <span class="github__list-icon" aria-hidden="true"><i data-lucide="palette"></i></span>
+                            OGraf logos for software integration
+                        </li>
+                    </ul>
+                </section>
+
+            </div>
+
+            <!-- Working Group CTA - companion strip to the GitHub block.
+                 Both sections answer "how do I contribute?": GitHub for
+                 code, this for the spec / requirements / direction. -->
+            <div class="github__wg">
+
+                <div class="github__wg-copy">
+                    <p class="eyebrow github__wg-eyebrow">Working Group</p>
+                    <h3 class="github__wg-heading">Join the EBU HTML Graphics Working Group</h3>
+                    <p class="github__wg-desc">
+                        Help shape the OGraf specification. Share requirements. Influence development. Drive adoption.
+                    </p>
+                    <p class="github__wg-note">Open to EBU members and industry contributors.</p>
+                </div>
+
+                <div class="github__wg-actions">
+                    <a href="https://tech.ebu.ch/groups/html-graphics"
+                       class="btn btn--light github__wg-btn"
+                       target="_blank" rel="noopener">
+                        Join the Working Group
+                        <i data-lucide="arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- ---------------------------------------
+     FOOTER
+--------------------------------------- -->
+<footer class="site-footer">
+    <div class="container">
+
+        <div class="footer__main">
+
+            <div class="footer__brand">
+                <a href="./" aria-label="OGraf - Home">
+                    <img src="docs/logo/ograf-logo-colour.svg" alt="OGraf" class="footer__logo" width="100"
+                         height="34">
+                </a>
+                <p class="footer__tagline">Open Graphics. Open Possibilities.</p>
+                <p class="footer__ebu">A project by the <a href="https://tech.ebu.ch" target="_blank" rel="noopener">European
+                    Broadcasting Union</a></p>
+            </div>
+
+            <nav class="footer__nav" aria-label="Footer navigation">
+
+                <div class="footer__nav-group">
+                    <p class="footer__nav-label">Specification</p>
+                    <ul>
+                        <li><a href="https://ograf.ebu.io/v1/specification/docs/Specification.html" target="_blank"
+                               rel="noopener">Read the Spec</a></li>
+                        <li><a href="https://github.com/ebu/ograf/blob/main/CHANGELOG.md" target="_blank"
+                               rel="noopener">Changelog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__nav-group">
+                    <p class="footer__nav-label">GitHub</p>
+                    <ul>
+                        <li><a href="https://github.com/ebu/ograf" target="_blank" rel="noopener">Repository</a></li>
+                        <li><a href="https://github.com/ebu/ograf/issues" target="_blank" rel="noopener">Issues</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__nav-group">
+                    <p class="footer__nav-label">EBU</p>
+                    <ul>
+                        <li><a href="https://tech.ebu.ch" target="_blank" rel="noopener">EBU Tech</a></li>
+                    </ul>
+                </div>
+
+            </nav>
+
+        </div>
+
+        <div class="footer__bottom">
+            <p class="footer__copy">&copy; <span id="footer-year"></span> European Broadcasting Union. OGraf is an open
+                standard.</p>
+            <p class="footer__legal mono">
+                <a href="https://github.com/ebu/ograf/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+<!-- Lucide icons -->
+<script src="website/assets/vendor/lucide/lucide.min.js?v=2"></script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="website/assets/vendor/gsap/gsap.min.js"></script>
+<script src="website/assets/vendor/gsap/ScrollTrigger.min.js"></script>
+
+<script src="website/js/site.js?v=2"></script>
+
+<script src="website/js/animations.js?v=7"></script>
+
+<!-- Demo control panel -->
+<script src="website/js/demo-controls.js?v=2"></script>
+
+<!-- Demo 2: Scoreboard control panel -->
+<script src="website/js/demo-scoreboard.js?v=12"></script>
+
+<!-- Demo carousel -->
+    <script src="website/js/demo-carousel.js?v=13"></script>
+
+<!-- Build current example ZIP downloads in the browser. -->
+<script type="module" src="website/js/example-download.js?v=1"></script>
+
+<!-- Multi-device stage demo -->
+<!-- Register the responsive OGraf example for the multi-device stage. -->
+<script type="module">
+    import ResponsiveLowerThird from
+        './v1/examples/responsive-lower-third/graphic.mjs';
+
+    customElements.define('ograf-lower-third', ResponsiveLowerThird);
+</script>
+
+<script src="website/js/stage-demo.js?v=4"></script>
+
+<!-- Vendor logo ticker (auto-discovers logos in assets/img/vendor-logos/vendors/) -->
+<script src="website/js/vendor-ticker.js?v=2"></script>
+
+<!-- Autopopulates the bottom "Vendors & adopters" logo grids from
+     assets/img/vendor-logos/{vendors,organisations}/manifest.json. -->
+<script src="website/js/logo-grid.js?v=2"></script>
+
+<!-- Code block tab switcher -->
+<script src="website/js/code-tabs.js?v=1"></script>
+
+<script>
+    const lucideIcons = window['lucide'];
+    if (lucideIcons && typeof lucideIcons.createIcons === 'function') {
+        lucideIcons.createIcons();
+    }
+</script>
+<script src="website/js/video-embed.js?v=2"></script>
+<script type="module" src="website/js/hero-ticker.js?v=5"></script>
+</body>
+</html>

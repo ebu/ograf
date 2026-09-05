@@ -1,0 +1,97 @@
+name: Website checks
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/website-checks.yml"
+      - "_config.yml"
+      - "CHANGELOG.md"
+      - "CNAME"
+      - "docs/logo/**"
+      - "index.html"
+      - "robots.txt"
+      - "site.webmanifest"
+      - "sitemap.xml"
+      - "v1/examples/**"
+      - "v1/specification/**"
+      - "website/**"
+  pull_request:
+    paths:
+      - ".github/workflows/website-checks.yml"
+      - "_config.yml"
+      - "CHANGELOG.md"
+      - "CNAME"
+      - "docs/logo/**"
+      - "index.html"
+      - "robots.txt"
+      - "site.webmanifest"
+      - "sitemap.xml"
+      - "v1/examples/**"
+      - "v1/specification/**"
+      - "website/**"
+  workflow_dispatch:
+    inputs:
+      full_matrix:
+        description: Run all tests in all five browser and viewport projects
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Jekyll output
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+
+      - name: Set up Node.js
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: website/_tooling/package-lock.json
+
+      - name: Install website tooling
+        run: npm --prefix website/_tooling ci --ignore-scripts
+
+      - name: Verify vendored assets
+        run: |
+          npm --prefix website/_tooling run vendor-assets
+          git diff --exit-code -- website/assets website/_tooling/package-lock.json
+
+      - name: Validate source and manifests
+        run: npm --prefix website/_tooling run validate
+
+      - name: Build the GitHub Pages site
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
+        with:
+          source: ./
+          destination: ./_site
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Playwright browsers
+        run: npx --prefix website/_tooling playwright install --with-deps chromium firefox webkit
+
+      - name: Test generated site with the lean browser matrix
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.full_matrix != true }}
+        run: npm --prefix website/_tooling run test:browsers
+        env:
+          CI: true
+          REQUIRE_JEKYLL_OUTPUT: "1"
+          SITE_ROOT: ../../_site
+
+      - name: Test generated site with the full browser matrix
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.full_matrix == true }}
+        run: npm --prefix website/_tooling run test:browsers:full
+        env:
+          CI: true
+          REQUIRE_JEKYLL_OUTPUT: "1"
+          SITE_ROOT: ../../_site

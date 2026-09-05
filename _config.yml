@@ -1,0 +1,5 @@
+exclude:
+  - website/README.md
+  - website/_tooling
+
+keep_files: []

@@ -10,6 +10,7 @@
 class MyGraphic extends HTMLElement {
   constructor() {
     super();
+    this.currentStep = undefined;
     this.nonRealTimeState = {};
     this.displayState = {}
     this.loadParams = {}
@@ -25,6 +26,7 @@ class MyGraphic extends HTMLElement {
     // 3. Initialize the GSAP timeline
 
     this.loadParams = loadParams
+    this.currentStep = undefined;
 
     // Load the GSAP scripts ---------------------------------------------------
     const importsPromises = {
@@ -84,6 +86,8 @@ class MyGraphic extends HTMLElement {
 
     const logo = document.createElement("img");
     logo.src = await this._loadImage(import.meta.resolve("./lib/ograf-logo-app.svg"))
+    logo.alt = '';
+    logo.setAttribute('aria-hidden', 'true');
     logo.style.position = "absolute";
     logo.style.left = `calc(10%)`
     logo.style.bottom = `calc(10% + 10px)`
@@ -125,17 +129,29 @@ class MyGraphic extends HTMLElement {
 
     await this._doAction("updateAction", params);
   }
-  async playAction(params) {
+  async playAction(params = {}) {
     // params.delta
     // params.goto
     // params.skipAnimation
 
+    const targetStep = this._resolveTargetStep(params);
+    if (targetStep === undefined) {
+      await this._doAction("stopAction", params);
+      this.currentStep = undefined;
+
+      return { statusCode: 200, currentStep: undefined };
+    }
+
     await this._doAction("playAction", params);
+    this.currentStep = targetStep;
+
+    return { statusCode: 200, currentStep: this.currentStep };
   }
-  async stopAction(params) {
+  async stopAction(params = {}) {
     // params.skipAnimation
 
     await this._doAction("stopAction", params);
+    this.currentStep = undefined;
   }
   async customAction(params) {
     // params.id
@@ -154,6 +170,13 @@ class MyGraphic extends HTMLElement {
 
     // Wait for timeline to finish animating:
     await timeline.then();
+  }
+  _resolveTargetStep({ delta = 1, goto } = {}) {
+    const targetStep = Number.isInteger(goto) && goto >= 0
+      ? goto
+      : (this.currentStep ?? -1) + (Number.isInteger(delta) ? delta : 1);
+
+    return targetStep >= 1 ? undefined : 0;
   }
   async goToTime(payload) {
     this.nonRealTimeState.timestamp = payload.timestamp;

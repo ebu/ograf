@@ -4,6 +4,15 @@
     "description": "Name lower third",
     "id": "l3rd-name",
     "main": "graphic.mjs",
+    "thumbnails": [
+        {
+            "file": "thumbnail.webp",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        }
+    ],
     "version": "0",
     "author": {
         "name": "Johan Nyman, SuperFly.tv"
@@ -48,7 +57,7 @@
             "title": {
                 "type": "string",
                 "title": "Title",
-                "default": "Ograf expert"
+          "default": "OGraf expert"
             }
         }
     },

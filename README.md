@@ -41,3 +41,9 @@ Useful resources:
 
 * The **[OGraf Devtool](https://github.com/SuperFlyTV/ograf-devtool)** is a tool for developing OGraf graphics.
 * The **[OGraf Simple Rendering System](https://github.com/SuperFlyTV/ograf-server)** can be used to play OGraf Graphics in a browser (for use in any existing system capable of rendering HTML graphics).
+
+### Website
+
+The landing page is served from the repository root by GitHub Pages. See
+[website/README.md](./website/README.md) for local development and instructions for
+maintaining website examples and logos.

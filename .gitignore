@@ -6,3 +6,9 @@ __old_from_tmp_repo/
 
 # scripts used in local testing
 local-scripts/
+
+# Website tooling output
+website/_tooling/node_modules/
+website/_tooling/playwright-report/
+website/_tooling/test-results/
+_site/

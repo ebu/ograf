@@ -1,0 +1,143 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "804a74b8-0076-48b1-a804-4119ba888640",
+  "version": "1.0.1",
+  "name": "OGraf BarChart",
+  "main": "graphic.mjs",
+  "supportsRealTime": true,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "_Title": {
+        "type": "string",
+        "label": "Title",
+        "default": "Bar Chart Graphic",
+        "gddType": "single-line",
+        "order": 0
+      },
+      "_Value 1": {
+        "type": "number",
+        "label": "Value 1",
+        "default": 205,
+        "order": 1
+      },
+      "_Text 1": {
+        "type": "string",
+        "label": "Text 1",
+        "default": "2006",
+        "gddType": "single-line",
+        "order": 2
+      },
+      "_Value 2": {
+        "type": "number",
+        "label": "Value 2",
+        "default": 600,
+        "order": 3
+      },
+      "_Text 2": {
+        "type": "string",
+        "label": "Text 2",
+        "default": "2007",
+        "gddType": "single-line",
+        "order": 4
+      },
+      "_Value 3": {
+        "type": "number",
+        "label": "Value 3",
+        "default": 807,
+        "order": 5
+      },
+      "_Text 3": {
+        "type": "string",
+        "label": "Text 3",
+        "default": "2008",
+        "gddType": "single-line",
+        "order": 6
+      },
+      "_Value 4": {
+        "type": "number",
+        "label": "Value 4",
+        "default": 1200,
+        "order": 7
+      },
+      "_Text 4": {
+        "type": "string",
+        "label": "Text 4",
+        "default": "2009",
+        "gddType": "single-line",
+        "order": 8
+      },
+      "_Value 5": {
+        "type": "number",
+        "label": "Value 5",
+        "default": 290,
+        "order": 9
+      },
+      "_Text 5": {
+        "type": "string",
+        "label": "Text 5",
+        "default": "2010",
+        "gddType": "single-line",
+        "order": 10
+      },
+      "_Value 6": {
+        "type": "number",
+        "label": "Value 6",
+        "default": 102,
+        "order": 11
+      },
+      "_Text 6": {
+        "type": "string",
+        "label": "Text 6",
+        "default": "2011",
+        "gddType": "single-line",
+        "order": 12
+      }
+    }
+  },
+  "description": "A fullscreen graphic template with a barchart featuring six bars and a title.\nDesigned by Mike and technically adapted by Nico.",
+  "author": {
+    "name": "Mike and Nico",
+    "url": "streamshapers.com"
+  },
+  "stepCount": 1,
+  "actionDurations": [
+    {
+      "type": "playAction",
+      "duration": 4040
+    },
+    {
+      "type": "updateAction",
+      "duration": 0
+    },
+    {
+      "type": "stopAction",
+      "duration": 400
+    }
+  ],
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": {
+          "exact": 1920
+        },
+        "height": {
+          "exact": 1080
+        }
+      },
+      "frameRate": {
+        "exact": 50
+      }
+    }
+  ],
+  "thumbnails": [
+    {
+      "file": "thumbnail.png",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  ]
+}

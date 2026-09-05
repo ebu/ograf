@@ -1,0 +1,156 @@
+/* Diagonal reel of thumbnails declared by the curated OGraf examples. */
+.section-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-ticker {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.85;
+    -webkit-mask-image: radial-gradient(
+        ellipse 110% 90% at 50% 50%,
+        rgb(0 0 0) 30%,
+        rgb(0 0 0 / 0.45) 65%,
+        transparent 95%
+    );
+    mask-image: radial-gradient(
+        ellipse 110% 90% at 50% 50%,
+        rgb(0 0 0) 30%,
+        rgb(0 0 0 / 0.45) 65%,
+        transparent 95%
+    );
+}
+
+.hero-ticker__diag {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    width: 200%;
+    flex-direction: column;
+    gap: clamp(14px, 2vw, 28px);
+    pointer-events: auto;
+    transform: translate(-50%, -50%) rotate(-6deg);
+}
+
+.hero-ticker__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgb(13 17 23 / 0.1) 0%,
+        rgb(13 17 23 / 0.55) 28%,
+        rgb(13 17 23 / 0.55) 50%,
+        rgb(13 17 23 / 0.1) 72%,
+        transparent 100%
+    );
+}
+
+.section-hero .hero__inner {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.section-hero .hero__content,
+.section-hero .hero__badge {
+    pointer-events: auto;
+}
+
+.htk-row {
+    display: flex;
+    width: max-content;
+    gap: clamp(14px, 1.6vw, 24px);
+    animation: htk-right 95s linear infinite;
+    will-change: transform;
+}
+
+@keyframes htk-right {
+    from { transform: translateX(-25%); }
+    to { transform: translateX(0); }
+}
+
+.htk-card {
+    display: block;
+    width: 320px;
+    flex: 0 0 auto;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.htk-card:hover {
+    transform: translateY(-4px);
+}
+
+.htk-card__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px 8px;
+    color: rgb(249 250 251 / 0.85);
+    font-family: var(--font-mono), monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.htk-card__dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    background: var(--color-brand-periwinkle);
+    box-shadow: 0 0 8px var(--color-brand-periwinkle);
+}
+
+.htk-card__frame {
+    width: 320px;
+    height: 180px;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 14px;
+    background: var(--color-bg-dark);
+    box-shadow:
+        0 0 0 1px rgb(255 255 255 / 0.04),
+        0 18px 40px rgb(0 0 0 / 0.5),
+        0 0 32px -8px var(--color-brand-periwinkle);
+    transition: border-color 0.2s ease;
+}
+
+.htk-card:hover .htk-card__frame {
+    border-color: rgb(255 255 255 / 0.18);
+}
+
+.htk-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+}
+
+.section-hero .hero__heading,
+.section-hero .hero__sub {
+    text-shadow:
+        0 2px 14px rgb(13 17 23 / 0.9),
+        0 0 8px rgb(13 17 23 / 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .htk-row {
+        animation: none;
+    }
+
+    .htk-card,
+    .htk-card__frame {
+        transition: none;
+    }
+}

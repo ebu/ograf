@@ -1,0 +1,292 @@
+{
+    "version": 1,
+    "examples": [
+        {
+            "id": "scoreboard",
+            "title": "Live Scoreboard",
+            "manifest": "v1/examples/scoreboard/scoreboard.ograf.json",
+            "archiveName": "ograf-example-scoreboard.zip",
+            "presentation": {
+                "renderer": "viewport",
+                "background": {
+                    "type": "image",
+                    "src": "website/assets/img/bg-stadium.webp",
+                    "overlay": "rgba(4, 7, 18, 0.6)"
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/scoreboard/README.md",
+                    "archive": "README.md",
+                    "sha256": "d6fdcb289c324cccba4bcb846883f462fe095190402d6116f717c6da2f2deac0"
+                },
+                {
+                    "source": "v1/examples/scoreboard/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "2cc2e1c855a43ece121bb718d5c3bad7fbff6aa7b24297d5a0f3bfa8f50b09d7"
+                },
+                {
+                    "source": "v1/examples/scoreboard/scoreboard.ograf.json",
+                    "archive": "scoreboard.ograf.json",
+                    "sha256": "ab835f78f4697af6c59753b9b4c8bc93c0d2076465c108d64d045524967f6f1c"
+                },
+                {
+                    "source": "v1/examples/scoreboard/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "72aa6f6d77e6f03a2c6ae38a8de1e037d38bd9fd1e1858cd7a8a6963c4fbc02e"
+                }
+            ]
+        },
+        {
+            "id": "responsive-lower-third",
+            "title": "Responsive Lower Third",
+            "manifest": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
+            "archiveName": "ograf-example-responsive-lower-third.zip",
+            "presentation": {
+                "renderer": "viewport",
+                "background": {
+                    "type": "image",
+                    "src": "website/assets/img/bg-interview.webp",
+                    "overlay": "rgba(4, 7, 18, 0.18)"
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/responsive-lower-third/README.md",
+                    "archive": "README.md",
+                    "sha256": "509a6944963e52be23a4b68ce329f76e2fcfa881413e00d6df23143bb0063c45"
+                },
+                {
+                    "source": "v1/examples/responsive-lower-third/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "899c4b18aa0583281e682aa4ac538d64d9eae621c94ca04281aa59b9253ac035"
+                },
+                {
+                    "source": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
+                    "archive": "responsive-lower-third.ograf.json",
+                    "sha256": "6b7544adf92f3a3f58cfa67062b9aeeb9b0b3892d624d9a8ae7d98ee4124a13f"
+                },
+                {
+                    "source": "v1/examples/responsive-lower-third/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "19f2a00fbfa5baf81aa1ae20c18518a4ec6ea275cbdce0638a8f51b1731594a3"
+                }
+            ]
+        },
+        {
+            "id": "l3rd-name",
+            "title": "L3rd Name",
+            "manifest": "v1/examples/l3rd-name/l3rd.ograf.json",
+            "archiveName": "ograf-example-l3rd-name.zip",
+            "presentation": {
+                "renderer": "fixed-canvas",
+                "canvas": {
+                    "width": 1920,
+                    "height": 1080
+                },
+                "background": {
+                    "type": "image",
+                    "src": "website/assets/img/bg-newsroom.jpg",
+                    "overlay": "rgba(4, 7, 18, 0.12)"
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/l3rd-name/README.md",
+                    "archive": "README.md",
+                    "sha256": "69079c4c4e0ff52a7d84e866c3a7cf52aec2db91d948b038081624cf75ea825a"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "2c6440e4b1fd040316f89b9536df5772abc9a6a769fe98a32824991f901ccf42"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/l3rd.ograf.json",
+                    "archive": "l3rd.ograf.json",
+                    "sha256": "3c0abde2cef6ab51cc6eea77d72961c603ce668ccfc16ad6c7013708db8bd660"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/CSSPlugin.js",
+                    "archive": "lib/CSSPlugin.js",
+                    "sha256": "c2f2cff1b79e4cb4fddaff825479a6b0ccc06099c5ae1d0eaefec7f8f4f3a61d"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/TextPlugin.js",
+                    "archive": "lib/TextPlugin.js",
+                    "sha256": "01282229e1ef67338cf36206482e68151cea61c3dba7f405b9f74b70d4ec694c"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/gsap-core.js",
+                    "archive": "lib/gsap-core.js",
+                    "sha256": "7210e5562d6b1d4b438525d33014c8eac6042f8b92cac949e602c5b9c820aaeb"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/gsap.min.js",
+                    "archive": "lib/gsap.min.js",
+                    "sha256": "28033e449a31ebcc396e5be8b13b63152bf03094288fb5867034321927bce087"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/ograf-logo-app.svg",
+                    "archive": "lib/ograf-logo-app.svg",
+                    "sha256": "b100d43774a47c62fc3469e0ec376455b8901a821f1f5fa7de48a7b64b3194dd"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/lib/utils/strings.js",
+                    "archive": "lib/utils/strings.js",
+                    "sha256": "fc284f768f1860ad03c914aa1efef24fe4d8e2aa712700909126f4956647a328"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "8855edf0a1264b68006124a10a0b6117dc59ae5ad6e07d6978b965af8463e09c"
+                }
+            ]
+        },
+        {
+            "id": "bar-chart",
+            "title": "Bar Chart",
+            "manifest": "v1/examples/bar-chart/bar-chart.ograf.json",
+            "archiveName": "ograf-example-bar-chart.zip",
+            "presentation": {
+                "renderer": "fixed-canvas",
+                "canvas": {
+                    "width": 1920,
+                    "height": 1080
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/bar-chart/README.md",
+                    "archive": "README.md",
+                    "sha256": "ef221dde4774bccef5ea6748c4791aaa5932f51ccfd64c97a8d5a94f927e22ce"
+                },
+                {
+                    "source": "v1/examples/bar-chart/bar-chart.ograf.json",
+                    "archive": "bar-chart.ograf.json",
+                    "sha256": "b049df58911e2cc6ef93738403bbf738c97af78c3b4b8d19624c3b8be39b93fd"
+                },
+                {
+                    "source": "v1/examples/bar-chart/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "1abe4f4cd5aafd3973ea8507218e35e5dcaa02b868030f6dac2e62488b376447"
+                },
+                {
+                    "source": "v1/examples/bar-chart/lib/animation.json",
+                    "archive": "lib/animation.json",
+                    "sha256": "2d8664eea2954e6c8996ec127ee8705108b92a46b6e497ecd79b1fcbbe8c11f7"
+                },
+                {
+                    "source": "v1/examples/bar-chart/lib/lottie-web.esm.mjs",
+                    "archive": "lib/lottie-web.esm.mjs",
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                },
+                {
+                    "source": "v1/examples/bar-chart/thumbnail.png",
+                    "archive": "thumbnail.png",
+                    "sha256": "603dc2e48b5a63e20a32d4e072fd33be423ade070af8eba7f4798769b8e96bae"
+                }
+            ]
+        },
+        {
+            "id": "headline",
+            "title": "Headline",
+            "manifest": "v1/examples/headline/headline.ograf.json",
+            "archiveName": "ograf-example-headline.zip",
+            "presentation": {
+                "renderer": "fixed-canvas",
+                "canvas": {
+                    "width": 1920,
+                    "height": 1080
+                },
+                "background": {
+                    "type": "image",
+                    "src": "website/assets/img/bg-interview.webp",
+                    "overlay": "rgba(4, 7, 18, 0.18)"
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/headline/README.md",
+                    "archive": "README.md",
+                    "sha256": "c3a852c387602514fa1abff4ca7d279cd35acbab7b3f37640088e31c53956045"
+                },
+                {
+                    "source": "v1/examples/headline/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "cd3b871e77537e4b0a7d238ad8ef4fb0350b49e3d659580b432323833c91e9f7"
+                },
+                {
+                    "source": "v1/examples/headline/headline.ograf.json",
+                    "archive": "headline.ograf.json",
+                    "sha256": "66ecb00baf3ec567a16fbde8d464e40a566918fcc5d6935a8a01925f827150c3"
+                },
+                {
+                    "source": "v1/examples/headline/lib/animation.json",
+                    "archive": "lib/animation.json",
+                    "sha256": "cf3f26a94c0d1fad1d38f5694f830b2d71bc002884280ca326e3ce668795628c"
+                },
+                {
+                    "source": "v1/examples/headline/lib/lottie-web.esm.mjs",
+                    "archive": "lib/lottie-web.esm.mjs",
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                },
+                {
+                    "source": "v1/examples/headline/thumbnail.jpg",
+                    "archive": "thumbnail.jpg",
+                    "sha256": "817e31a7859384e35f7cc6d312504541538889ba685762bd946d803f4b353dca"
+                }
+            ]
+        },
+        {
+            "id": "weather",
+            "title": "Weather",
+            "manifest": "v1/examples/weather/weather.ograf.json",
+            "archiveName": "ograf-example-weather.zip",
+            "presentation": {
+                "renderer": "fixed-canvas",
+                "canvas": {
+                    "width": 1920,
+                    "height": 1080
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/weather/README.md",
+                    "archive": "README.md",
+                    "sha256": "5dfd9972a65e1d21a9f9fc184de561ed43397b99df8cd66126e6066c4ddf0476"
+                },
+                {
+                    "source": "v1/examples/weather/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "4f0e5ea07dc03c95736cfbb6cfc5df44daffea0bf2021b55391e7e4339661188"
+                },
+                {
+                    "source": "v1/examples/weather/lib/animation.json",
+                    "archive": "lib/animation.json",
+                    "sha256": "3ef153207543f97e3eee176b2200d7fff762d429a24d64e8ec1ab8734a53c698"
+                },
+                {
+                    "source": "v1/examples/weather/lib/images/image_0.jpg",
+                    "archive": "lib/images/image_0.jpg",
+                    "sha256": "0af1ccbbf90e138c34bdf1c344905764b7ae7081761891d08f1c8f81d83417e8"
+                },
+                {
+                    "source": "v1/examples/weather/lib/lottie-web.esm.mjs",
+                    "archive": "lib/lottie-web.esm.mjs",
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                },
+                {
+                    "source": "v1/examples/weather/thumbnail.jpg",
+                    "archive": "thumbnail.jpg",
+                    "sha256": "f8e15fea2630c8169afa925612913b33e2f72b318d19d6ccd30ee1e6bc4fd91f"
+                },
+                {
+                    "source": "v1/examples/weather/weather.ograf.json",
+                    "archive": "weather.ograf.json",
+                    "sha256": "79a3958e2e2c8990660ee7bc2a28a2e4bcda52a9f4e5daf31f87ace6ba74000c"
+                }
+            ]
+        }
+    ]
+}

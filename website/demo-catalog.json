@@ -159,7 +159,7 @@
                 {
                     "source": "v1/examples/bar-chart/README.md",
                     "archive": "README.md",
-                    "sha256": "ef221dde4774bccef5ea6748c4791aaa5932f51ccfd64c97a8d5a94f927e22ce"
+                    "sha256": "7a47e97288473474b6d215d5cac044efb1a5c8d5b75904755c3fd2d7ca859722"
                 },
                 {
                     "source": "v1/examples/bar-chart/bar-chart.ograf.json",
@@ -209,7 +209,7 @@
                 {
                     "source": "v1/examples/headline/README.md",
                     "archive": "README.md",
-                    "sha256": "c3a852c387602514fa1abff4ca7d279cd35acbab7b3f37640088e31c53956045"
+                    "sha256": "41d7a8e69dc68799b193b255ec38e8b019553e8917dd06ec1d80d3a98af6954f"
                 },
                 {
                     "source": "v1/examples/headline/graphic.mjs",
@@ -254,7 +254,7 @@
                 {
                     "source": "v1/examples/weather/README.md",
                     "archive": "README.md",
-                    "sha256": "5dfd9972a65e1d21a9f9fc184de561ed43397b99df8cd66126e6066c4ddf0476"
+                    "sha256": "7366f0ee92f5ec07925cda1191aafc7e83eacafff9374ae830efe5a610c24bc9"
                 },
                 {
                     "source": "v1/examples/weather/graphic.mjs",

@@ -1,11 +1,10 @@
 # Reference: Bar Chart
 
 This full-screen example displays a title and six configurable bars. Each bar
-has a numeric value and a text label.
+has a numeric value and a text label. The chart advances one point per
+`playAction` step; the points and the background image asset are declared in
+`bar-chart.ograf.json`.
 
-The Graphic is designed for a 1920 x 1080, 50 fps output. It supports real-time
-and non-real-time rendering and exposes one play step.
-
-The package was exported with [StreamShapers](https://streamshapers.com) OGraf
-Export. All runtime assets, including the local Lottie player, are included in
-this directory.
+The Graphic is designed for a 1920 x 1080 output and supports real-time
+rendering. The bundled SVG background can be replaced through the
+`backgroundImage` input.

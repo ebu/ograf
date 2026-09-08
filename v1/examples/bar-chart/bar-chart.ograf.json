@@ -1,111 +1,87 @@
 {
   "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "804a74b8-0076-48b1-a804-4119ba888640",
-  "version": "1.0.1",
-  "name": "OGraf BarChart",
+  "id": "ograf.bar-chart",
+  "version": "2.0.0",
+  "name": "Animated Bar Chart",
+  "description": "A full-screen bar chart that reveals one point on each play step.",
   "main": "graphic.mjs",
   "supportsRealTime": true,
-  "supportsNonRealTime": true,
+  "supportsNonRealTime": false,
+  "stepCount": 6,
   "schema": {
     "type": "object",
+    "additionalProperties": false,
     "properties": {
-      "_Title": {
+      "title": {
         "type": "string",
         "label": "Title",
         "default": "Bar Chart Graphic",
         "gddType": "single-line",
         "order": 0
       },
-      "_Value 1": {
-        "type": "number",
-        "label": "Value 1",
-        "default": 205,
-        "order": 1
+      "points": {
+        "type": "array",
+        "label": "Chart points",
+        "description": "Points are revealed in array order, one per play step.",
+        "order": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string",
+              "label": "Label",
+              "gddType": "single-line"
+            },
+            "value": {
+              "type": "number",
+              "label": "Value",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "label",
+            "value"
+          ]
+        },
+        "default": [
+          { "label": "2006", "value": 205 },
+          { "label": "2007", "value": 600 },
+          { "label": "2008", "value": 807 },
+          { "label": "2009", "value": 1200 },
+          { "label": "2010", "value": 290 },
+          { "label": "2011", "value": 102 }
+        ]
       },
-      "_Text 1": {
+      "backgroundImage": {
         "type": "string",
-        "label": "Text 1",
-        "default": "2006",
-        "gddType": "single-line",
+        "label": "Background image",
+        "description": "Image asset used for the full-screen blue background.",
+        "default": "./lib/background.svg",
+        "gddType": "file-path/image-path",
+        "gddOptions": {
+          "extensions": [ "svg", "png", "jpg", "jpeg", "webp", "gif" ]
+        },
         "order": 2
-      },
-      "_Value 2": {
-        "type": "number",
-        "label": "Value 2",
-        "default": 600,
-        "order": 3
-      },
-      "_Text 2": {
-        "type": "string",
-        "label": "Text 2",
-        "default": "2007",
-        "gddType": "single-line",
-        "order": 4
-      },
-      "_Value 3": {
-        "type": "number",
-        "label": "Value 3",
-        "default": 807,
-        "order": 5
-      },
-      "_Text 3": {
-        "type": "string",
-        "label": "Text 3",
-        "default": "2008",
-        "gddType": "single-line",
-        "order": 6
-      },
-      "_Value 4": {
-        "type": "number",
-        "label": "Value 4",
-        "default": 1200,
-        "order": 7
-      },
-      "_Text 4": {
-        "type": "string",
-        "label": "Text 4",
-        "default": "2009",
-        "gddType": "single-line",
-        "order": 8
-      },
-      "_Value 5": {
-        "type": "number",
-        "label": "Value 5",
-        "default": 290,
-        "order": 9
-      },
-      "_Text 5": {
-        "type": "string",
-        "label": "Text 5",
-        "default": "2010",
-        "gddType": "single-line",
-        "order": 10
-      },
-      "_Value 6": {
-        "type": "number",
-        "label": "Value 6",
-        "default": 102,
-        "order": 11
-      },
-      "_Text 6": {
-        "type": "string",
-        "label": "Text 6",
-        "default": "2011",
-        "gddType": "single-line",
-        "order": 12
       }
     }
   },
-  "description": "A fullscreen graphic template with a barchart featuring six bars and a title.\nDesigned by Mike and technically adapted by Nico.",
   "author": {
-    "name": "Mike and Nico",
-    "url": "streamshapers.com"
+    "name": "European Broadcasting Union",
+    "url": "https://ebu.io/"
   },
-  "stepCount": 1,
   "actionDurations": [
     {
       "type": "playAction",
-      "duration": 4040
+      "duration": 500,
+      "steps": [
+        { "step": 0, "duration": 500 },
+        { "step": 1, "duration": 450 },
+        { "step": 2, "duration": 450 },
+        { "step": 3, "duration": 450 },
+        { "step": 4, "duration": 450 },
+        { "step": 5, "duration": 450 }
+      ]
     },
     {
       "type": "updateAction",
@@ -114,21 +90,6 @@
     {
       "type": "stopAction",
       "duration": 400
-    }
-  ],
-  "renderRequirements": [
-    {
-      "resolution": {
-        "width": {
-          "exact": 1920
-        },
-        "height": {
-          "exact": 1080
-        }
-      },
-      "frameRate": {
-        "exact": 50
-      }
     }
   ],
   "thumbnails": [

@@ -38,5 +38,35 @@
     "file": "neton-live.svg",
     "name": "Neton Live",
     "url": "https://www.neton.live/"
+  },
+  {
+    "file": "chyron.svg",
+    "name": "Chyron",
+    "url": "https://chyron.com"
+  },
+  {
+    "file": "cuttingroom.svg",
+    "name": "CuttingRoom",
+    "url": "https://www.cuttingroom.com"
+  },
+  {
+    "file": "erizos.svg",
+    "name": "Erizos",
+    "url": "https://erizos.tv"
+  },
+  {
+    "file": "mapcreator.svg",
+    "name": "Mapcreator",
+    "url": "https://mapcreator.io"
+  },
+  {
+    "file": "pixotope.svg",
+    "name": "Pixotope",
+    "url": "https://www.pixotope.com"
+  },
+  {
+    "file": "zero-density_black.svg",
+    "name": "Zero Density",
+    "url": "https://www.zerodensity.io"
   }
 ]

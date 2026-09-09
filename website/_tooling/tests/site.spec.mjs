@@ -886,6 +886,55 @@ test('@mobile landscape phones retain a complete demo frame', async ({ page }) =
     await expectCleanPage(monitor);
 });
 
+test('@mobile vendor and organisation logos fit compact light cards', async ({ page }, testInfo) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const monitor = await openLandingPage(page);
+    const vendors = page.locator('.logo-grid[data-base$="/vendors/"]');
+    for (const [directory, count] of [['vendors', 14], ['organisations', 11]]) {
+        const grid = page.locator(`.logo-grid[data-base$="/${directory}/"]`);
+        await expect(grid.locator('img')).toHaveCount(count);
+        await grid.scrollIntoViewIfNeeded();
+        await expect.poll(() => grid.locator('img').evaluateAll(images =>
+            images.every(image => image.complete && image.naturalWidth > 0)
+        )).toBe(true);
+        const dimensions = await grid.locator('.logo-grid__item').evaluateAll(cards =>
+            cards.map(card => {
+                const image = card.querySelector('img').getBoundingClientRect();
+                const bounds = card.getBoundingClientRect();
+                return {
+                    height: bounds.height,
+                    imageWidth: image.width,
+                    imageHeight: image.height,
+                    contained: image.left >= bounds.left && image.right <= bounds.right
+                        && image.top >= bounds.top && image.bottom <= bounds.bottom,
+                    background: getComputedStyle(card).backgroundColor
+                };
+            })
+        );
+        for (const dimensionsForCard of dimensions) {
+            expect(dimensionsForCard.contained).toBe(true);
+            expect(dimensionsForCard.background).toBe('rgb(255, 255, 255)');
+            expect(dimensionsForCard.imageWidth).toBeGreaterThan(0);
+            expect(dimensionsForCard.imageHeight).toBeGreaterThan(0);
+            expect(dimensionsForCard.imageHeight).toBeLessThanOrEqual(36);
+            expect(dimensionsForCard.height).toBe(dimensions[0].height);
+        }
+        await grid.screenshot({ path: testInfo.outputPath(`${directory}-logos.png`) });
+    }
+
+    const erizos = vendors.locator('.logo-grid__item').filter({
+        has: page.getByRole('img', { name: 'Erizos', exact: true })
+    });
+    await expect(erizos).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    await expect(erizos.locator('img')).toHaveAttribute('src', /\/vendors\/erizos\.svg$/);
+    await expect(vendors.locator('.logo-grid__item--dark')).toHaveCount(0);
+    await expect(vendors.getByRole('img', { name: 'CuttingRoom', exact: true })).toBeVisible();
+    await page.locator('.vendor-ticker').screenshot({
+        path: testInfo.outputPath('hero-vendor-logos.png')
+    });
+    await expectCleanPage(monitor);
+});
+
 test('video is private until consent and uses only youtube-nocookie', async ({ page }) => {
     const thirdPartyRequests = [];
     await page.route('https://www.youtube-nocookie.com/**', async route => {
@@ -898,7 +947,7 @@ test('video is private until consent and uses only youtube-nocookie', async ({ p
     await page.locator('.section-video__consent').click();
     await expect(page.locator('.section-video__embed iframe')).toHaveAttribute(
         'src',
-        /youtube-nocookie\.com\/embed\/u4wruk2QTs0/
+        /youtube-nocookie\.com\/embed\/GMG0NrY4N80/
     );
     await expect.poll(() => thirdPartyRequests.length).toBeGreaterThan(0);
     expect(thirdPartyRequests.every(url => url.startsWith('https://www.youtube-nocookie.com/'))).toBeTruthy();

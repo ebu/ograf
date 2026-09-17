@@ -73,5 +73,10 @@
     "file": "matrox.svg",
     "name": "Matrox",
     "url": "https://www.matrox.com/"
+  },
+  {
+    "file": "moovit.png",
+    "name": "MoovIT",
+    "url": "https://moovit.de/"
   }
 ]

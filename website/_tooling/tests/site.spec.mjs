@@ -891,7 +891,7 @@ test('@mobile vendor and organisation logos fit compact light cards', async ({ p
     await page.emulateMedia({ reducedMotion: 'reduce' });
     const monitor = await openLandingPage(page);
     const vendors = page.locator('.logo-grid[data-base$="/vendors/"]');
-    for (const [directory, count] of [['vendors', 15], ['organisations', 11]]) {
+    for (const [directory, count] of [['vendors', 16], ['organisations', 11]]) {
         const grid = page.locator(`.logo-grid[data-base$="/${directory}/"]`);
         await expect(grid.locator('img')).toHaveCount(count);
         await grid.scrollIntoViewIfNeeded();

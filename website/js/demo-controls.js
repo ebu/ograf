@@ -49,6 +49,15 @@
             );
         }
 
+        function getUpdatedFieldData() {
+            // A custom action can change the score before its animation returns
+            // fresh state. Resending unchanged fields would undo that action.
+            return Object.fromEntries(Object.entries(getFieldData()).filter(([name, value]) =>
+                !graphicState || !Object.hasOwn(graphicState, name)
+                    || String(value) !== String(graphicState[name])
+            ));
+        }
+
         function setStatus(state, text) {
             statusEl.dataset.state = state;
             statusEl.textContent = text;
@@ -172,7 +181,7 @@
         btnPlay.addEventListener('click', () => {
             if (isReady) send('play', getFieldData());
         });
-        btnUpdate.addEventListener('click', () => send('update', getFieldData()));
+        btnUpdate.addEventListener('click', () => send('update', getUpdatedFieldData()));
         btnPrevious?.addEventListener('click', () => send('step', { delta: -1 }));
         btnNext?.addEventListener('click', () => send('step', { delta: 1 }));
         customActionButtons.forEach(button => {

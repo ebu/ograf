@@ -88,6 +88,9 @@ A tie-break can also be loaded or corrected midway through: its first server is
 reconstructed from the total points played and the current server. The website's
 rally-point fields follow custom actions, including counts above four during deuce
 or a tie-break; changing a player's name does not restore an earlier score.
+Update sends only edited fields, so a name change also preserves points awarded
+while a custom-action animation is still running. Editing a score field explicitly
+still corrects that score.
 
 `playAction()` and the custom actions resolve to a `result` object carrying the public
 state plus `currentStep`, `stepCount`, and the derived `setInPlay`, `matchWinner`

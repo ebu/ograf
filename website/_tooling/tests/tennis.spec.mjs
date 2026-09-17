@@ -130,6 +130,24 @@ test('@compat @mobile tennis form retains points after a name update', async ({ 
     await expect(graphic.locator('.tb__points--a')).toHaveText('AD');
 });
 
+test('@compat @mobile tennis updates retain points while an action is animating', async ({ page }) => {
+    const { controller, graphic } = await playTennis(page);
+    await controller.locator('[data-demo-field="playerAName"]').fill('Updated Player');
+    // Send Update before the point animation has returned its state to the form.
+    await controller.evaluate(element => {
+        element.querySelector('[data-demo-custom-action="point-server"]').click();
+        element.querySelector('[data-demo-action="update"]').click();
+    });
+    await expect(graphic.locator('.tb__name--a')).toHaveText('Updated Player');
+    await expect(graphic.locator('.tb__points--a')).toHaveText('30');
+    await expect(controller.locator('[data-demo-field="pointsA"]')).toHaveValue('2');
+
+    // An intentional score correction must still be applied, including zero.
+    await controller.locator('[data-demo-field="pointsA"]').fill('0');
+    await controller.locator('[data-demo-action="update"]').click();
+    await expect(graphic.locator('.tb__points--a')).toHaveText('0');
+});
+
 test('@compat @mobile tennis demo explores both match formats', async ({ page }) => {
     const { controller, graphic } = await playTennis(page);
     const next = controller.locator('[data-demo-action="next"]');

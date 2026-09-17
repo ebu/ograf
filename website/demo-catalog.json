@@ -305,7 +305,7 @@
                 {
                     "source": "v1/examples/tennis-scoreboard/README.md",
                     "archive": "README.md",
-                    "sha256": "0c276d1e1367fbe79a2686fbdcc6e124f44cd84fb9dc630b5011935cbddecbed"
+                    "sha256": "7a42efeff398635596bd241c0a9d986406792a92e78207c37294354e0f8b53a6"
                 },
                 {
                     "source": "v1/examples/tennis-scoreboard/graphic.mjs",

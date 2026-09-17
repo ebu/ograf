@@ -261,14 +261,14 @@ test('@mobile hero uses example thumbnails and stable demo deep links', async ({
     }
 
     await page.evaluate(() => history.back());
-    await expect(page).toHaveURL(/#demo-headline$/);
-    await expect(page.locator('.demo-carousel__slide.is-active'))
-        .toHaveAttribute('data-example-id', 'headline');
-
-    await page.evaluate(() => history.forward());
     await expect(page).toHaveURL(/#demo-weather$/);
     await expect(page.locator('.demo-carousel__slide.is-active'))
         .toHaveAttribute('data-example-id', 'weather');
+
+    await page.evaluate(() => history.forward());
+    await expect(page).toHaveURL(/#demo-tennis-scoreboard$/);
+    await expect(page.locator('.demo-carousel__slide.is-active'))
+        .toHaveAttribute('data-example-id', 'tennis-scoreboard');
 
     await page.goto('./#demo-weather');
     await expect(page.locator('.demo-carousel__slide.is-active'))
@@ -358,13 +358,21 @@ test('heavy demo media loads only when requested', async ({ page }) => {
                 overlay: 'rgba(4, 7, 18, 0.18)'
             }
         },
-        { id: 'weather', background: null }
+        { id: 'weather', background: null },
+        {
+            id: 'tennis-scoreboard',
+            background: {
+                type: 'image',
+                src: 'website/assets/img/bg-tennis-court.webp',
+                overlay: 'rgba(4, 7, 18, 0.35)'
+            }
+        }
     ]);
     for (const source of await stageSources.all()) {
         await expect(source).not.toHaveAttribute('src');
         await expect(source).toHaveAttribute('data-src', /Background-Interview-Video-720/);
     }
-    await expect(deferredFrames).toHaveCount(6);
+    await expect(deferredFrames).toHaveCount(7);
     expect(sameOriginRequests.some(path => path.includes('Background-Interview-Video-720')))
         .toBe(false);
     expect(sameOriginRequests.some(
@@ -502,7 +510,8 @@ test('@compat stage and carousel example controls run', async ({ browserName, pa
             'responsive-lower-third',
             'bar-chart',
             'headline',
-            'weather'
+            'weather',
+            'tennis-scoreboard'
         ];
     for (const controllerName of controllerNames) {
         await page.locator(
@@ -617,8 +626,8 @@ test('@mobile demo carousel adapts and offers valid OGraf packages', async ({ pa
 
     await page.locator('#demos').scrollIntoViewIfNeeded();
     await expect(carouselViewport).toBeVisible();
-    await expect(page.locator('.demo-carousel__slide')).toHaveCount(6);
-    await expect(page.locator('.demo-carousel__dot')).toHaveCount(6);
+    await expect(page.locator('.demo-carousel__slide')).toHaveCount(7);
+    await expect(page.locator('.demo-carousel__dot')).toHaveCount(7);
     await expect(page.locator('.demo-card__tag')).toHaveCount(0);
 
     for (const chromePart of ['.demo-card__header', '.demo-aspect-bar']) {
@@ -773,6 +782,15 @@ test('@mobile demo carousel adapts and offers valid OGraf packages', async ({ pa
                 'lib/lottie-web.esm.mjs',
                 'thumbnail.jpg',
                 'weather.ograf.json'
+            ]
+        },
+        {
+            name: 'ograf-example-tennis-scoreboard.zip',
+            files: [
+                'README.md',
+                'graphic.mjs',
+                'tennis-scoreboard.ograf.json',
+                'thumbnail.webp'
             ]
         }
     ];

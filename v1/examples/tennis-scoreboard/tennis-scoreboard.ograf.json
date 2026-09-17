@@ -1,0 +1,292 @@
+{
+    "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+    "id": "tennis-scoreboard",
+    "version": "1.0.0",
+    "name": "Tennis Scoreboard",
+    "description": "A real-time tennis scoreboard demonstrating a dynamic step count, per-step action durations, a boolean serve indicator, tie-break point counting, and both parameterless and parameterised custom actions. It renders from its schema defaults and makes no network requests.",
+    "author": {
+        "name": "Ben Abulafia",
+        "email": "ben@synapsereality.io"
+    },
+    "main": "graphic.mjs",
+    "thumbnails": [
+        {
+            "file": "thumbnail.webp",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        }
+    ],
+    "supportsRealTime": true,
+    "supportsNonRealTime": false,
+    "stepCount": -1,
+    "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "eventLabel": {
+                "type": "string",
+                "label": "Event",
+                "description": "Court and round shown above the score.",
+                "gddType": "single-line",
+                "order": 1,
+                "default": "Centre Court · Quarter-Final",
+                "maxLength": 48
+            },
+            "bestOf": {
+                "type": "integer",
+                "label": "Match format",
+                "description": "Number of sets the match is played over. This decides how many steps the Graphic has: one per set, plus the result.",
+                "gddType": "select",
+                "order": 2,
+                "default": 3,
+                "enum": [3, 5],
+                "gddOptions": {
+                    "labels": {
+                        "3": "Best of 3 sets",
+                        "5": "Best of 5 sets"
+                    }
+                }
+            },
+            "playerAName": {
+                "type": "string",
+                "label": "Player A",
+                "description": "Name of the player shown on the top row.",
+                "gddType": "single-line",
+                "order": 3,
+                "default": "A. Moreau",
+                "maxLength": 24
+            },
+            "playerBName": {
+                "type": "string",
+                "label": "Player B",
+                "description": "Name of the player shown on the bottom row.",
+                "gddType": "single-line",
+                "order": 4,
+                "default": "J. Lindqvist",
+                "maxLength": 24
+            },
+            "playerAShort": {
+                "type": "string",
+                "label": "Player A code",
+                "description": "Three-letter code for player A.",
+                "gddType": "single-line",
+                "order": 5,
+                "default": "MOR",
+                "maxLength": 3,
+                "hidden": true
+            },
+            "playerBShort": {
+                "type": "string",
+                "label": "Player B code",
+                "description": "Three-letter code for player B.",
+                "gddType": "single-line",
+                "order": 6,
+                "default": "LIN",
+                "maxLength": 3,
+                "hidden": true
+            },
+            "playerAColor": {
+                "type": "string",
+                "label": "Player A colour",
+                "gddType": "color-rrggbb",
+                "order": 7,
+                "default": "#1d4ed8",
+                "pattern": "^#[0-9a-f]{6}$",
+                "hidden": true
+            },
+            "playerBColor": {
+                "type": "string",
+                "label": "Player B colour",
+                "gddType": "color-rrggbb",
+                "order": 8,
+                "default": "#b91c1c",
+                "pattern": "^#[0-9a-f]{6}$",
+                "hidden": true
+            },
+            "setsA": {
+                "type": "integer",
+                "label": "Sets won by A",
+                "description": "Completed sets won by player A.",
+                "order": 9,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 3,
+                "hidden": true
+            },
+            "setsB": {
+                "type": "integer",
+                "label": "Sets won by B",
+                "description": "Completed sets won by player B.",
+                "order": 10,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 3,
+                "hidden": true
+            },
+            "gamesA": {
+                "type": "integer",
+                "label": "Games won by A",
+                "description": "Games won by player A in the set that is in play.",
+                "order": 11,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 7,
+                "hidden": true
+            },
+            "gamesB": {
+                "type": "integer",
+                "label": "Games won by B",
+                "description": "Games won by player B in the set that is in play.",
+                "order": 12,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 7,
+                "hidden": true
+            },
+            "pointsA": {
+                "type": "integer",
+                "label": "Points won by A",
+                "description": "Rally points won by player A in the game that is in play. Rendered as 0, 15, 30, 40 or AD in a normal game, and as a running count in a tie-break.",
+                "order": 13,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 99,
+                "hidden": true
+            },
+            "pointsB": {
+                "type": "integer",
+                "label": "Points won by B",
+                "description": "Rally points won by player B in the game that is in play. Rendered as 0, 15, 30, 40 or AD in a normal game, and as a running count in a tie-break.",
+                "order": 14,
+                "default": 0,
+                "minimum": 0,
+                "maximum": 99,
+                "hidden": true
+            },
+            "playerAServing": {
+                "type": "boolean",
+                "label": "Player A is serving",
+                "description": "True when player A serves, false when player B serves.",
+                "order": 15,
+                "default": true,
+                "hidden": true
+            },
+            "tiebreak": {
+                "type": "boolean",
+                "label": "Tie-break",
+                "description": "True while the game in play is a tie-break, which switches the points from 0/15/30/40/AD to a running count.",
+                "order": 16,
+                "default": false,
+                "hidden": true
+            }
+        }
+    },
+    "customActions": [
+        {
+            "id": "point-server",
+            "name": "Point (server)",
+            "description": "Award the current point to the player who is serving. Completed games, sets and the match roll over automatically.",
+            "schema": null
+        },
+        {
+            "id": "point-receiver",
+            "name": "Point (receiver)",
+            "description": "Award the current point to the player who is receiving. Completed games, sets and the match roll over automatically.",
+            "schema": null
+        },
+        {
+            "id": "award-game",
+            "name": "Award game",
+            "description": "Award the game in play to one player, resetting the points and handing over the serve.",
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "player": {
+                        "type": "string",
+                        "label": "Player",
+                        "description": "Which player wins the game.",
+                        "gddType": "select",
+                        "order": 1,
+                        "default": "a",
+                        "enum": ["a", "b"],
+                        "gddOptions": {
+                            "labels": {
+                                "a": "Player A",
+                                "b": "Player B"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": "award-set",
+            "name": "Award set",
+            "description": "Award the set in play to one player, resetting the games and the points.",
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "player": {
+                        "type": "string",
+                        "label": "Player",
+                        "description": "Which player wins the set.",
+                        "gddType": "select",
+                        "order": 1,
+                        "default": "a",
+                        "enum": ["a", "b"],
+                        "gddOptions": {
+                            "labels": {
+                                "a": "Player A",
+                                "b": "Player B"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "actionDurations": [
+        {
+            "type": "playAction",
+            "duration": 400,
+            "steps": [
+                {
+                    "step": 0,
+                    "duration": 620
+                }
+            ]
+        },
+        {
+            "type": "updateAction",
+            "duration": 500
+        },
+        {
+            "type": "stopAction",
+            "duration": 380
+        },
+        {
+            "type": "customAction",
+            "customActionId": "point-server",
+            "duration": 500
+        },
+        {
+            "type": "customAction",
+            "customActionId": "point-receiver",
+            "duration": 500
+        },
+        {
+            "type": "customAction",
+            "customActionId": "award-game",
+            "duration": 600
+        },
+        {
+            "type": "customAction",
+            "customActionId": "award-set",
+            "duration": 700
+        }
+    ]
+}

@@ -15,6 +15,8 @@
         const btnPlay = controller.querySelector('[data-demo-action="play"]');
         const btnUpdate = controller.querySelector('[data-demo-action="update"]');
         const btnStop = controller.querySelector('[data-demo-action="stop"]');
+        const btnPrevious = controller.querySelector('[data-demo-action="previous"]');
+        const btnNext = controller.querySelector('[data-demo-action="next"]');
         const customActionButtons = [
             ...controller.querySelectorAll('[data-demo-custom-action]')
         ];
@@ -29,6 +31,7 @@
         let isReady = false;
         let readinessTimer = null;
         let currentFormat = FORMATS[player.dataset.ratio || '16/9'];
+        let graphicState = null;
 
         function send(action, data) {
             iframe.contentWindow.postMessage({ action, data }, MESSAGE_ORIGIN);
@@ -105,9 +108,22 @@
 
         window.addEventListener('message', ({ data, origin, source }) => {
             if (source !== iframe.contentWindow || origin !== MESSAGE_ORIGIN) return;
-            const { event } = data ?? {};
+            const { event, state } = data ?? {};
             if (!event) return;
 
+            if (event === 'state' && state) {
+                for (const [name, field] of Object.entries(fields)) {
+                    // Preserve edits that have not yet been sent to the graphic.
+                    if (Object.hasOwn(state, name)
+                        && (!graphicState || field.value === String(graphicState[name]))) {
+                        field.value = String(state[name]);
+                    }
+                }
+                graphicState = state;
+                const hasStep = Number.isInteger(state.currentStep);
+                if (btnPrevious) btnPrevious.disabled = !hasStep || state.currentStep === 0;
+                if (btnNext) btnNext.disabled = !hasStep || state.currentStep >= state.stepCount - 1;
+            }
             if (event === 'ready') {
                 isReady = true;
                 window.clearInterval(readinessTimer);
@@ -127,6 +143,8 @@
                 btnUpdate.disabled = true;
                 btnStop.disabled = true;
                 customActionButtons.forEach(button => { button.disabled = true; });
+                if (btnPrevious) btnPrevious.disabled = true;
+                if (btnNext) btnNext.disabled = true;
             }
             if (event === 'stopped') {
                 setStatus('ready', 'Ready');
@@ -134,6 +152,9 @@
                 btnUpdate.disabled = true;
                 btnStop.disabled = true;
                 customActionButtons.forEach(button => { button.disabled = true; });
+                if (btnPrevious) btnPrevious.disabled = true;
+                if (btnNext) btnNext.disabled = true;
+                graphicState = null;
             }
         });
 
@@ -152,6 +173,8 @@
             if (isReady) send('play', getFieldData());
         });
         btnUpdate.addEventListener('click', () => send('update', getFieldData()));
+        btnPrevious?.addEventListener('click', () => send('step', { delta: -1 }));
+        btnNext?.addEventListener('click', () => send('step', { delta: 1 }));
         customActionButtons.forEach(button => {
             button.addEventListener('click', () => send('custom', {
                 id: button.dataset.demoCustomAction

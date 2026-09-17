@@ -100,6 +100,15 @@ function otherSide(side) {
     return side === 'a' ? 'b' : 'a';
 }
 
+function firstTiebreakServerIsA(state) {
+    // The first player serves at 0, 3, 4, 7, 8, ... points played. A snapshot
+    // supplies the current server, so undo the completed service changes.
+    const switched = state.tiebreak
+        && Math.floor((state.pointsA + state.pointsB + 1) / 2) % 2 === 1;
+
+    return switched ? !state.playerAServing : state.playerAServing;
+}
+
 function toInteger(value, fallback) {
     const parsed = Math.trunc(Number(value));
 
@@ -370,6 +379,9 @@ const CSS = `
 
   .tb__pressure.is-shown {
     display: flex;
+  }
+
+  .tb__pressure.is-animated {
     animation: pressureIn 0.3s ease-out both;
   }
 
@@ -420,11 +432,11 @@ export default class OGrafTennisScoreboard extends HTMLElement {
     async load({ data = {}, renderType, renderCharacteristics } = {}) {
         this._cancelPendingAction();
         this._state = normalizeState({ ...DEFAULT_STATE, ...data });
-        this._tiebreakStartServerIsA = this._state.playerAServing;
+        this._tiebreakStartServerIsA = firstTiebreakServerIsA(this._state);
         this._currentStep = undefined;
         this._lifecycleState = 'start';
         this._buildDOM();
-        this._updateDOM();
+        this._updateDOM(true);
 
         return { statusCode: 200 };
     }
@@ -447,7 +459,7 @@ export default class OGrafTennisScoreboard extends HTMLElement {
         const wasVisible = this._lifecycleState === 'step';
         this._currentStep = targetStep;
         this._lifecycleState = 'step';
-        this._updateDOM();
+        this._updateDOM(params.skipAnimation);
 
         if (!wasVisible) {
             await this._showGraphic(params.skipAnimation, actionRevision);
@@ -474,10 +486,13 @@ export default class OGrafTennisScoreboard extends HTMLElement {
         const actionRevision = this._beginAction();
         const previousState = this._state;
         this._state = normalizeState({ ...this._state, ...data });
-        if (!previousState.tiebreak && this._state.tiebreak) {
-            this._tiebreakStartServerIsA = this._state.playerAServing;
+        if (this._state.tiebreak) {
+            this._tiebreakStartServerIsA = firstTiebreakServerIsA(this._state);
         }
-        this._updateDOM();
+        if (this._currentStep !== undefined) {
+            this._currentStep = Math.min(this._currentStep, this._stepCount() - 1);
+        }
+        this._updateDOM(skipAnimation);
 
         if (!skipAnimation && this._lifecycleState === 'step') {
             await this._animateCells(
@@ -518,7 +533,7 @@ export default class OGrafTennisScoreboard extends HTMLElement {
         }
 
         const actionRevision = this._beginAction();
-        this._updateDOM();
+        this._updateDOM(skipAnimation);
 
         if (!skipAnimation && this._lifecycleState === 'step') {
             await this._animateCells(
@@ -791,6 +806,8 @@ export default class OGrafTennisScoreboard extends HTMLElement {
             ?.classList.remove('is-phase-changing');
         this._shadow.querySelectorAll('.is-flashing')
             .forEach(cell => cell.classList.remove('is-flashing'));
+        this._shadow.querySelector('.tb__pressure')
+            ?.classList.remove('is-animated');
     }
 
     /* ── Results ─────────────────────────────────────── */
@@ -808,6 +825,8 @@ export default class OGrafTennisScoreboard extends HTMLElement {
 
         return {
             ...this._state,
+            currentStep: this._currentStep ?? null,
+            stepCount: this._stepCount(),
             step: this._currentStep === undefined ? null : phase,
             setInPlay: phase === 'set' && this._currentStep !== undefined
                 ? this._currentStep + 1
@@ -856,7 +875,7 @@ export default class OGrafTennisScoreboard extends HTMLElement {
         `;
     }
 
-    _updateDOM() {
+    _updateDOM(skipAnimation = false) {
         const graphic = this._shadow.querySelector('.tb');
         if (!graphic) return;
 
@@ -896,15 +915,16 @@ export default class OGrafTennisScoreboard extends HTMLElement {
         rowA?.classList.toggle('is-winner', phase === 'result' && winner === 'a');
         rowB?.classList.toggle('is-winner', phase === 'result' && winner === 'b');
 
-        this._updatePressure(phase);
+        this._updatePressure(phase, skipAnimation);
     }
 
-    _updatePressure(phase) {
+    _updatePressure(phase, skipAnimation) {
         const pressure = this._shadow.querySelector('.tb__pressure');
         if (!pressure) return;
 
         const current = phase === 'set' ? this._pressure() : null;
         pressure.classList.toggle('is-shown', current !== null);
+        pressure.classList.toggle('is-animated', current !== null && !skipAnimation);
         if (!current) {
             this._setText('.tb__pressure-label', '');
             return;

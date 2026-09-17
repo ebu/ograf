@@ -199,9 +199,11 @@ async function handleMessage({ data, origin, source }) {
                 isResetting = false;
             }
             break;
-        case 'update':
-            await graphic.updateAction({ data: payload ?? {}, skipAnimation: false });
+        case 'update': {
+            const result = await graphic.updateAction({ data: payload ?? {}, skipAnimation: false });
+            notifyParent({ event: 'state', state: result?.result });
             break;
+        }
         case 'custom': {
             const result = await graphic.customAction({
                 id: payload?.id,

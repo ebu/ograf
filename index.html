@@ -1325,6 +1325,10 @@
                                     <button class="btn btn--ghost demo-btn" data-demo-action="update" type="button" disabled>Update</button>
                                     <button class="btn btn--ghost demo-btn" data-demo-custom-action="point-server"
                                             type="button" disabled>Point</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="previous"
+                                            type="button" disabled>Previous view</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="next"
+                                            type="button" disabled>Next view</button>
                                     <button class="btn btn--ghost demo-btn" data-demo-action="stop" type="button" disabled>Stop</button>
                                 </div>
 
@@ -1355,26 +1359,25 @@
                                     </label>
 
                                     <label class="demo-field">
-                                        <span class="demo-field__label">Points A</span>
-                                        <select class="demo-field__input" data-demo-field="pointsA"
-                                                data-demo-value-type="number">
-                                            <option value="0">0</option>
-                                            <option value="1" selected>15</option>
-                                            <option value="2">30</option>
-                                            <option value="3">40</option>
-                                            <option value="4">AD</option>
-                                        </select>
+                                        <span class="demo-field__label">Rally points A</span>
+                                        <input class="demo-field__input" data-demo-field="pointsA"
+                                               type="number" min="0" step="1" value="1"
+                                               data-demo-value-type="number">
                                     </label>
 
                                     <label class="demo-field">
-                                        <span class="demo-field__label">Points B</span>
-                                        <select class="demo-field__input" data-demo-field="pointsB"
+                                        <span class="demo-field__label">Rally points B</span>
+                                        <input class="demo-field__input" data-demo-field="pointsB"
+                                               type="number" min="0" step="1" value="3"
+                                               data-demo-value-type="number">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Match format</span>
+                                        <select class="demo-field__input" data-demo-field="bestOf"
                                                 data-demo-value-type="number">
-                                            <option value="0">0</option>
-                                            <option value="1">15</option>
-                                            <option value="2">30</option>
-                                            <option value="3" selected>40</option>
-                                            <option value="4">AD</option>
+                                            <option value="3" selected>Best of three</option>
+                                            <option value="5">Best of five</option>
                                         </select>
                                     </label>
 
@@ -2000,7 +2003,7 @@
 <script src="website/js/animations.js?v=7"></script>
 
 <!-- Demo control panel -->
-<script src="website/js/demo-controls.js?v=2"></script>
+<script src="website/js/demo-controls.js?v=3"></script>
 
 <!-- Demo 2: Scoreboard control panel -->
 <script src="website/js/demo-scoreboard.js?v=12"></script>

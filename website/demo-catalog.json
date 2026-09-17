@@ -305,12 +305,12 @@
                 {
                     "source": "v1/examples/tennis-scoreboard/README.md",
                     "archive": "README.md",
-                    "sha256": "ad5b5714f88be619c96d0ea2054dcf60564d8539a044409d685311e097dbf9f9"
+                    "sha256": "0c276d1e1367fbe79a2686fbdcc6e124f44cd84fb9dc630b5011935cbddecbed"
                 },
                 {
                     "source": "v1/examples/tennis-scoreboard/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "7829cea9200d14bfab283efe475ace1261acabd2a14fc744cbef4ee033eab668"
+                    "sha256": "b06ac5b5091483eb3b32eac117de3665bb7a83ec98c40a2c6b147ecd5571df6e"
                 },
                 {
                     "source": "v1/examples/tennis-scoreboard/tennis-scoreboard.ograf.json",

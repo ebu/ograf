@@ -32,6 +32,10 @@ current count transitions the Graphic to its hidden end state, as does `stopActi
 The step selects what the Graphic presents; the data carries the score. A set that is
 never played (step 2 of a match won 2–0) is simply never used.
 
+The website demo provides Previous view and Next view buttons and a Match format
+selector (applied with Update). Switching from best of five to best of three clamps
+the current view to the shorter sequence's result if necessary.
+
 ## Score model
 
 | Field | Meaning |
@@ -80,9 +84,14 @@ the games; 6–6 starts a tie-break, inside which the serve changes after the fi
 and then every two points, and whoever received its first point serves first in the next
 set. So calling `point-server` twice in a tie-break gives one point to each player.
 
+A tie-break can also be loaded or corrected midway through: its first server is
+reconstructed from the total points played and the current server. The website's
+rally-point fields follow custom actions, including counts above four during deuce
+or a tie-break; changing a player's name does not restore an earlier score.
+
 `playAction()` and the custom actions resolve to a `result` object carrying the public
-state plus the derived `setInPlay`, `matchWinner` and `matchComplete`, which lets an
-automation system decide when to step to the result.
+state plus `currentStep`, `stepCount`, and the derived `setInPlay`, `matchWinner`
+and `matchComplete`, which lets an automation system decide when to step to the result.
 
 ## Action durations
 

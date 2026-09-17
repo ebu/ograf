@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const PRODUCTION_URL = 'https://ograf.ebu.io/';
+const DEMO_CATALOG_MODULE_PATH = './website/js/demo-catalog.js';
 const SOCIAL_IMAGE_PATH = 'website/assets/img/ograf-social-preview.png';
 const SOCIAL_IMAGE_URL = `${PRODUCTION_URL}${SOCIAL_IMAGE_PATH}`;
 const SOCIAL_IMAGE_ALT = 'OGraf logo with the text "The EBU\'s open specification '
@@ -152,8 +153,8 @@ test('social metadata uses the approved preview image', async ({ page }) => {
 
 test('hero thumbnail selection prefers a suitable 16:9 source', async ({ page }) => {
     await page.goto('./');
-    const selected = await page.evaluate(async () => {
-        const { selectHeroThumbnail } = await import('./website/js/demo-catalog.js');
+    const selected = await page.evaluate(async moduleUrl => {
+        const { selectHeroThumbnail } = await import(moduleUrl);
 
         return {
             sized: selectHeroThumbnail([
@@ -167,7 +168,7 @@ test('hero thumbnail selection prefers a suitable 16:9 source', async ({ page })
                 { file: 'second.webp' }
             ])
         };
-    });
+    }, new URL(DEMO_CATALOG_MODULE_PATH, page.url()).href);
 
     expect(selected.sized).toEqual({
         file: 'hd.webp',
@@ -209,12 +210,12 @@ test('@mobile hero uses example thumbnails and stable demo deep links', async ({
     const monitor = await openLandingPage(page);
     await expect(page.locator('.hero-ticker')).toHaveAttribute('aria-hidden', 'true');
 
-    const heroExamples = await page.evaluate(async () => {
+    const heroExamples = await page.evaluate(async moduleUrl => {
         const {
             loadDemoCatalog,
             resolveSitePath,
             selectHeroThumbnail: selectThumbnail
-        } = await import('./website/js/demo-catalog.js');
+        } = await import(moduleUrl);
         const catalogue = await loadDemoCatalog();
 
         return Promise.all(catalogue.examples.map(async example => {
@@ -229,7 +230,7 @@ test('@mobile hero uses example thumbnails and stable demo deep links', async ({
                 resolution: thumbnail.resolution ?? null
             };
         }));
-    });
+    }, new URL(DEMO_CATALOG_MODULE_PATH, page.url()).href);
 
     await expect(page.locator('.htk-card')).toHaveCount(heroExamples.length * 12);
     for (const example of heroExamples) {
@@ -890,7 +891,7 @@ test('@mobile vendor and organisation logos fit compact light cards', async ({ p
     await page.emulateMedia({ reducedMotion: 'reduce' });
     const monitor = await openLandingPage(page);
     const vendors = page.locator('.logo-grid[data-base$="/vendors/"]');
-    for (const [directory, count] of [['vendors', 15], ['organisations', 11]]) {
+    for (const [directory, count] of [['vendors', 16], ['organisations', 11]]) {
         const grid = page.locator(`.logo-grid[data-base$="/${directory}/"]`);
         await expect(grid.locator('img')).toHaveCount(count);
         await grid.scrollIntoViewIfNeeded();

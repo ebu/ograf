@@ -68,5 +68,10 @@
     "file": "zero-density_black.svg",
     "name": "Zero Density",
     "url": "https://www.zerodensity.io"
+  },
+  {
+    "file": "matrox.svg",
+    "name": "Matrox",
+    "url": "https://www.matrox.com/"
   }
 ]

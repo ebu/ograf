@@ -68,5 +68,10 @@
     "file": "zero-density_black.svg",
     "name": "Zero Density",
     "url": "https://www.zerodensity.io"
+  },
+  {
+    "file": "moovit.png",
+    "name": "MoovIT",
+    "url": "https://moovit.de/"
   }
 ]

@@ -1258,7 +1258,7 @@ export interface components {
              */
             description?: string;
             /** @description Custom Actions that can be invoked on the Renderer. */
-            customActions?: components["schemas"]["action-2"][];
+            customActions?: components["schemas"]["action"][];
             renderCharacteristics?: components["schemas"]["RenderCharacteristics"];
             renderTargetSchema?: components["schemas"]["RenderTargetSchema"];
             /** @description Status of the renderer */
@@ -1594,7 +1594,12 @@ export interface components {
             name: string;
             /** @description A longer description of the action. This is displayed to the user. */
             description?: string;
-            /** @description The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action. If the action does not require any parameters, set this to null. */
+            /**
+             * @description The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action. If the action does not require any parameters, set this to null.
+             * @example {
+             *       "actionParameter": "example-string"
+             *     }
+             */
             schema?: components["schemas"]["object"] | null;
         } & {
             [key: string]: unknown;
@@ -1747,23 +1752,6 @@ export interface components {
             } & {
                 [key: string]: unknown;
             })[];
-        } & {
-            [key: string]: unknown;
-        };
-        "action-2": {
-            /** @description The identity of the action. The id must be unique within the graphic. */
-            id: string;
-            /** @description The name of the action. This is displayed to the user. */
-            name: string;
-            /** @description A longer description of the action. This is displayed to the user. */
-            description?: string;
-            /**
-             * @description The schema of the action. This is used to validate the action parameters as well as auto-generate a GUI for the action. If the action does not require any parameters, set this to null.
-             * @example {
-             *       "actionParameter": "example-string"
-             *     }
-             */
-            schema?: components["schemas"]["object"] | null;
         } & {
             [key: string]: unknown;
         };

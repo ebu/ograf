@@ -287,6 +287,42 @@
                     "sha256": "79a3958e2e2c8990660ee7bc2a28a2e4bcda52a9f4e5daf31f87ace6ba74000c"
                 }
             ]
+        },
+        {
+            "id": "tennis-scoreboard",
+            "title": "Tennis Scoreboard",
+            "manifest": "v1/examples/tennis-scoreboard/tennis-scoreboard.ograf.json",
+            "archiveName": "ograf-example-tennis-scoreboard.zip",
+            "presentation": {
+                "renderer": "viewport",
+                "background": {
+                    "type": "image",
+                    "src": "website/assets/img/bg-tennis-court.webp",
+                    "overlay": "rgba(4, 7, 18, 0.35)"
+                }
+            },
+            "files": [
+                {
+                    "source": "v1/examples/tennis-scoreboard/README.md",
+                    "archive": "README.md",
+                    "sha256": "7a42efeff398635596bd241c0a9d986406792a92e78207c37294354e0f8b53a6"
+                },
+                {
+                    "source": "v1/examples/tennis-scoreboard/graphic.mjs",
+                    "archive": "graphic.mjs",
+                    "sha256": "b06ac5b5091483eb3b32eac117de3665bb7a83ec98c40a2c6b147ecd5571df6e"
+                },
+                {
+                    "source": "v1/examples/tennis-scoreboard/tennis-scoreboard.ograf.json",
+                    "archive": "tennis-scoreboard.ograf.json",
+                    "sha256": "7ef4f67fb544462a392f795050bef587848db5eaed85283b326d62dad06d6b30"
+                },
+                {
+                    "source": "v1/examples/tennis-scoreboard/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "656bcfa7ae5bf5506a582815d7025443a16f65423422c03f0fa33d0f1f66dd49"
+                }
+            ]
         }
     ]
 }

@@ -2,6 +2,61 @@ import { expect, test } from '@playwright/test';
 
 const HERO_FILES = ['adobe.svg', 'blackmagic-design.svg', 'matrox.svg', 'moovit.png'];
 
+test('@mobile @compat vendor and organisation grids sort by name independently of manifest order', async ({ page }) => {
+    const manifests = {
+        vendors: [
+            { file: 'adobe.svg', name: 'zulu', url: 'https://example.com/zulu' },
+            { file: 'moovit.png', name: 'Bravo', url: 'https://example.com/bravo' },
+            { file: 'matrox.svg', name: 'alpha', url: 'https://example.com/alpha' },
+            { file: 'loopic.svg', name: '', url: 'https://example.com/unnamed' },
+            'blackmagic-design.svg'
+        ],
+        organisations: [
+            { file: 'bbc.svg', name: 'zebra', url: 'https://example.com/zebra' },
+            { file: 'nrk.svg', name: 'Beta', url: 'https://example.com/beta' },
+            { file: 'yle.svg', name: 'apple', url: 'https://example.com/apple' }
+        ]
+    };
+    const expected = {
+        vendors: [
+            { file: 'matrox.svg', name: 'alpha', url: 'https://example.com/alpha' },
+            { file: 'blackmagic-design.svg', name: '', url: null },
+            { file: 'moovit.png', name: 'Bravo', url: 'https://example.com/bravo' },
+            { file: 'loopic.svg', name: '', url: 'https://example.com/unnamed' },
+            { file: 'adobe.svg', name: 'zulu', url: 'https://example.com/zulu' }
+        ],
+        organisations: [
+            { file: 'yle.svg', name: 'apple', url: 'https://example.com/apple' },
+            { file: 'nrk.svg', name: 'Beta', url: 'https://example.com/beta' },
+            { file: 'bbc.svg', name: 'zebra', url: 'https://example.com/zebra' }
+        ]
+    };
+    let reverseManifest = false;
+    for (const [directory, entries] of Object.entries(manifests)) {
+        await page.route(`**/vendor-logos/${directory}/manifest.json`, route => route.fulfill({
+            json: reverseManifest ? [...entries].reverse() : entries
+        }));
+    }
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('./');
+    for (let load = 0; load < 2; load += 1) {
+        for (const [directory, entries] of Object.entries(expected)) {
+            const grid = page.locator(`.logo-grid[data-base$="/${directory}/"]`);
+            await expect(grid.locator('img')).toHaveCount(entries.length);
+            const rendered = await grid.locator('li').evaluateAll(items => items.map(item => ({
+                file: new URL(item.querySelector('img').src).pathname.split('/').pop(),
+                name: item.querySelector('img').alt,
+                url: item.querySelector('a')?.getAttribute('href') ?? null
+            })));
+            expect(rendered).toEqual(entries);
+        }
+        if (load === 0) {
+            reverseManifest = true;
+            await page.reload();
+        }
+    }
+});
+
 async function tickerFiles(track) {
     return track.locator('img').evaluateAll(images => images.map(image =>
         decodeURIComponent(new URL(image.src).pathname.split('/').pop())

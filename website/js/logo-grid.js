@@ -38,6 +38,9 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
   }[c]));
 
+  const sortName = entry => typeof entry === 'string' ? entry : entry.name || entry.file || '';
+  const nameOrder = new Intl.Collator('en', { sensitivity: 'base' });
+
   const renderEntry = (entry, base) => {
     // Tolerate a plain string for backward-compat with the hero
     // manifest format (string array of filenames).
@@ -61,6 +64,8 @@
       if (!r.ok) return;
       const list = await r.json();
       if (!Array.isArray(list)) return;
+      // Each grid is alphabetical by display name, regardless of manifest order.
+      list.sort((left, right) => nameOrder.compare(sortName(left), sortName(right)));
       // Replace whatever was in the <ul> (server-rendered fallback or
       // empty) with the freshly rendered list.
       grid.innerHTML = list.map(e => renderEntry(e, base)).filter(Boolean).join('');

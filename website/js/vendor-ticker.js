@@ -26,6 +26,12 @@
   const files = await loadFileList(folder, exts);
   if (!files.length) return;
 
+  // Shuffle once per page load; every repeated set must keep the same order.
+  for (let i = files.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [files[i], files[j]] = [files[j], files[i]];
+  }
+
   const buildSet = () => {
     const frag = document.createDocumentFragment();
     for (const file of files) {

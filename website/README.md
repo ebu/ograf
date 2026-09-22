@@ -56,3 +56,6 @@ npm --prefix website/_tooling run update-manifests
 For vendor and organisation entries, edit the generated `manifest.json` entry to provide
 the correct display name and official URL. The generator preserves these fields on later
 runs. Finish by running `validate` and checking both desktop and mobile layouts.
+
+The vendor ticker shuffles its logos once on each page load, independently of the
+manifest order. Repeated sets keep that order for a seamless animation loop.

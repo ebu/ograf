@@ -305,8 +305,9 @@ The `delta` and `goto` fields indicate the target step. Steps are zero-based ind
 `delta` field (which defaults to `1` when not provided). When the current step is undefined (i.e. when the Graphic is
 in the 'start' state), the target step must be calculated as `-1 + delta`.
 
-When the target step is higher or equal to the `stepCount` defined in the Manifest, the Graphic MUST transition to the
-end.
+When `stepCount` is non-negative and the target step is greater than or equal to `stepCount`, the Graphic MUST
+transition to the end. When `stepCount` is omitted, the default value of `1` applies.
+For `stepCount: -1` (dynamic or unknown number of steps), this comparison does not apply.
 
 The following table shows some examples of target step calculations, based on the internal state of the Graphic and
 incoming `goto` and `delta` fields. Target step equal to `undefined` means the Graphic needs to transition to the end.

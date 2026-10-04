@@ -98,7 +98,7 @@ paths:
                     $ref: "#/components/schemas/GraphicMetadata"
                 required:
                   - graphic
-                  - manifest
+                  - metadata
         404:
           description: No Graphic found with the given ID and version
           content:

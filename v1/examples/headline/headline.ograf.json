@@ -67,6 +67,34 @@
         "width": 1280,
         "height": 720
       }
+    },
+    {
+      "file": "thumbnails/1280x720.png",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "file": "thumbnails/1280x720-cropped.png",
+      "resolution": {
+        "width": 1134,
+        "height": 111
+      }
+    },
+    {
+      "file": "thumbnails/animated.webp",
+      "resolution": {
+        "width": 640,
+        "height": 360
+      }
+    },
+    {
+      "file": "thumbnails/animated.gif",
+      "resolution": {
+        "width": 640,
+        "height": 360
+      }
     }
   ]
 }

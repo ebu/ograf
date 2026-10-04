@@ -7,15 +7,23 @@
     "supportsRealTime": true,
     "supportsNonRealTime": false,
     "schema": {
-        "type":"object",
-
+        "type": "object",
         "properties": {
             "message": {
                 "type": "string",
                 "default": "Hello World!",
-        "gddType": "single-line",
+                "gddType": "single-line",
                 "hidden": true
             }
         }
-    }
+    },
+    "thumbnails": [
+        {
+            "file": "thumbnails/1280x720.png",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        }
+    ]
 }

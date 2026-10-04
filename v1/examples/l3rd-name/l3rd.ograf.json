@@ -6,11 +6,36 @@
     "main": "graphic.mjs",
     "thumbnails": [
         {
-            "file": "thumbnail.webp",
+            "file": "thumbnails/1280x720.png",
             "resolution": {
                 "width": 1280,
                 "height": 720
             }
+        },
+        {
+            "file": "thumbnails/1280x720-cropped.png",
+            "resolution": {
+                "width": 236,
+                "height": 74
+            }
+        },
+        {
+            "file": "thumbnails/animated.webp",
+            "resolution": {
+                "width": 640,
+                "height": 360
+            },
+            "animated": true,
+            "format": "webp"
+        },
+        {
+            "file": "thumbnails/animated.gif",
+            "resolution": {
+                "width": 640,
+                "height": 360
+            },
+            "animated": true,
+            "format": "gif"
         }
     ],
     "version": "0",
@@ -57,7 +82,7 @@
             "title": {
                 "type": "string",
                 "title": "Title",
-          "default": "OGraf expert"
+                "default": "OGraf expert"
             }
         }
     },

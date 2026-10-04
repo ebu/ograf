@@ -133,10 +133,31 @@
   ],
   "thumbnails": [
     {
-      "file": "thumbnail.png",
+      "file": "thumbnails/1920x1080.png",
       "resolution": {
         "width": 1920,
         "height": 1080
+      }
+    },
+    {
+      "file": "thumbnails/1280x720.png",
+      "resolution": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "file": "thumbnails/animated.webp",
+      "resolution": {
+        "width": 640,
+        "height": 360
+      }
+    },
+    {
+      "file": "thumbnails/animated.gif",
+      "resolution": {
+        "width": 640,
+        "height": 360
       }
     }
   ]

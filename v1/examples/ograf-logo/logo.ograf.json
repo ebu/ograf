@@ -22,9 +22,33 @@
     "renderRequirements": [
         {
             "resolution": {
-                "width": { "min": 600, "max": 4000, "ideal": 1920 }
+                "width": {
+                    "min": 600,
+                    "max": 4000,
+                    "ideal": 1920
+                }
             },
-            "frameRate": { "min": 1, "max": 240, "ideal": 60 }
+            "frameRate": {
+                "min": 1,
+                "max": 240,
+                "ideal": 60
+            }
+        }
+    ],
+    "thumbnails": [
+        {
+            "file": "thumbnails/1280x720.png",
+            "resolution": {
+                "width": 1280,
+                "height": 720
+            }
+        },
+        {
+            "file": "thumbnails/1280x720-cropped.png",
+            "resolution": {
+                "width": 66,
+                "height": 66
+            }
         }
     ]
 }

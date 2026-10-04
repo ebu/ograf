@@ -1239,6 +1239,25 @@ export interface components {
             updatedAt?: string;
             /** @description Information about who last updated the graphic */
             updatedBy?: components["schemas"]["Author"];
+            /** @description Optional info about the Graphic content */
+            content?: {
+                /**
+                 * @description URL of the graphic (under which the content files are located). This MUST be a fully-qualified URL, relative paths are not allowed.
+                 * @example https://my-ograf-server/graphics/my-simple-lower-third/
+                 */
+                url: string;
+                files: ({
+                    /**
+                     * @description Path to the file, relative to the graphic URL.
+                     * @example resources/logo.png
+                     */
+                    path: string;
+                } & {
+                    [key: string]: unknown;
+                })[];
+            } & {
+                [key: string]: unknown;
+            };
         } & {
             [key: string]: unknown;
         };

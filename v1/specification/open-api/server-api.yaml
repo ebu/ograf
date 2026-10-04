@@ -910,6 +910,28 @@ components:
         updatedBy:
           description: "Information about who last updated the graphic"
           $ref: "#/components/schemas/Author"
+        content:
+          description: "Optional info about the Graphic content"
+          type: object
+          properties:
+            url:
+              description: "URL of the graphic (under which the content files are located). This MUST be a fully-qualified URL, relative paths are not allowed."
+              type: string
+              example: "https://my-ograf-server/graphics/my-simple-lower-third/"
+            files:
+              type: array
+              items:
+                type: object
+                properties:
+                  path:
+                    description: "Path to the file, relative to the graphic URL."
+                    type: string
+                    example: "resources/logo.png"
+                required:
+                  - path
+          required:
+            - url
+            - files
       required:
         - createdAt
     GraphicManifest:

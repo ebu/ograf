@@ -29,6 +29,11 @@ For example, if the base URL is `https://example.com/my/prefix/ograf/v1`, the Op
 
 The `/ograf/v1` path prefix used in examples is allowed, but not required.
 
+### Graphic data validation (optional)
+
+* The Server MAY validate `params.data` sent to `load()` or `updateAction()` against the Graphic Manifest's `schema` field.
+* Handling data that does not conform to the schema is implementation-specific. The specification does not require a hard failure or prescribe an HTTP status code or response body.
+
 ### Security (optional)
 
 * The current version of the Server API doesn't specify any security measures.

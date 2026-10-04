@@ -867,10 +867,10 @@ export interface paths {
                              */
                             statusMessage?: string;
                             /**
-                             * @description The resulting step from a PlayAction
+                             * @description The resulting step from a PlayAction. Not included when stepCount is 0 or the Graphic has transitioned to the end.
                              * @example 1
                              */
-                            currentStep: number;
+                            currentStep?: number;
                         } & {
                             [key: string]: unknown;
                         };

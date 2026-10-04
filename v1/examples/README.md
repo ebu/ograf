@@ -12,4 +12,5 @@
 - [Renderer Test](renderer-test/): Technical package for testing renderer behavior.
 - [Responsive Lower Third](responsive-lower-third/): Lower third that adapts to its output size.
 - [Scoreboard](scoreboard/): Multi-step live scoreboard.
+- [Tennis Scoreboard](tennis-scoreboard/): Live tennis scoreboard with a dynamic step count.
 - [Weather](weather/): Full-screen weather display with configurable content and image.

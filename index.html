@@ -1241,6 +1241,157 @@
                     </div>
                 </div><!-- /.demo-carousel__slide -->
 
+                <!-- Slide 7: Tennis Scoreboard -->
+                <div class="demo-carousel__slide" id="demo-slide-6" role="tabpanel"
+                     data-example-id="tennis-scoreboard"
+                     aria-labelledby="demo-tab-6" aria-hidden="true" inert tabindex="0">
+                    <div class="demo-card" data-demo-controller="tennis-scoreboard">
+
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Tennis Scoreboard</h3>
+                            <div class="demo-card__header-actions">
+                                <span class="demo-card__badge">Dynamic steps</span>
+                                <a class="demo-card__download"
+                                   href="https://github.com/ebu/ograf/tree/main/v1/examples/tennis-scoreboard"
+                                   data-example-download="tennis-scoreboard"
+                                   aria-label="Download the Tennis Scoreboard OGraf package as a ZIP file">
+                                    <i data-lucide="download" aria-hidden="true"></i>
+                                    <span>Download OGraf (.zip)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="demo-card__body">
+
+                            <div class="demo-aspect-bar">
+                                <span class="demo-aspect-bar__label">Format</span>
+                                <div class="demo-aspect-bar__options" role="radiogroup"
+                                     aria-label="Tennis Scoreboard format">
+                                    <button class="demo-aspect-btn is-active" type="button" role="radio"
+                                            aria-checked="true" tabindex="0" data-ratio="16/9"
+                                            title="Landscape 16:9">
+                                        <svg width="20" height="14" viewBox="0 0 20 14">
+                                            <rect x="0.5" y="0.5" width="19" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>16:9</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="4/3"
+                                            title="Classic 4:3">
+                                        <svg width="16" height="14" viewBox="0 0 16 14">
+                                            <rect x="0.5" y="0.5" width="15" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>4:3</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="1/1"
+                                            title="Square 1:1">
+                                        <svg width="14" height="14" viewBox="0 0 14 14">
+                                            <rect x="0.5" y="0.5" width="13" height="13" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>1:1</span>
+                                    </button>
+                                    <button class="demo-aspect-btn" type="button" role="radio"
+                                            aria-checked="false" tabindex="-1" data-ratio="9/16"
+                                            title="Portrait 9:16">
+                                        <svg width="10" height="16" viewBox="0 0 10 16">
+                                            <rect x="0.5" y="0.5" width="9" height="15" rx="2" fill="none"
+                                                  stroke="currentColor" stroke-width="1"/>
+                                        </svg>
+                                        <span>9:16</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="demo-player-stage">
+                                <div class="demo-player" data-demo-player data-ratio="16/9">
+                                    <iframe
+                                            class="demo-player__iframe"
+                                            data-demo-iframe
+                                            data-src="website/demo-player/index.html?example=tennis-scoreboard"
+                                            title="OGraf Tennis Scoreboard Demo"
+                                            sandbox="allow-scripts allow-same-origin"
+                                            tabindex="-1"
+                                    ></iframe>
+                                </div>
+                            </div>
+
+                            <div class="demo-controls">
+                                <div class="demo-controls__actions">
+                                    <button class="btn btn--primary demo-btn" data-demo-action="play" type="button" disabled>Play In</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="update" type="button" disabled>Update</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-custom-action="point-server"
+                                            type="button" disabled>Point</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="previous"
+                                            type="button" disabled>Previous view</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="next"
+                                            type="button" disabled>Next view</button>
+                                    <button class="btn btn--ghost demo-btn" data-demo-action="stop" type="button" disabled>Stop</button>
+                                </div>
+
+                                <div class="demo-controls__fields demo-controls__fields--compact">
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Player A</span>
+                                        <input class="demo-field__input" data-demo-field="playerAName" type="text"
+                                               value="A. Moreau" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Player B</span>
+                                        <input class="demo-field__input" data-demo-field="playerBName" type="text"
+                                               value="J. Lindqvist" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Games A</span>
+                                        <input class="demo-field__input" data-demo-field="gamesA" type="text"
+                                               data-demo-value-type="number" value="4" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Games B</span>
+                                        <input class="demo-field__input" data-demo-field="gamesB" type="text"
+                                               data-demo-value-type="number" value="3" autocomplete="off">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Rally points A</span>
+                                        <input class="demo-field__input" data-demo-field="pointsA"
+                                               type="number" min="0" step="1" value="1"
+                                               data-demo-value-type="number">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Rally points B</span>
+                                        <input class="demo-field__input" data-demo-field="pointsB"
+                                               type="number" min="0" step="1" value="3"
+                                               data-demo-value-type="number">
+                                    </label>
+
+                                    <label class="demo-field">
+                                        <span class="demo-field__label">Match format</span>
+                                        <select class="demo-field__input" data-demo-field="bestOf"
+                                                data-demo-value-type="number">
+                                            <option value="3" selected>Best of three</option>
+                                            <option value="5">Best of five</option>
+                                        </select>
+                                    </label>
+
+                                </div>
+                                <div class="demo-controls__status">
+                                    <span class="demo-status" data-demo-status data-state="loading"
+                                          role="status" aria-live="polite" aria-atomic="true">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div><!-- /.demo-card__body -->
+                    </div><!-- /.demo-card -->
+                </div><!-- /.demo-carousel__slide -->
+
                 </div><!-- /.demo-carousel__track -->
             </div><!-- /.demo-carousel__viewport -->
 
@@ -1273,6 +1424,9 @@
                 <button class="demo-carousel__dot" id="demo-tab-5" type="button" role="tab"
                         aria-selected="false" aria-controls="demo-slide-5" tabindex="-1" data-index="5"
                         data-example-id="weather" aria-label="Weather"></button>
+                <button class="demo-carousel__dot" id="demo-tab-6" type="button" role="tab"
+                        aria-selected="false" aria-controls="demo-slide-6" tabindex="-1" data-index="6"
+                        data-example-id="tennis-scoreboard" aria-label="Tennis Scoreboard"></button>
             </div>
 
         </div><!-- /.demo-carousel -->
@@ -1848,7 +2002,7 @@
 <script src="website/js/animations.js?v=7"></script>
 
 <!-- Demo control panel -->
-<script src="website/js/demo-controls.js?v=2"></script>
+<script src="website/js/demo-controls.js?v=3"></script>
 
 <!-- Demo 2: Scoreboard control panel -->
 <script src="website/js/demo-scoreboard.js?v=12"></script>

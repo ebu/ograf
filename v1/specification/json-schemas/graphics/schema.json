@@ -199,7 +199,7 @@
             "minimum": -1
         },
         "schema": {
-            "description": "The schema is used by a Graphic to define the data parameters of the 'update' method.",
+            "description": "The schema is used by a Graphic to define the data parameters of the 'load()' and 'updateAction()' methods.",
             "type": "object",
             "$ref": "https://ograf.ebu.io/v1/specification/json-schemas/gdd/object.json"
         },

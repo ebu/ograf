@@ -252,6 +252,43 @@ Lets the user pick an image file from disk
 
 Example data: `"C:\images\myImage.jpg"` or `"folder/myImage.png"`
 
+### File list
+
+Lets the user select a file from a list of files scanned from a folder.
+
+```typescript
+{
+  "type": "string",
+  "gddType": "file-list",
+  "gddOptions": {
+    "folder": "files", // [Required, String] Folder path or URI to scan. Relative paths are resolved relative to the manifest/base folder.
+    "extensions": ["jpg", "txt"] // [Optional, Array of strings] Limit which files can be selected by the user.
+  }
+}
+```
+
+Example data: `"files/myImage.jpg"` or `"files/myFile.txt"`
+
+### File list multiple
+
+Lets the user select multiple files from a list of files scanned from a folder.
+
+```typescript
+{
+  "type": "array",
+  "items": {
+    "type": "string"
+  },
+  "gddType": "file-list-multiple",
+  "gddOptions": {
+    "folder": "files", // [Required, String] Folder path or URI to scan. Relative paths are resolved relative to the manifest/base folder.
+    "extensions": ["jpg", "txt"] // [Optional, Array of strings] Limit which files can be selected by the user.
+  }
+}
+```
+
+Example data: `["files/myImage.jpg", "files/myFile.txt"]`
+
 ### Select
 
 Lets the user select from a limited number of options (this is often done from a dropdown menu).

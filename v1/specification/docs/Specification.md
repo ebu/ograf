@@ -155,8 +155,8 @@ an exact `step` match, then a fallback step duration without `step`, then the ac
 #### Custom actions
 
 A custom action is an action that is specific for a particular Graphic. It is a mechanism to support any action
-a Graphic can execute. The Manifest file defines the custom actions by means of the `actions` field. It represents
-a Map where the keys correspond to the id of the custom action and the values are `Action` objects. The `Action` object
+a Graphic can execute. The Manifest file defines the custom actions by means of the `customActions` field. It is an
+array of `Action` objects, each carrying the id of the custom action in its own `id` field. The `Action` object
 supports the following fields:
 
 | Field       | Type   | Required | Default | Description                                               |
@@ -164,7 +164,7 @@ supports the following fields:
 | id          | string |    X     |         | The identity of the action. The id must be unique within the graphic.                               |
 | name        | string |    X     |         | The name of the action (for use in GUIs).                 |
 | description | string |          |         | A longer description of the action.                       |
-| schema      | object |          |         | The JSON schema definition for the payload of the action. |
+| schema      | object |          |         | The JSON schema definition for the payload of the action. Set to `null` when the action takes no parameters. |
 
 #### RenderRequirements
 
@@ -385,15 +385,15 @@ customAction: (
 ) => Promise<ReturnPayload | undefined>;
 ```
 The `customAction()` function is called by the Renderer to invoke a custom action on the Graphic. The `id` field MUST
-correspond to an `id` of an Action that is defined in the Manifest file, inside the `actions` field. The schema for the
+correspond to an `id` of an Action that is defined in the Manifest file, inside the `customActions` field. The schema for the
 `payload` field is the described in the corresponding Action inside the Manifest file. The returned Promise MUST
 resolve when the action is executed.
 
-The `skipAnimation` field indicates whether the Graphic should disappear with or without animation.
+The `skipAnimation` field indicates whether the Graphic should perform the action with or without animation.
 When not provided, the `skipAnimation` field defaults to `false`. The Graphic MUST skip the animation when
 `skipAnimation` is set to `true`.
 
-The returned Promise MUST resolve after the execution of the update.
+The returned Promise MUST resolve after the execution of the action.
 The point in time when the Promise is resolved SHOULD indicate that the graphic is ready to execute another action.
 Typically, it could be when a graphic has finished an animation of the action.
 

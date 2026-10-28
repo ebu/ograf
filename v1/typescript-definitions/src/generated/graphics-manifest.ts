@@ -440,7 +440,7 @@ export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddBasicTypesJson = {
   [k: string]: unknown;
 };
 /**
- * The schema is used by a Graphic to define the data parameters of the 'update' method.
+ * The schema is used by a Graphic to define the data parameters of the 'load()' and 'updateAction()' methods.
  */
 export type HttpsOgrafEbuIoV1SpecificationJsonSchemasGddObjectJson1 = CoreAndValidationSpecificationsMetaSchema &
   HttpsOgrafEbuIoV1SpecificationJsonSchemasGddGddTypesJson &

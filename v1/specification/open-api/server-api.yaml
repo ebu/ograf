@@ -594,13 +594,12 @@ paths:
                     type: string
                     example: "Playing!"
                   currentStep:
-                    description: The resulting step from a PlayAction
+                    description: The resulting step from a PlayAction. Not included when stepCount is 0 or the Graphic has transitioned to the end.
                     type: number
                     example: 1
                 required:
                   - graphicInstanceId
                   - statusCode
-                  - currentStep
         404:
           description: No GraphicInstance or RenderTarget found
           content:

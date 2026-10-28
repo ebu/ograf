@@ -46,6 +46,6 @@ export type ActionInvokeParams = {
 } & VendorExtend;
 
 export type PlayActionReturnPayload = ReturnPayload & {
-  /** The resulting step from a PlayAction */
-  currentStep: number;
+  /** The resulting step from a PlayAction, or undefined when stepCount is 0 or the Graphic has transitioned to the end. */
+  currentStep: number | undefined;
 };

@@ -249,7 +249,7 @@ async function validateHeroThumbnails() {
 
             const thumbnailStats = await stat(thumbnailPath);
             if (thumbnailStats.size > HERO_THUMBNAIL_MAXIMUM_BYTES) {
-                report(`${example.id} hero thumbnail exceeds the 500 KB performance budget`);
+                report(`${example.id} hero thumbnail (${thumbnailPath}) exceeds the 500 KB performance budget`);
             }
 
             const repositoryPath = relative(REPOSITORY_ROOT, thumbnailPath).split('\\').join('/');

@@ -117,14 +117,7 @@
   ],
   "thumbnails": [
     {
-      "file": "thumbnail.jpg",
-      "resolution": {
-        "width": 1280,
-        "height": 720
-      }
-    },
-    {
-      "file": "thumbnails/1280x720.png",
+      "file": "thumbnails/1280x720.jpg",
       "resolution": {
         "width": 1280,
         "height": 720

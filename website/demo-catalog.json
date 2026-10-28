@@ -347,14 +347,9 @@
                     "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
                 },
                 {
-                    "source": "v1/examples/weather/thumbnail.jpg",
-                    "archive": "thumbnail.jpg",
-                    "sha256": "f8e15fea2630c8169afa925612913b33e2f72b318d19d6ccd30ee1e6bc4fd91f"
-                },
-                {
-                    "source": "v1/examples/weather/thumbnails/1280x720.png",
-                    "archive": "thumbnails/1280x720.png",
-                    "sha256": "71e00bdb36641076b96c78aa22d67dce788cb42c2b3247cf23cdce20c557dec5"
+                    "source": "v1/examples/weather/thumbnails/1280x720.jpg",
+                    "archive": "thumbnails/1280x720.jpg",
+                    "sha256": "f2d15c694a07f93e9f761687afef273def6ed810260658ce69d3860c8905d672"
                 },
                 {
                     "source": "v1/examples/weather/thumbnails/animated.gif",
@@ -369,7 +364,7 @@
                 {
                     "source": "v1/examples/weather/weather.ograf.json",
                     "archive": "weather.ograf.json",
-                    "sha256": "11ebf1fdc446d2bcd14944b9e5f6a090995faa3c2f5022282c3fc48c7afe5e57"
+                    "sha256": "4c7dc8fd58a0f1f66b920ec93ebb04a00b29043f3ca42653143b7ffadf5a423c"
                 }
             ]
         }

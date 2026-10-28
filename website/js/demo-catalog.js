@@ -16,6 +16,19 @@ function resolutionOf(thumbnail) {
 }
 
 function compareThumbnails(left, right) {
+
+    const leftFile = `${left.file}`
+    const rightFile = `${right.file}`;
+
+    
+    const leftExtension = leftFile.split('.').pop().toLowerCase();
+    const rightExtension = rightFile.split('.').pop().toLowerCase();
+    const extensionPriority = ['png', 'jpg', 'webp', 'gif'];
+    const leftPriority = extensionPriority.indexOf(leftExtension);
+    const rightPriority = extensionPriority.indexOf(rightExtension);
+    if (leftPriority !== rightPriority) return leftPriority - rightPriority;
+
+
     const leftResolution = resolutionOf(left);
     const rightResolution = resolutionOf(right);
     if (!leftResolution && !rightResolution) return 0;

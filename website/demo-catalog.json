@@ -18,22 +18,32 @@
                 {
                     "source": "v1/examples/scoreboard/README.md",
                     "archive": "README.md",
-                    "sha256": "d6fdcb289c324cccba4bcb846883f462fe095190402d6116f717c6da2f2deac0"
+                    "sha256": "d1c30c31cf865ebed519070954f41167a66b6d50111929b7ef6e4aec9111b667"
                 },
                 {
                     "source": "v1/examples/scoreboard/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "2cc2e1c855a43ece121bb718d5c3bad7fbff6aa7b24297d5a0f3bfa8f50b09d7"
+                    "sha256": "43581534fa04270457636ce242233ccef9ce7347e2f5f6444e9043978df64bc8"
                 },
                 {
                     "source": "v1/examples/scoreboard/scoreboard.ograf.json",
                     "archive": "scoreboard.ograf.json",
-                    "sha256": "ab835f78f4697af6c59753b9b4c8bc93c0d2076465c108d64d045524967f6f1c"
+                    "sha256": "ee4257c6a9cd9e84a3633a38c3a6384b8788a6b24b9bc97a2b9e87445d6730d3"
                 },
                 {
                     "source": "v1/examples/scoreboard/thumbnail.webp",
                     "archive": "thumbnail.webp",
                     "sha256": "72aa6f6d77e6f03a2c6ae38a8de1e037d38bd9fd1e1858cd7a8a6963c4fbc02e"
+                },
+                {
+                    "source": "v1/examples/scoreboard/thumbnails/1280x720-cropped.png",
+                    "archive": "thumbnails/1280x720-cropped.png",
+                    "sha256": "17d4247ed21d77f3fc128bea42fb9d33172c98f3a393857048cd2fb81d69d5c0"
+                },
+                {
+                    "source": "v1/examples/scoreboard/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "bd4443c2cd2082f0c6ab70d96f467ee99a918f40be68ebdd88690328967ca517"
                 }
             ]
         },
@@ -54,22 +64,32 @@
                 {
                     "source": "v1/examples/responsive-lower-third/README.md",
                     "archive": "README.md",
-                    "sha256": "509a6944963e52be23a4b68ce329f76e2fcfa881413e00d6df23143bb0063c45"
+                    "sha256": "ad5e4afbb002fdbe191524a32d07f4d2dc6556d74ff6d490d57b4f01a109d367"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "899c4b18aa0583281e682aa4ac538d64d9eae621c94ca04281aa59b9253ac035"
+                    "sha256": "8dded2c5fef88f4640ff77794c3102baadb2e41123fffc9832126e208643fb3c"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
                     "archive": "responsive-lower-third.ograf.json",
-                    "sha256": "6b7544adf92f3a3f58cfa67062b9aeeb9b0b3892d624d9a8ae7d98ee4124a13f"
+                    "sha256": "0091f338cc6f9b6a6b801a6d1e466fb03bd64835d8e85ceee5415d56e807f424"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/thumbnail.webp",
                     "archive": "thumbnail.webp",
                     "sha256": "19f2a00fbfa5baf81aa1ae20c18518a4ec6ea275cbdce0638a8f51b1731594a3"
+                },
+                {
+                    "source": "v1/examples/responsive-lower-third/thumbnails/1280x720-cropped.png",
+                    "archive": "thumbnails/1280x720-cropped.png",
+                    "sha256": "9aa6b952e91a3c2218071c0191b6954c17813421de7ec79ce94427514b7dd6b9"
+                },
+                {
+                    "source": "v1/examples/responsive-lower-third/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "e201cb33d0830f4c606e96ab260d45c6ba53598b60d56421dfca9947d55a536e"
                 }
             ]
         },
@@ -99,12 +119,12 @@
                 {
                     "source": "v1/examples/l3rd-name/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "2c6440e4b1fd040316f89b9536df5772abc9a6a769fe98a32824991f901ccf42"
+                    "sha256": "807d14ad2e60ebabd5f63afa94dccfe110c2405e8d96733319e53e308e7b7b8d"
                 },
                 {
                     "source": "v1/examples/l3rd-name/l3rd.ograf.json",
                     "archive": "l3rd.ograf.json",
-                    "sha256": "3c0abde2cef6ab51cc6eea77d72961c603ce668ccfc16ad6c7013708db8bd660"
+                    "sha256": "4459bf4903121311df302bac04ecb682c370eb0d53bad7946b56569b57fdff39"
                 },
                 {
                     "source": "v1/examples/l3rd-name/lib/CSSPlugin.js",
@@ -137,9 +157,24 @@
                     "sha256": "fc284f768f1860ad03c914aa1efef24fe4d8e2aa712700909126f4956647a328"
                 },
                 {
-                    "source": "v1/examples/l3rd-name/thumbnail.webp",
-                    "archive": "thumbnail.webp",
-                    "sha256": "8855edf0a1264b68006124a10a0b6117dc59ae5ad6e07d6978b965af8463e09c"
+                    "source": "v1/examples/l3rd-name/thumbnails/1280x720-cropped.png",
+                    "archive": "thumbnails/1280x720-cropped.png",
+                    "sha256": "6ac924a12158c5bc8eebe7ea3fca6e593ab79ecf6a50e80e3d29baf34dc5e688"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "6e35b1cb8c794e35a234f5790296ed4c442f14973b54e8c33cef8c7002a78236"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/thumbnails/animated.gif",
+                    "archive": "thumbnails/animated.gif",
+                    "sha256": "ab316327b2af77fbbf7dbd92119bd38adcd01eb2eae8bff9f53cd84c2460674e"
+                },
+                {
+                    "source": "v1/examples/l3rd-name/thumbnails/animated.webp",
+                    "archive": "thumbnails/animated.webp",
+                    "sha256": "83df12a08bb34a41d0c43cc35e187ca82b2bab628d76cc6592f4fc477b60ebf2"
                 }
             ]
         },
@@ -159,32 +194,47 @@
                 {
                     "source": "v1/examples/bar-chart/README.md",
                     "archive": "README.md",
-                    "sha256": "7a47e97288473474b6d215d5cac044efb1a5c8d5b75904755c3fd2d7ca859722"
+                    "sha256": "f050133277c404df8915ae34c366882ce13d152698d7ff385b1e1095ef536699"
                 },
                 {
                     "source": "v1/examples/bar-chart/bar-chart.ograf.json",
                     "archive": "bar-chart.ograf.json",
-                    "sha256": "b049df58911e2cc6ef93738403bbf738c97af78c3b4b8d19624c3b8be39b93fd"
+                    "sha256": "f060d822ec67ed0bb48ca877f89372c402eeb8ad53a69dd4f89542c6e4c5aa27"
                 },
                 {
                     "source": "v1/examples/bar-chart/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "1abe4f4cd5aafd3973ea8507218e35e5dcaa02b868030f6dac2e62488b376447"
+                    "sha256": "b5ac3198e2eff83da958a191004d3f01b332405c15d476d0e7dc3789548e784c"
                 },
                 {
                     "source": "v1/examples/bar-chart/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "2d8664eea2954e6c8996ec127ee8705108b92a46b6e497ecd79b1fcbbe8c11f7"
+                    "sha256": "976e93c602aba22689b84ac34b54a3a641e6817c052ec65d2ef44adb28cdad6c"
                 },
                 {
                     "source": "v1/examples/bar-chart/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
                 },
                 {
-                    "source": "v1/examples/bar-chart/thumbnail.png",
-                    "archive": "thumbnail.png",
-                    "sha256": "603dc2e48b5a63e20a32d4e072fd33be423ade070af8eba7f4798769b8e96bae"
+                    "source": "v1/examples/bar-chart/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "3f3169d5674c90c252c3c78f8321ab5472cc8e324838bce5fa4c5852f11aa401"
+                },
+                {
+                    "source": "v1/examples/bar-chart/thumbnails/1920x1080.png",
+                    "archive": "thumbnails/1920x1080.png",
+                    "sha256": "1aef88995640122c7963983abb37c3940493f2dda5a7bb72fdb1f56812326d48"
+                },
+                {
+                    "source": "v1/examples/bar-chart/thumbnails/animated.gif",
+                    "archive": "thumbnails/animated.gif",
+                    "sha256": "063669d135ceb2f6155572b674e1410aab46704f0ac82ba72efbc6dd294eacb2"
+                },
+                {
+                    "source": "v1/examples/bar-chart/thumbnails/animated.webp",
+                    "archive": "thumbnails/animated.webp",
+                    "sha256": "25b974e92caddb955297cdd06bbdfb1e64800b5259c3cf5bf6a9a9d9ab249a4c"
                 }
             ]
         },
@@ -209,32 +259,52 @@
                 {
                     "source": "v1/examples/headline/README.md",
                     "archive": "README.md",
-                    "sha256": "41d7a8e69dc68799b193b255ec38e8b019553e8917dd06ec1d80d3a98af6954f"
+                    "sha256": "113658feec59b15df1f909e04a73680182ac4396fc9c8aa8486ff684cd408187"
                 },
                 {
                     "source": "v1/examples/headline/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "cd3b871e77537e4b0a7d238ad8ef4fb0350b49e3d659580b432323833c91e9f7"
+                    "sha256": "ca5b7321ab501774bf4013d34fdb35ddab57ccc3f9929b2350508fd81c7ab6fd"
                 },
                 {
                     "source": "v1/examples/headline/headline.ograf.json",
                     "archive": "headline.ograf.json",
-                    "sha256": "66ecb00baf3ec567a16fbde8d464e40a566918fcc5d6935a8a01925f827150c3"
+                    "sha256": "63cbf56f855b35ef2ff2aa2bac39f3007e22b89142f1476e930f59d5b44bff58"
                 },
                 {
                     "source": "v1/examples/headline/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "cf3f26a94c0d1fad1d38f5694f830b2d71bc002884280ca326e3ce668795628c"
+                    "sha256": "a902d1c0e9fbf49ec0a4bc99ad2e5790e6ba93a761016a58ee3dca48f7e35de2"
                 },
                 {
                     "source": "v1/examples/headline/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
                 },
                 {
                     "source": "v1/examples/headline/thumbnail.jpg",
                     "archive": "thumbnail.jpg",
                     "sha256": "817e31a7859384e35f7cc6d312504541538889ba685762bd946d803f4b353dca"
+                },
+                {
+                    "source": "v1/examples/headline/thumbnails/1280x720-cropped.png",
+                    "archive": "thumbnails/1280x720-cropped.png",
+                    "sha256": "92170bff6676836657ee1abf4c1fbc73e1a970649ddd797b951a8da6fe1e045c"
+                },
+                {
+                    "source": "v1/examples/headline/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "f148e7cf50ea3493f99468c19435d9883390fab80d37d204f0f00a4d9e14b020"
+                },
+                {
+                    "source": "v1/examples/headline/thumbnails/animated.gif",
+                    "archive": "thumbnails/animated.gif",
+                    "sha256": "d51eaa5be30966bcd1e81a0617d04539049e5d6da7f5c2abf02ce1131fa1f864"
+                },
+                {
+                    "source": "v1/examples/headline/thumbnails/animated.webp",
+                    "archive": "thumbnails/animated.webp",
+                    "sha256": "feaefe028e4f4de7f1fc4b3ace7aaac033009585448b2b19c3edfc60657a79ea"
                 }
             ]
         },
@@ -254,17 +324,17 @@
                 {
                     "source": "v1/examples/weather/README.md",
                     "archive": "README.md",
-                    "sha256": "7366f0ee92f5ec07925cda1191aafc7e83eacafff9374ae830efe5a610c24bc9"
+                    "sha256": "595092d3675e220178d591d865c317dd8026fef61574043b4cc8d3224ba7bd86"
                 },
                 {
                     "source": "v1/examples/weather/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "4f0e5ea07dc03c95736cfbb6cfc5df44daffea0bf2021b55391e7e4339661188"
+                    "sha256": "66dd549f0427d9131332c2fe01994397b733ffd7f644d86cdd203d364640ee2e"
                 },
                 {
                     "source": "v1/examples/weather/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "3ef153207543f97e3eee176b2200d7fff762d429a24d64e8ec1ab8734a53c698"
+                    "sha256": "9aad3d836a4137ad5281704616e059a2bbf8d9abef76e6901eca18afdeaf7083"
                 },
                 {
                     "source": "v1/examples/weather/lib/images/image_0.jpg",
@@ -274,7 +344,7 @@
                 {
                     "source": "v1/examples/weather/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
+                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
                 },
                 {
                     "source": "v1/examples/weather/thumbnail.jpg",
@@ -282,9 +352,24 @@
                     "sha256": "f8e15fea2630c8169afa925612913b33e2f72b318d19d6ccd30ee1e6bc4fd91f"
                 },
                 {
+                    "source": "v1/examples/weather/thumbnails/1280x720.png",
+                    "archive": "thumbnails/1280x720.png",
+                    "sha256": "71e00bdb36641076b96c78aa22d67dce788cb42c2b3247cf23cdce20c557dec5"
+                },
+                {
+                    "source": "v1/examples/weather/thumbnails/animated.gif",
+                    "archive": "thumbnails/animated.gif",
+                    "sha256": "c9c325f3b9e5d2ce56b20737a8596810153c07c827679dd149f6153c27c8ba52"
+                },
+                {
+                    "source": "v1/examples/weather/thumbnails/animated.webp",
+                    "archive": "thumbnails/animated.webp",
+                    "sha256": "4da704e277a075dc4003a62b34c8301e9420d9742124e4878f2bf894ba3d9836"
+                },
+                {
                     "source": "v1/examples/weather/weather.ograf.json",
                     "archive": "weather.ograf.json",
-                    "sha256": "79a3958e2e2c8990660ee7bc2a28a2e4bcda52a9f4e5daf31f87ace6ba74000c"
+                    "sha256": "11ebf1fdc446d2bcd14944b9e5f6a090995faa3c2f5022282c3fc48c7afe5e57"
                 }
             ]
         }

@@ -24,18 +24,14 @@
             "resolution": {
                 "width": 640,
                 "height": 360
-            },
-            "animated": true,
-            "format": "webp"
+            }
         },
         {
             "file": "thumbnails/animated.gif",
             "resolution": {
                 "width": 640,
                 "height": 360
-            },
-            "animated": true,
-            "format": "gif"
+            }
         }
     ],
     "version": "0",

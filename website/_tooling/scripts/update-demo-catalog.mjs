@@ -93,11 +93,36 @@ for (const example of catalogue.examples) {
     });
 }
 
+/**
+ * Compares two strings and returns the difference as a string.
+ * Outputs "${lineNumber}:\n${leftLine}\n${rightLine}"
+*/
+function strDiff(left, right) {
+    let diff = '';
+    const leftLines = left.split('\n');
+    const rightLines = right.split('\n');
+
+    const maxLines = Math.max(leftLines.length, rightLines.length);
+    for (let lineNumber = 0; lineNumber < maxLines; lineNumber++) {
+        const leftLine = leftLines[lineNumber] ?? '';
+        const rightLine = rightLines[lineNumber] ?? '';
+        if (leftLine !== rightLine) {
+            diff += `${lineNumber}:\n${leftLine}\n${rightLine}\n`;
+        }
+    }
+
+    return diff;
+ 
+}
+
 const updatedContents = `${JSON.stringify({ ...catalogue, examples }, null, 4)}\n`;
 const currentContents = await readFile(CATALOG_PATH, 'utf8');
 
-if (CHECK_ONLY && currentContents !== updatedContents) {
-    console.error('website/demo-catalog.json is outdated');
+const contentDiff = strDiff(currentContents, updatedContents);
+
+if (CHECK_ONLY && contentDiff) {
+    console.error('website/demo-catalog.json is outdated:');
+    console.error(contentDiff);
     process.exitCode = 1;
 } else if (CHECK_ONLY) {
     console.log('Demo catalogue verified.');

@@ -5,6 +5,8 @@ on:
     branches:
       - main
     paths:
+      - ".gitattributes"
+      - ".editorconfig"
       - ".github/workflows/website-checks.yml"
       - "_config.yml"
       - "CHANGELOG.md"
@@ -19,6 +21,8 @@ on:
       - "website/**"
   pull_request:
     paths:
+      - ".gitattributes"
+      - ".editorconfig"
       - ".github/workflows/website-checks.yml"
       - "_config.yml"
       - "CHANGELOG.md"
@@ -70,6 +74,9 @@ jobs:
       - name: Validate source and manifests
         run: npm --prefix website/_tooling run validate
 
+      - name: Test content tooling and package integrity
+        run: npm --prefix website/_tooling run test:unit
+
       - name: Build the GitHub Pages site
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697
         with:
@@ -95,3 +102,28 @@ jobs:
           CI: true
           REQUIRE_JEKYLL_OUTPUT: "1"
           SITE_ROOT: ../../_site
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-browser-failures
+          path: |
+            website/_tooling/playwright-report
+            website/_tooling/test-results
+          if-no-files-found: ignore
+
+  windows-content:
+    name: Validate content on Windows
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: website/_tooling/package-lock.json
+      - run: npm --prefix website/_tooling ci --ignore-scripts
+      - run: npm --prefix website/_tooling run validate
+      - run: npm --prefix website/_tooling run test:unit

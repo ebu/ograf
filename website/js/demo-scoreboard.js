@@ -1,4 +1,6 @@
 (function () {
+  // The specialised card is optional content; a partial card must still fail.
+  if (!document.querySelector('.demo-card--scoreboard')) return;
   const MESSAGE_ORIGIN = window.location.origin;
   const READY_PING_INTERVAL_MS = 250;
   const READY_PING_TIMEOUT_MS = 10_000;

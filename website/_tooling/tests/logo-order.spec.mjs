@@ -2,6 +2,13 @@ import { expect, test } from '@playwright/test';
 
 const HERO_FILES = ['adobe.svg', 'blackmagic-design.svg', 'matrox.svg', 'moovit.png'];
 
+test.beforeEach(async ({ page }) => {
+    // These are fixture names, not required real-world vendors. A content edit
+    // may remove or rename any actual logo without breaking sorting tests.
+    await page.route(url => /\/vendor-logos\/(?:hero|vendors|organisations)\/[^/]+\.(?:svg|png|webp|jpe?g)$/.test(url.pathname),
+        route => route.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>'}));
+});
+
 test('@mobile @compat vendor and organisation grids sort by name independently of manifest order', async ({ page }) => {
     const manifests = {
         vendors: [

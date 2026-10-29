@@ -1,0 +1,20 @@
+# Hashes describe bytes served by Pages; keep website text identical on Unix/Windows.
+/website/** text=auto eol=lf
+/v1/examples/** text=auto eol=lf
+/index.html text eol=lf
+/.github/workflows/website-checks.yml text eol=lf
+/_config.yml text eol=lf
+/CNAME text eol=lf
+/robots.txt text eol=lf
+/sitemap.xml text eol=lf
+/site.webmanifest text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.mp4 binary
+*.webm binary
+*.woff2 binary

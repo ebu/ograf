@@ -2,22 +2,11 @@ import {
     loadDemoCatalog,
     resolveSitePath,
     selectHeroThumbnail
-} from './demo-catalog.js';
+} from './demo-catalog.js?v=2';
 
-const ALLOWED_THUMBNAIL_EXTENSIONS = new Set(['.gif', '.jpeg', '.jpg', '.png', '.webp']);
 const CARD_WIDTH_PIXELS = 320;
 const MINIMUM_ROW_COPIES = 4;
 const ROW_VIEWPORT_COVERAGE = 2.25;
-
-function isSafeThumbnailPath(path) {
-    if (typeof path !== 'string' || !path || path.startsWith('/')) return false;
-    if (path.split('/').includes('..') || path.includes('\\')) return false;
-
-    const extensionIndex = path.lastIndexOf('.');
-    const extension = extensionIndex >= 0 ? path.slice(extensionIndex).toLowerCase() : '';
-
-    return ALLOWED_THUMBNAIL_EXTENSIONS.has(extension);
-}
 
 async function loadJson(url) {
     const response = await fetch(url);
@@ -38,9 +27,9 @@ function loadImage(url) {
 async function loadHeroExample(example) {
     const manifestUrl = resolveSitePath(example.manifest);
     const manifest = await loadJson(manifestUrl);
-    const thumbnail = selectHeroThumbnail(manifest.thumbnails);
-    if (!thumbnail || !isSafeThumbnailPath(thumbnail.file)) {
-        throw new Error(`${example.id} does not define a safe hero thumbnail`);
+    const thumbnail = selectHeroThumbnail(manifest.thumbnails, example.presentation?.heroThumbnail);
+    if (!thumbnail) {
+        throw new Error(`${example.id} does not define a PNG, JPEG or WebP hero thumbnail`);
     }
 
     const thumbnailUrl = new URL(thumbnail.file, manifestUrl);

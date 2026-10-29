@@ -126,6 +126,50 @@ test('thumbnail selection uses size and ratio, with a fallback for unspecified d
     assert.equal(selectHeroThumbnail([{file:'first.webp'},{file:'second.webp'}]).file,'first.webp');
 });
 
+test('hero selection honours editorial choices, ignores GIF and does not prefer a format',()=>{
+    const gif={file:'animation.GIF',resolution:{width:640,height:360}};
+    const photo={file:'photo.webp',resolution:{width:1280,height:720}};
+    const graphic={file:'graphic.png',resolution:{width:1280,height:720}};
+    const portrait={file:'chosen.jpeg',resolution:{width:200,height:400}};
+    const options=[gif,photo,graphic,portrait];
+    assert.equal(selectHeroThumbnail(options).file,'photo.webp');
+    assert.equal(selectHeroThumbnail([graphic,photo]).file,'graphic.png');
+    assert.equal(selectHeroThumbnail(options,'chosen.jpeg'),portrait);
+    assert.deepEqual(options,[gif,photo,graphic,portrait]);
+    assert.equal(selectHeroThumbnail([{file:'first.gif'},{file:'second.jpg'}]).file,'second.jpg');
+    assert.equal(selectHeroThumbnail([gif]),null);
+    assert.equal(selectHeroThumbnail([]),null);
+    for(const invalid of ['animation.GIF','animation.%67if','../photo.webp','https://example.com/photo.webp',null,'']) {
+        assert.throws(()=>selectHeroThumbnail(options,invalid),/presentation.heroThumbnail/);
+    }
+    assert.throws(()=>selectHeroThumbnail(options,'missing.png'),/not declared/);
+});
+
+test('catalogue hero choices survive generation and fail for broken or GIF references',async t=>{
+    const f=await fixture(t);
+    const example=f.catalog.examples[0];
+    const manifest=await f.readJson(example.manifest);
+    await f.put('v1/examples/first/editorial.png',PNG);
+    manifest.thumbnails.push({file:'editorial.png',resolution:{width:1,height:1}});
+    await f.json(example.manifest,manifest);
+    example.presentation.heroThumbnail='editorial.png';
+    await f.update(); await clean(f.root);
+    assert.equal((await f.readJson('website/demo-catalog.json')).examples[0].presentation.heroThumbnail,'editorial.png');
+    for(const invalid of ['missing.png','thumbnail.gif','../thumbnail.png',null]) {
+        example.presentation.heroThumbnail=invalid; await f.update();
+        assert((await validateSite(f.root)).errors.some(error=>error.includes('[first]') && error.includes('presentation.heroThumbnail')));
+    }
+    example.presentation.heroThumbnail='editorial.png';
+    await f.remove('v1/examples/first/editorial.png'); await f.update();
+    assert((await validateSite(f.root)).errors.some(error=>error.includes('editorial.png')));
+    delete example.presentation.heroThumbnail;
+    await f.update(); await clean(f.root);
+    manifest.thumbnails=[{file:'only.gif',resolution:{width:640,height:360}}];
+    await f.put('v1/examples/first/only.gif',Buffer.from('GIF89a'));
+    await f.json(example.manifest,manifest); await f.update();
+    assert((await validateSite(f.root)).errors.some(error=>error.includes('Missing supported hero thumbnail')));
+});
+
 test('ZIP reader checks nested UTF-8 names, bytes, CRC and central-directory corruption',()=>{
     // Independently produced by System.IO.Compression.ZipArchive (deflate).
     const deflated = Buffer.from('UEsDBBQAAAAIAL1kXV3aikMLHwAAABcAAAAMAAAAZGVmbGF0ZWQudHh08sxLSS1IzUtJzStRiPIMUEjLrCgpLUoFAAAA//8DAFBLAQIUABQAAAAIAL1kXV3aikMLHwAAABcAAAAMAAAAAAAAAAAAAAAAAAAAAABkZWZsYXRlZC50eHRQSwUGAAAAAAEAAQA6AAAASQAAAAAA', 'base64');

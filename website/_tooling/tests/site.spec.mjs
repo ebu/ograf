@@ -35,7 +35,7 @@ test('social metadata is complete, consistent and references a working image', a
     expect(errors).toEqual([]);
 });
 
-test('@mobile hero cards, carousel and deep links agree with current content', async ({ page }) => {
+test('@mobile hero cards, carousel and deep links agree with current content', async ({ page }, testInfo) => {
     const errors = await openLandingPage(page, { reducedMotion: true });
     const catalog = await catalogue(page);
     const ids = catalog.examples.map(example => example.id);
@@ -43,10 +43,17 @@ test('@mobile hero cards, carousel and deep links agree with current content', a
     expect([...actual].sort()).toEqual([...ids].sort());
     expect(await tabs(page).evaluateAll(nodes => nodes.map(node => node.dataset.exampleId))).toEqual(actual);
     await expect(page.locator('.hero-ticker')).toHaveAttribute('aria-hidden', 'true');
+    await page.screenshot({ path: testInfo.outputPath('hero-current.png'), scale: 'css' });
     for (const example of catalog.examples) {
         const card = page.locator(`.htk-card[data-demo-target="${example.id}"]`).first();
         await expect(card.locator('.htk-card__tag')).toHaveText(example.title);
         await expect.poll(() => card.locator('img').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+        const imageUrl = await card.locator('img').getAttribute('src');
+        expect(new URL(imageUrl).pathname).not.toMatch(/\.gif$/i);
+        if (example.presentation?.heroThumbnail !== undefined) {
+            const manifestUrl = new URL(example.manifest, new URL('./', page.url()));
+            expect(imageUrl).toBe(new URL(example.presentation.heroThumbnail, manifestUrl).href);
+        }
         await card.evaluate(node => node.click());
         await expect(page.locator('.demo-carousel__slide.is-active')).toHaveAttribute('data-example-id', example.id);
         await expect(page).toHaveURL(new RegExp(`#demo-${example.id}$`));

@@ -7,6 +7,7 @@
             "manifest": "v1/examples/scoreboard/scoreboard.ograf.json",
             "archiveName": "ograf-example-scoreboard.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "viewport",
                 "background": {
                     "type": "image",
@@ -53,6 +54,7 @@
             "manifest": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
             "archiveName": "ograf-example-responsive-lower-third.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "viewport",
                 "background": {
                     "type": "image",
@@ -99,6 +101,7 @@
             "manifest": "v1/examples/l3rd-name/l3rd.ograf.json",
             "archiveName": "ograf-example-l3rd-name.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -124,7 +127,7 @@
                 {
                     "source": "v1/examples/l3rd-name/l3rd.ograf.json",
                     "archive": "l3rd.ograf.json",
-                    "sha256": "af6aeab1fd9a81ed86c8bf400b6c16413c0259c7086b181818e2984eec873fe5"
+                    "sha256": "92dc0cfd9cb1dc5362812f550c43af433cb1172f8e85676228a2296b64a9f394"
                 },
                 {
                     "source": "v1/examples/l3rd-name/lib/CSSPlugin.js",
@@ -157,6 +160,11 @@
                     "sha256": "fc284f768f1860ad03c914aa1efef24fe4d8e2aa712700909126f4956647a328"
                 },
                 {
+                    "source": "v1/examples/l3rd-name/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "8855edf0a1264b68006124a10a0b6117dc59ae5ad6e07d6978b965af8463e09c"
+                },
+                {
                     "source": "v1/examples/l3rd-name/thumbnails/1280x720-cropped.png",
                     "archive": "thumbnails/1280x720-cropped.png",
                     "sha256": "6ac924a12158c5bc8eebe7ea3fca6e593ab79ecf6a50e80e3d29baf34dc5e688"
@@ -184,6 +192,7 @@
             "manifest": "v1/examples/bar-chart/bar-chart.ograf.json",
             "archiveName": "ograf-example-bar-chart.zip",
             "presentation": {
+                "heroThumbnail": "thumbnails/1280x720.png",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -244,6 +253,7 @@
             "manifest": "v1/examples/headline/headline.ograf.json",
             "archiveName": "ograf-example-headline.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.jpg",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -314,6 +324,7 @@
             "manifest": "v1/examples/weather/weather.ograf.json",
             "archiveName": "ograf-example-weather.zip",
             "presentation": {
+                "heroThumbnail": "thumbnails/1280x720.jpg",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,

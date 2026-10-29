@@ -160,9 +160,9 @@ export async function validateSite(root = cliRoot()) {
                     await localFile(root, source);
                     references.add(source);
                 }
-                const thumbnail = selectHeroThumbnail(manifest.thumbnails);
+                const thumbnail = selectHeroThumbnail(manifest.thumbnails, presentation.heroThumbnail);
                 if (!thumbnail || !isSafePath(thumbnail.file) || !IMAGE_EXTENSIONS.has(extname(thumbnail.file).toLowerCase())) {
-                    throw new Error('Missing supported hero thumbnail');
+                    throw new Error('Missing supported hero thumbnail (PNG, JPEG or WebP; GIF is not supported)');
                 }
                 const thumbnailFile = await localFile(dirname(file), thumbnail.file);
                 if (!example.files.some(entry => entry.source === repositoryPath(root, thumbnailFile))) {

@@ -63,6 +63,30 @@ requires `content:update`, even if only that package file's formatting changed.
 
 The individual `update-demo-catalog` and `update-manifests` commands remain available.
 
+### Choose a hero thumbnail
+
+Set `presentation.heroThumbnail` in the catalogue to choose the hero preview explicitly:
+
+```json
+"presentation": {
+    "renderer": "viewport",
+    "heroThumbnail": "thumbnail.webp"
+}
+```
+
+The path is relative to the example's manifest and must match a file declared in its
+`thumbnails` array. PNG, JPEG and WebP (including animated WebP) are supported. GIF is
+never used in the hero, even if explicitly configured; it can remain in the example
+package for other consumers. Invalid, missing or undeclared selections fail validation
+instead of silently choosing another image. `content:update` preserves this setting.
+
+If `heroThumbnail` is omitted, the fallback considers supported thumbnails by proximity
+to 16:9, then chooses the smallest width of at least 640 pixels (or the largest available
+width below that). Equal candidates retain manifest order; files without dimensions
+come last, or retain manifest order if none have dimensions. File format has no priority.
+Check the actual selected image: transparency and an included background are editorial
+properties. The hero displays the chosen file without adding the player's background.
+
 ## Add, remove or reorder a demo
 
 1. Put the complete package in `/v1/examples/<example-id>/`: manifest, entry module,

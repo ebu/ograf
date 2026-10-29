@@ -10,6 +10,7 @@ const WEBKIT_TESTS = /@(compat|webkit)/;
 const desktopProject = {
     name: 'desktop-root',
     use: {
+        screenshot: 'only-on-failure',
         ...devices['Desktop Chrome'],
         baseURL: ROOT_BASE_URL
     }
@@ -70,12 +71,15 @@ const LEAN_BROWSER_PROJECTS = [
 
 export default defineConfig({
     testDir: './tests',
+    testMatch: '**/*.spec.mjs',
+    testIgnore: '**/examples.spec.mjs',
     timeout: 45_000,
     expect: { timeout: 10_000 },
     fullyParallel: false,
+    workers: process.env.CI ? 2 : undefined,
     forbidOnly: Boolean(process.env.CI),
     retries: process.env.CI ? 2 : 0,
-    reporter: process.env.CI ? 'github' : 'list',
+    reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
     use: {
         trace: 'retain-on-failure',
         video: 'retain-on-failure'

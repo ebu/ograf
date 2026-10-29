@@ -16,19 +16,6 @@ function resolutionOf(thumbnail) {
 }
 
 function compareThumbnails(left, right) {
-
-    const leftFile = `${left.file}`
-    const rightFile = `${right.file}`;
-
-    
-    const leftExtension = leftFile.split('.').pop().toLowerCase();
-    const rightExtension = rightFile.split('.').pop().toLowerCase();
-    const extensionPriority = ['png', 'jpg', 'webp', 'gif'];
-    const leftPriority = extensionPriority.indexOf(leftExtension);
-    const rightPriority = extensionPriority.indexOf(rightExtension);
-    if (leftPriority !== rightPriority) return leftPriority - rightPriority;
-
-
     const leftResolution = resolutionOf(left);
     const rightResolution = resolutionOf(right);
     if (!leftResolution && !rightResolution) return 0;
@@ -80,9 +67,29 @@ export function findDemoExample(catalogue, id) {
     return example;
 }
 
-export function selectHeroThumbnail(thumbnails) {
-    if (!Array.isArray(thumbnails) || !thumbnails.length) return null;
-    if (!thumbnails.some(thumbnail => resolutionOf(thumbnail))) return thumbnails[0];
+export function isHeroThumbnailPath(path) {
+    if (typeof path !== 'string' || !path) return false;
+    let decoded;
+    try { decoded = decodeURIComponent(path); } catch { return false; }
+    return !/[\\\x00-\x1f?#]/.test(decoded)
+        && !/^[a-z][a-z\d+.-]*:/i.test(decoded)
+        && !decoded.split('/').some(part => !part || part === '.' || part === '..')
+        && /\.(?:png|jpe?g|webp)$/i.test(decoded);
+}
 
-    return [...thumbnails].sort(compareThumbnails)[0];
+export function selectHeroThumbnail(thumbnails, preferredFile) {
+    const entries = Array.isArray(thumbnails) ? thumbnails : [];
+    if (preferredFile !== undefined) {
+        if (!isHeroThumbnailPath(preferredFile)) {
+            throw new Error('presentation.heroThumbnail must be a safe relative PNG, JPEG or WebP path; GIF is not supported');
+        }
+        const selected = entries.find(thumbnail => thumbnail?.file === preferredFile);
+        if (!selected) {
+            throw new Error(`presentation.heroThumbnail is not declared in the example manifest: ${preferredFile}`);
+        }
+        return selected;
+    }
+    // Filter before ranking: GIF must never win, even with ideal dimensions.
+    const candidates = entries.filter(thumbnail => isHeroThumbnailPath(thumbnail?.file));
+    return candidates.sort(compareThumbnails)[0] ?? null;
 }

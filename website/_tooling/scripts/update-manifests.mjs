@@ -1,12 +1,8 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, extname, parse, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { extname, parse, resolve } from 'node:path';
+import { cliRoot, isMain, isSafePath, sameJson, UPDATE_HINT } from './content-utils.mjs';
 
-const SCRIPT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
-const REPOSITORY_ROOT = resolve(SCRIPT_DIRECTORY, '..', '..', '..');
-const LOGO_ROOT = resolve(REPOSITORY_ROOT, 'website/assets/img/vendor-logos');
 const SUPPORTED_EXTENSIONS = new Set(['.avif', '.gif', '.jpeg', '.jpg', '.png', '.svg', '.webp']);
-const CHECK_ONLY = process.argv.includes('--check');
 
 const MANIFESTS = [
     { directory: 'hero', format: 'strings' },
@@ -67,22 +63,37 @@ function buildObjectManifest(existingEntries, diskFiles) {
     return outputEntries;
 }
 
-async function updateManifest(manifest) {
-    const directoryPath = resolve(LOGO_ROOT, manifest.directory);
+async function updateManifest(root, manifest, check) {
+    const directoryPath = resolve(root, 'website/assets/img/vendor-logos', manifest.directory);
     const manifestPath = resolve(directoryPath, 'manifest.json');
     const [diskFiles, existingContents] = await Promise.all([
         listLogoFiles(directoryPath),
         readFile(manifestPath, 'utf8')
     ]);
     const existingEntries = parseManifest(existingContents, manifestPath);
+    const seen = new Set();
+    for (const entry of existingEntries) {
+        const file = typeof entry === 'string' ? entry : entry?.file;
+        if (!isSafePath(file) || file.includes('/') || seen.has(file)) {
+            throw new Error(`${manifestPath}: invalid or duplicate logo file ${file}`);
+        }
+        seen.add(file);
+        if (typeof entry === 'object' && entry.url && !/^https?:\/\//.test(entry.url)) {
+            throw new Error(`${manifestPath} [${file}]: URL must use HTTP or HTTPS`);
+        }
+    }
     const outputEntries = manifest.format === 'strings'
-        ? diskFiles
+        ? [...existingEntries.filter(file => diskFiles.includes(file)),
+            ...diskFiles.filter(file => !existingEntries.includes(file))]
         : buildObjectManifest(existingEntries, diskFiles);
     const outputContents = `${JSON.stringify(outputEntries, null, 2)}\n`;
 
-    if (CHECK_ONLY) {
-        if (outputContents !== existingContents) {
-            throw new Error(`Manifest is not up to date: ${manifestPath}`);
+    if (check) {
+        // Hero order is editorial too: compare its file set, not directory order.
+        const current = manifest.format === 'strings' ? [...existingEntries].sort() : existingEntries;
+        const expected = manifest.format === 'strings' ? [...outputEntries].sort() : outputEntries;
+        if (!sameJson(expected, current)) {
+            throw new Error(`${manifestPath}: logo files are not up to date. ${UPDATE_HINT}`);
         }
         return;
     }
@@ -91,4 +102,11 @@ async function updateManifest(manifest) {
     console.log(`Updated ${manifest.directory}/manifest.json (${outputEntries.length} entries)`);
 }
 
-await Promise.all(MANIFESTS.map(updateManifest));
+export async function updateManifests(root, check = false) {
+    await Promise.all(MANIFESTS.map(manifest => updateManifest(root, manifest, check)));
+}
+
+if (isMain(import.meta.url)) {
+    try { await updateManifests(cliRoot(), process.argv.includes('--check')); }
+    catch (error) { console.error(error.message); process.exitCode = 1; }
+}

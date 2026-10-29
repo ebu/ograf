@@ -1,0 +1,4 @@
+# Only website and example sources are covered by this change.
+[{website/**,v1/examples/**,index.html,.github/workflows/website-checks.yml,_config.yml,CNAME,robots.txt,sitemap.xml,site.webmanifest}]
+end_of_line = lf
+charset = utf-8

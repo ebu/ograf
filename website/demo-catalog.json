@@ -7,6 +7,7 @@
             "manifest": "v1/examples/scoreboard/scoreboard.ograf.json",
             "archiveName": "ograf-example-scoreboard.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "viewport",
                 "background": {
                     "type": "image",
@@ -18,17 +19,17 @@
                 {
                     "source": "v1/examples/scoreboard/README.md",
                     "archive": "README.md",
-                    "sha256": "d1c30c31cf865ebed519070954f41167a66b6d50111929b7ef6e4aec9111b667"
+                    "sha256": "d6fdcb289c324cccba4bcb846883f462fe095190402d6116f717c6da2f2deac0"
                 },
                 {
                     "source": "v1/examples/scoreboard/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "43581534fa04270457636ce242233ccef9ce7347e2f5f6444e9043978df64bc8"
+                    "sha256": "2cc2e1c855a43ece121bb718d5c3bad7fbff6aa7b24297d5a0f3bfa8f50b09d7"
                 },
                 {
                     "source": "v1/examples/scoreboard/scoreboard.ograf.json",
                     "archive": "scoreboard.ograf.json",
-                    "sha256": "ee4257c6a9cd9e84a3633a38c3a6384b8788a6b24b9bc97a2b9e87445d6730d3"
+                    "sha256": "f59d91eada2ec4bcce33c01b618f81e0ef0b7e27c0c405aff06c7e0542c790d2"
                 },
                 {
                     "source": "v1/examples/scoreboard/thumbnail.webp",
@@ -53,6 +54,7 @@
             "manifest": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
             "archiveName": "ograf-example-responsive-lower-third.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "viewport",
                 "background": {
                     "type": "image",
@@ -64,17 +66,17 @@
                 {
                     "source": "v1/examples/responsive-lower-third/README.md",
                     "archive": "README.md",
-                    "sha256": "ad5e4afbb002fdbe191524a32d07f4d2dc6556d74ff6d490d57b4f01a109d367"
+                    "sha256": "509a6944963e52be23a4b68ce329f76e2fcfa881413e00d6df23143bb0063c45"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "8dded2c5fef88f4640ff77794c3102baadb2e41123fffc9832126e208643fb3c"
+                    "sha256": "899c4b18aa0583281e682aa4ac538d64d9eae621c94ca04281aa59b9253ac035"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/responsive-lower-third.ograf.json",
                     "archive": "responsive-lower-third.ograf.json",
-                    "sha256": "0091f338cc6f9b6a6b801a6d1e466fb03bd64835d8e85ceee5415d56e807f424"
+                    "sha256": "8357a8ce5c8122cc0fee097cfd63efa8091fa2ba1b81c444b09b16ffac4c27d8"
                 },
                 {
                     "source": "v1/examples/responsive-lower-third/thumbnail.webp",
@@ -99,6 +101,7 @@
             "manifest": "v1/examples/l3rd-name/l3rd.ograf.json",
             "archiveName": "ograf-example-l3rd-name.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.webp",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -119,12 +122,12 @@
                 {
                     "source": "v1/examples/l3rd-name/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "807d14ad2e60ebabd5f63afa94dccfe110c2405e8d96733319e53e308e7b7b8d"
+                    "sha256": "2c6440e4b1fd040316f89b9536df5772abc9a6a769fe98a32824991f901ccf42"
                 },
                 {
                     "source": "v1/examples/l3rd-name/l3rd.ograf.json",
                     "archive": "l3rd.ograf.json",
-                    "sha256": "4459bf4903121311df302bac04ecb682c370eb0d53bad7946b56569b57fdff39"
+                    "sha256": "92dc0cfd9cb1dc5362812f550c43af433cb1172f8e85676228a2296b64a9f394"
                 },
                 {
                     "source": "v1/examples/l3rd-name/lib/CSSPlugin.js",
@@ -157,6 +160,11 @@
                     "sha256": "fc284f768f1860ad03c914aa1efef24fe4d8e2aa712700909126f4956647a328"
                 },
                 {
+                    "source": "v1/examples/l3rd-name/thumbnail.webp",
+                    "archive": "thumbnail.webp",
+                    "sha256": "8855edf0a1264b68006124a10a0b6117dc59ae5ad6e07d6978b965af8463e09c"
+                },
+                {
                     "source": "v1/examples/l3rd-name/thumbnails/1280x720-cropped.png",
                     "archive": "thumbnails/1280x720-cropped.png",
                     "sha256": "6ac924a12158c5bc8eebe7ea3fca6e593ab79ecf6a50e80e3d29baf34dc5e688"
@@ -184,6 +192,7 @@
             "manifest": "v1/examples/bar-chart/bar-chart.ograf.json",
             "archiveName": "ograf-example-bar-chart.zip",
             "presentation": {
+                "heroThumbnail": "thumbnails/1280x720.png",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -194,27 +203,27 @@
                 {
                     "source": "v1/examples/bar-chart/README.md",
                     "archive": "README.md",
-                    "sha256": "f050133277c404df8915ae34c366882ce13d152698d7ff385b1e1095ef536699"
+                    "sha256": "7a47e97288473474b6d215d5cac044efb1a5c8d5b75904755c3fd2d7ca859722"
                 },
                 {
                     "source": "v1/examples/bar-chart/bar-chart.ograf.json",
                     "archive": "bar-chart.ograf.json",
-                    "sha256": "f060d822ec67ed0bb48ca877f89372c402eeb8ad53a69dd4f89542c6e4c5aa27"
+                    "sha256": "353a86010cf7d15a372abfdcfdfc5654c9c36f0a40c3c100a61a9c97907cd9cf"
                 },
                 {
                     "source": "v1/examples/bar-chart/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "b5ac3198e2eff83da958a191004d3f01b332405c15d476d0e7dc3789548e784c"
+                    "sha256": "1abe4f4cd5aafd3973ea8507218e35e5dcaa02b868030f6dac2e62488b376447"
                 },
                 {
                     "source": "v1/examples/bar-chart/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "976e93c602aba22689b84ac34b54a3a641e6817c052ec65d2ef44adb28cdad6c"
+                    "sha256": "2d8664eea2954e6c8996ec127ee8705108b92a46b6e497ecd79b1fcbbe8c11f7"
                 },
                 {
                     "source": "v1/examples/bar-chart/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
                 },
                 {
                     "source": "v1/examples/bar-chart/thumbnails/1280x720.png",
@@ -244,6 +253,7 @@
             "manifest": "v1/examples/headline/headline.ograf.json",
             "archiveName": "ograf-example-headline.zip",
             "presentation": {
+                "heroThumbnail": "thumbnail.jpg",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -259,27 +269,27 @@
                 {
                     "source": "v1/examples/headline/README.md",
                     "archive": "README.md",
-                    "sha256": "113658feec59b15df1f909e04a73680182ac4396fc9c8aa8486ff684cd408187"
+                    "sha256": "41d7a8e69dc68799b193b255ec38e8b019553e8917dd06ec1d80d3a98af6954f"
                 },
                 {
                     "source": "v1/examples/headline/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "ca5b7321ab501774bf4013d34fdb35ddab57ccc3f9929b2350508fd81c7ab6fd"
+                    "sha256": "cd3b871e77537e4b0a7d238ad8ef4fb0350b49e3d659580b432323833c91e9f7"
                 },
                 {
                     "source": "v1/examples/headline/headline.ograf.json",
                     "archive": "headline.ograf.json",
-                    "sha256": "63cbf56f855b35ef2ff2aa2bac39f3007e22b89142f1476e930f59d5b44bff58"
+                    "sha256": "5e010963f3d7aa15c156ed13fe12c7df5d7ced2e61fee7bed68af3af3714e07d"
                 },
                 {
                     "source": "v1/examples/headline/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "a902d1c0e9fbf49ec0a4bc99ad2e5790e6ba93a761016a58ee3dca48f7e35de2"
+                    "sha256": "cf3f26a94c0d1fad1d38f5694f830b2d71bc002884280ca326e3ce668795628c"
                 },
                 {
                     "source": "v1/examples/headline/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
                 },
                 {
                     "source": "v1/examples/headline/thumbnail.jpg",
@@ -314,6 +324,7 @@
             "manifest": "v1/examples/weather/weather.ograf.json",
             "archiveName": "ograf-example-weather.zip",
             "presentation": {
+                "heroThumbnail": "thumbnails/1280x720.jpg",
                 "renderer": "fixed-canvas",
                 "canvas": {
                     "width": 1920,
@@ -324,17 +335,17 @@
                 {
                     "source": "v1/examples/weather/README.md",
                     "archive": "README.md",
-                    "sha256": "595092d3675e220178d591d865c317dd8026fef61574043b4cc8d3224ba7bd86"
+                    "sha256": "7366f0ee92f5ec07925cda1191aafc7e83eacafff9374ae830efe5a610c24bc9"
                 },
                 {
                     "source": "v1/examples/weather/graphic.mjs",
                     "archive": "graphic.mjs",
-                    "sha256": "66dd549f0427d9131332c2fe01994397b733ffd7f644d86cdd203d364640ee2e"
+                    "sha256": "4f0e5ea07dc03c95736cfbb6cfc5df44daffea0bf2021b55391e7e4339661188"
                 },
                 {
                     "source": "v1/examples/weather/lib/animation.json",
                     "archive": "lib/animation.json",
-                    "sha256": "9aad3d836a4137ad5281704616e059a2bbf8d9abef76e6901eca18afdeaf7083"
+                    "sha256": "3ef153207543f97e3eee176b2200d7fff762d429a24d64e8ec1ab8734a53c698"
                 },
                 {
                     "source": "v1/examples/weather/lib/images/image_0.jpg",
@@ -344,7 +355,7 @@
                 {
                     "source": "v1/examples/weather/lib/lottie-web.esm.mjs",
                     "archive": "lib/lottie-web.esm.mjs",
-                    "sha256": "23ed98e8e84487c93ca70c223a6a7d85b1c1c2481791875ce18e5bad47c93ddb"
+                    "sha256": "48a3f1ed37e969d2bb5b32ebfdf09d13bac1b757623f691de61a8c4ac1f57e92"
                 },
                 {
                     "source": "v1/examples/weather/thumbnails/1280x720.jpg",
@@ -364,7 +375,7 @@
                 {
                     "source": "v1/examples/weather/weather.ograf.json",
                     "archive": "weather.ograf.json",
-                    "sha256": "4c7dc8fd58a0f1f66b920ec93ebb04a00b29043f3ca42653143b7ffadf5a423c"
+                    "sha256": "c8a63d1664f3ad2a98c1c0d412149f14d70283a4358da46717950d04bc03f6c1"
                 }
             ]
         }
